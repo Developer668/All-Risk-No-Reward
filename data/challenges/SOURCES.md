@@ -21,5 +21,8 @@ Publicly indexed social posts and challenge collections were reviewed for broad 
 - [Reddit: Daily challenge discussion](https://www.reddit.com/r/GetMotivated/comments/1g3gvx6/) — public discussion involving family texts, short clips, skill practice, movement, and friend accountability.
 - [Forgetting Fairytales: Dares Over Text](https://www.forgettingfairytales.com/dares-over-text/) — reviewed as a map of common texting and social-media dare categories.
 - [TikTok safety guide for online challenges](https://ads.tiktok.com/business/library/Helping_our_community_stay_safe_while_having_fun_on_TikTok.pdf) — distinguishes ordinary fun challenges from dangerous acts.
+- [Scouting America: Balloon Pop Relay](https://www.scouting.org/cub-scout-fun-games/balloon-pop-relay/) — reviewed as inspiration for supervised, structured balloon-game formats.
+- [Family-friendly game-night dares](https://spinyourpick.com/articles/family-night-dares) — reviewed for broad categories including silly voices, songs, acceptance speeches, character acting, and family activities.
+- [Cosplay photography and consent discussion](https://www.pcgamer.com/games/cosplay-is-not-consent-and-i-wish-wed-stop-feeling-so-entitled-to-shoving-our-phones-in-peoples-faces-without-asking-them-first/) — reinforces asking before deliberately photographing or recording people, including at public events.
 
 Instagram, Threads, and TikTok pages may restrict automated viewing, so only publicly indexed material was used. Common unsafe patterns were deliberately rejected, including fake emergency messages, prank calls to workers, random-number calls, pressure to expose private messages, required public posting, forced account access, humiliation, and refusal to accept a social or romantic rejection.

@@ -11,12 +11,12 @@ This directory contains an original, application-ready challenge library for **A
 | `easy.json` | 75 short, low-pressure challenges |
 | `medium.json` | 75 challenges requiring more time or confidence |
 | `hard.json` | 75 substantial effort, creative, and social-courage challenges |
-| `extreme.json` | 75 major but bounded challenges |
-| `nightmare.json` | 75 epic but still same-day challenges |
+| `extreme.json` | 125 difficult, funny, social, fitness, travel, and creative challenges |
+| `nightmare.json` | 127 epic but still same-day challenges |
 | `SAFETY.md` | Required product and moderation rules |
 | `SOURCES.md` | Research sources and content-origin notes |
 
-Total: **375 original challenges**. Every challenge ends in one session or by the end of the same day.
+Total: **477 original challenges**. Every challenge ends in one session or by the end of the same day.
 
 ## Challenge object
 

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "2.0.0",
+  "datasetVersion": "3.0.0",
   "name": "All Risk No Reward Challenge Library",
   "license": "Apache-2.0",
   "contentOrigin": "Original prompts informed by the safety sources documented in SOURCES.md; no third-party challenge database was copied.",
-  "totalChallenges": 375,
+  "totalChallenges": 477,
   "levels": [
     {
       "level": "easy",
@@ -24,12 +24,12 @@
     {
       "level": "extreme",
       "file": "extreme.json",
-      "count": 75
+      "count": 125
     },
     {
       "level": "nightmare",
       "file": "nightmare.json",
-      "count": 75
+      "count": 127
     }
   ],
   "safetyPolicy": "SAFETY.md",
