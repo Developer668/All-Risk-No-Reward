@@ -85,14 +85,14 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
             ? file?.type.startsWith('video/')
               ? <video src={preview} aria-label="Selected proof video preview" controls muted playsInline />
               : <img src={preview} alt="Selected proof preview" />
-            : <><ImagePlus aria-hidden="true" /><strong>{mediaBusy ? 'Preparing private proof…' : 'Add an optional photo or short video'}</strong><span>Images are cleaned; crop or record without identifying details</span></>}
-          <input type="file" aria-label="Choose optional proof photo or video" accept="image/png,image/jpeg,image/webp,video/mp4,video/quicktime,video/webm" onChange={(event) => void pickFile(event)} disabled={mediaBusy || busy} />
+            : <><ImagePlus aria-hidden="true" /><strong>{mediaBusy ? 'Preparing private proof…' : 'Add a photo or short video'}</strong><span>Required for repository challenges; crop or record without identifying details</span></>}
+          <input type="file" aria-label="Choose proof photo or video" accept="image/png,image/jpeg,image/webp,video/mp4,video/quicktime,video/webm" onChange={(event) => void pickFile(event)} disabled={mediaBusy || busy} />
         </label>
         <label className="field">What did you do?<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="I said… I asked… The uncomfortable part was…" rows={5} maxLength={4000} /></label>
-        <div className="privacy-note"><LockKeyhole size={17} aria-hidden="true" /> Don’t include names, faces, contact details, or another person’s private reply.</div>
-        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I understand this note and optional photo or video will be sent to the configured AI provider (Gemini, OpenRouter, or NVIDIA NIM) for this automated assessment.</span></label>}
+        <div className="privacy-note"><LockKeyhole size={17} aria-hidden="true" /> {challenge.privacyNotes || 'Don’t include names, faces, contact details, or another person’s private reply.'}</div>
+        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I understand this note and required image or video will be sent to the configured AI provider (Gemini, OpenRouter, or NVIDIA NIM) for visual interpretation.</span></label>}
         {error && <p className="form-error" role="alert">{error}</p>}
-        <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || mediaBusy || note.trim().length < 12 || (backendMode === 'insforge' && !consent)}>{busy ? 'Checking concrete details…' : 'Check and record my proof'} <Sparkles size={18} aria-hidden="true" /></button>
+        <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || mediaBusy || !mediaDataUrl || note.trim().length < 12 || (backendMode === 'insforge' && !consent)}>{busy ? 'Checking concrete details…' : 'Check and record my proof'} <Sparkles size={18} aria-hidden="true" /></button>
       </> : <div className="assessment">
         <div className={`score-ring score-ring--${assessment.verdict}`}><strong>{assessment.score}</strong><span>PROOF SCORE</span></div>
         <p className="section-kicker">{assessment.verdict === 'complete' ? 'CHALLENGE COMPLETE' : assessment.verdict === 'partial' ? 'PROGRESS RECORDED' : 'MORE DETAIL NEEDED'}</p>

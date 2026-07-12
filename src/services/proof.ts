@@ -20,8 +20,8 @@ export interface ProofResult extends ProofAssessment {
 function localAssessment(note: string, hasMedia: boolean): ProofResult {
   const normalized = note.trim()
   const words = normalized.split(/\s+/).filter(Boolean)
-  const concreteSignals = /\b(said|asked|sent|told|gave|complimented|greeted|invited|declined|answered|spoke|called|introduced|shared|responded)\b/i.test(normalized) ? 16 : 0
-  const reflectionSignals = /\b(felt|nervous|awkward|uncomfortable|learned|next time|response|reacted)\b/i.test(normalized) ? 10 : 0
+  const concreteSignals = /\b(said|asked|sent|told|gave|built|created|made|cooked|walked|ran|completed|recorded|designed|wrote|tested|practiced|performed|organized|photographed|shared|responded)\b/i.test(normalized) ? 16 : 0
+  const reflectionSignals = /\b(felt|nervous|awkward|uncomfortable|learned|result|finished|next time|response|reacted)\b/i.test(normalized) ? 10 : 0
   const score = Math.min(96, 12 + Math.min(42, words.length * 2) + concreteSignals + reflectionSignals + (hasMedia ? 18 : 0))
 
   if (score >= 72) {

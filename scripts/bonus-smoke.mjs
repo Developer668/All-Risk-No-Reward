@@ -37,6 +37,7 @@ async function makeCurrentCompletionFast(page) {
 
 async function recordFullProof(page, rewardRoll) {
   await page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
+  await page.locator('input[type="file"]').setInputFiles('public/og.png')
   await page.getByLabel('What did you do?').fill('I asked a thoughtful question, listened to the answer, and shared one honest detail. I felt nervous, then they responded kindly.')
   await page.getByRole('button', { name: /Check and record my proof/ }).click()
   await page.locator('.assessment').waitFor()
@@ -94,6 +95,7 @@ try {
   })
   await redeem.page.reload({ waitUntil: 'networkidle' })
   await redeem.page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
+  await redeem.page.locator('input[type="file"]').setInputFiles('public/og.png')
   await redeem.page.getByLabel('What did you do?').fill('I spoke briefly today.')
   await redeem.page.getByRole('button', { name: /Check and record my proof/ }).click()
   await redeem.page.locator('.assessment').waitFor()

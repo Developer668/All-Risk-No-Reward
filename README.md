@@ -32,10 +32,10 @@ The production backend in `insforge/` adds:
 
 - InsForge authentication, email verification/reset methods, OAuth-provider discovery, and row-level security
 - Timezone-aware server assignments, reminders, recovery locks, safety reports, deletion requests, and scheduled maintenance
-- Authenticated proof assessment through Gemini, OpenRouter, or NVIDIA NIM, with the InsForge `verify-proof` edge function acting only as a secure proxy
+- Deterministic challenge loading, selection, filtering, and upload validation; Gemini, OpenRouter, or NVIDIA NIM is used only for authenticated image/video interpretation, with the InsForge `verify-proof` edge function acting as the secure proxy
 - Ephemeral proof images (PNG/JPEG/WebP, capped at 180 KiB after browser compression) or short videos (MP4/MOV/WebM; the browser enforces 5 MiB and 30 seconds, while the server independently enforces 5 MiB); only a hash, media type, size, and optional filename are retained
 - Server-owned scoring, points, streaks, rate limits, and idempotent completion upgrades
-- Operator-fed challenge and punishment catalogs, atomic two-roll dice limits, and an owner-readable no-repeat audit trail
+- The repository-backed 500-challenge catalog, operator-fed punishment tasks, atomic two-roll dice limits, and an owner-readable no-repeat audit trail
 
 Follow [insforge/README.md](./insforge/README.md) for the exact schema import, secrets, edge-function deployment, schedule, and post-deployment security checks. The repository is ready to deploy, but it is intentionally not tied to a specific InsForge project.
 
@@ -49,6 +49,10 @@ Never put `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `NVIDIA_NIM_API_KEY`, an InsFo
 npm run verify       # lint, unit/domain tests, Sites build, dependency audit, runtime E2E, PWA/offline test
 npm run e2e:visual   # regenerate desktop/mobile visual QA screenshots
 ```
+
+`data/challenges/*.json` is the challenge source of truth. Local mode imports all
+500 records directly. `npm run catalog:generate` deterministically rebuilds the
+rerunnable InsForge seed without using an AI model.
 
 The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dialog focus and Escape behavior; local auth; full and partial proof; immediate recovery; both no-repeat dice rolls and reload persistence; recovery completion; fast-finish bonus outcomes and lifeline redemption; report-and-replace; branded share privacy, copy, PNG export; settings persistence; notifications; and browser console errors.
 

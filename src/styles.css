@@ -211,6 +211,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .active-challenge__footer { padding-top: 14px; display: flex; gap: 25px; border-top: 1px solid rgba(255,255,255,.25); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
 .active-challenge__footer span { display: flex; gap: 5px; align-items: center; }
 .active-challenge__footer svg { width: 14px; color: var(--yellow); }
+.challenge-facts { display: flex; flex-wrap: wrap; gap: 7px; margin-top: -5px; }
+.challenge-facts span { display: inline-flex; align-items: center; gap: 5px; padding: 6px 8px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.challenge-facts svg { width: 13px; height: 13px; color: var(--yellow); flex: 0 0 auto; }
 .challenge-actions { margin-top: 22px; display: flex; align-items: center; gap: 24px; }
 .challenge-actions .button { flex: 1; }
 .text-button { min-height: 44px; border: 0; display: flex; align-items: center; gap: 5px; color: var(--muted); background: transparent; font-size: 13px; cursor: pointer; }

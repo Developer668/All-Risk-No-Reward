@@ -1,95 +1,126 @@
 import { deriveSchedule, localDateKey, stableHash } from '../domain/date'
-import type { Challenge, ResetTask, UserSettings } from '../types'
+import type {
+  Challenge,
+  ChallengeBoundaryTag,
+  ChallengeCategory,
+  ChallengeEvidenceType,
+  ChallengeMode,
+  Difficulty,
+  ResetTask,
+  UserSettings,
+} from '../types'
+import easy from '../../data/challenges/easy.json'
+import medium from '../../data/challenges/medium.json'
+import hard from '../../data/challenges/hard.json'
+import extreme from '../../data/challenges/extreme.json'
+import nightmare from '../../data/challenges/nightmare.json'
+import manifest from '../../data/challenges/manifest.json'
 
-export const challenges: Challenge[] = [
-  {
-    id: 'specific-compliment',
-    title: 'Say the specific thing',
-    prompt: 'Give someone a sincere compliment about a choice they made—not their appearance.',
-    why: 'Specific appreciation trains you to initiate warmth without needing a perfect opening.',
-    category: 'warm-up',
-    difficulty: 1,
-    minutes: 5,
-    proofHint: 'Write what you said and how they responded. No names needed.',
-    script: '“That was a really thoughtful way to handle ___.”',
-  },
-  {
-    id: 'ask-recommendation',
-    title: 'Borrow a good opinion',
-    prompt: 'Ask someone you do not usually talk to for a recommendation: music, food, a show, or a local spot.',
-    why: 'Low-stakes questions create natural conversation without forcing intimacy.',
-    category: 'conversation',
-    difficulty: 1,
-    minutes: 8,
-    proofHint: 'Share the recommendation you received and one detail you learned.',
-    script: '“Quick question—you seem like you’d have a good answer. What’s one ___ you’d recommend?”',
-  },
-  {
-    id: 'voice-note',
-    title: 'Use your real voice',
-    prompt: 'Send a 20–40 second voice note to a friend you normally only text.',
-    why: 'Letting your voice be heard is a small, controllable exposure to being more present.',
-    category: 'connection',
-    difficulty: 2,
-    minutes: 7,
-    proofHint: 'Upload your own draft or describe what you shared. Never upload someone else’s private message.',
-    boundaryTags: ['voice-message', 'direct-message'],
-  },
-  {
-    id: 'small-preference',
-    title: 'State a preference',
-    prompt: 'When a small choice appears today, say what you actually prefer instead of “anything is fine.”',
-    why: 'Confidence grows when you practice taking up a reasonable amount of space.',
-    category: 'assertiveness',
-    difficulty: 2,
-    minutes: 3,
-    proofHint: 'Describe the choice, your preference, and what happened next.',
-  },
-  {
-    id: 'three-questions',
-    title: 'Go one question deeper',
-    prompt: 'Have a conversation where you ask three genuine follow-up questions instead of planning your next answer.',
-    why: 'Curiosity takes pressure off performance and makes connection easier.',
-    category: 'conversation',
-    difficulty: 2,
-    minutes: 12,
-    proofHint: 'List the three questions, with identifying details removed.',
-  },
-  {
-    id: 'invite-light',
-    title: 'Make the light invite',
-    prompt: 'Invite someone to a low-pressure activity: coffee, a walk, lunch, a game, or studying together.',
-    why: 'Clear invitations teach you that a “no” is information, not a verdict on you.',
-    category: 'connection',
-    difficulty: 3,
-    minutes: 10,
-    proofHint: 'Share the invitation you sent. Crop or cover names and avatars.',
-    script: '“I’m planning to ___ this week. Want to join? No worries if your week is packed.”',
-    boundaryTags: ['invitation', 'direct-message'],
-  },
-  {
-    id: 'kind-boundary',
-    title: 'Use a kind no',
-    prompt: 'Decline one small request or suggestion you do not want, kindly and without inventing an excuse.',
-    why: 'Healthy boundaries reduce resentment and build trust in your own judgment.',
-    category: 'assertiveness',
-    difficulty: 3,
-    minutes: 5,
-    proofHint: 'Write the boundary in your own words and rate the discomfort from 1–10.',
-    script: '“Thanks for thinking of me. I’m going to pass this time.”',
-  },
-  {
-    id: 'honest-appreciation',
-    title: 'Name what they mean',
-    prompt: 'Tell someone you trust one concrete way they have made your life better.',
-    why: 'Direct appreciation is vulnerable, useful, and safer than dramatic declarations.',
-    category: 'connection',
-    difficulty: 3,
-    minutes: 12,
-    proofHint: 'Share what you chose to express and how it felt. Their response stays private.',
-    boundaryTags: ['vulnerability'],
-  },
-]
+interface RepositoryChallenge {
+  id: string
+  title: string
+  prompt: string
+  description: string
+  category: ChallengeCategory
+  estimatedMinutes: number
+  timeWindow: 'single_session' | '1_day'
+  mode: ChallengeMode
+  participants: Challenge['participants']
+  ageGroup: 'all' | 'teen_or_adult'
+  requiresConsent: boolean
+  intensity: string
+  equipment?: string[]
+  platforms?: string[]
+  verification: {
+    gradeableByVision: true
+    acceptedEvidence: ChallengeEvidenceType[]
+    captureInstructions: string
+    successCriteria: string[]
+    privacyNotes: string
+  }
+}
+
+interface RepositoryLevel {
+  schemaVersion: 1
+  level: 'easy' | 'medium' | 'hard' | 'extreme' | 'nightmare'
+  challengeCount: number
+  challenges: RepositoryChallenge[]
+}
+
+const levelDifficulty: Record<RepositoryLevel['level'], Difficulty> = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+  extreme: 4,
+  nightmare: 5,
+}
+
+const categoryWhy: Record<Exclude<ChallengeCategory, 'warm-up' | 'conversation' | 'assertiveness' | 'connection'>, string> = {
+  coding: 'Building something concrete turns a large technical idea into a finishable, visible result.',
+  comedy: 'Playful discomfort makes it easier to practice being seen without needing to be perfect.',
+  cooking: 'A practical creation gives effort, planning, and experimentation a tangible finish line.',
+  creative: 'Making and sharing a finished artifact builds confidence through visible follow-through.',
+  fitness: 'A scalable physical task builds momentum by pairing a clear target with safe movement.',
+  kindness: 'A specific helpful action strengthens connection while keeping the focus on another person’s needs.',
+  outdoors: 'A planned change of setting creates a concrete adventure while preserving safety and choice.',
+  productivity: 'Closing one bounded loop builds trust in your ability to start, focus, and finish.',
+  skill: 'Deliberate practice makes progress observable and turns unfamiliar work into a repeatable skill.',
+  social: 'A consent-respecting social action creates a real opportunity to practice initiative and connection.',
+  wellness: 'A bounded reset supports attention and self-awareness without demanding perfection.',
+}
+
+function derivedBoundaryTags(challenge: RepositoryChallenge): ChallengeBoundaryTag[] {
+  const tags = new Set<ChallengeBoundaryTag>()
+  const prompt = challenge.prompt.toLowerCase()
+  if (challenge.requiresConsent) tags.add('requires-consent')
+  if (challenge.mode === 'group') tags.add('group-activity')
+  if (challenge.platforms?.length) tags.add('social-platform')
+  if (challenge.category === 'fitness' || challenge.category === 'outdoors') tags.add('physical-activity')
+  if (/\bvoice (?:note|message)|audio message\b/.test(prompt)) tags.add('voice-message')
+  if (/\b(?:dm|direct message|message|text|instagram)\b/.test(prompt)) tags.add('direct-message')
+  if (/\b(?:invite|invitation|ask (?:someone|them) out)\b/.test(prompt)) tags.add('invitation')
+  if (/\b(?:vulnerable|personal story|meaningful|appreciation)\b/.test(prompt)) tags.add('vulnerability')
+  return [...tags]
+}
+
+function adaptLevel(source: RepositoryLevel): Challenge[] {
+  if (source.challengeCount !== source.challenges.length) {
+    throw new Error(`Challenge count mismatch in ${source.level}.json`)
+  }
+  const difficulty = levelDifficulty[source.level]
+  return source.challenges.map((challenge) => ({
+    id: challenge.id,
+    title: challenge.title,
+    prompt: challenge.prompt,
+    description: challenge.description,
+    why: categoryWhy[challenge.category as keyof typeof categoryWhy],
+    category: challenge.category,
+    difficulty,
+    minutes: challenge.estimatedMinutes,
+    proofHint: challenge.verification.captureInstructions,
+    boundaryTags: derivedBoundaryTags(challenge),
+    timeWindow: challenge.timeWindow,
+    mode: challenge.mode,
+    participants: challenge.participants,
+    ageGroup: challenge.ageGroup,
+    requiresConsent: challenge.requiresConsent,
+    intensity: challenge.intensity,
+    equipment: challenge.equipment,
+    platforms: challenge.platforms,
+    acceptedEvidence: challenge.verification.acceptedEvidence,
+    successCriteria: challenge.verification.successCriteria,
+    privacyNotes: challenge.verification.privacyNotes,
+    datasetVersion: manifest.datasetVersion,
+  }))
+}
+
+const repositoryLevels = [easy, medium, hard, extreme, nightmare] as RepositoryLevel[]
+
+export const challenges: Challenge[] = repositoryLevels.flatMap(adaptLevel)
+
+if (challenges.length !== manifest.totalChallenges || new Set(challenges.map(({ id }) => id)).size !== challenges.length) {
+  throw new Error('Repository challenge manifest does not match the loaded catalog')
+}
 
 export const resetTasks: ResetTask[] = [
   {

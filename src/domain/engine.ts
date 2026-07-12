@@ -159,6 +159,7 @@ export class ChallengeEngine {
 
   sync(now = new Date()): DailyView {
     const dateKey = localDateKey(now)
+    const unavailableOpenAssignment = this.retireUnavailableOpenAssignments(dateKey)
     this.closeExpiredAssignments(now)
     this.refreshStreak(dateKey)
     this.escalateRecovery(dateKey, now)
@@ -168,7 +169,7 @@ export class ChallengeEngine {
     const deadlineToday = localDateTime(dateKey, timeToMinutes(this.state.settings.deadlineTime))
 
     if (!current && !recovery && now.getTime() <= deadlineToday.getTime()) {
-      this.createAssignment(dateKey, now)
+      this.createAssignment(dateKey, now, unavailableOpenAssignment?.id)
     }
 
     this.refreshCurrentAssignment(now)
@@ -375,6 +376,23 @@ export class ChallengeEngine {
     return latestByDate(
       this.state.assignments.filter((item) => item.dateKey === dateKey && item.status !== 'reported'),
     )
+  }
+
+  private retireUnavailableOpenAssignments(dateKey: string): DailyAssignment | undefined {
+    const catalogIds = new Set(this.catalog.map((challenge) => challenge.id))
+    const retiredToday: DailyAssignment[] = []
+
+    for (const assignment of this.state.assignments) {
+      if (!isOpenAssignment(assignment) || catalogIds.has(assignment.challengeId)) continue
+
+      // Catalog upgrades may retire an item while it is still open on a device.
+      // Do this before expiry handling so a removed card can never create a
+      // no-fault punishment. Completed and partial history stays untouched.
+      assignment.status = 'reported'
+      if (assignment.dateKey === dateKey) retiredToday.push(assignment)
+    }
+
+    return latestByDate(retiredToday)
   }
 
   private openRecovery(): RecoveryItem | undefined {

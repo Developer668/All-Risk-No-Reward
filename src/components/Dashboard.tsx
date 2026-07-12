@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight, Bell, CalendarDays, Check, ChevronRight, Clock3, Dices, Download, Flag, Flame, Gift,
   History, Inbox, Laugh, LifeBuoy, LockKeyhole, Menu, RefreshCw, Settings, ShieldCheck, Sparkles, Star,
-  Share2, Target, Trash2, Trophy, X, Zap,
+  Package, Share2, Target, Trash2, Trophy, Users, X, Zap,
 } from 'lucide-react'
 import type {
   ChallengeBoundaryTag, ChallengeCategory, ChallengeReportReason, DailyView, Difficulty, HistoryEntry,
@@ -47,13 +47,24 @@ const boundaryOptions: Array<{ tag: ChallengeBoundaryTag; label: string }> = [
   { tag: 'voice-message', label: 'Voice messages' },
   { tag: 'invitation', label: 'Invitations' },
   { tag: 'vulnerability', label: 'Vulnerable disclosures' },
+  { tag: 'requires-consent', label: 'Activities involving other people' },
+  { tag: 'group-activity', label: 'Group activities' },
+  { tag: 'social-platform', label: 'Social platforms' },
+  { tag: 'physical-activity', label: 'Physical activities' },
 ]
 
 const categoryOptions: Array<{ category: ChallengeCategory; label: string }> = [
-  { category: 'warm-up', label: 'Warm-ups' },
-  { category: 'conversation', label: 'Conversation starters' },
-  { category: 'assertiveness', label: 'Assertiveness practice' },
-  { category: 'connection', label: 'Deeper connection' },
+  { category: 'coding', label: 'Coding' },
+  { category: 'comedy', label: 'Comedy' },
+  { category: 'cooking', label: 'Cooking' },
+  { category: 'creative', label: 'Creative' },
+  { category: 'fitness', label: 'Fitness' },
+  { category: 'kindness', label: 'Kindness' },
+  { category: 'outdoors', label: 'Outdoors' },
+  { category: 'productivity', label: 'Productivity' },
+  { category: 'skill', label: 'Skill building' },
+  { category: 'social', label: 'Social' },
+  { category: 'wellness', label: 'Wellness' },
 ]
 
 function formatDate(date = new Date()) {
@@ -80,15 +91,23 @@ function EmptyState({ title, body }: { title: string; body: string }) {
 
 function ActiveChallengeCard({ daily, onProof, onReport }: { daily: DailyView; onProof: () => void; onReport: () => void }) {
   const challenge = daily.challenge!
+  const participantTarget = challenge.participants?.targetTotal ?? 1
+  const facts = [
+    challenge.requiresConsent ? <span key="consent"><ShieldCheck aria-hidden="true" /> Consent required</span> : null,
+    participantTarget > 1 ? <span key="participants"><Users aria-hidden="true" /> {participantTarget} people</span> : null,
+    challenge.equipment?.length ? <span key="equipment"><Package aria-hidden="true" /> {challenge.equipment.join(', ')}</span> : null,
+    challenge.timeWindow === '1_day' ? <span key="window"><CalendarDays aria-hidden="true" /> Finish today</span> : null,
+  ].filter(Boolean)
   return <>
     <article className="active-challenge">
-      <div className="active-challenge__rail"><span>TODAY</span><span className="vertical">SOCIAL COURAGE</span><span>PRIVATE</span></div>
+      <div className="active-challenge__rail"><span>TODAY</span><span className="vertical">DAILY COURAGE</span><span>PRIVATE</span></div>
       <div className="active-challenge__body">
         <div className="active-challenge__meta"><span><Star fill="currentColor" aria-hidden="true" /> LEVEL {challenge.difficulty}</span><span>{challenge.category}</span></div>
         <div className="active-challenge__icon"><Target aria-hidden="true" /></div>
         <p className="challenge-card__label">TODAY’S CHALLENGE</p>
         <h2>{challenge.title}</h2>
         <p className="active-challenge__prompt">{challenge.prompt}</p>
+        {facts.length > 0 && <div className="challenge-facts" aria-label="Challenge requirements">{facts}</div>}
         {challenge.script && <div className="script"><span>OPTIONAL WORDING</span> “{challenge.script.replaceAll('“', '').replaceAll('”', '')}”</div>}
         <div className="why"><Sparkles aria-hidden="true" /><div><strong>Why this works</strong><p>{challenge.why}</p></div></div>
         <div className="active-challenge__footer"><span><Clock3 aria-hidden="true" /> ABOUT {challenge.minutes} MIN</span><span><Zap aria-hidden="true" /> UP TO 120 POINTS</span></div>

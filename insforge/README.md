@@ -25,11 +25,11 @@ notifications are written only through narrow RPCs.
   challenge from that user's future selection.
 - Immediate app-data erasure plus an account-deletion queue for the remaining
   InsForge Auth account.
-- Empty production catalogs: the operator supplies and safety-reviews all
-  challenge and punishment content after the schema is imported.
+- The repository's safety-reviewed 500-item challenge catalog, imported from a
+  generated rerunnable seed. The operator still supplies punishment content.
 
 No backend code sends a message, controls a social account, impersonates a user,
-or publishes proof. An optional image or short video is sent ephemerally to the
+or publishes proof. A submitted image or short video is sent ephemerally to the
 configured Gemini, OpenRouter, or NVIDIA NIM endpoint; only its SHA-256 hash,
 media type, byte count, and user-provided filename are retained by this app.
 
@@ -43,13 +43,17 @@ npx @insforge/cli link
 npx @insforge/cli current
 npx @insforge/cli metadata --json
 npx @insforge/cli db import insforge/schema.sql
+npm run catalog:apply
 ```
 
-The import creates empty `challenge_catalog` and `recovery_catalog` tables; it
-does not generate product content. Populate them with your reviewed dataset.
-Use stable, unique text IDs because assignment history uses those IDs to enforce
-account-wide no-repeat rolls. Set `is_active = true` only after a row has passed
-your legal and safety review; inactive rows are never assigned or rolled.
+The generated challenge seed upserts the repository's stable IDs and is safe to
+rerun. Rebuild it with `npm run catalog:generate` whenever
+`data/challenges/*.json` changes; `npm run catalog:check` verifies that the seed
+is current. `npm run catalog:apply` sends the same upsert through the linked
+InsForge CLI in bounded batches. The generator validates counts, IDs, evidence
+types, and mappings without calling an AI model. `recovery_catalog` remains
+operator-managed and must be populated with reviewed rows before punishments
+can run.
 
 The edge runtime needs these values:
 
@@ -90,8 +94,8 @@ npx @insforge/cli secrets add GEMINI_API_KEY YOUR_GEMINI_API_KEY
 npx @insforge/cli secrets add GEMINI_PROOF_MODEL gemini-3.5-flash
 npx @insforge/cli secrets add ALLOWED_ORIGINS https://your-site.example
 npx @insforge/cli secrets add DAILY_MAINTENANCE_SECRET REPLACE_WITH_64_RANDOM_HEX_CHARACTERS
-npx @insforge/cli functions deploy verify-proof
-npx @insforge/cli functions deploy daily-maintenance
+npx @insforge/cli functions deploy verify-proof --file insforge/functions/verify-proof/index.ts
+npx @insforge/cli functions deploy daily-maintenance --file insforge/functions/daily-maintenance/index.ts
 ```
 
 `auto` selects the first configured key in this order: Gemini, OpenRouter,
@@ -171,8 +175,9 @@ await insforge.database.rpc('update_profile_preferences', {
 ```
 
 Only supplied parameters change. Points, streak, and level are not accepted.
-Boundary tags are `direct-message`, `voice-message`, `invitation`, and
-`vulnerability`; challenges with any disabled tag are excluded server-side.
+Boundary tags include direct/voice messaging, invitations, vulnerable
+disclosures, consent, group activity, social platforms, and physical activity;
+challenges with any disabled tag are excluded server-side.
 
 ### Verify proof
 
@@ -183,21 +188,24 @@ await insforge.functions.invoke('verify-proof', {
   body: {
     assignmentId,
     proofNote,
-    mediaDataUrl, // optional image/video data URL; limits below
+    mediaDataUrl, // required image/video data URL; limits below
     proofName,    // optional display name only
   },
 })
 ```
 
-`mediaDataUrl` accepts PNG, JPEG, or WebP images up to 180 KiB after browser
+`mediaDataUrl` is required and accepts PNG, JPEG, or WebP images up to 180 KiB after browser
 compression, or MP4, MOV, or WebM videos up to 5 MiB. The browser also limits
 selected videos to 30 seconds; the edge function independently enforces bytes and MIME type. The entire
 request must be no larger than 7 MiB. The server temporarily accepts the legacy
 `imageDataUrl` field during rollout.
 
-The function authenticates the bearer token, loads the owned assignment and
-catalog prompt, reserves a rate-limited attempt, securely proxies it to the
-configured AI provider, and records the result through the project-admin-only
+The function performs request-size, MIME, ownership, assignment-state, and
+catalog evidence-type checks deterministically. Only then does it reserve a
+rate-limited attempt and send the image/video to the configured Gemini,
+OpenRouter, or NVIDIA NIM provider, because interpreting pixels or video frames
+is the part that requires a vision model. It records the result through the
+project-admin-only
 `record_verified_completion` RPC. InsForge does not perform the AI assessment;
 its edge function is the authentication and provider proxy. The client cannot
 provide a challenge prompt, score, verdict, points, or user ID.

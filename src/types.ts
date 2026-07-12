@@ -1,12 +1,43 @@
 export type Difficulty = 1 | 2 | 3 | 4 | 5
 
-export type ChallengeCategory = 'warm-up' | 'conversation' | 'assertiveness' | 'connection'
+export type ChallengeCategory =
+  | 'coding'
+  | 'comedy'
+  | 'cooking'
+  | 'creative'
+  | 'fitness'
+  | 'kindness'
+  | 'outdoors'
+  | 'productivity'
+  | 'skill'
+  | 'social'
+  | 'wellness'
+  // Retained so existing local histories created before the repository catalog
+  // was imported can still be decoded safely.
+  | 'warm-up'
+  | 'conversation'
+  | 'assertiveness'
+  | 'connection'
 
 export type ChallengeBoundaryTag =
   | 'direct-message'
   | 'voice-message'
   | 'invitation'
   | 'vulnerability'
+  | 'requires-consent'
+  | 'group-activity'
+  | 'social-platform'
+  | 'physical-activity'
+
+export type ChallengeEvidenceType = 'image' | 'video'
+
+export type ChallengeMode = 'solo' | 'solo_with_other_people' | 'group'
+
+export interface ChallengeParticipants {
+  minimumTotal: number
+  targetTotal: number
+  maximumTotal: number
+}
 
 export interface Challenge {
   id: string
@@ -19,6 +50,19 @@ export interface Challenge {
   proofHint: string
   script?: string
   boundaryTags?: ChallengeBoundaryTag[]
+  description?: string
+  timeWindow?: 'single_session' | '1_day'
+  mode?: ChallengeMode
+  participants?: ChallengeParticipants
+  ageGroup?: 'all' | 'teen_or_adult'
+  requiresConsent?: boolean
+  intensity?: string
+  equipment?: string[]
+  platforms?: string[]
+  acceptedEvidence?: ChallengeEvidenceType[]
+  successCriteria?: string[]
+  privacyNotes?: string
+  datasetVersion?: string
 }
 
 export interface ResetTask {

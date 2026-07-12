@@ -42,6 +42,60 @@ describe('ChallengeEngine daily assignments', () => {
     expect(second.challengeId).not.toBe(first.challengeId)
   })
 
+  it('replaces an open assignment whose challenge was retired from the catalog', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const state = createUserState({
+      id: 'user-catalog-upgrade',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    })
+    state.assignments.push({
+      id: 'assignment:legacy',
+      userId: state.profile.id,
+      dateKey: '2026-07-12',
+      challengeId: 'retired-legacy-challenge',
+      status: 'available',
+      unlockAt: new Date(2026, 6, 12, 10).toISOString(),
+      deadlineAt: new Date(2026, 6, 12, 22).toISOString(),
+      createdAt: now.toISOString(),
+    })
+
+    const engine = new ChallengeEngine(state)
+    const view = engine.sync(now)
+
+    expect(view.assignment?.challengeId).not.toBe('retired-legacy-challenge')
+    expect(view.assignment?.replacementForAssignmentId).toBe('assignment:legacy')
+    expect(engine.getState().assignments.find(({ id }) => id === 'assignment:legacy')?.status).toBe('reported')
+    expect(view.recovery).toBeUndefined()
+  })
+
+  it('does not punish an expired open assignment retired by a catalog upgrade', () => {
+    const state = createUserState({
+      id: 'user-expired-catalog-upgrade',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now: new Date(2026, 6, 11, 20),
+    })
+    state.assignments.push({
+      id: 'assignment:expired-legacy',
+      userId: state.profile.id,
+      dateKey: '2026-07-11',
+      challengeId: 'retired-expired-challenge',
+      status: 'available',
+      unlockAt: new Date(2026, 6, 11, 10).toISOString(),
+      deadlineAt: new Date(2026, 6, 11, 22).toISOString(),
+      createdAt: new Date(2026, 6, 11, 20).toISOString(),
+    })
+
+    const engine = new ChallengeEngine(state)
+    const view = engine.sync(new Date(2026, 6, 12, 9))
+
+    expect(engine.getState().assignments.find(({ id }) => id === 'assignment:expired-legacy')?.status).toBe('reported')
+    expect(view.recovery).toBeUndefined()
+    expect(view.assignment?.challengeId).not.toBe('retired-expired-challenge')
+  })
+
   it('turns partial progress into an immediate proportional recovery lock', () => {
     const engine = new ChallengeEngine(createUserState({
       id: 'user-partial',

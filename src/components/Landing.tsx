@@ -63,7 +63,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
         <div className="steps__grid">
           <article><span>01</span><Bell aria-hidden="true" /><h3>Wake up curious</h3><p>Your private challenge unlocks at a different daytime hour.</p></article>
           <article><span>02</span><Zap aria-hidden="true" /><h3>Take the tiny risk</h3><p>Do the challenge—or complete a smaller, valid version when life gets messy.</p></article>
-          <article><span>03</span><Trophy aria-hidden="true" /><h3>Show your work</h3><p>Submit a privacy-safe note or photo. AI offers a score, never a moral judgment.</p></article>
+          <article><span>03</span><Trophy aria-hidden="true" /><h3>Show your work</h3><p>Submit privacy-safe image or video proof. AI is used only when visual interpretation is needed.</p></article>
         </div>
       </section>
 

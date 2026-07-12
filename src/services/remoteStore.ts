@@ -78,6 +78,8 @@ interface RemoteChallengeRow {
   proof_hint: string
   suggested_script: string | null
   boundary_tags: unknown
+  source_data?: unknown
+  dataset_version?: string | null
   is_active?: boolean
 }
 
@@ -185,6 +187,17 @@ interface DatabaseResult<T> {
 }
 
 const challengeCategories: ChallengeCategory[] = [
+  'coding',
+  'comedy',
+  'cooking',
+  'creative',
+  'fitness',
+  'kindness',
+  'outdoors',
+  'productivity',
+  'skill',
+  'social',
+  'wellness',
   'warm-up',
   'conversation',
   'assertiveness',
@@ -196,6 +209,10 @@ const boundaryTags: ChallengeBoundaryTag[] = [
   'voice-message',
   'invitation',
   'vulnerability',
+  'requires-consent',
+  'group-activity',
+  'social-platform',
+  'physical-activity',
 ]
 
 const friendlyErrors: Array<[string, string]> = [
@@ -258,6 +275,12 @@ function stringArray(value: unknown): string[] {
     .filter(Boolean)
 }
 
+function record(value: unknown): Record<string, unknown> {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : {}
+}
+
 function clampInteger(value: unknown, minimum: number, maximum: number): number {
   const numeric = typeof value === 'number' && Number.isFinite(value) ? Math.round(value) : minimum
   return Math.max(minimum, Math.min(maximum, numeric))
@@ -274,7 +297,7 @@ function recoverySeverity(value: unknown): RecoveryItem['severity'] {
 function category(value: unknown): ChallengeCategory {
   return challengeCategories.includes(value as ChallengeCategory)
     ? value as ChallengeCategory
-    : 'warm-up'
+    : 'social'
 }
 
 function validBoundaryTags(value: unknown): ChallengeBoundaryTag[] {
@@ -322,6 +345,25 @@ function clockTime(value: unknown, fallback: string): string {
 }
 
 function mapChallenge(row: RemoteChallengeRow): Challenge {
+  const source = record(row.source_data)
+  const verification = record(source.verification)
+  const participantData = record(source.participants)
+  const mode = ['solo', 'solo_with_other_people', 'group'].includes(String(source.mode))
+    ? source.mode as Challenge['mode']
+    : undefined
+  const timeWindow = ['single_session', '1_day'].includes(String(source.timeWindow))
+    ? source.timeWindow as Challenge['timeWindow']
+    : undefined
+  const ageGroup = ['all', 'teen_or_adult'].includes(String(source.ageGroup))
+    ? source.ageGroup as Challenge['ageGroup']
+    : undefined
+  const acceptedEvidence = stringArray(verification.acceptedEvidence)
+    .filter((item): item is 'image' | 'video' => item === 'image' || item === 'video')
+  const participants = Object.keys(participantData).length > 0 ? {
+    minimumTotal: clampInteger(participantData.minimumTotal, 1, 50),
+    targetTotal: clampInteger(participantData.targetTotal, 1, 50),
+    maximumTotal: clampInteger(participantData.maximumTotal, 1, 50),
+  } : undefined
   return {
     id: String(row.id),
     title: String(row.title),
@@ -329,10 +371,23 @@ function mapChallenge(row: RemoteChallengeRow): Challenge {
     why: String(row.why),
     category: category(row.category),
     difficulty: difficulty(row.difficulty),
-    minutes: clampInteger(row.estimated_minutes, 1, 120),
+    minutes: clampInteger(row.estimated_minutes, 1, 1440),
     proofHint: String(row.proof_hint),
     script: row.suggested_script?.trim() || undefined,
     boundaryTags: validBoundaryTags(row.boundary_tags),
+    description: typeof source.description === 'string' ? source.description : undefined,
+    timeWindow,
+    mode,
+    participants,
+    ageGroup,
+    requiresConsent: typeof source.requiresConsent === 'boolean' ? source.requiresConsent : undefined,
+    intensity: typeof source.intensity === 'string' ? source.intensity : undefined,
+    equipment: stringArray(source.equipment),
+    platforms: stringArray(source.platforms),
+    acceptedEvidence,
+    successCriteria: stringArray(verification.successCriteria),
+    privacyNotes: typeof verification.privacyNotes === 'string' ? verification.privacyNotes : undefined,
+    datasetVersion: row.dataset_version || undefined,
   }
 }
 

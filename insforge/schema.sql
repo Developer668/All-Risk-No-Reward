@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS challenge_catalog (
   title TEXT NOT NULL,
   prompt TEXT NOT NULL,
   why TEXT NOT NULL,
-  category TEXT NOT NULL CHECK (category IN ('warm-up', 'conversation', 'assertiveness', 'connection')),
+  category TEXT NOT NULL,
   difficulty SMALLINT NOT NULL CHECK (difficulty BETWEEN 1 AND 5),
-  estimated_minutes SMALLINT NOT NULL CHECK (estimated_minutes BETWEEN 1 AND 120),
+  estimated_minutes SMALLINT NOT NULL,
   proof_hint TEXT NOT NULL,
   suggested_script TEXT,
   is_active BOOLEAN NOT NULL DEFAULT true,
@@ -64,6 +64,17 @@ CREATE TABLE IF NOT EXISTS challenge_catalog (
 ALTER TABLE challenge_catalog ADD COLUMN IF NOT EXISTS safety_notes TEXT NOT NULL DEFAULT
   'Voluntary, legal, private by default, and never requires harassment, impersonation, coercion, or automated messaging.';
 ALTER TABLE challenge_catalog ADD COLUMN IF NOT EXISTS boundary_tags TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[];
+ALTER TABLE challenge_catalog ADD COLUMN IF NOT EXISTS source_data JSONB NOT NULL DEFAULT '{}'::jsonb;
+ALTER TABLE challenge_catalog ADD COLUMN IF NOT EXISTS dataset_version TEXT;
+ALTER TABLE challenge_catalog DROP CONSTRAINT IF EXISTS challenge_catalog_category_check;
+ALTER TABLE challenge_catalog ADD CONSTRAINT challenge_catalog_category_check CHECK (category IN (
+  'coding', 'comedy', 'cooking', 'creative', 'fitness', 'kindness', 'outdoors',
+  'productivity', 'skill', 'social', 'wellness',
+  'warm-up', 'conversation', 'assertiveness', 'connection'
+));
+ALTER TABLE challenge_catalog DROP CONSTRAINT IF EXISTS challenge_catalog_estimated_minutes_check;
+ALTER TABLE challenge_catalog ADD CONSTRAINT challenge_catalog_estimated_minutes_check
+  CHECK (estimated_minutes BETWEEN 1 AND 1440);
 
 CREATE TABLE IF NOT EXISTS recovery_catalog (
   id TEXT PRIMARY KEY,
@@ -267,8 +278,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS daily_assignments_current_user_date_uidx
   ON daily_assignments(user_id, assignment_date)
   WHERE status <> 'replaced';
 
--- Catalogs are intentionally empty. The operator supplies and safety-reviews
--- challenge_catalog and recovery_catalog content after importing this schema.
+-- challenge_catalog is populated by the generated repository seed after this
+-- schema is imported. recovery_catalog remains operator-managed.
 
 -- ---------------------------------------------------------------------------
 -- Updated-at trigger
@@ -1015,20 +1026,27 @@ BEGIN
   END IF;
 
   IF p_disabled_categories IS NOT NULL AND (
-    COALESCE(array_length(p_disabled_categories, 1), 0) > 4
+    COALESCE(array_length(p_disabled_categories, 1), 0) > 15
     OR EXISTS (
       SELECT 1 FROM unnest(p_disabled_categories) AS category
-       WHERE category NOT IN ('warm-up', 'conversation', 'assertiveness', 'connection')
+       WHERE category NOT IN (
+         'coding', 'comedy', 'cooking', 'creative', 'fitness', 'kindness',
+         'outdoors', 'productivity', 'skill', 'social', 'wellness',
+         'warm-up', 'conversation', 'assertiveness', 'connection'
+       )
     )
   ) THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_DISABLED_CATEGORIES';
   END IF;
 
   IF p_disabled_boundary_tags IS NOT NULL AND (
-    COALESCE(array_length(p_disabled_boundary_tags, 1), 0) > 4
+    COALESCE(array_length(p_disabled_boundary_tags, 1), 0) > 8
     OR EXISTS (
       SELECT 1 FROM unnest(p_disabled_boundary_tags) AS boundary_tag
-       WHERE boundary_tag NOT IN ('direct-message', 'voice-message', 'invitation', 'vulnerability')
+       WHERE boundary_tag NOT IN (
+         'direct-message', 'voice-message', 'invitation', 'vulnerability',
+         'requires-consent', 'group-activity', 'social-platform', 'physical-activity'
+       )
     )
   ) THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_DISABLED_BOUNDARY_TAGS';

@@ -4,9 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "catalog:generate": "node scripts/generate-challenge-catalog.mjs",
+    "catalog:check": "node scripts/generate-challenge-catalog.mjs --check",
+    "catalog:apply": "node scripts/generate-challenge-catalog.mjs --apply",
     "dev": "vite --host 127.0.0.1",
     "build": "node scripts/clean-sites-build.mjs && tsc -b && vite build && node scripts/generate-sw.mjs && node scripts/prepare-sites.mjs",
-    "check": "npm run lint && npm run test && npm run build",
+    "check": "npm run catalog:check && npm run lint && npm run test && npm run build",
     "lint": "eslint .",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
