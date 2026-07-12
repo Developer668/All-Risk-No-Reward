@@ -93,6 +93,9 @@ try {
   const assessment = await full.page.locator('.assessment').innerText()
   assert.match(assessment, /CHALLENGE COMPLETE/)
   assert.match(assessment, /\+120 courage points/)
+  // This flow validates sharing, so force the independent random bonus roll to
+  // the no-offer branch. Bonus outcomes have their own dedicated smoke suite.
+  await full.page.evaluate(() => { Math.random = () => 0.99 })
   await full.page.getByRole('button', { name: /View today’s log/ }).click()
   await full.page.locator('.complete-card').waitFor()
   assert.match(await full.page.locator('.complete-card').innerText(), /\+120/)
