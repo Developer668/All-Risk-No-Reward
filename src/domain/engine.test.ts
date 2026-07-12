@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { ChallengeEngine, createUserState } from './engine'
-import type { ResetTask } from '../types'
+import { ChallengeEngine, createUserState, difficultyForSuccessfulDays } from './engine'
+import type { Challenge, ResetTask } from '../types'
 
 const diceCatalog: ResetTask[] = [
   { id: 'easy', title: 'Easy', prompt: 'Easy task', difficulty: 1, minutes: 1, privateOnly: true },
@@ -49,10 +49,11 @@ describe('ChallengeEngine daily assignments', () => {
     engine.developerRegenerateChallenge({ difficulty: 3 }, now)
     const missed = engine.developerApplyScenario('missed', now)
     expect(missed.status).toBe('blocked')
-    expect(missed.assignment?.status).toBe('missed')
+    expect(engine.getState().assignments.find(({ id }) => id === engine.getState().recoveries[0].sourceAssignmentId)?.status)
+      .toBe('missed')
   })
 
-  it('creates the same per-user assignment and local schedule when synced repeatedly', () => {
+  it('keeps one assignment open for the complete local calendar day', () => {
     const now = new Date(2026, 6, 12, 9, 0)
     const engine = new ChallengeEngine(createUserState({
       id: 'user-1',
@@ -66,9 +67,29 @@ describe('ChallengeEngine daily assignments', () => {
 
     expect(first.assignment?.id).toBe(second.assignment?.id)
     expect(first.assignment?.challengeId).toBe(second.assignment?.challengeId)
-    expect(new Date(first.assignment!.unlockAt).getHours()).toBeGreaterThanOrEqual(10)
-    expect(new Date(first.assignment!.unlockAt).getHours()).toBeLessThan(18)
-    expect(new Date(first.assignment!.deadlineAt).getHours()).toBe(22)
+    const unlock = new Date(first.assignment!.unlockAt)
+    const deadline = new Date(first.assignment!.deadlineAt)
+    expect([unlock.getHours(), unlock.getMinutes(), unlock.getSeconds(), unlock.getMilliseconds()]).toEqual([0, 0, 0, 0])
+    expect([deadline.getHours(), deadline.getMinutes(), deadline.getSeconds(), deadline.getMilliseconds()]).toEqual([23, 59, 59, 999])
+    expect(first.status).toBe('available')
+
+    const late = new ChallengeEngine(createUserState({
+      id: 'late-user', name: 'Late', email: 'late@example.com', now: new Date(2026, 6, 12, 23, 59, 30),
+    })).sync(new Date(2026, 6, 12, 23, 59, 30))
+    expect(late.status).toBe('available')
+  })
+
+  it('ignores attempts to configure the fixed schedule or difficulty cap', () => {
+    const now = new Date(2026, 6, 12, 12)
+    const engine = new ChallengeEngine(createUserState({
+      id: 'fixed-policy', name: 'Alex', email: 'alex@example.com', now,
+      settings: { unlockWindowStart: '12:00', unlockWindowEnd: '13:00', deadlineTime: '14:00', maxDifficulty: 1 },
+    }))
+
+    engine.updateSettings({ unlockWindowStart: '08:00', deadlineTime: '09:00', maxDifficulty: 2 }, now)
+    expect(engine.getState().settings).toMatchObject({
+      unlockWindowStart: '00:00', unlockWindowEnd: '23:59', deadlineTime: '23:59', maxDifficulty: 5,
+    })
   })
 
   it('does not repeat a challenge on consecutive assigned days when another is eligible', () => {
@@ -164,11 +185,20 @@ describe('ChallengeEngine daily assignments', () => {
   it('uses a progress ticket to preserve streak continuity and close recovery', () => {
     const now = new Date(2026, 6, 12, 20)
     const state = createUserState({ id: 'ticket-user', name: 'Alex', email: 'alex@example.com', now })
-    state.profile.streak = 2
-    state.assignments.push(
-      { id: 'prior-1', userId: state.profile.id, dateKey: '2026-07-10', challengeId: 'easy-comedy-001', status: 'completed', unlockAt: new Date(2026, 6, 10, 10).toISOString(), deadlineAt: new Date(2026, 6, 10, 22).toISOString(), createdAt: new Date(2026, 6, 10, 10).toISOString() },
-      { id: 'prior-2', userId: state.profile.id, dateKey: '2026-07-11', challengeId: 'easy-comedy-002', status: 'completed', unlockAt: new Date(2026, 6, 11, 10).toISOString(), deadlineAt: new Date(2026, 6, 11, 22).toISOString(), createdAt: new Date(2026, 6, 11, 10).toISOString() },
-    )
+    state.profile.streak = 7
+    state.profile.level = 2
+    for (let day = 5; day <= 11; day += 1) {
+      state.assignments.push({
+        id: `prior-${day}`,
+        userId: state.profile.id,
+        dateKey: `2026-07-${String(day).padStart(2, '0')}`,
+        challengeId: `prior-challenge-${day}`,
+        status: 'completed',
+        unlockAt: new Date(2026, 6, day).toISOString(),
+        deadlineAt: new Date(2026, 6, day, 23, 59, 59, 999).toISOString(),
+        createdAt: new Date(2026, 6, day, 10).toISOString(),
+      })
+    }
     const engine = new ChallengeEngine(state)
     const assignment = engine.sync(now).assignment!
     const partial = engine.submitCompletion({ assignmentId: assignment.id, score: 50, note: 'I made a visible partial attempt.' }, new Date(2026, 6, 12, 20, 5))
@@ -178,7 +208,9 @@ describe('ChallengeEngine daily assignments', () => {
     expect(protectedView.status).toBe('partial')
     expect(protectedView.assignment?.progressProtected).toBe(true)
     expect(protectedView.recovery).toBeUndefined()
-    expect(engine.getState().profile.streak).toBe(3)
+    expect(engine.getState().profile.streak).toBe(8)
+    expect(engine.getState().profile.level).toBe(2)
+    expect(protectedView.currentDifficulty).toBe(2)
   })
 
   it('uses the proof service threshold and fixed point awards consistently', () => {
@@ -250,11 +282,12 @@ describe('ChallengeEngine daily assignments', () => {
       now: new Date(2026, 6, 12, 20),
     }))
     engine.sync(new Date(2026, 6, 12, 20))
-    const missed = engine.sync(new Date(2026, 6, 12, 22, 0, 1))
-    engine.sync(new Date(2026, 6, 12, 23))
+    const missed = engine.sync(new Date(2026, 6, 13, 0, 0, 0))
+    engine.sync(new Date(2026, 6, 13, 0, 1))
 
     expect(missed.status).toBe('blocked')
-    expect(missed.assignment?.status).toBe('missed')
+    expect(engine.getState().assignments.find(({ id }) => id === missed.recovery?.sourceAssignmentId)?.status)
+      .toBe('missed')
     expect(missed.recovery?.severity).toBe(3)
     expect(engine.getState().recoveries).toHaveLength(1)
   })
@@ -404,6 +437,92 @@ describe('ChallengeEngine daily assignments', () => {
 
     engine.sync(new Date(2026, 6, 14, 12))
     expect(engine.getState().profile.streak).toBe(0)
+  })
+
+  it('climbs one exact difficulty tier every seven successful days up to Nightmare', () => {
+    expect([0, 6, 7, 13, 14, 20, 21, 27, 28].map(difficultyForSuccessfulDays))
+      .toEqual([1, 1, 2, 2, 3, 3, 4, 4, 5])
+
+    const catalog: Challenge[] = [1, 2, 3, 4, 5].flatMap((difficulty) => [0, 1].map((variant) => ({
+      id: `tier-${difficulty}-${variant}`,
+      title: `Tier ${difficulty}`,
+      prompt: 'Do the tier challenge.',
+      why: 'Progression test.',
+      category: 'skill' as const,
+      difficulty: difficulty as Challenge['difficulty'],
+      minutes: 5,
+      proofHint: 'Proof.',
+    })))
+    const now = new Date(2026, 6, 12, 12)
+    const state = createUserState({ id: 'tier-user', name: 'Alex', email: 'alex@example.com', now })
+    state.profile.streak = 28
+    state.profile.level = 5
+    for (let offset = 28; offset >= 1; offset -= 1) {
+      const date = new Date(2026, 6, 12 - offset, 12)
+      state.assignments.push({
+        id: `completed-${offset}`,
+        userId: state.profile.id,
+        dateKey: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
+        challengeId: 'tier-1-0',
+        status: 'completed',
+        unlockAt: new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString(),
+        deadlineAt: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999).toISOString(),
+        createdAt: date.toISOString(),
+      })
+    }
+
+    const engine = new ChallengeEngine(state, catalog, undefined, () => 0)
+    const nightmare = engine.sync(now)
+    expect(nightmare.currentDifficulty).toBe(5)
+    expect(nightmare.challenge?.difficulty).toBe(5)
+  })
+
+  it('resets progression to Easy after a failed day', () => {
+    const now = new Date(2026, 6, 12, 12)
+    const state = createUserState({ id: 'reset-tier', name: 'Alex', email: 'alex@example.com', now })
+    state.profile.streak = 21
+    state.profile.level = 4
+    const engine = new ChallengeEngine(state)
+    const assignment = engine.sync(now).assignment!
+    const partial = engine.submitCompletion({
+      assignmentId: assignment.id,
+      score: 50,
+      note: 'I did not complete this challenge.',
+    }, new Date(2026, 6, 12, 13))
+
+    expect(partial.view.currentDifficulty).toBe(1)
+    expect(engine.getState().profile.level).toBe(1)
+  })
+
+  it('allows one same-tier daily reroll and makes the replacement binding', () => {
+    const catalog: Challenge[] = ['a', 'b', 'c'].map((id) => ({
+      id,
+      title: id.toUpperCase(),
+      prompt: 'Easy task.',
+      why: 'Reroll test.',
+      category: 'skill',
+      difficulty: 1,
+      minutes: 5,
+      proofHint: 'Proof.',
+    }))
+    const now = new Date(2026, 6, 12, 12)
+    const engine = new ChallengeEngine(
+      createUserState({ id: 'daily-reroll', name: 'Alex', email: 'alex@example.com', now }),
+      catalog,
+      undefined,
+      () => 0,
+    )
+    const original = engine.sync(now).assignment!
+    const replacement = engine.rerollDailyChallenge(original.id, new Date(2026, 6, 12, 12, 1))
+
+    expect(replacement.assignment?.challengeId).not.toBe(original.challengeId)
+    expect(replacement.challenge?.difficulty).toBe(1)
+    expect(replacement.assignment?.replacementForAssignmentId).toBe(original.id)
+    expect(replacement.dailyRerollStatus).toBe('used')
+    expect(replacement.dailyRerollsRemaining).toBe(0)
+    expect(engine.getState().assignments.find(({ id }) => id === original.id)).toMatchObject({ status: 'replaced' })
+    expect(() => engine.rerollDailyChallenge(replacement.assignment!.id, new Date(2026, 6, 12, 12, 2)))
+      .toThrowError(expect.objectContaining({ code: 'DAILY_REROLL_ALREADY_USED' }))
   })
 
   it('persists boundaries and replaces a reported open challenge', () => {

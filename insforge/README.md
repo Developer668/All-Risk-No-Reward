@@ -64,7 +64,7 @@ The edge runtime needs these values:
 | `INSFORGE_API_KEY` | yes | Project-admin key used only inside trusted functions |
 | `PROOF_AI_PROVIDER` | no | `auto` (default), `openai`, `gemini`, `openrouter`, or `nvidia-nim` |
 | `OPENAI_API_KEY` | for OpenAI | Backend-only OpenAI project API key |
-| `OPENAI_PROOF_MODEL` | no | Defaults to `gpt-4.1-nano` |
+| `OPENAI_PROOF_MODEL` | no | Defaults to low-cost vision-capable `gpt-5-nano` |
 | `GEMINI_API_KEY` | for Gemini | Gemini Developer API key created in Google AI Studio |
 | `GEMINI_PROOF_MODEL` | no | Defaults to `gemini-3.5-flash` |
 | `OPENROUTER_API_KEY` | for OpenRouter | Backend-only OpenRouter key |
@@ -84,7 +84,7 @@ secrets with the CLI (values below are placeholders):
 ```bash
 npx @insforge/cli secrets add PROOF_AI_PROVIDER openai
 npx @insforge/cli secrets add OPENAI_API_KEY YOUR_OPENAI_API_KEY
-npx @insforge/cli secrets add OPENAI_PROOF_MODEL gpt-4.1-nano
+npx @insforge/cli secrets add OPENAI_PROOF_MODEL gpt-5-nano
 
 # Or use OpenRouter instead:
 # npx @insforge/cli secrets add PROOF_AI_PROVIDER openrouter
@@ -207,8 +207,8 @@ await insforge.functions.invoke('verify-proof', {
 
 `mediaItems` accepts up to four images or sampled videos, including mixed image/video
 submissions and up to three videos. The normal video flow accepts MP4, MOV, or WebM
-files up to 80 MiB and 30 seconds in the browser, then extracts six timestamped JPEG
-frames (three for videos shorter than three seconds). Each frame is resized to at
+files up to 80 MiB and 30 seconds in the browser, then extracts three timestamped JPEG
+frames. Each frame is resized to at
 most 720 px and capped at 170 KiB before submission. Full videos stay in the browser.
 Image proof accepts PNG, JPEG, or WebP and is likewise resized and re-encoded. The
 edge function independently validates attachment count, frame count, MIME type, and

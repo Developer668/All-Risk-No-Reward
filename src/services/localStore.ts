@@ -299,6 +299,10 @@ export class LocalStore {
     return this.useEngine((engine) => engine.rerollRecovery(recoveryId, now))
   }
 
+  rerollDailyChallenge(assignmentId: string, now = this.now()): DailyView {
+    return this.useEngine((engine) => engine.rerollDailyChallenge(assignmentId, now))
+  }
+
   getHistory(now = this.now()): HistoryEntry[] {
     return this.useEngine((engine) => engine.getHistory(now))
   }

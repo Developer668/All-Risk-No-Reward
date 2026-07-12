@@ -23,6 +23,7 @@ import {
   markAllRemoteNotifications,
   markRemoteNotification,
   reportRemoteChallenge,
+  rerollRemoteDailyChallenge,
   rerollRemoteRecovery,
   updateRemoteSettings,
 } from './services/remoteStore'
@@ -276,6 +277,17 @@ function AppContent() {
     }
   }
 
+  async function rerollDailyChallenge() {
+    const assignmentId = snapshot?.daily.assignment?.id
+    if (!assignmentId) throw new Error('Today\'s assignment is no longer available. Refresh and try again.')
+    if (backendMode === 'local') {
+      localStore.rerollDailyChallenge(assignmentId)
+      setSnapshot(localSnapshot())
+    } else {
+      setSnapshot(await rerollRemoteDailyChallenge(assignmentId))
+    }
+  }
+
   async function reportChallenge(reason: ChallengeReportReason, details: string) {
     const assignmentId = snapshot?.daily.assignment?.id
     const challengeId = snapshot?.daily.assignment?.challengeId
@@ -326,7 +338,13 @@ function AppContent() {
   }
 
   async function exportData() {
-    if (backendMode !== 'local') return exportRemoteData()
+    if (backendMode !== 'local') {
+      const remoteData = JSON.parse(await exportRemoteData()) as Record<string, unknown>
+      return JSON.stringify({
+        ...remoteData,
+        bonus: snapshot ? loadBonusState(snapshot.profile.id, window.localStorage) : undefined,
+      }, null, 2)
+    }
     const localData = localStore.exportData()
     return JSON.stringify({
       ...localData,
@@ -345,8 +363,9 @@ function AppContent() {
   }
 
   async function deleteData() {
+    const profileId = snapshot?.profile.id
+    if (profileId) clearBonusState(profileId, window.localStorage)
     if (backendMode === 'local') {
-      clearBonusState(localStore.getProfile().id, window.localStorage)
       localStore.deleteMyData()
     }
     else {
@@ -377,6 +396,8 @@ function AppContent() {
         onRecordProof={recordProof}
         onCompleteRecovery={completeRecovery}
         onRerollRecovery={rerollRecovery}
+        onRerollDaily={rerollDailyChallenge}
+        dailyRerollAvailable={snapshot.daily.dailyRerollStatus === 'available'}
         onReport={reportChallenge}
         onUpdateSettings={updateSettings}
         onMarkNotification={markNotification}

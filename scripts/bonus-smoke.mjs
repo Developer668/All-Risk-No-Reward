@@ -34,9 +34,10 @@ async function recordFullProof(page) {
 
 try {
   const win = await pageForTest()
+  await win.page.addInitScript(() => { Math.random = () => 0.1 })
   await startDemo(win.page)
   await recordFullProof(win.page)
-  const winDialog = win.page.getByRole('dialog', { name: 'One more for future you?' })
+  const winDialog = win.page.getByRole('dialog', { name: 'The extra round found you.' })
   await winDialog.waitFor()
   await win.page.waitForTimeout(400)
   await win.page.screenshot({ path: 'output/playwright/bonus-challenge.png' })
@@ -45,15 +46,19 @@ try {
   await win.page.screenshot({ path: 'output/playwright/bonus-challenge-mobile.png' })
   assert.equal(await win.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), 0, 'Mobile bonus flow overflows horizontally.')
   await win.page.setViewportSize({ width: 1180, height: 900 })
-  await winDialog.getByRole('button', { name: /save my ticket/i }).click()
-  const winResult = win.page.getByRole('dialog', { name: 'Ticket saved.' })
+  await winDialog.getByRole('button', { name: /Accept & spin/i }).click()
+  await win.page.getByRole('heading', { name: 'Spinning difficulty…' }).waitFor()
+  await win.page.getByRole('heading', { name: 'Choosing your challenge…' }).waitFor({ timeout: 3_000 })
+  const committed = win.page.getByRole('dialog', { name: 'This is your bonus.' })
+  await committed.waitFor({ timeout: 4_000 })
+  assert.match(await committed.innerText(), /RESULT LOCKED/i)
+  await committed.getByRole('button', { name: /I finished the bonus/i }).click()
+  const winResult = win.page.getByRole('dialog', { name: 'Extra round cleared.' })
   await winResult.waitFor()
-  assert.match(await winResult.innerText(), /1 Progress Ticket/i)
+  assert.match(await winResult.innerText(), /BONUS COMPLETE/i)
   await win.page.waitForTimeout(400)
   await win.page.screenshot({ path: 'output/playwright/bonus-progress-ticket.png' })
-  await winResult.getByRole('button', { name: /Keep going/ }).click()
-  await win.page.reload({ waitUntil: 'networkidle' })
-  assert.match(await win.page.locator('.progress-ticket-balance').innerText(), /1 banked/)
+  await winResult.getByRole('button', { name: /Back to today/ }).click()
   await win.context.close()
 
   const redeem = await pageForTest()
@@ -76,7 +81,7 @@ try {
   await redeem.context.close()
 
   assert.deepEqual(errors, [], `Browser errors occurred: ${errors.join('; ')}`)
-  console.log(JSON.stringify({ guaranteedDailyOffer: true, progressTicketReward: true, automaticProtection: true, errors }, null, 2))
+  console.log(JSON.stringify({ fiftyPercentOfferDeterministic: true, twoStageReel: true, committedChallenge: true, completionRecorded: true, legacyTicketProtection: true, errors }, null, 2))
 } finally {
   await browser.close()
 }

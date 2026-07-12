@@ -52,26 +52,25 @@ export function stableHash(input: string): number {
 }
 
 export function deriveSchedule(userId: string, dateKey: string, settings: UserSettings) {
-  const start = timeToMinutes(settings.unlockWindowStart)
-  const end = timeToMinutes(settings.unlockWindowEnd)
-  const windowSize = end - start
-  if (windowSize <= 0) throw new Error('Unlock window end must be after its start.')
-
-  const unlockMinute = start + (stableHash(`${userId}:${dateKey}:unlock`) % windowSize)
+  // Keep the parameters for source compatibility with older adapters. Daily
+  // availability is now the user's complete local calendar day, not a random
+  // configurable window.
+  void userId
+  const nextMidnight = localDateTime(dateKey, 24 * 60)
   return {
-    unlockAt: localDateTime(dateKey, unlockMinute),
-    deadlineAt: localDateTime(dateKey, timeToMinutes(settings.deadlineTime)),
+    unlockAt: localDateTime(dateKey, 0),
+    deadlineAt: new Date(nextMidnight.getTime() - 1),
     morningAt: localDateTime(dateKey, timeToMinutes(settings.morningReminderTime)),
   }
 }
 
 export function validateScheduleSettings(settings: UserSettings): void {
-  const start = timeToMinutes(settings.unlockWindowStart)
-  const end = timeToMinutes(settings.unlockWindowEnd)
-  const deadline = timeToMinutes(settings.deadlineTime)
-  const morning = timeToMinutes(settings.morningReminderTime)
-
-  if (start >= end) throw new Error('Unlock window end must be after its start.')
-  if (deadline <= end) throw new Error('The deadline must be after the unlock window.')
-  if (morning > start) throw new Error('The morning reminder must be no later than the unlock window.')
+  timeToMinutes(settings.morningReminderTime)
+  if (
+    settings.unlockWindowStart !== '00:00' ||
+    settings.unlockWindowEnd !== '23:59' ||
+    settings.deadlineTime !== '23:59'
+  ) {
+    throw new Error('Daily challenges always run from local midnight through 11:59 PM.')
+  }
 }

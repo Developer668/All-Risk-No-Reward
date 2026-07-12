@@ -12,7 +12,7 @@ import type {
 import type { ProofResult } from '../services/proof'
 import type { DeveloperChallengeFilters, DeveloperScenario } from '../domain/engine'
 import {
-  completeBonusChallenge, declineBonusChallenge, loadBonusState, offerDailyBonus, taskForBonus,
+  acceptBonusChallenge, BONUS_PENALTY, completeBonusChallenge, declineBonusChallenge, loadBonusState, offerDailyBonus, taskForBonus,
   type BonusRecord, type BonusState,
 } from '../services/bonusChallenge'
 import { notificationPermission, notificationsSupported, requestNotificationPermission, sendTestNotification } from '../services/notifications'
@@ -35,6 +35,10 @@ interface DashboardProps {
   onRecordProof: (result: ProofResult, note: string, proofName?: string) => Promise<void>
   onCompleteRecovery: (recoveryId: string, note: string) => Promise<void>
   onRerollRecovery: (recoveryId: string) => Promise<void>
+  /** Persisted by the owning store; a successful draw permanently replaces today's card. */
+  onRerollDaily?: () => Promise<void>
+  /** False once today's single same-difficulty redraw has been spent. */
+  dailyRerollAvailable?: boolean
   onReport: (reason: ChallengeReportReason, details: string) => Promise<void>
   onUpdateSettings: (patch: Partial<UserSettings>) => Promise<void>
   onMarkNotification: (id: string) => Promise<void>
@@ -188,14 +192,40 @@ function EmptyState({ title, body }: { title: string; body: string }) {
   return <div className="empty-state"><Sparkles aria-hidden="true" /><h2>{title}</h2><p>{body}</p></div>
 }
 
-function ActiveChallengeCard({ daily, onProof, onReport }: { daily: DailyView; onProof: () => void; onReport: () => void }) {
+function ActiveChallengeCard({ daily, onProof, onReport, onReroll, rerollAvailable = true }: {
+  daily: DailyView
+  onProof: () => void
+  onReport: () => void
+  onReroll?: () => Promise<void>
+  rerollAvailable?: boolean
+}) {
   const challenge = daily.challenge!
+  const [rerollState, setRerollState] = useState<'idle' | 'confirming' | 'rolling' | 'used' | 'error'>(rerollAvailable ? 'idle' : 'used')
+  const [rerollError, setRerollError] = useState('')
   const participantTarget = challenge.participants?.targetTotal ?? 1
   const facts = [
     challenge.requiresConsent ? <span key="consent"><ShieldCheck aria-hidden="true" /> Consent required</span> : null,
     challenge.equipment?.length ? <span key="equipment"><Package aria-hidden="true" /> {challenge.equipment.join(', ')}</span> : null,
     challenge.timeWindow === '1_day' ? <span key="window"><CalendarDays aria-hidden="true" /> Finish today</span> : null,
   ].filter(Boolean)
+
+  useEffect(() => {
+    if (!rerollAvailable) setRerollState('used')
+  }, [rerollAvailable])
+
+  async function reroll() {
+    if (!onReroll) return
+    setRerollState('rolling')
+    setRerollError('')
+    try {
+      await onReroll()
+      setRerollState('used')
+    } catch (caught) {
+      setRerollError(caught instanceof Error ? caught.message : 'The reroll did not work. Your current card is still active.')
+      setRerollState('error')
+    }
+  }
+
   return <>
     <article className="active-challenge">
       <div className="active-challenge__rail"><span>TODAY</span><span className="vertical">DAILY COURAGE</span><span>PRIVATE</span></div>
@@ -219,6 +249,12 @@ function ActiveChallengeCard({ daily, onProof, onReport }: { daily: DailyView; o
       <button className="button button--accent" onClick={onProof}>Add privacy-safe proof <ArrowRight aria-hidden="true" /></button>
       <button className="text-button" onClick={onReport}><Flag aria-hidden="true" /> Flag or replace this challenge</button>
     </div>
+    {onReroll && <div className={`daily-reroll daily-reroll--${rerollState}`}>
+      <div><Dices className={rerollState === 'rolling' ? 'daily-reroll__dice--rolling' : ''} aria-hidden="true" /><span><strong>{rerollState === 'used' ? 'Today\'s reroll is used' : 'One same-level reroll'}</strong><small>{rerollState === 'used' ? 'This challenge is final. Finish it before 11:59 PM.' : 'You get one redraw today. Whatever lands next is binding, even if it is harder.'}</small></span></div>
+      {rerollState === 'confirming' ? <span className="daily-reroll__confirm"><button type="button" className="button button--ink" onClick={() => void reroll()}>Spin the final card</button><button type="button" className="text-button" onClick={() => setRerollState('idle')}>Keep this one</button></span>
+        : rerollState !== 'used' && <button type="button" className="button button--outline" disabled={rerollState === 'rolling'} onClick={() => setRerollState('confirming')}>{rerollState === 'rolling' ? 'Drawing…' : rerollState === 'error' ? 'Try again' : 'Use reroll'}</button>}
+      {rerollError && <p className="form-error" role="alert">{rerollError}</p>}
+    </div>}
   </>
 }
 
@@ -254,41 +290,79 @@ function ProgressProtectedCard({ missed = false }: { missed?: boolean }) {
 }
 
 function BonusChallengeCard({ record, onOpen }: { record?: BonusRecord; onOpen: () => void }) {
-  if (!record || record.status === 'declined') return null
+  if (!record || ['declined', 'expired', 'not-offered'].includes(record.status)) return null
   const pending = record.status === 'offered'
+  const penalty = record.status === 'penalty-required'
+  const completed = record.status === 'completed'
   return <button type="button" className={`bonus-callout ${pending ? '' : 'bonus-callout--resolved'}`} onClick={onOpen}>
-    <span>{pending ? <Gift aria-hidden="true" /> : <ShieldCheck aria-hidden="true" />}</span>
-    <span><strong>{pending ? 'Today’s bonus is waiting' : 'Progress Ticket banked'}</strong><small>{pending ? 'One optional extra challenge. One guaranteed save.' : 'Your next incomplete day is protected automatically.'}</small></span>
+    <span>{pending ? <Gift aria-hidden="true" /> : penalty ? <Flag aria-hidden="true" /> : completed ? <Trophy aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}</span>
+    <span><strong>{pending ? 'A bonus drop appeared' : penalty ? 'Bonus penalty due' : completed ? 'Bonus conquered' : 'Your bonus is locked in'}</strong><small>{pending ? 'A 50% roll hit today. Accept it to spin—or walk away now.' : penalty ? 'Complete the one safe, respectful invitation.' : completed ? 'You beat the extra challenge.' : 'You accepted. Finish the challenge by 11:59 PM.'}</small></span>
     <ChevronRight aria-hidden="true" />
   </button>
 }
 
-function BonusChallengeDialog({ open, record, tickets, onClose, onComplete, onDecline }: {
+type BonusReelPhase = 'offer' | 'difficulty' | 'challenge' | 'committed'
+
+function wait(milliseconds: number) {
+  return new Promise((resolve) => window.setTimeout(resolve, milliseconds))
+}
+
+function BonusChallengeDialog({ open, record, onClose, onAccept, onComplete, onDecline }: {
   open: boolean
   record?: BonusRecord
-  tickets: number
   onClose: () => void
+  onAccept: () => void
   onComplete: () => void
   onDecline: () => void
 }) {
+  const [phase, setPhase] = useState<BonusReelPhase>('offer')
+  const [spinning, setSpinning] = useState(false)
   const task = taskForBonus(record)
-  if (!record || !task) return null
-  const pending = record.status === 'offered'
+  useEffect(() => {
+    if (!open) setPhase('offer')
+    else if (record?.status !== 'offered' && !spinning) setPhase('committed')
+  }, [open, record?.dateKey, record?.status, spinning])
+  if (!record) return null
+
+  async function acceptAndSpin() {
+    setSpinning(true)
+    setPhase('difficulty')
+    onAccept()
+    await wait(1_350)
+    setPhase('challenge')
+    await wait(1_500)
+    setPhase('committed')
+    setSpinning(false)
+  }
+
+  const difficultyName = record.selectedDifficulty ? ['Easy', 'Medium', 'Hard', 'Extreme', 'Nightmare'][record.selectedDifficulty - 1] : 'Mystery'
+  const reelItems = phase === 'difficulty'
+    ? ['EASY', 'MEDIUM', 'HARD', 'EXTREME', 'NIGHTMARE', 'EASY', 'MEDIUM', 'HARD', 'EXTREME', 'NIGHTMARE']
+    : ['SOCIAL DRAW', 'FITNESS DRAW', task?.title.toUpperCase() ?? 'MYSTERY CARD', 'CREATIVE DRAW', 'SKILL DRAW', 'SOCIAL DRAW', 'FITNESS DRAW', task?.title.toUpperCase() ?? 'MYSTERY CARD']
+
   return <Modal open={open} onClose={onClose} labelledBy="bonus-title" className="bonus-modal">
-    {pending ? <>
+    {record.status === 'offered' && phase === 'offer' ? <>
       <div className="bonus-modal__icon"><Gift aria-hidden="true" /></div>
-      <p className="section-kicker">DAILY BONUS · YOUR CHOICE</p>
-      <h2 id="bonus-title">One more for future you?</h2>
-      <p>Every completed day gets one optional bonus offer. Finish it and the reward is guaranteed.</p>
-      <div className="bonus-task"><span>TODAY’S ONE BONUS</span><h3>{task.title}</h3><p>{task.prompt}</p></div>
-      <p className="bonus-modal__odds"><strong>Guaranteed reward:</strong> one Progress Ticket. It automatically protects your streak and clears recovery on one future partial or missed day.</p>
-      <div className="bonus-modal__choices"><button type="button" className="button button--accent" onClick={onComplete}>I completed it — save my ticket <Sparkles aria-hidden="true" /></button><button type="button" className="button button--outline" onClick={onDecline}>Not today</button></div>
-    </> : <div className="bonus-result">
-      <div className="bonus-result__mark bonus-result__mark--win"><LifeBuoy aria-hidden="true" /></div>
-      <p className="section-kicker">PROGRESS PROTECTION READY</p>
-      <h2 id="bonus-title">Ticket saved.</h2>
-      <p>Your next incomplete day is protected automatically. You now have <strong>{tickets} Progress {tickets === 1 ? 'Ticket' : 'Tickets'}</strong> banked.</p>
-      <button type="button" className="button button--ink button--full" onClick={onClose}>Keep going <Check aria-hidden="true" /></button>
+      <p className="section-kicker">50% BONUS DROP · YOUR CHOICE</p>
+      <h2 id="bonus-title">The extra round found you.</h2>
+      <p>You can decline now with no consequence. If you accept, two reels choose the difficulty and exact challenge—and the result is final.</p>
+      <div className="bonus-stakes"><Dices aria-hidden="true" /><div><strong>Accept means commit</strong><p>Finish the spun challenge before 11:59 PM. Missing it activates one safe penalty: a single respectful invitation to an adult you already know.</p></div></div>
+      <div className="bonus-modal__choices"><button type="button" className="button button--accent" onClick={() => void acceptAndSpin()}>Accept & spin <Sparkles aria-hidden="true" /></button><button type="button" className="button button--outline" onClick={onDecline}>Decline safely</button></div>
+    </> : spinning || phase === 'difficulty' || phase === 'challenge' ? <div className="bonus-spin-screen" aria-live="polite">
+      <p className="section-kicker">BONUS DRAW · {phase === 'difficulty' ? 'ROUND 1 OF 2' : 'ROUND 2 OF 2'}</p>
+      <h2 id="bonus-title">{phase === 'difficulty' ? 'Spinning difficulty…' : 'Choosing your challenge…'}</h2>
+      <div className={`bonus-reel bonus-reel--${phase}`}><i /><div className="bonus-reel__track">{reelItems.map((item, index) => <span key={`${item}-${index}`}>{item}</span>)}</div><i /></div>
+      <p>{phase === 'difficulty' ? 'Easy through Nightmare are all on the reel.' : `${difficultyName} locked. Now drawing one challenge from that level.`}</p>
+    </div> : record.status === 'committed' && task ? <div className="bonus-committed">
+      <p className="section-kicker">RESULT LOCKED · {difficultyName.toUpperCase()}</p>
+      <h2 id="bonus-title">This is your bonus.</h2>
+      <div className="bonus-task"><span>COMMITTED UNTIL 11:59 PM</span><h3>{task.title}</h3><p>{task.prompt}</p></div>
+      <div className="bonus-penalty-note"><ShieldCheck aria-hidden="true" /><p><strong>If you miss it:</strong> {BONUS_PENALTY.prompt} {BONUS_PENALTY.safetyNote}</p></div>
+      <div className="bonus-modal__choices"><button type="button" className="button button--accent" onClick={onComplete}>I finished the bonus <Check aria-hidden="true" /></button><button type="button" className="button button--outline" onClick={onClose}>Close for now</button></div>
+    </div> : record.status === 'penalty-required' ? <div className="bonus-result">
+      <div className="bonus-result__mark bonus-result__mark--nothing"><Flag aria-hidden="true" /></div><p className="section-kicker">BONUS MISSED · ONE SAFE PENALTY</p><h2 id="bonus-title">Make one respectful invitation.</h2><p>{BONUS_PENALTY.prompt}</p><div className="bonus-penalty-note"><ShieldCheck aria-hidden="true" /><p>{BONUS_PENALTY.safetyNote}</p></div><button type="button" className="button button--ink button--full" onClick={onClose}>I understand</button>
+    </div> : <div className="bonus-result">
+      <div className="bonus-result__mark bonus-result__mark--win"><Trophy aria-hidden="true" /></div><p className="section-kicker">BONUS COMPLETE</p><h2 id="bonus-title">Extra round cleared.</h2><p>You accepted the random result and finished it. That is the whole win.</p><button type="button" className="button button--ink button--full" onClick={onClose}>Back to today <Check aria-hidden="true" /></button>
     </div>}
   </Modal>
 }
@@ -352,8 +426,8 @@ function RecoveryCard({ daily, onComplete, onReroll, diceEnabled }: {
   </article>
 }
 
-function TodayPanel({ daily, bonusRecord, onOpenBonus, onProof, onReport, onShare, onCompleteRecovery, onRerollRecovery, diceEnabled, onEnableNotifications, now }: {
-  daily: DailyView; bonusRecord?: BonusRecord; onOpenBonus: () => void; onProof: () => void; onReport: () => void; onShare: () => void; onCompleteRecovery: (note: string) => Promise<void>; onRerollRecovery: () => Promise<void>; diceEnabled: boolean; onEnableNotifications: () => void; now: Date
+function TodayPanel({ daily, bonusRecord, onOpenBonus, onProof, onReport, onShare, onCompleteRecovery, onRerollRecovery, onRerollDaily, dailyRerollAvailable, diceEnabled, onEnableNotifications, now }: {
+  daily: DailyView; bonusRecord?: BonusRecord; onOpenBonus: () => void; onProof: () => void; onReport: () => void; onShare: () => void; onCompleteRecovery: (note: string) => Promise<void>; onRerollRecovery: () => Promise<void>; onRerollDaily?: () => Promise<void>; dailyRerollAvailable?: boolean; diceEnabled: boolean; onEnableNotifications: () => void; now: Date
 }) {
   const hasRecovery = Boolean(daily.recovery && daily.recoveryTask)
   const protectedDay = Boolean(daily.assignment?.progressProtected)
@@ -361,7 +435,7 @@ function TodayPanel({ daily, bonusRecord, onOpenBonus, onProof, onReport, onShar
     <div className="today-heading"><div><span className="section-kicker">YOUR DAILY DROP</span><h2>{daily.status === 'locked' ? 'A little suspense.' : protectedDay ? 'Ticket saved the day.' : hasRecovery ? 'Close the loop.' : daily.status === 'completed' ? 'Filed under: brave.' : 'The card is yours.'}</h2></div>{daily.deadlineAt && <div className="deadline"><Clock3 aria-hidden="true" /><span>PROOF DUE<strong>{formatTime(daily.deadlineAt)}</strong></span></div>}</div>
     {daily.status === 'locked' ? <LockedCard daily={daily} now={now} onEnableNotifications={onEnableNotifications} />
       : hasRecovery ? <><CompletionCard daily={daily} onShare={onShare} /><RecoveryCard daily={daily} onComplete={onCompleteRecovery} onReroll={onRerollRecovery} diceEnabled={diceEnabled} /></>
-      : daily.status === 'available' && daily.challenge ? <ActiveChallengeCard daily={daily} onProof={onProof} onReport={onReport} />
+      : daily.status === 'available' && daily.challenge ? <ActiveChallengeCard daily={daily} onProof={onProof} onReport={onReport} onReroll={onRerollDaily} rerollAvailable={dailyRerollAvailable} />
       : daily.status === 'completed' ? <><CompletionCard daily={daily} onShare={onShare} /><BonusChallengeCard record={bonusRecord} onOpen={onOpenBonus} /></>
       : daily.status === 'partial' ? <><CompletionCard daily={daily} onShare={onShare} />{protectedDay && <ProgressProtectedCard />}</>
       : daily.status === 'missed' && protectedDay ? <ProgressProtectedCard missed />
@@ -453,11 +527,7 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
       const disabledCategories = categoryOptions.filter(({ category }) => form.get(`category-${category}`) === 'on').map(({ category }) => category)
       const notificationsEnabled = form.get('notifications') === 'on'
       await onSave({
-        unlockWindowStart: String(form.get('unlockStart')),
-        unlockWindowEnd: String(form.get('unlockEnd')),
-        deadlineTime: String(form.get('deadline')),
         morningReminderTime: String(form.get('morningTime')),
-        maxDifficulty: Number(form.get('maxDifficulty')) as Difficulty,
         notificationsEnabled,
         morningReminderEnabled: form.get('morning') === 'on',
         unlockReminderEnabled: form.get('unlockReminder') === 'on',
@@ -496,16 +566,19 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
     catch (caught) { setMessage(caught instanceof Error ? caught.message : 'Could not delete your data.'); setBusy(false) }
   }
 
+  const detectedTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'your device timezone'
+
   return <section className="content-panel">
     <div className="panel-heading"><div><span className="section-kicker">SETTINGS & SAFETY</span><h2>Keep the challenge yours.</h2></div><Settings aria-hidden="true" /></div>
     <form className="settings-form" onSubmit={save}>
-      <fieldset><legend>Daily schedule</legend><div className="settings-grid">
-        <label className="field">Unlock window starts<input type="time" name="unlockStart" defaultValue={settings.unlockWindowStart} required /></label>
-        <label className="field">Unlock window ends<input type="time" name="unlockEnd" defaultValue={settings.unlockWindowEnd} required /></label>
-        <label className="field">Proof deadline<input type="time" name="deadline" defaultValue={settings.deadlineTime} required /></label>
-        <label className="field">Morning heads-up<input type="time" name="morningTime" defaultValue={settings.morningReminderTime} required /></label>
-        <label className="field">Maximum difficulty<select name="maxDifficulty" defaultValue={settings.maxDifficulty}>{[1,2,3,4,5].map((level) => <option value={level} key={level}>Level {level}</option>)}</select></label>
-      </div></fieldset>
+      <fieldset><legend>Daily schedule & difficulty</legend>
+        <div className="automatic-rules" aria-label="Automatic daily rules">
+          <div><Clock3 aria-hidden="true" /><span><strong>A full local day</strong><small>Your card opens at 12:00 AM and proof is due by 11:59 PM in <b>{detectedTimeZone}</b>. The app follows this device automatically.</small></span></div>
+          <div><BarChart3 aria-hidden="true" /><span><strong>Difficulty grows with you</strong><small>Everyone begins on Easy. Consistent attempts gradually climb toward Nightmare over weeks; one failed day restarts the climb from Easy.</small></span></div>
+          <div><Dices aria-hidden="true" /><span><strong>One binding redraw</strong><small>Each day includes one optional reroll at the same difficulty. The replacement becomes your final challenge for that day.</small></span></div>
+        </div>
+        <label className="field automatic-rules__morning">Morning heads-up<input type="time" name="morningTime" defaultValue={settings.morningReminderTime} required /></label>
+      </fieldset>
       <fieldset><legend>Challenge boundaries</legend><p>Checked formats or categories will never be assigned.</p>
         <div className="settings-check-grid">
           <div><strong>Formats</strong>{boundaryOptions.map(({ tag, label }) => <label className="check-row" key={tag}><input type="checkbox" name={`boundary-${tag}`} defaultChecked={settings.disabledBoundaryTags.includes(tag)} /><span>{label}</span></label>)}</div>
@@ -549,7 +622,9 @@ export function Dashboard(props: DashboardProps) {
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const autoOpenedBonusRef = useRef('')
   const { daily, onRefresh } = props
-  const bonusEnabled = props.backendMode === 'local'
+  // Bonus commitments are device-local for now, but available to both demo and
+  // synced accounts. The profile id keeps each signed-in user's roll isolated.
+  const bonusEnabled = true
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000)
@@ -575,6 +650,16 @@ export function Dashboard(props: DashboardProps) {
       setBonusOpen(true)
     }
   }, [bonusEnabled, daily, proofOpen, props.profile.id])
+  useEffect(() => {
+    if (!bonusEnabled || !bonusRecord || !['offered', 'committed'].includes(bonusRecord.status)) return
+    const refreshed = loadBonusState(props.profile.id, window.localStorage, now)
+    const current = refreshed.records[bonusRecord.dateKey]
+    if (current && current.status !== bonusRecord.status) {
+      setBonusState(refreshed)
+      setBonusRecord(current)
+      if (current.status === 'penalty-required') setBonusOpen(true)
+    }
+  }, [bonusEnabled, bonusRecord, now, props.profile.id])
   useEffect(() => {
     if (!daily.unlockAt || daily.status !== 'locked') return
     const delay = new Date(daily.unlockAt).getTime() - Date.now()
@@ -620,6 +705,13 @@ export function Dashboard(props: DashboardProps) {
     const permission = await requestNotificationPermission()
     if (permission === 'granted') { await props.onUpdateSettings({ notificationsEnabled: true }); await sendTestNotification() }
   }
+  function acceptBonus() {
+    const dateKey = bonusRecord?.dateKey
+    if (!dateKey) return
+    const result = acceptBonusChallenge(props.profile.id, dateKey, window.localStorage)
+    setBonusRecord({ ...result.record })
+    setBonusState(result.state)
+  }
   function finishBonus() {
     const dateKey = bonusRecord?.dateKey
     if (!dateKey) return
@@ -627,6 +719,7 @@ export function Dashboard(props: DashboardProps) {
     setBonusRecord({ ...result.record })
     setBonusState(result.state)
   }
+
   function declineBonus() {
     const dateKey = bonusRecord?.dateKey
     if (!dateKey) return
@@ -656,7 +749,7 @@ export function Dashboard(props: DashboardProps) {
     <main className="dashboard">
       <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : section === 'developer' ? 'Developer lab.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
 
-      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.progressTickets > 0 && <article className="progress-ticket-balance"><ShieldCheck aria-hidden="true" /><div><span>PROGRESS TICKETS</span><strong>{bonusState.progressTickets} banked</strong><small>Automatically protects your next incomplete day.</small></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
+      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onRerollDaily={props.onRerollDaily} dailyRerollAvailable={props.dailyRerollAvailable} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{props.backendMode === 'local' && bonusState.progressTickets > 0 && <article className="progress-ticket-balance"><ShieldCheck aria-hidden="true" /><div><span>PROGRESS TICKETS</span><strong>{bonusState.progressTickets} banked</strong><small>Automatically protects your next incomplete day.</small></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
         : <div className={`dashboard-content ${section === 'developer' ? 'dashboard-content--developer' : ''}`}>{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : section === 'developer' && props.developerTools ? <DeveloperPanel daily={props.daily} tools={props.developerTools} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 
@@ -664,7 +757,7 @@ export function Dashboard(props: DashboardProps) {
     {props.daily.assignment && props.daily.challenge && <ProofDialog open={proofOpen} assignment={props.daily.assignment} challenge={props.daily.challenge} backendMode={props.backendMode} onClose={() => setProofOpen(false)} onRecorded={props.onRecordProof} />}
     {props.daily.challenge && <ReportDialog open={reportOpen} challengeTitle={props.daily.challenge.title} onClose={() => setReportOpen(false)} onSubmit={props.onReport} />}
     {props.daily.completion && <ShareDialog open={shareOpen} onClose={() => setShareOpen(false)} verdict={props.daily.status === 'completed' || props.daily.completion.verdict === 'complete' ? 'complete' : 'partial'} points={props.daily.completion.pointsAwarded ?? 0} streak={props.profile.streak} challengeTitle={props.daily.challenge?.title} />}
-    <BonusChallengeDialog open={bonusOpen} record={bonusRecord} tickets={bonusState.progressTickets} onClose={() => setBonusOpen(false)} onComplete={finishBonus} onDecline={declineBonus} />
+    <BonusChallengeDialog open={bonusOpen} record={bonusRecord} onClose={() => setBonusOpen(false)} onAccept={acceptBonus} onComplete={finishBonus} onDecline={declineBonus} />
     <NotificationsDialog open={notificationsOpen} records={props.notifications} onClose={() => setNotificationsOpen(false)} onRead={props.onMarkNotification} onReadAll={props.onMarkAllNotifications} />
   </div>
 }

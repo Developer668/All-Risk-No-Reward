@@ -337,7 +337,7 @@ function resolveProvider(): ProviderConfig | null {
       openai: {
         name: 'openai' as const,
         apiKey: openAiKey,
-        model: Deno.env.get('OPENAI_PROOF_MODEL')?.trim() || 'gpt-4.1-nano',
+        model: Deno.env.get('OPENAI_PROOF_MODEL')?.trim() || 'gpt-5-nano',
       },
     } : {}),
     ...(geminiKey ? {
@@ -467,7 +467,8 @@ async function requestAssessment(
           { role: 'system', content: SYSTEM_INSTRUCTION },
           { role: 'user', content: responsesUserContent(prompt, evidence) },
         ],
-        max_output_tokens: 300,
+        max_output_tokens: 180,
+        reasoning: { effort: 'minimal' },
         text: {
           format: {
             type: 'json_schema',

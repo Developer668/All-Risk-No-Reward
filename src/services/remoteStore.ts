@@ -98,6 +98,9 @@ interface RemoteAssignmentRow {
   completed_at?: string | null
   missed_at?: string | null
   points_awarded?: number
+  replacement_for_assignment_id?: string | null
+  rerolled_at?: string | null
+  daily_reroll_used?: boolean
 }
 
 interface RemoteCompletionRow {
@@ -395,7 +398,7 @@ function assignmentStatus(value: unknown): AssignmentStatus {
   switch (value) {
     case 'active': return 'available'
     case 'complete': return 'completed'
-    case 'replaced': return 'reported'
+    case 'replaced': return 'replaced'
     case 'locked':
     case 'partial':
     case 'missed':
@@ -417,6 +420,9 @@ function mapAssignment(row: RemoteAssignmentRow, completion?: RemoteCompletionRo
     createdAt: String(row.created_at),
     completedAt: row.completed_at || completion?.completed_at || undefined,
     completionId: completion?.id,
+    replacementForAssignmentId: row.replacement_for_assignment_id || undefined,
+    rerolledAt: row.rerolled_at || undefined,
+    dailyRerollUsed: row.daily_reroll_used === true,
   }
 }
 
@@ -707,9 +713,30 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
         ? 'catalog-exhausted'
         : 'available'
     : undefined
+  const currentDifficulty = difficulty(
+    visibleChallengeRow?.difficulty
+      ?? (currentAssignmentRow ? challengeById.get(currentAssignmentRow.challenge_id)?.difficulty : 1)
+      ?? 1,
+  )
+  const currentDateKey = state.assignment?.assignment_date || localDateKey(state.profile?.timezone)
+  const sameDayAssignments = assignments.filter((row) => row.assignment_date === currentDateKey)
+  const dailyRerollUsed = sameDayAssignments.some((row) => Boolean(row.rerolled_at) || row.daily_reroll_used === true)
+  const seenChallengeIds = new Set(sameDayAssignments.map((row) => row.challenge_id))
+  const hasSameDifficultyReplacement = challenges.some((row) =>
+    row.is_active !== false
+      && difficulty(row.difficulty) === currentDifficulty
+      && !seenChallengeIds.has(row.id),
+  )
+  const dailyRerollStatus: DailyView['dailyRerollStatus'] = currentAssignmentRow && assignmentStatus(currentAssignmentRow.status) === 'available'
+    ? dailyRerollUsed
+      ? 'used'
+      : hasSameDifficultyReplacement
+        ? 'available'
+        : 'catalog-exhausted'
+    : undefined
 
   const daily: DailyView = {
-    dateKey: state.assignment?.assignment_date || localDateKey(state.profile?.timezone),
+    dateKey: currentDateKey,
     status: dailyStatus(state.assignment, state),
     assignment: currentAssignmentRow
       ? mapAssignment(currentAssignmentRow, currentCompletionRow)
@@ -739,6 +766,9 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
     unreadNotificationCount: notifications.filter((record) => !record.readAt).length,
     recoveryRerollStatus,
     recoveryRerollsRemaining: currentRecoveryRow ? Math.max(0, 2 - currentRerollCount) : undefined,
+    currentDifficulty,
+    dailyRerollStatus,
+    dailyRerollsRemaining: dailyRerollStatus === 'available' ? 1 : dailyRerollStatus ? 0 : undefined,
   }
 
   return { profile, daily, history, notifications, settings }
@@ -764,6 +794,15 @@ export async function rerollRemoteRecovery(recoveryId: string): Promise<AppSnaps
   await remoteRpc<unknown>('reroll_recovery_task', {
     p_recovery_id: normalizedId,
   }, 'Could not roll the punishment dice.')
+  return loadRemoteSnapshot()
+}
+
+export async function rerollRemoteDailyChallenge(assignmentId: string): Promise<AppSnapshot> {
+  const normalizedId = assignmentId.trim()
+  if (!normalizedId) throw new Error('Choose today\'s challenge to reroll.')
+  await remoteRpc<unknown>('reroll_daily_assignment', {
+    p_assignment_id: normalizedId,
+  }, 'Could not reroll today\'s challenge.')
   return loadRemoteSnapshot()
 }
 

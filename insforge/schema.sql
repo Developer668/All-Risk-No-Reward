@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS profiles (
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS notification_enabled BOOLEAN NOT NULL DEFAULT true;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS disabled_categories TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[];
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS disabled_boundary_tags TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[];
-ALTER TABLE profiles ADD COLUMN IF NOT EXISTS unlock_window_start TIME NOT NULL DEFAULT TIME '10:00';
-ALTER TABLE profiles ADD COLUMN IF NOT EXISTS unlock_window_end TIME NOT NULL DEFAULT TIME '18:00';
-ALTER TABLE profiles ADD COLUMN IF NOT EXISTS deadline_time TIME NOT NULL DEFAULT TIME '22:00';
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS unlock_window_start TIME NOT NULL DEFAULT TIME '00:00';
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS unlock_window_end TIME NOT NULL DEFAULT TIME '23:59';
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS deadline_time TIME NOT NULL DEFAULT TIME '23:59';
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS morning_reminder_time TIME NOT NULL DEFAULT TIME '08:00';
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS morning_reminder_enabled BOOLEAN NOT NULL DEFAULT true;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS unlock_reminder_enabled BOOLEAN NOT NULL DEFAULT true;
@@ -40,6 +40,15 @@ ALTER TABLE profiles ADD COLUMN IF NOT EXISTS deadline_reminder_enabled BOOLEAN 
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS max_difficulty SMALLINT NOT NULL DEFAULT 3;
 ALTER TABLE profiles DROP CONSTRAINT IF EXISTS profiles_max_difficulty_check;
 ALTER TABLE profiles ADD CONSTRAINT profiles_max_difficulty_check CHECK (max_difficulty BETWEEN 1 AND 5);
+ALTER TABLE profiles ALTER COLUMN unlock_window_start SET DEFAULT TIME '00:00';
+ALTER TABLE profiles ALTER COLUMN unlock_window_end SET DEFAULT TIME '23:59';
+ALTER TABLE profiles ALTER COLUMN deadline_time SET DEFAULT TIME '23:59';
+ALTER TABLE profiles ALTER COLUMN max_difficulty SET DEFAULT 5;
+UPDATE profiles
+   SET unlock_window_start = TIME '00:00',
+       unlock_window_end = TIME '23:59',
+       deadline_time = TIME '23:59',
+       max_difficulty = 5;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS proof_ai_consent BOOLEAN NOT NULL DEFAULT false;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS minimum_age_confirmed BOOLEAN NOT NULL DEFAULT false;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS accepted_terms_at TIMESTAMPTZ;
@@ -107,6 +116,9 @@ ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS activated_at TIMESTAMPTZ;
 ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS completed_at TIMESTAMPTZ;
 ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS missed_at TIMESTAMPTZ;
 ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS points_awarded INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS replacement_for_assignment_id UUID REFERENCES daily_assignments(id);
+ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS rerolled_at TIMESTAMPTZ;
+ALTER TABLE daily_assignments ADD COLUMN IF NOT EXISTS daily_reroll_used BOOLEAN NOT NULL DEFAULT false;
 
 CREATE TABLE IF NOT EXISTS proof_verification_attempts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -576,7 +588,7 @@ BEGIN
        AND deadline_at < p_now
      RETURNING *
   LOOP
-    UPDATE profiles SET streak = 0 WHERE user_id = p_user_id;
+    UPDATE profiles SET streak = 0, level = 1 WHERE user_id = p_user_id;
   END LOOP;
 
   -- This also retries an earlier partial/miss if the operator catalog was empty
@@ -599,7 +611,7 @@ BEGIN
       v_assignment.id,
       p_now
     );
-    UPDATE profiles SET streak = 0 WHERE user_id = p_user_id;
+    UPDATE profiles SET streak = 0, level = 1 WHERE user_id = p_user_id;
   END LOOP;
 
   -- Escalate at most once per due interval and only through active,
@@ -700,8 +712,7 @@ DECLARE
   v_deadline_local TIMESTAMP;
   v_unlock_at TIMESTAMPTZ;
   v_deadline_at TIMESTAMPTZ;
-  v_window_minutes INTEGER;
-  v_offset_minutes INTEGER;
+  v_difficulty SMALLINT;
 BEGIN
   IF EXISTS (
     SELECT 1 FROM account_deletion_requests
@@ -733,20 +744,6 @@ BEGIN
     RETURN v_assignment;
   END IF;
 
-  -- A new user arriving after today's deadline receives tomorrow's locked
-  -- assignment rather than an immediately missed challenge.
-  IF v_local_time >= v_profile.deadline_time THEN
-    v_local_date := v_today + 1;
-    SELECT * INTO v_assignment
-      FROM daily_assignments
-     WHERE user_id = p_user_id
-       AND assignment_date = v_local_date
-       AND status <> 'replaced';
-    IF v_assignment.id IS NOT NULL THEN
-      RETURN v_assignment;
-    END IF;
-  END IF;
-
   IF EXISTS (
     SELECT 1 FROM recovery_tasks
      WHERE user_id = p_user_id AND status = 'open'
@@ -754,10 +751,20 @@ BEGIN
     RETURN NULL;
   END IF;
 
+  -- Four complete seven-day tiers lead from Easy to Nightmare. A failed
+  -- day resets streak/level to one in the maintenance and proof paths.
+  v_difficulty := CASE
+    WHEN v_profile.streak >= 28 THEN 5
+    WHEN v_profile.streak >= 21 THEN 4
+    WHEN v_profile.streak >= 14 THEN 3
+    WHEN v_profile.streak >= 7 THEN 2
+    ELSE 1
+  END;
+
   SELECT * INTO v_challenge
     FROM challenge_catalog
    WHERE is_active = true
-     AND difficulty <= LEAST(5, v_profile.level + 1, v_profile.max_difficulty)
+     AND difficulty = v_difficulty
      AND NOT (category = ANY(v_profile.disabled_categories))
      AND NOT (challenge_catalog.boundary_tags && v_profile.disabled_boundary_tags)
      AND NOT EXISTS (
@@ -765,25 +772,15 @@ BEGIN
         WHERE user_id = p_user_id
           AND challenge_id = challenge_catalog.id
      )
-   ORDER BY md5(p_user_id::text || ':' || v_local_date::text || ':' || id)
+   ORDER BY random()
    LIMIT 1;
 
   IF v_challenge.id IS NULL THEN
     RETURN NULL;
   END IF;
 
-  v_window_minutes := GREATEST(
-    1,
-    (extract(epoch FROM (v_profile.unlock_window_end - v_profile.unlock_window_start)) / 60)::integer
-  );
-  v_offset_minutes := (
-    ('x' || substr(md5(p_user_id::text || ':' || v_local_date::text || ':unlock'), 1, 8))::bit(32)::bigint
-    % v_window_minutes
-  )::integer;
-
-  v_unlock_local := v_local_date + v_profile.unlock_window_start
-    + make_interval(mins => v_offset_minutes);
-  v_deadline_local := v_local_date + v_profile.deadline_time;
+  v_unlock_local := v_local_date + TIME '00:00';
+  v_deadline_local := v_local_date + interval '1 day' - interval '1 millisecond';
   v_unlock_at := v_unlock_local AT TIME ZONE v_profile.timezone;
   v_deadline_at := v_deadline_local AT TIME ZONE v_profile.timezone;
 
@@ -992,30 +989,12 @@ BEGIN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_SCHEDULE_TIME';
   END IF;
 
-  v_unlock_start := CASE
-    WHEN p_unlock_window_start IS NOT NULL THEN p_unlock_window_start::time
-    WHEN p_notification_hour_start IS NOT NULL THEN make_time(v_start, 0, 0)
-    ELSE v_profile.unlock_window_start
-  END;
-  v_unlock_end := CASE
-    WHEN p_unlock_window_end IS NOT NULL THEN p_unlock_window_end::time
-    WHEN p_notification_hour_end IS NOT NULL THEN make_time(v_end, 0, 0)
-    ELSE v_profile.unlock_window_end
-  END;
-  v_deadline := COALESCE(p_deadline_time::time, v_profile.deadline_time);
+  -- These parameters remain in the RPC signature for old clients, but the
+  -- challenge window and difficulty ceiling are no longer user preferences.
+  v_unlock_start := TIME '00:00';
+  v_unlock_end := TIME '23:59';
+  v_deadline := TIME '23:59';
   v_morning := COALESCE(p_morning_reminder_time::time, v_profile.morning_reminder_time);
-
-  IF v_unlock_start < TIME '06:00'
-     OR v_unlock_end > TIME '19:00'
-     OR v_unlock_start >= v_unlock_end
-     OR v_deadline <= v_unlock_end
-     OR v_morning > v_unlock_start THEN
-    RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_SCHEDULE_ORDER';
-  END IF;
-
-  IF p_max_difficulty IS NOT NULL AND p_max_difficulty NOT BETWEEN 1 AND 5 THEN
-    RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_MAX_DIFFICULTY';
-  END IF;
 
   IF p_boundaries IS NOT NULL AND (
     jsonb_typeof(p_boundaries) <> 'array'
@@ -1056,8 +1035,8 @@ BEGIN
      SET display_name = COALESCE(NULLIF(btrim(p_display_name), ''), display_name),
          timezone = COALESCE(p_timezone, timezone),
          notification_enabled = COALESCE(p_notification_enabled, notification_enabled),
-         notification_hour_start = extract(hour FROM v_unlock_start)::smallint,
-         notification_hour_end = extract(hour FROM v_unlock_end)::smallint,
+          notification_hour_start = v_start,
+          notification_hour_end = v_end,
          unlock_window_start = v_unlock_start,
          unlock_window_end = v_unlock_end,
          deadline_time = v_deadline,
@@ -1065,7 +1044,7 @@ BEGIN
          morning_reminder_enabled = COALESCE(p_morning_reminder_enabled, morning_reminder_enabled),
          unlock_reminder_enabled = COALESCE(p_unlock_reminder_enabled, unlock_reminder_enabled),
          deadline_reminder_enabled = COALESCE(p_deadline_reminder_enabled, deadline_reminder_enabled),
-         max_difficulty = COALESCE(p_max_difficulty, max_difficulty),
+          max_difficulty = 5,
          boundaries = COALESCE(p_boundaries, boundaries),
          disabled_categories = CASE
            WHEN p_disabled_categories IS NULL THEN disabled_categories
@@ -1264,6 +1243,98 @@ BEGIN
   RETURN jsonb_build_object(
     'report', to_jsonb(v_report),
     'state', v_state,
+    'idempotent', false
+  );
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION public.reroll_daily_assignment(p_assignment_id UUID)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+DECLARE
+  v_user_id UUID := auth.uid();
+  v_profile profiles%ROWTYPE;
+  v_previous daily_assignments%ROWTYPE;
+  v_replacement daily_assignments%ROWTYPE;
+  v_challenge challenge_catalog%ROWTYPE;
+BEGIN
+  IF v_user_id IS NULL THEN
+    RAISE EXCEPTION USING ERRCODE = '28000', MESSAGE = 'AUTH_REQUIRED';
+  END IF;
+
+  SELECT * INTO v_profile FROM profiles WHERE user_id = v_user_id FOR UPDATE;
+  SELECT * INTO v_previous
+    FROM daily_assignments
+   WHERE id = p_assignment_id
+     AND user_id = v_user_id
+   FOR UPDATE;
+
+  IF v_previous.id IS NULL THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'ASSIGNMENT_NOT_FOUND';
+  END IF;
+  IF v_previous.status = 'locked' THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'ASSIGNMENT_LOCKED';
+  END IF;
+  IF v_previous.status <> 'active'
+     OR v_previous.assignment_date <> (now() AT TIME ZONE v_profile.timezone)::date
+     OR now() > v_previous.deadline_at THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'ASSIGNMENT_CLOSED';
+  END IF;
+  IF EXISTS (
+    SELECT 1 FROM daily_assignments
+     WHERE user_id = v_user_id
+       AND assignment_date = v_previous.assignment_date
+       AND (rerolled_at IS NOT NULL OR daily_reroll_used)
+  ) THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'DAILY_REROLL_ALREADY_USED';
+  END IF;
+
+  SELECT * INTO v_challenge
+    FROM challenge_catalog
+   WHERE is_active = true
+     AND difficulty = (
+       SELECT difficulty FROM challenge_catalog WHERE id = v_previous.challenge_id
+     )
+     AND NOT (category = ANY(v_profile.disabled_categories))
+     AND NOT (challenge_catalog.boundary_tags && v_profile.disabled_boundary_tags)
+     AND NOT EXISTS (
+       SELECT 1 FROM challenge_reports
+        WHERE user_id = v_user_id AND challenge_id = challenge_catalog.id
+     )
+     AND NOT EXISTS (
+       SELECT 1 FROM daily_assignments
+        WHERE user_id = v_user_id
+          AND assignment_date = v_previous.assignment_date
+          AND challenge_id = challenge_catalog.id
+     )
+   ORDER BY random()
+   LIMIT 1;
+
+  IF v_challenge.id IS NULL THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'DAILY_REROLL_CATALOG_EXHAUSTED';
+  END IF;
+
+  UPDATE daily_assignments
+     SET status = 'replaced', rerolled_at = now()
+   WHERE id = v_previous.id;
+
+  INSERT INTO daily_assignments (
+    user_id, challenge_id, assignment_date, unlock_at, deadline_at, status,
+    activated_at, replacement_for_assignment_id, daily_reroll_used
+  ) VALUES (
+    v_user_id, v_challenge.id, v_previous.assignment_date,
+    v_previous.unlock_at, v_previous.deadline_at, 'active', now(),
+    v_previous.id, true
+  )
+  RETURNING * INTO v_replacement;
+
+  RETURN jsonb_build_object(
+    'assignment', to_jsonb(v_replacement),
+    'challenge', to_jsonb(v_challenge),
+    'rerollsRemaining', 0,
     'idempotent', false
   );
 END;
@@ -1628,7 +1699,16 @@ BEGIN
                THEN v_new_streak
              ELSE streak
            END,
-           level = LEAST(5, 1 + ((courage_points + v_points) / 500))
+           level = CASE
+             WHEN v_verdict = 'complete' AND v_assignment.status <> 'complete' THEN CASE
+               WHEN v_new_streak >= 28 THEN 5
+               WHEN v_new_streak >= 21 THEN 4
+               WHEN v_new_streak >= 14 THEN 3
+               WHEN v_new_streak >= 7 THEN 2
+               ELSE 1
+             END
+             ELSE level
+           END
      WHERE user_id = v_attempt.user_id;
   END IF;
 
@@ -1676,7 +1756,7 @@ BEGIN
   -- commit together, or none of them do. The helper applies the same
   -- score-based starting difficulty as the missed-deadline path.
   IF v_verdict = 'partial' THEN
-    UPDATE profiles SET streak = 0 WHERE user_id = v_attempt.user_id;
+    UPDATE profiles SET streak = 0, level = 1 WHERE user_id = v_attempt.user_id;
     v_recovery := public._create_recovery_for_assignment(
       v_attempt.user_id,
       v_assignment.id,
@@ -1877,6 +1957,7 @@ REVOKE ALL ON FUNCTION public.update_profile_preferences(TEXT, TEXT, BOOLEAN, SM
 REVOKE ALL ON FUNCTION public.reserve_proof_verification(UUID) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.report_challenge(UUID, TEXT, TEXT) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.complete_recovery_task(UUID, TEXT) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.reroll_daily_assignment(UUID) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.reroll_recovery_task(UUID) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.mark_notifications_read(UUID[]) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.delete_my_app_data(TEXT) FROM PUBLIC;
@@ -1889,6 +1970,7 @@ GRANT EXECUTE ON FUNCTION public.update_profile_preferences(TEXT, TEXT, BOOLEAN,
 GRANT EXECUTE ON FUNCTION public.reserve_proof_verification(UUID) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.report_challenge(UUID, TEXT, TEXT) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.complete_recovery_task(UUID, TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.reroll_daily_assignment(UUID) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.reroll_recovery_task(UUID) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.mark_notifications_read(UUID[]) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.delete_my_app_data(TEXT) TO authenticated;

@@ -1,7 +1,9 @@
 const IMAGE_INLINE_LIMIT = 170 * 1024
 const VIDEO_FILE_LIMIT = 80 * 1024 * 1024
 const VIDEO_DURATION_LIMIT_SECONDS = 30
-const VIDEO_FRAME_COUNT = 6
+// Three low-resolution frames are enough for coarse action verification while
+// keeping multimodal token usage predictable across multi-video submissions.
+const VIDEO_FRAME_COUNT = 3
 
 export interface PreparedVideoFrame {
   dataUrl: string
@@ -113,7 +115,7 @@ async function prepareVideo(file: File): Promise<PreparedProofMedia> {
   const { video, url, duration } = await videoElement(file)
   try {
     if (duration > VIDEO_DURATION_LIMIT_SECONDS) throw new Error('Choose a video that is 30 seconds or shorter.')
-    const count = duration < 3 ? 3 : VIDEO_FRAME_COUNT
+    const count = VIDEO_FRAME_COUNT
     const start = Math.min(0.15, duration / 10)
     const end = Math.max(start, duration - 0.15)
     const timestamps = Array.from({ length: count }, (_, index) =>

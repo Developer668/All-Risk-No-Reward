@@ -109,11 +109,11 @@ export interface ProofAssessment {
 }
 
 export interface UserSettings {
-  /** Inclusive local-time start of the random unlock window, in HH:MM. */
+  /** Fixed at local midnight. Retained for decoding older saved states. */
   unlockWindowStart: string
-  /** Exclusive local-time end of the random unlock window, in HH:MM. */
+  /** Fixed at 23:59 local time. Retained for decoding older saved states. */
   unlockWindowEnd: string
-  /** Same-day proof deadline in local time, in HH:MM. */
+  /** Fixed at the end of the local calendar day. Retained for compatibility. */
   deadlineTime: string
   /** Time at which the inbox receives the morning heads-up, in HH:MM. */
   morningReminderTime: string
@@ -121,6 +121,7 @@ export interface UserSettings {
   morningReminderEnabled: boolean
   unlockReminderEnabled: boolean
   deadlineReminderEnabled: boolean
+  /** Progression owns this value; users cannot configure a difficulty cap. */
   maxDifficulty: Difficulty
   disabledCategories: ChallengeCategory[]
   disabledBoundaryTags: ChallengeBoundaryTag[]
@@ -133,6 +134,7 @@ export type AssignmentStatus =
   | 'completed'
   | 'partial'
   | 'missed'
+  | 'replaced'
   | 'reported'
 
 export interface DailyAssignment {
@@ -147,6 +149,10 @@ export interface DailyAssignment {
   completedAt?: string
   completionId?: string
   replacementForAssignmentId?: string
+  /** Set on the discarded card when the user's one daily reroll is spent. */
+  rerolledAt?: string
+  /** Persisted on the replacement so reloads cannot restore the spent reroll. */
+  dailyRerollUsed?: boolean
   /** A single-use bonus ticket preserved streak continuity for this incomplete day. */
   progressProtected?: boolean
 }
@@ -230,6 +236,7 @@ export type DailyViewStatus =
   | 'completed'
   | 'partial'
   | 'missed'
+  | 'replaced'
   | 'blocked'
   | 'unavailable'
 
@@ -247,6 +254,10 @@ export interface DailyView {
   /** Server- or device-owned state for the active punishment dice. */
   recoveryRerollStatus?: 'available' | 'limit-reached' | 'catalog-exhausted'
   recoveryRerollsRemaining?: number
+  /** Exact catalog tier used for today's normal challenge. */
+  currentDifficulty?: Difficulty
+  dailyRerollStatus?: 'available' | 'used' | 'catalog-exhausted'
+  dailyRerollsRemaining?: 0 | 1
 }
 
 export interface HistoryEntry {

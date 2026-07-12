@@ -24,7 +24,6 @@ import {
   localDateKey,
   localDateTime,
   stableHash,
-  timeToMinutes,
   validateScheduleSettings,
 } from './date'
 
@@ -34,16 +33,32 @@ const MAX_RECOVERY_SEVERITY = 5
 const MAX_RECOVERY_ESCALATIONS = 4
 const MAX_RECOVERY_REROLLS = 2
 
+/** Nightmare starts after four complete seven-day tiers (day 29 onward). */
+export const DIFFICULTY_PROGRESSION = [
+  { successfulDaysRequired: 0, difficulty: 1, label: 'Easy' },
+  { successfulDaysRequired: 7, difficulty: 2, label: 'Medium' },
+  { successfulDaysRequired: 14, difficulty: 3, label: 'Hard' },
+  { successfulDaysRequired: 21, difficulty: 4, label: 'Extreme' },
+  { successfulDaysRequired: 28, difficulty: 5, label: 'Nightmare' },
+] as const satisfies ReadonlyArray<{ successfulDaysRequired: number; difficulty: Difficulty; label: string }>
+
+export function difficultyForSuccessfulDays(successfulDays: number): Difficulty {
+  const safeDays = Number.isFinite(successfulDays) ? Math.max(0, Math.floor(successfulDays)) : 0
+  return [...DIFFICULTY_PROGRESSION]
+    .reverse()
+    .find((tier) => safeDays >= tier.successfulDaysRequired)!.difficulty
+}
+
 export const DEFAULT_SETTINGS: UserSettings = {
-  unlockWindowStart: '10:00',
-  unlockWindowEnd: '18:00',
-  deadlineTime: '22:00',
+  unlockWindowStart: '00:00',
+  unlockWindowEnd: '23:59',
+  deadlineTime: '23:59',
   morningReminderTime: '08:00',
   notificationsEnabled: true,
   morningReminderEnabled: true,
   unlockReminderEnabled: true,
   deadlineReminderEnabled: true,
-  maxDifficulty: 3,
+  maxDifficulty: 5,
   disabledCategories: [],
   disabledBoundaryTags: [],
   boundaries: ['No public posting', 'No romantic dares', 'No contact sharing'],
@@ -60,6 +75,8 @@ export type DomainErrorCode =
   | 'CHALLENGE_NOT_FOUND'
   | 'REROLL_LIMIT_REACHED'
   | 'RECOVERY_CATALOG_EXHAUSTED'
+  | 'DAILY_REROLL_ALREADY_USED'
+  | 'DAILY_REROLL_CATALOG_EXHAUSTED'
 
 export class DomainError extends Error {
   constructor(public readonly code: DomainErrorCode, message: string) {
@@ -101,6 +118,12 @@ function mergeSettings(settings?: Partial<UserSettings>): UserSettings {
     disabledCategories: [...(settings?.disabledCategories ?? DEFAULT_SETTINGS.disabledCategories)],
     disabledBoundaryTags: [...(settings?.disabledBoundaryTags ?? DEFAULT_SETTINGS.disabledBoundaryTags)],
     boundaries: [...(settings?.boundaries ?? DEFAULT_SETTINGS.boundaries)],
+    // Schedule and challenge ceiling are progression-owned, even when an old
+    // save or client still sends legacy configurable values.
+    unlockWindowStart: DEFAULT_SETTINGS.unlockWindowStart,
+    unlockWindowEnd: DEFAULT_SETTINGS.unlockWindowEnd,
+    deadlineTime: DEFAULT_SETTINGS.deadlineTime,
+    maxDifficulty: DEFAULT_SETTINGS.maxDifficulty,
   }
 }
 
@@ -174,7 +197,7 @@ export class ChallengeEngine {
 
     const current = this.currentAssignment(dateKey)
     const recovery = this.openRecovery()
-    const deadlineToday = localDateTime(dateKey, timeToMinutes(this.state.settings.deadlineTime))
+    const deadlineToday = deriveSchedule(this.state.profile.id, dateKey, this.state.settings).deadlineAt
 
     if (!current && !recovery && now.getTime() <= deadlineToday.getTime()) {
       this.createAssignment(dateKey, now, unavailableOpenAssignment?.id)
@@ -236,11 +259,11 @@ export class ChallengeEngine {
     assignment.completionId = completion.id
     this.state.completions.push(completion)
     this.state.profile.couragePoints += pointsAwarded
-    this.state.profile.level = Math.min(5, Math.floor(this.state.profile.couragePoints / 500) + 1)
 
     let recovery: RecoveryItem | undefined
     if (verdict === 'complete') {
       this.state.profile.streak = this.calculateStreak(assignment.dateKey)
+      this.syncProgressionLevel()
       this.addNotification({
         id: `completed:${assignment.id}`,
         kind: 'completed',
@@ -251,6 +274,7 @@ export class ChallengeEngine {
       })
     } else {
       this.state.profile.streak = 0
+      this.syncProgressionLevel()
       recovery = this.createRecovery(assignment, score, now)
     }
 
@@ -292,6 +316,7 @@ export class ChallengeEngine {
       recovery.completionNote = 'Automatically protected by a single-use Progress Ticket.'
     }
     this.state.profile.streak = this.calculateStreak(assignment.dateKey)
+    this.syncProgressionLevel()
     return this.buildView(now)
   }
 
@@ -324,6 +349,52 @@ export class ChallengeEngine {
     recovery.severity = selected.difficulty
     recovery.rerollCount = rerollCount + 1
     this.rememberRecoveryTask(recovery, selected.id)
+    return this.buildView(now)
+  }
+
+  rerollDailyChallenge(assignmentId: string, now = new Date()): DailyView {
+    this.sync(now)
+    const assignment = this.state.assignments.find((item) => item.id === assignmentId)
+    if (!assignment) throw new DomainError('ASSIGNMENT_NOT_FOUND', 'That daily challenge could not be found.')
+    if (assignment.status === 'locked') {
+      throw new DomainError('ASSIGNMENT_LOCKED', 'This challenge has not unlocked yet.')
+    }
+    if (assignment.status !== 'available' || assignment.dateKey !== localDateKey(now)) {
+      throw new DomainError('ASSIGNMENT_CLOSED', 'Only today\'s open challenge can be rerolled.')
+    }
+    if (this.dailyRerollWasUsed(assignment.dateKey)) {
+      throw new DomainError('DAILY_REROLL_ALREADY_USED', 'Today\'s one challenge reroll is already used.')
+    }
+
+    const difficulty = difficultyForSuccessfulDays(this.state.profile.streak)
+    const seenToday = new Set(
+      this.state.assignments
+        .filter((item) => item.dateKey === assignment.dateKey)
+        .map((item) => item.challengeId),
+    )
+    const replacements = this.eligibleChallenges(difficulty).filter((challenge) => !seenToday.has(challenge.id))
+    if (replacements.length === 0) {
+      throw new DomainError(
+        'DAILY_REROLL_CATALOG_EXHAUSTED',
+        'There is no unseen challenge left at today\'s difficulty. Your current challenge stays in place.',
+      )
+    }
+
+    const selected = this.randomItem(replacements)
+    assignment.status = 'replaced'
+    assignment.rerolledAt = now.toISOString()
+    const replacement = this.createAssignment(
+      assignment.dateKey,
+      now,
+      assignment.id,
+      selected,
+      true,
+    )
+    if (!replacement) {
+      assignment.status = 'available'
+      assignment.rerolledAt = undefined
+      throw new DomainError('DAILY_REROLL_CATALOG_EXHAUSTED', 'Could not create a replacement challenge.')
+    }
     return this.buildView(now)
   }
 
@@ -487,7 +558,9 @@ export class ChallengeEngine {
 
   private currentAssignment(dateKey: string): DailyAssignment | undefined {
     return latestByDate(
-      this.state.assignments.filter((item) => item.dateKey === dateKey && item.status !== 'reported'),
+      this.state.assignments.filter((item) =>
+        item.dateKey === dateKey && item.status !== 'reported' && item.status !== 'replaced',
+      ),
     )
   }
 
@@ -504,7 +577,6 @@ export class ChallengeEngine {
     )
     const removedPoints = removedCompletions.reduce((sum, item) => sum + (item.pointsAwarded ?? 0), 0)
     this.state.profile.couragePoints = Math.max(0, this.state.profile.couragePoints - removedPoints)
-    this.state.profile.level = Math.min(5, Math.floor(this.state.profile.couragePoints / 500) + 1)
     this.state.assignedRecoveryTaskIds = [...new Set(this.state.recoveries.flatMap((item) => item.assignedTaskIds ?? [item.taskId]))]
     this.refreshStreak(dateKey)
   }
@@ -530,22 +602,25 @@ export class ChallengeEngine {
     return this.state.recoveries.find((item) => item.status === 'open')
   }
 
-  private eligibleChallenges(): Challenge[] {
+  private eligibleChallenges(difficulty = difficultyForSuccessfulDays(this.state.profile.streak)): Challenge[] {
     const reported = new Set(this.state.reports.map((report) => report.challengeId))
-    const levelLimit = Math.min(
-      this.state.settings.maxDifficulty,
-      Math.min(5, this.state.profile.level + 1) as Difficulty,
-    )
     return this.catalog.filter((challenge) =>
-      challenge.difficulty <= levelLimit &&
+      challenge.difficulty === difficulty &&
       !this.state.settings.disabledCategories.includes(challenge.category) &&
       !(challenge.boundaryTags ?? []).some((tag) => this.state.settings.disabledBoundaryTags.includes(tag)) &&
       !reported.has(challenge.id),
     )
   }
 
-  private createAssignment(dateKey: string, now: Date, replacementForAssignmentId?: string) {
-    const eligible = this.eligibleChallenges()
+  private createAssignment(
+    dateKey: string,
+    now: Date,
+    replacementForAssignmentId?: string,
+    forcedChallenge?: Challenge,
+    dailyRerollUsed = false,
+  ) {
+    const difficulty = difficultyForSuccessfulDays(this.state.profile.streak)
+    const eligible = this.eligibleChallenges(difficulty)
     if (eligible.length === 0) return undefined
 
     const prior = latestByDate(
@@ -553,12 +628,14 @@ export class ChallengeEngine {
         item.dateKey < dateKey && item.status !== 'reported',
       ),
     )
-    const withoutRepeat = eligible.filter((challenge) => challenge.id !== prior?.challengeId)
-    const pool = withoutRepeat.length > 0 ? withoutRepeat : eligible
+    const seenToday = new Set(
+      this.state.assignments.filter((item) => item.dateKey === dateKey).map((item) => item.challengeId),
+    )
+    const withoutToday = eligible.filter((challenge) => !seenToday.has(challenge.id))
+    const withoutRepeat = withoutToday.filter((challenge) => challenge.id !== prior?.challengeId)
+    const pool = withoutRepeat.length > 0 ? withoutRepeat : withoutToday.length > 0 ? withoutToday : eligible
     const replacementIndex = this.state.assignments.filter((item) => item.dateKey === dateKey).length
-    const selected = pool[
-      stableHash(`${this.state.profile.id}:${dateKey}:challenge:${replacementIndex}`) % pool.length
-    ]
+    const selected = forcedChallenge ?? this.randomItem(pool)
     const schedule = deriveSchedule(this.state.profile.id, dateKey, this.state.settings)
     const assignment: DailyAssignment = {
       id: `assignment:${this.state.profile.id}:${dateKey}:${selected.id}:${replacementIndex}`,
@@ -570,9 +647,24 @@ export class ChallengeEngine {
       deadlineAt: schedule.deadlineAt.toISOString(),
       createdAt: now.toISOString(),
       replacementForAssignmentId,
+      dailyRerollUsed,
     }
     this.state.assignments.push(assignment)
     return assignment
+  }
+
+  private randomItem<T>(items: T[]): T {
+    const roll = this.random()
+    const randomValue = Number.isFinite(roll)
+      ? Math.max(0, Math.min(0.9999999999999999, roll))
+      : 0
+    return items[Math.floor(randomValue * items.length)]
+  }
+
+  private dailyRerollWasUsed(dateKey: string): boolean {
+    return this.state.assignments.some((assignment) =>
+      assignment.dateKey === dateKey && (Boolean(assignment.rerolledAt) || assignment.dailyRerollUsed === true),
+    )
   }
 
   private refreshCurrentAssignment(now: Date) {
@@ -588,6 +680,7 @@ export class ChallengeEngine {
       if (now.getTime() <= new Date(assignment.deadlineAt).getTime()) continue
       assignment.status = 'missed'
       this.state.profile.streak = 0
+      this.syncProgressionLevel()
       this.createRecovery(assignment, 0, now)
     }
   }
@@ -718,13 +811,20 @@ export class ChallengeEngine {
     )
     if (!latestCompleted) {
       this.state.profile.streak = 0
+      this.syncProgressionLevel()
       return
     }
     if (latestCompleted.dateKey !== dateKey && latestCompleted.dateKey !== addLocalDays(dateKey, -1)) {
       this.state.profile.streak = 0
+      this.syncProgressionLevel()
       return
     }
     this.state.profile.streak = this.calculateStreak(latestCompleted.dateKey)
+    this.syncProgressionLevel()
+  }
+
+  private syncProgressionLevel() {
+    this.state.profile.level = difficultyForSuccessfulDays(this.state.profile.streak)
   }
 
   private addNotification(input: Omit<NotificationRecord, 'userId'>) {
@@ -827,6 +927,20 @@ export class ChallengeEngine {
           ? 'catalog-exhausted'
           : 'available'
       : undefined
+    const currentDifficulty = difficultyForSuccessfulDays(this.state.profile.streak)
+    const dailyRerollUsed = this.dailyRerollWasUsed(dateKey)
+    const unseenAtCurrentDifficulty = assignment
+      ? this.eligibleChallenges(currentDifficulty).some((candidate) =>
+          !this.state.assignments.some((item) => item.dateKey === dateKey && item.challengeId === candidate.id),
+        )
+      : false
+    const dailyRerollStatus = assignment && isOpenAssignment(assignment)
+      ? dailyRerollUsed
+        ? 'used'
+        : unseenAtCurrentDifficulty
+          ? 'available'
+          : 'catalog-exhausted'
+      : undefined
 
     let status: DailyView['status'] = 'unavailable'
     if (recovery) status = 'blocked'
@@ -845,6 +959,9 @@ export class ChallengeEngine {
       unreadNotificationCount: this.state.notifications.filter((item) => !item.readAt).length,
       recoveryRerollStatus,
       recoveryRerollsRemaining: recovery ? Math.max(0, MAX_RECOVERY_REROLLS - rerollCount) : undefined,
+      currentDifficulty,
+      dailyRerollStatus,
+      dailyRerollsRemaining: dailyRerollStatus === 'available' ? 1 : dailyRerollStatus ? 0 : undefined,
     }
   }
 }
