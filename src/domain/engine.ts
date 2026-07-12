@@ -1,6 +1,7 @@
 import { challenges as defaultChallenges, resetTasks as defaultResetTasks } from '../data/challenges'
 import type {
   Challenge,
+  ChallengeCategory,
   ChallengeReportReason,
   Completion,
   DailyAssignment,
@@ -81,6 +82,13 @@ export interface ReportChallengeInput {
   reason: ChallengeReportReason
   details?: string
 }
+
+export interface DeveloperChallengeFilters {
+  difficulty?: Difficulty
+  category?: ChallengeCategory
+}
+
+export type DeveloperScenario = 'unlock' | 'lock' | 'complete' | 'partial' | 'missed' | 'recovery-complete'
 
 function copyState(state: UserDomainState): UserDomainState {
   return JSON.parse(JSON.stringify(state)) as UserDomainState
@@ -348,6 +356,92 @@ export class ChallengeEngine {
     return this.buildView(now)
   }
 
+  /** Local development helper. Production and remote adapters never expose this mutation surface. */
+  developerRegenerateChallenge(filters: DeveloperChallengeFilters = {}, now = new Date()): DailyView {
+    const dateKey = localDateKey(now)
+    const previousChallengeId = this.currentAssignment(dateKey)?.challengeId
+    this.clearDeveloperDate(dateKey)
+
+    const matching = this.catalog.filter((challenge) =>
+      (!filters.difficulty || challenge.difficulty === filters.difficulty) &&
+      (!filters.category || challenge.category === filters.category),
+    )
+    if (matching.length === 0) {
+      throw new DomainError('CHALLENGE_NOT_FOUND', 'No challenge matches those developer filters.')
+    }
+    const withoutRepeat = matching.filter((challenge) => challenge.id !== previousChallengeId)
+    const pool = withoutRepeat.length > 0 ? withoutRepeat : matching
+    const roll = this.random()
+    const randomValue = Number.isFinite(roll) ? Math.max(0, Math.min(0.9999999999999999, roll)) : 0
+    const selected = pool[Math.floor(randomValue * pool.length)]
+    const deadline = new Date(localDateTime(dateKey, 23 * 60 + 59).getTime() + 59_999)
+    const assignment: DailyAssignment = {
+      id: `assignment:dev:${this.state.profile.id}:${dateKey}:${selected.id}:${now.getTime()}`,
+      userId: this.state.profile.id,
+      dateKey,
+      challengeId: selected.id,
+      status: 'available',
+      unlockAt: new Date(now.getTime() - 1_000).toISOString(),
+      deadlineAt: deadline.toISOString(),
+      createdAt: now.toISOString(),
+    }
+    this.state.assignments.push(assignment)
+    return this.buildView(now)
+  }
+
+  /** Local development helper for exercising the daily state machine without waiting on real time. */
+  developerApplyScenario(scenario: DeveloperScenario, now = new Date()): DailyView {
+    const dateKey = localDateKey(now)
+    const recovery = this.openRecovery()
+    if (scenario === 'recovery-complete') {
+      if (!recovery) throw new DomainError('RECOVERY_NOT_FOUND', 'There is no open recovery to complete.')
+      return this.completeRecovery(recovery.id, 'Completed from the developer lab.', now)
+    }
+
+    let assignment = this.currentAssignment(dateKey)
+    if (!assignment || !isOpenAssignment(assignment)) {
+      this.developerRegenerateChallenge({}, now)
+      assignment = this.currentAssignment(dateKey)
+    }
+    if (!assignment) throw new DomainError('ASSIGNMENT_NOT_FOUND', 'Could not create a developer challenge.')
+
+    const endOfDay = new Date(localDateTime(dateKey, 23 * 60 + 59).getTime() + 59_999)
+    if (scenario === 'unlock') {
+      assignment.status = 'available'
+      assignment.unlockAt = new Date(now.getTime() - 1_000).toISOString()
+      assignment.deadlineAt = endOfDay.toISOString()
+      return this.buildView(now)
+    }
+    if (scenario === 'lock') {
+      assignment.status = 'locked'
+      assignment.unlockAt = new Date(now.getTime() + 15 * 60_000).toISOString()
+      assignment.deadlineAt = new Date(Math.max(endOfDay.getTime(), now.getTime() + 75 * 60_000)).toISOString()
+      return this.buildView(now)
+    }
+    if (scenario === 'missed') {
+      assignment.status = 'available'
+      assignment.unlockAt = new Date(now.getTime() - 60_000).toISOString()
+      assignment.deadlineAt = new Date(now.getTime() - 1_000).toISOString()
+      return this.sync(now)
+    }
+
+    assignment.status = 'available'
+    assignment.unlockAt = new Date(now.getTime() - 1_000).toISOString()
+    assignment.deadlineAt = endOfDay.toISOString()
+    return this.submitCompletion({
+      assignmentId: assignment.id,
+      score: scenario === 'complete' ? 100 : 50,
+      note: `Developer lab simulated a ${scenario} proof result.`,
+      proofName: 'developer-lab-proof.jpg',
+    }, now).view
+  }
+
+  /** Removes only today's local test records, then restores the normal deterministic card. */
+  developerResetToday(now = new Date()): DailyView {
+    this.clearDeveloperDate(localDateKey(now))
+    return this.sync(now)
+  }
+
   getHistory(now = new Date()): HistoryEntry[] {
     this.sync(now)
     return [...this.state.assignments]
@@ -376,6 +470,24 @@ export class ChallengeEngine {
     return latestByDate(
       this.state.assignments.filter((item) => item.dateKey === dateKey && item.status !== 'reported'),
     )
+  }
+
+  private clearDeveloperDate(dateKey: string) {
+    const assignmentIds = new Set(this.state.assignments.filter((item) => item.dateKey === dateKey).map((item) => item.id))
+    const removedCompletions = this.state.completions.filter((item) => item.assignmentId && assignmentIds.has(item.assignmentId))
+    const recoveryIds = new Set(this.state.recoveries.filter((item) => assignmentIds.has(item.sourceAssignmentId)).map((item) => item.id))
+    this.state.assignments = this.state.assignments.filter((item) => !assignmentIds.has(item.id))
+    this.state.completions = this.state.completions.filter((item) => !item.assignmentId || !assignmentIds.has(item.assignmentId))
+    this.state.recoveries = this.state.recoveries.filter((item) => !recoveryIds.has(item.id))
+    this.state.notifications = this.state.notifications.filter((item) =>
+      (!item.assignmentId || !assignmentIds.has(item.assignmentId)) &&
+      (!item.recoveryId || !recoveryIds.has(item.recoveryId)),
+    )
+    const removedPoints = removedCompletions.reduce((sum, item) => sum + (item.pointsAwarded ?? 0), 0)
+    this.state.profile.couragePoints = Math.max(0, this.state.profile.couragePoints - removedPoints)
+    this.state.profile.level = Math.min(5, Math.floor(this.state.profile.couragePoints / 500) + 1)
+    this.state.assignedRecoveryTaskIds = [...new Set(this.state.recoveries.flatMap((item) => item.assignedTaskIds ?? [item.taskId]))]
+    this.refreshStreak(dateKey)
   }
 
   private retireUnavailableOpenAssignments(dateKey: string): DailyAssignment | undefined {

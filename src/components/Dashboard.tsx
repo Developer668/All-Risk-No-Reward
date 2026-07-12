@@ -1,15 +1,16 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import {
-  ArrowRight, Award, BarChart3, Bell, CalendarDays, Check, ChevronRight, CircleCheckBig, Clock3,
+  ArrowRight, Award, BarChart3, Bell, Bug, CalendarDays, Check, ChevronRight, CircleCheckBig, Clipboard, Clock3,
   Dices, Download, Flag, Flame, Gift, History, Inbox, Laugh, LifeBuoy, LockKeyhole, Medal,
   Menu, Package, RefreshCw, Route, Settings, ShieldCheck, Sparkles, Star, Share2, Target, Trash2,
-  Trophy, Users, X, Zap,
+  Trophy, UnlockKeyhole, Users, X, Zap,
 } from 'lucide-react'
 import type {
   ChallengeBoundaryTag, ChallengeCategory, ChallengeReportReason, DailyView, Difficulty, HistoryEntry,
   NotificationRecord, Profile, UserSettings,
 } from '../types'
 import type { ProofResult } from '../services/proof'
+import type { DeveloperChallengeFilters, DeveloperScenario } from '../domain/engine'
 import {
   completeBonusChallenge, loadBonusState, markChallengeStarted, rollFastFinishBonus, spendLifeline, taskForBonus,
   type BonusRecord, type BonusState,
@@ -41,6 +42,11 @@ interface DashboardProps {
   onExportData: () => Promise<string>
   onDeleteData: () => Promise<void>
   onSignOut: () => Promise<void>
+  developerTools?: {
+    onRegenerate: (filters: DeveloperChallengeFilters) => Promise<void>
+    onScenario: (scenario: DeveloperScenario) => Promise<void>
+    onResetToday: () => Promise<void>
+  }
 }
 
 const boundaryOptions: Array<{ tag: ChallengeBoundaryTag; label: string }> = [
@@ -90,6 +96,70 @@ function formatDate(date = new Date()) {
 function formatTime(value?: string) {
   if (!value) return '—'
   return new Date(value).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
+}
+
+function DeveloperPanel({ daily, tools }: { daily: DailyView; tools: NonNullable<DashboardProps['developerTools']> }) {
+  const [difficulty, setDifficulty] = useState<'any' | `${Difficulty}`>('any')
+  const [category, setCategory] = useState<'any' | ChallengeCategory>('any')
+  const [busy, setBusy] = useState(false)
+  const [message, setMessage] = useState('')
+  const challenge = daily.challenge
+  const assignment = daily.assignment
+
+  async function run(label: string, action: () => Promise<void>) {
+    setBusy(true)
+    setMessage('')
+    try {
+      await action()
+      setMessage(`${label} applied.`)
+    } catch (caught) {
+      setMessage(caught instanceof Error ? caught.message : 'Developer action failed.')
+    } finally { setBusy(false) }
+  }
+
+  async function copySnapshot() {
+    const debug = JSON.stringify({ capturedAt: new Date().toISOString(), daily }, null, 2)
+    try {
+      await navigator.clipboard.writeText(debug)
+      setMessage('Debug snapshot copied.')
+    } catch {
+      setMessage('Clipboard access was blocked. Expand the snapshot and copy it manually.')
+    }
+  }
+
+  const filters: DeveloperChallengeFilters = {
+    ...(difficulty === 'any' ? {} : { difficulty: Number(difficulty) as Difficulty }),
+    ...(category === 'any' ? {} : { category }),
+  }
+
+  return <section className="developer-panel" aria-label="Developer testing tools">
+    <div className="developer-panel__header"><div><span className="developer-badge"><Bug aria-hidden="true" /> DEV LAB</span><h2>Daily challenge simulator</h2><p>Local demo data only. Generate cards and force states without waiting for the clock or uploading proof.</p></div><span className="developer-environment">DEVELOPMENT</span></div>
+    <div className="developer-generate">
+      <label className="field">Exact difficulty<select value={difficulty} onChange={(event) => setDifficulty(event.target.value as typeof difficulty)} disabled={busy}><option value="any">Any level</option>{([1,2,3,4,5] as Difficulty[]).map((level) => <option value={level} key={level}>Level {level} · {['Easy','Medium','Hard','Extreme','Nightmare'][level - 1]}</option>)}</select></label>
+      <label className="field">Category<select value={category} onChange={(event) => setCategory(event.target.value as typeof category)} disabled={busy}><option value="any">Any category</option>{categoryOptions.map(({ category: id, label }) => <option value={id} key={id}>{label}</option>)}</select></label>
+      <button type="button" className="button button--accent" disabled={busy} onClick={() => void run('New challenge', () => tools.onRegenerate(filters))}><Dices aria-hidden="true" /> Generate new card</button>
+    </div>
+    <div className="developer-current">
+      <span><small>CURRENT STATE</small><strong>{daily.status}</strong></span>
+      <span><small>DIFFICULTY</small><strong>{challenge ? `Level ${challenge.difficulty}` : '—'}</strong></span>
+      <span><small>CATEGORY</small><strong>{challenge ? challengeCategoryLabels[challenge.category] ?? challenge.category : '—'}</strong></span>
+      <span className="developer-current__id"><small>CHALLENGE ID</small><code>{challenge?.id ?? 'none'}</code></span>
+    </div>
+    <div className="developer-actions" aria-label="State simulation">
+      <button type="button" disabled={busy} onClick={() => void run('Unlocked state', () => tools.onScenario('unlock'))}><UnlockKeyhole aria-hidden="true" /> Unlock now</button>
+      <button type="button" disabled={busy} onClick={() => void run('Locked state', () => tools.onScenario('lock'))}><LockKeyhole aria-hidden="true" /> Lock 15 min</button>
+      <button type="button" disabled={busy} onClick={() => void run('Complete proof', () => tools.onScenario('complete'))}><CircleCheckBig aria-hidden="true" /> Pass proof</button>
+      <button type="button" disabled={busy} onClick={() => void run('Partial proof', () => tools.onScenario('partial'))}><RefreshCw aria-hidden="true" /> Partial proof</button>
+      <button type="button" disabled={busy} onClick={() => void run('Missed deadline', () => tools.onScenario('missed'))}><Clock3 aria-hidden="true" /> Miss deadline</button>
+      <button type="button" disabled={busy || !daily.recovery} onClick={() => void run('Recovery completion', () => tools.onScenario('recovery-complete'))}><LifeBuoy aria-hidden="true" /> Complete recovery</button>
+    </div>
+    <div className="developer-footer">
+      <details><summary>Debug snapshot</summary><pre>{JSON.stringify({ daily, challenge: challenge && { id: challenge.id, difficulty: challenge.difficulty, category: challenge.category, mode: challenge.mode, acceptedEvidence: challenge.acceptedEvidence }, assignment }, null, 2)}</pre></details>
+      <button type="button" className="text-button" onClick={() => void copySnapshot()}><Clipboard aria-hidden="true" /> Copy snapshot</button>
+      <button type="button" className="text-button developer-reset" disabled={busy} onClick={() => void run('Today reset', tools.onResetToday)}><Trash2 aria-hidden="true" /> Reset today</button>
+    </div>
+    {message && <p className="developer-message" role="status">{message}</p>}
+  </section>
 }
 
 function timeUntil(value?: string, now = new Date()) {
@@ -564,7 +634,7 @@ export function Dashboard(props: DashboardProps) {
     <main className="dashboard">
       <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
 
-      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
+      {section === 'today' ? <>{props.developerTools && <DeveloperPanel daily={props.daily} tools={props.developerTools} />}<section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section></>
         : <div className="dashboard-content">{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 

@@ -11,6 +11,10 @@ npm run dev
 
 Open the printed local URL and choose **Preview sample data**, or create a local account. No cloud project or API key is required for local mode.
 
+### Developer lab
+
+While `npm run dev` is running, the local demo's **Today** page includes a development-only simulator. It can generate a different card at an exact difficulty and category, unlock or relock it, simulate full/partial/missed results, complete recovery, reset today's test records, and copy the current state as JSON. The panel is excluded from production builds and is never available for synced accounts.
+
 Local mode includes:
 
 - Salted PBKDF2 passwords, 30-day sessions, local sign-up/sign-in/reset, export, and deletion

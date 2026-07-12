@@ -29,6 +29,7 @@ import {
 import { registerAppServiceWorker, scheduleUnlockNotification } from './services/notifications'
 import { clearBonusState, loadBonusState } from './services/bonusChallenge'
 import type { ProofResult } from './services/proof'
+import type { DeveloperChallengeFilters, DeveloperScenario } from './domain/engine'
 
 type BackendMode = 'local' | 'insforge'
 type Route = 'home' | 'app' | 'privacy' | 'terms' | 'reset-password' | 'sign-in'
@@ -283,6 +284,24 @@ function AppContent() {
     } else setSnapshot(await updateRemoteSettings(patch, snapshot?.profile))
   }
 
+  async function developerRegenerate(filters: DeveloperChallengeFilters) {
+    if (!import.meta.env.DEV || backendMode !== 'local') throw new Error('Developer tools require the local development demo.')
+    localStore.developerRegenerateChallenge(filters)
+    setSnapshot(localSnapshot())
+  }
+
+  async function developerScenario(scenario: DeveloperScenario) {
+    if (!import.meta.env.DEV || backendMode !== 'local') throw new Error('Developer tools require the local development demo.')
+    localStore.developerApplyScenario(scenario)
+    setSnapshot(localSnapshot())
+  }
+
+  async function developerResetToday() {
+    if (!import.meta.env.DEV || backendMode !== 'local') throw new Error('Developer tools require the local development demo.')
+    localStore.developerResetToday()
+    setSnapshot(localSnapshot())
+  }
+
   async function markNotification(id: string) {
     if (backendMode === 'local') {
       localStore.markNotificationRead(id)
@@ -356,6 +375,11 @@ function AppContent() {
         onExportData={exportData}
         onDeleteData={deleteData}
         onSignOut={signOut}
+        developerTools={import.meta.env.DEV && backendMode === 'local' ? {
+          onRegenerate: developerRegenerate,
+          onScenario: developerScenario,
+          onResetToday: developerResetToday,
+        } : undefined}
       />
       {loadError && <div className="app-toast" role="status">{loadError}</div>}
     </>

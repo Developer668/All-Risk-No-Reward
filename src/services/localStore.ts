@@ -1,5 +1,5 @@
 import { ChallengeEngine, createUserState } from '../domain/engine'
-import type { ReportChallengeInput } from '../domain/engine'
+import type { DeveloperChallengeFilters, DeveloperScenario, ReportChallengeInput } from '../domain/engine'
 import type {
   ChallengeReport,
   DailyView,
@@ -322,6 +322,18 @@ export class LocalStore {
 
   reportChallenge(input: ReportChallengeInput, now = this.now()): DailyView {
     return this.useEngine((engine) => engine.reportChallenge(input, now))
+  }
+
+  developerRegenerateChallenge(filters: DeveloperChallengeFilters, now = this.now()): DailyView {
+    return this.useEngine((engine) => engine.developerRegenerateChallenge(filters, now))
+  }
+
+  developerApplyScenario(scenario: DeveloperScenario, now = this.now()): DailyView {
+    return this.useEngine((engine) => engine.developerApplyScenario(scenario, now))
+  }
+
+  developerResetToday(now = this.now()): DailyView {
+    return this.useEngine((engine) => engine.developerResetToday(now))
   }
 
   getReports(): ChallengeReport[] {

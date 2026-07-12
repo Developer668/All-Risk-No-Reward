@@ -9,6 +9,49 @@ const diceCatalog: ResetTask[] = [
 ]
 
 describe('ChallengeEngine daily assignments', () => {
+  it('lets the local developer lab force a difficulty and exercise assignment states', () => {
+    const now = new Date(2026, 6, 12, 14, 0)
+    const engine = new ChallengeEngine(createUserState({
+      id: 'developer-lab',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }), undefined, undefined, () => 0)
+
+    const generated = engine.developerRegenerateChallenge({ difficulty: 5 }, now)
+    expect(generated.challenge?.difficulty).toBe(5)
+    expect(generated.status).toBe('available')
+    expect(engine.developerApplyScenario('lock', now).status).toBe('locked')
+    expect(engine.developerApplyScenario('unlock', now).status).toBe('available')
+    expect(engine.developerApplyScenario('complete', now).status).toBe('completed')
+    expect(engine.getState().profile.couragePoints).toBe(120)
+
+    const reset = engine.developerResetToday(now)
+    expect(reset.assignment).toBeDefined()
+    expect(engine.getState().profile.couragePoints).toBe(0)
+  })
+
+  it('lets the developer lab simulate a partial or missed challenge and close recovery', () => {
+    const now = new Date(2026, 6, 12, 14, 0)
+    const engine = new ChallengeEngine(createUserState({
+      id: 'developer-recovery',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }))
+
+    engine.developerRegenerateChallenge({ difficulty: 2 }, now)
+    const partial = engine.developerApplyScenario('partial', now)
+    expect(partial.status).toBe('blocked')
+    expect(partial.recovery).toBeDefined()
+    expect(engine.developerApplyScenario('recovery-complete', now).status).toBe('partial')
+
+    engine.developerRegenerateChallenge({ difficulty: 3 }, now)
+    const missed = engine.developerApplyScenario('missed', now)
+    expect(missed.status).toBe('blocked')
+    expect(missed.assignment?.status).toBe('missed')
+  })
+
   it('creates the same per-user assignment and local schedule when synced repeatedly', () => {
     const now = new Date(2026, 6, 12, 9, 0)
     const engine = new ChallengeEngine(createUserState({
