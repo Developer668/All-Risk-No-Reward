@@ -30,8 +30,8 @@ notifications are written only through narrow RPCs.
 
 No backend code sends a message, controls a social account, impersonates a user,
 or publishes proof. An optional image or short video is sent ephemerally to the
-Gemini Developer API; only its SHA-256 hash, media type, byte count, and
-user-provided filename are retained.
+configured Gemini, OpenRouter, or NVIDIA NIM endpoint; only its SHA-256 hash,
+media type, byte count, and user-provided filename are retained by this app.
 
 ## Deploy
 
@@ -57,8 +57,16 @@ The edge runtime needs these values:
 |---|---:|---|
 | `INSFORGE_BASE_URL` | yes | Project base URL, such as `https://APP.REGION.insforge.app` |
 | `INSFORGE_API_KEY` | yes | Project-admin key used only inside trusted functions |
-| `GEMINI_API_KEY` | yes | Gemini Developer API key created in Google AI Studio (the free tier is sufficient) |
+| `PROOF_AI_PROVIDER` | no | `auto` (default), `gemini`, `openrouter`, or `nvidia-nim` |
+| `GEMINI_API_KEY` | for Gemini | Gemini Developer API key created in Google AI Studio |
 | `GEMINI_PROOF_MODEL` | no | Defaults to `gemini-3.5-flash` |
+| `OPENROUTER_API_KEY` | for OpenRouter | Backend-only OpenRouter key |
+| `OPENROUTER_PROOF_MODEL` | no | Defaults to `openrouter/free`; choose a model that supports the submitted media type |
+| `OPENROUTER_BASE_URL` | no | Defaults to `https://openrouter.ai/api/v1` |
+| `OPENROUTER_SITE_URL` | no | Public site URL sent as OpenRouter's optional `HTTP-Referer` attribution header |
+| `NVIDIA_NIM_API_KEY` | for NVIDIA NIM | Backend-only NVIDIA Developer API key |
+| `NVIDIA_NIM_PROOF_MODEL` | no | Defaults to `nvidia/nemotron-nano-12b-v2-vl`, which accepts text, image, and video inputs |
+| `NVIDIA_NIM_BASE_URL` | no | Defaults to NVIDIA's hosted `https://integrate.api.nvidia.com/v1`; may point to a compatible NIM deployment |
 | `ALLOWED_ORIGINS` | yes in production | Comma-separated exact web origins; no paths or wildcards |
 | `DAILY_MAINTENANCE_SECRET` | yes | Independent random bearer secret for the schedule |
 
@@ -67,6 +75,17 @@ the project runtime. Confirm that before adding duplicates. Add the application
 secrets with the CLI (values below are placeholders):
 
 ```bash
+npx @insforge/cli secrets add PROOF_AI_PROVIDER openrouter
+npx @insforge/cli secrets add OPENROUTER_API_KEY YOUR_OPENROUTER_API_KEY
+npx @insforge/cli secrets add OPENROUTER_PROOF_MODEL openrouter/free
+
+# Or use NVIDIA NIM instead:
+# npx @insforge/cli secrets add PROOF_AI_PROVIDER nvidia-nim
+# npx @insforge/cli secrets add NVIDIA_NIM_API_KEY YOUR_NVIDIA_NIM_API_KEY
+# npx @insforge/cli secrets add NVIDIA_NIM_PROOF_MODEL nvidia/nemotron-nano-12b-v2-vl
+
+# Or keep the existing Gemini provider:
+# npx @insforge/cli secrets add PROOF_AI_PROVIDER gemini
 npx @insforge/cli secrets add GEMINI_API_KEY YOUR_GEMINI_API_KEY
 npx @insforge/cli secrets add GEMINI_PROOF_MODEL gemini-3.5-flash
 npx @insforge/cli secrets add ALLOWED_ORIGINS https://your-site.example
@@ -75,11 +94,13 @@ npx @insforge/cli functions deploy verify-proof
 npx @insforge/cli functions deploy daily-maintenance
 ```
 
-Google states that content submitted through the free tier of the Gemini
-Developer API may be used to improve its products; content submitted through
-the paid tier is not used for that purpose. Do not submit confidential or
-identifying proof, disclose this provider behavior to users, and review
-Google's current terms before launch.
+`auto` selects the first configured key in this order: Gemini, OpenRouter,
+NVIDIA NIM. It does not silently retry proof through a different provider.
+OpenRouter's free router is rate-limited and model availability varies. NVIDIA
+Developer API access is intended for development and testing; production terms
+may differ. Do not submit confidential or identifying proof, disclose the
+selected provider to users, and review that provider's current retention,
+training, rate-limit, and production-use terms before launch.
 
 Generate the maintenance value locally with `openssl rand -hex 32`. Keep it out
 of source control and use the same stored secret in the schedule header.
@@ -176,7 +197,7 @@ request must be no larger than 7 MiB. The server temporarily accepts the legacy
 
 The function authenticates the bearer token, loads the owned assignment and
 catalog prompt, reserves a rate-limited attempt, securely proxies it to the
-Gemini Developer API, and records the result through the project-admin-only
+configured AI provider, and records the result through the project-admin-only
 `record_verified_completion` RPC. InsForge does not perform the AI assessment;
 its edge function is the authentication and provider proxy. The client cannot
 provide a challenge prompt, score, verdict, points, or user ID.

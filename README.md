@@ -24,24 +24,24 @@ Local mode includes:
 - A concrete-detail proof heuristic for the no-backend demo; proof images are processed in memory and never stored
 - Opt-in branded share cards with native share, caption copy, and PNG download; private proof is never included
 
-## Optional InsForge + Gemini Developer API mode
+## Optional InsForge + AI proof-provider mode
 
-Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. Create the backend-only `GEMINI_API_KEY` in Google AI Studio; the browser never receives that key or a project-admin secret. `GEMINI_PROOF_MODEL` is optional and defaults to `gemini-3.5-flash`.
+Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. The proof edge function supports Google Gemini, OpenRouter, or NVIDIA NIM. Set `PROOF_AI_PROVIDER` to `gemini`, `openrouter`, `nvidia-nim`, or `auto`, then add the matching backend-only API key. `auto` uses the first configured key in this order: Gemini, OpenRouter, NVIDIA NIM. The browser never receives a provider key or project-admin secret.
 
 The production backend in `insforge/` adds:
 
 - InsForge authentication, email verification/reset methods, OAuth-provider discovery, and row-level security
 - Timezone-aware server assignments, reminders, recovery locks, safety reports, deletion requests, and scheduled maintenance
-- Authenticated proof assessment through the Gemini Developer API, with the InsForge `verify-proof` edge function acting only as a secure proxy
+- Authenticated proof assessment through Gemini, OpenRouter, or NVIDIA NIM, with the InsForge `verify-proof` edge function acting only as a secure proxy
 - Ephemeral proof images (PNG/JPEG/WebP, capped at 180 KiB after browser compression) or short videos (MP4/MOV/WebM; the browser enforces 5 MiB and 30 seconds, while the server independently enforces 5 MiB); only a hash, media type, size, and optional filename are retained
 - Server-owned scoring, points, streaks, rate limits, and idempotent completion upgrades
 - Operator-fed challenge and punishment catalogs, atomic two-roll dice limits, and an owner-readable no-repeat audit trail
 
 Follow [insforge/README.md](./insforge/README.md) for the exact schema import, secrets, edge-function deployment, schedule, and post-deployment security checks. The repository is ready to deploy, but it is intentionally not tied to a specific InsForge project.
 
-Google states that content submitted through the free tier of the Gemini Developer API may be used to improve its products; content submitted through the paid tier is not used for that purpose. Do not submit confidential or identifying proof. Review Google's current terms before launch.
+OpenRouter's `openrouter/free` router and NVIDIA's hosted Developer API access can be useful for development, but free-model capacity, rate limits, and availability vary; production use may require credits or different NVIDIA licensing. Provider retention and training terms also differ. Do not submit confidential or identifying proof, disclose the configured provider, and review its current terms before launch.
 
-Never put `GEMINI_API_KEY`, an InsForge admin key, or the maintenance secret in a `VITE_` variable. Vite-prefixed values are public browser configuration.
+Never put `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `NVIDIA_NIM_API_KEY`, an InsForge admin key, or the maintenance secret in a `VITE_` variable. Vite-prefixed values are public browser configuration.
 
 ## Verification
 

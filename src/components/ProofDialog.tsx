@@ -90,7 +90,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         </label>
         <label className="field">What did you do?<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="I said… I asked… The uncomfortable part was…" rows={5} maxLength={4000} /></label>
         <div className="privacy-note"><LockKeyhole size={17} aria-hidden="true" /> Don’t include names, faces, contact details, or another person’s private reply.</div>
-        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I understand this note and optional photo or video will be sent to Google Gemini for this automated assessment.</span></label>}
+        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I understand this note and optional photo or video will be sent to the configured AI provider (Gemini, OpenRouter, or NVIDIA NIM) for this automated assessment.</span></label>}
         {error && <p className="form-error" role="alert">{error}</p>}
         <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || mediaBusy || note.trim().length < 12 || (backendMode === 'insforge' && !consent)}>{busy ? 'Checking concrete details…' : 'Check and record my proof'} <Sparkles size={18} aria-hidden="true" /></button>
       </> : <div className="assessment">
