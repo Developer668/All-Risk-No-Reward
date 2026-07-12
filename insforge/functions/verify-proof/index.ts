@@ -36,6 +36,7 @@ type RequestBody = {
   mediaDataUrl?: unknown
   imageDataUrl?: unknown
   proofName?: unknown
+  provider?: unknown
 }
 
 type Assignment = {
@@ -223,7 +224,36 @@ function withoutTrailingSlash(value: string): string {
   return value.replace(/\/+$/, '')
 }
 
-function resolveProvider(): ProviderConfig | null {
+function resolveProvider(clientProvider?: unknown): ProviderConfig | null {
+  const aliases: Record<string, ProviderName> = {
+    gemini: 'google-gemini',
+    google: 'google-gemini',
+    'google-gemini': 'google-gemini',
+    openrouter: 'openrouter',
+    nvidia: 'nvidia-nim',
+    nim: 'nvidia-nim',
+    'nvidia-nim': 'nvidia-nim',
+  }
+
+  if (clientProvider !== undefined) {
+    if (!clientProvider || typeof clientProvider !== 'object') throw new Error('INVALID_PROVIDER_CONFIG')
+    const candidate = clientProvider as Record<string, unknown>
+    const selected = aliases[String(candidate.name ?? '').trim().toLowerCase().replaceAll('_', '-')]
+    const apiKey = typeof candidate.apiKey === 'string' ? candidate.apiKey.trim() : ''
+    const model = typeof candidate.model === 'string' ? candidate.model.trim() : ''
+    if (!selected || apiKey.length < 8 || apiKey.length > 4_096 || /[\u0000-\u001f\u007f]/.test(apiKey)) {
+      throw new Error('INVALID_PROVIDER_CONFIG')
+    }
+    if (!/^[A-Za-z0-9._:/-]{2,180}$/.test(model)) throw new Error('INVALID_PROVIDER_CONFIG')
+    if (selected === 'google-gemini') return { name: selected, apiKey, model }
+    return {
+      name: selected,
+      apiKey,
+      model,
+      baseUrl: selected === 'openrouter' ? OPENROUTER_BASE_URL : NVIDIA_NIM_BASE_URL,
+    }
+  }
+
   const geminiKey = Deno.env.get('GEMINI_API_KEY')?.trim()
   const openRouterKey = Deno.env.get('OPENROUTER_API_KEY')?.trim()
   const nvidiaKey = Deno.env.get('NVIDIA_NIM_API_KEY')?.trim()
@@ -259,15 +289,6 @@ function resolveProvider(): ProviderConfig | null {
     return available['google-gemini'] ?? available.openrouter ?? available['nvidia-nim'] ?? null
   }
 
-  const aliases: Record<string, ProviderName> = {
-    gemini: 'google-gemini',
-    google: 'google-gemini',
-    'google-gemini': 'google-gemini',
-    openrouter: 'openrouter',
-    nvidia: 'nvidia-nim',
-    nim: 'nvidia-nim',
-    'nvidia-nim': 'nvidia-nim',
-  }
   const selected = aliases[requested]
   return selected ? available[selected] ?? null : null
 }
@@ -507,6 +528,14 @@ export default async function (req: Request): Promise<Response> {
     return json(req, { error: 'Request body must be valid JSON' }, 400)
   }
 
+  let provider: ProviderConfig | null
+  try {
+    provider = resolveProvider(body.provider)
+  } catch {
+    return json(req, { error: 'Choose a valid AI provider, model, and API key' }, 400)
+  }
+  if (!provider) return json(req, { error: 'Proof verification is not configured' }, 503)
+
   const note = typeof body.proofNote === 'string' ? body.proofNote.trim() : ''
   if (note.length < MIN_NOTE_LENGTH || note.length > MAX_NOTE_LENGTH) {
     return json(req, { error: `Proof note must be ${MIN_NOTE_LENGTH}–${MAX_NOTE_LENGTH} characters` }, 400)
@@ -609,9 +638,6 @@ export default async function (req: Request): Promise<Response> {
   const privacyNotes = typeof verification.privacyNotes === 'string'
     ? verification.privacyNotes
     : challenge.safety_notes ?? ''
-  const provider = resolveProvider()
-  if (!provider) return json(req, { error: 'Visual proof verification is not configured' }, 503)
-
   let attemptId: string | null = null
   const { data: reservation, error: reservationError } = await userClient.database.rpc(
     'reserve_proof_verification',

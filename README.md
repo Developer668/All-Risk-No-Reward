@@ -26,7 +26,9 @@ Local mode includes:
 
 ## Optional InsForge + AI proof-provider mode
 
-Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. The proof edge function supports Google Gemini, OpenRouter, or NVIDIA NIM. Set `PROOF_AI_PROVIDER` to `gemini`, `openrouter`, `nvidia-nim`, or `auto`, then add the matching backend-only API key. `auto` uses the first configured key in this order: Gemini, OpenRouter, NVIDIA NIM. The browser never receives a provider key or project-admin secret.
+Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. The proof edge function supports Google Gemini, OpenRouter, or NVIDIA NIM. Set `PROOF_AI_PROVIDER` to `gemini`, `openrouter`, `nvidia-nim`, or `auto`, then add the matching backend-only API key. `auto` uses the first configured key in this order: Gemini, OpenRouter, NVIDIA NIM. The browser never receives an operator key or project-admin secret.
+
+Players may instead connect their own provider key and model in **Settings → AI proof provider**. Personal keys stay in browser session storage by default, are never synced or exported, and are sent only to the selected provider (directly in local mode or ephemerally through the authenticated InsForge verifier in synced mode). An optional checkbox can remember the key in that browser's local storage; do not use it on a shared device.
 
 The production backend in `insforge/` adds:
 
@@ -75,7 +77,7 @@ The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dia
 
 ## Challenge Library
 
-The application-ready dataset is in [`data/challenges`](data/challenges/README.md). It contains **500 original same-day challenges** designed around funny, filmable, social, creative, helpful, and physically scalable experiences:
+The application-ready dataset is in [`data/challenges`](data/challenges/README.md), and all **500 original same-day challenges are loaded into the playable local catalog**. They are designed around funny, filmable, social, creative, helpful, and physically scalable experiences:
 
 - Easy
 - Medium
@@ -86,6 +88,8 @@ The application-ready dataset is in [`data/challenges`](data/challenges/README.m
 Easy contains 90 challenges, Medium 95, Hard 100, Extreme 105, and Nightmare 110. Every challenge includes a description and structured image/video evidence rules for VLM grading. Retired IDs are recorded rather than reused.
 
 The final library includes level-scaled Instagram and friend connections, private ask-outs to people already known, group hangouts, scalable specialist workouts, cooking games, hackathons, video-game builds, VM-only operating-system projects, community tools, and coding challenges using local and cloud AI model families.
+
+`npm run catalog:generate` regenerates [`insforge/challenge-catalog.seed.sql`](insforge/challenge-catalog.seed.sql) from those canonical JSON files so the same reviewed library can be imported into the synced InsForge catalog. Use `npm run catalog:check` to verify it is current or `npm run catalog:apply` to import it through a linked InsForge CLI.
 
 ## Contributing
 

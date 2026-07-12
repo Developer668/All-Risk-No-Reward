@@ -190,6 +190,7 @@ await insforge.functions.invoke('verify-proof', {
     proofNote,
     mediaDataUrl, // required image/video data URL; limits below
     proofName,    // optional display name only
+    provider,     // optional { name, model, apiKey } BYOK override
   },
 })
 ```
@@ -204,8 +205,15 @@ The function performs request-size, MIME, ownership, assignment-state, and
 catalog evidence-type checks deterministically. Only then does it reserve a
 rate-limited attempt and send the image/video to the configured Gemini,
 OpenRouter, or NVIDIA NIM provider, because interpreting pixels or video frames
-is the part that requires a vision model. It records the result through the
-project-admin-only
+is the part that requires a vision model.
+
+When `provider` is present, the function accepts only `gemini`, `openrouter`, or
+`nvidia-nim`, validates the model identifier and key length, and uses fixed
+official provider endpoints. The personal key is used for that request only; it
+is not written to the database or logs. Without this override, the function uses
+the operator-configured server secret selected by `PROOF_AI_PROVIDER`.
+
+It then records the result through the project-admin-only
 `record_verified_completion` RPC. InsForge does not perform the AI assessment;
 its edge function is the authentication and provider proxy. The client cannot
 provide a challenge prompt, score, verdict, points, or user ID.

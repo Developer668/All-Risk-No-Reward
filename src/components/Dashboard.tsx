@@ -1,8 +1,9 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import {
-  ArrowRight, Bell, CalendarDays, Check, ChevronRight, Clock3, Dices, Download, Flag, Flame, Gift,
-  History, Inbox, Laugh, LifeBuoy, LockKeyhole, Menu, RefreshCw, Settings, ShieldCheck, Sparkles, Star,
-  Package, Share2, Target, Trash2, Trophy, Users, X, Zap,
+  ArrowRight, Award, BarChart3, Bell, Bot, CalendarDays, Check, ChevronRight, CircleCheckBig, Clock3,
+  Dices, Download, Flag, Flame, Gift, History, Inbox, KeyRound, Laugh, LifeBuoy, LockKeyhole, Medal,
+  Menu, Package, RefreshCw, Route, Settings, ShieldCheck, Sparkles, Star, Share2, Target, Trash2,
+  Trophy, Users, X, Zap,
 } from 'lucide-react'
 import type {
   ChallengeBoundaryTag, ChallengeCategory, ChallengeReportReason, DailyView, Difficulty, HistoryEntry,
@@ -14,6 +15,14 @@ import {
   type BonusRecord, type BonusState,
 } from '../services/bonusChallenge'
 import { notificationPermission, notificationsSupported, requestNotificationPermission, sendTestNotification } from '../services/notifications'
+import {
+  AI_PROVIDER_OPTIONS,
+  aiProviderLabel,
+  clearAiProviderKey,
+  loadAiProviderSettings,
+  saveAiProviderSettings,
+  type AiProviderId,
+} from '../services/aiProvider'
 import { Brand } from './Brand'
 import { Modal } from './Modal'
 import { ProofDialog } from './ProofDialog'
@@ -67,6 +76,21 @@ const categoryOptions: Array<{ category: ChallengeCategory; label: string }> = [
   { category: 'wellness', label: 'Wellness' },
 ]
 
+const challengeCategoryLabels = Object.fromEntries(
+  categoryOptions.map(({ category, label }) => [category, label]),
+) as Partial<Record<ChallengeCategory, string>>
+
+function formatMode(mode?: string, participants = 1) {
+  if (mode === 'group') return `Group · about ${participants}`
+  if (mode === 'solo_with_other_people') return 'Social · with others'
+  return 'Solo-friendly'
+}
+
+function formatIntensity(value?: string) {
+  if (!value) return 'Flexible intensity'
+  return value.replaceAll('_', ' ').replace('none to ', '').replace('optional and scalable', 'scalable')
+}
+
 function formatDate(date = new Date()) {
   return date.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase()
 }
@@ -94,7 +118,6 @@ function ActiveChallengeCard({ daily, onProof, onReport }: { daily: DailyView; o
   const participantTarget = challenge.participants?.targetTotal ?? 1
   const facts = [
     challenge.requiresConsent ? <span key="consent"><ShieldCheck aria-hidden="true" /> Consent required</span> : null,
-    participantTarget > 1 ? <span key="participants"><Users aria-hidden="true" /> {participantTarget} people</span> : null,
     challenge.equipment?.length ? <span key="equipment"><Package aria-hidden="true" /> {challenge.equipment.join(', ')}</span> : null,
     challenge.timeWindow === '1_day' ? <span key="window"><CalendarDays aria-hidden="true" /> Finish today</span> : null,
   ].filter(Boolean)
@@ -102,12 +125,16 @@ function ActiveChallengeCard({ daily, onProof, onReport }: { daily: DailyView; o
     <article className="active-challenge">
       <div className="active-challenge__rail"><span>TODAY</span><span className="vertical">DAILY COURAGE</span><span>PRIVATE</span></div>
       <div className="active-challenge__body">
-        <div className="active-challenge__meta"><span><Star fill="currentColor" aria-hidden="true" /> LEVEL {challenge.difficulty}</span><span>{challenge.category}</span></div>
+        <div className="active-challenge__meta"><span><Star fill="currentColor" aria-hidden="true" /> LEVEL {challenge.difficulty}</span><span>{challengeCategoryLabels[challenge.category] ?? challenge.category}</span></div>
         <div className="active-challenge__icon"><Target aria-hidden="true" /></div>
         <p className="challenge-card__label">TODAY’S CHALLENGE</p>
         <h2>{challenge.title}</h2>
         <p className="active-challenge__prompt">{challenge.prompt}</p>
-        {facts.length > 0 && <div className="challenge-facts" aria-label="Challenge requirements">{facts}</div>}
+        <div className="challenge-facts" aria-label="Challenge requirements">
+          <span><Users aria-hidden="true" /> {formatMode(challenge.mode, participantTarget)}</span>
+          <span><Zap aria-hidden="true" /> {formatIntensity(challenge.intensity)}</span>
+          {facts}
+        </div>
         {challenge.script && <div className="script"><span>OPTIONAL WORDING</span> “{challenge.script.replaceAll('“', '').replaceAll('”', '')}”</div>}
         <div className="why"><Sparkles aria-hidden="true" /><div><strong>Why this works</strong><p>{challenge.why}</p></div></div>
         <div className="active-challenge__footer"><span><Clock3 aria-hidden="true" /> ABOUT {challenge.minutes} MIN</span><span><Zap aria-hidden="true" /> UP TO 120 POINTS</span></div>
@@ -266,16 +293,69 @@ function TodayPanel({ daily, bonusRecord, lifelines, onOpenBonus, onProof, onRep
 
 function JourneyPanel({ history }: { history: HistoryEntry[] }) {
   if (!history.length) return <EmptyState title="Your journey starts today." body="Completed and missed challenges will appear here with their private scores and recovery status." />
-  return <section className="content-panel"><div className="panel-heading"><div><span className="section-kicker">YOUR PRIVATE LOG</span><h2>Every attempt, in context.</h2></div><History aria-hidden="true" /></div><div className="history-list">{history.map(({ assignment, challenge, completion, recovery }) => <article key={assignment.id} className="history-row"><time>{new Date(`${assignment.dateKey}T12:00:00`).toLocaleDateString([], { month: 'short', day: 'numeric' })}</time><div><h3>{challenge?.title ?? 'Challenge unavailable'}</h3><p>{assignment.status === 'completed' ? 'Completed' : assignment.status === 'partial' ? 'Partial progress' : assignment.status === 'missed' ? 'Missed' : assignment.status}</p></div><div className="history-row__score">{completion ? <><strong>{completion.score}</strong><span>score</span></> : <span>—</span>}</div>{recovery && <span className={`status-chip status-chip--${recovery.status}`}>Recovery {recovery.status}</span>}</article>)}</div></section>
+  const attempted = history.filter((entry) => ['completed', 'partial', 'missed'].includes(entry.assignment.status))
+  const completed = attempted.filter((entry) => entry.assignment.status === 'completed').length
+  const scored = attempted.filter((entry) => entry.completion)
+  const averageScore = scored.length ? Math.round(scored.reduce((total, entry) => total + (entry.completion?.score ?? 0), 0) / scored.length) : 0
+  const categories = new Set(attempted.map((entry) => entry.challenge?.category).filter(Boolean)).size
+
+  return <div className="journey-layout">
+    <section className="journey-overview" aria-label="Journey summary">
+      <div><Route aria-hidden="true" /><span><strong>{attempted.length}</strong>Total attempts</span></div>
+      <div><CircleCheckBig aria-hidden="true" /><span><strong>{attempted.length ? Math.round(completed / attempted.length * 100) : 0}%</strong>Completion rate</span></div>
+      <div><BarChart3 aria-hidden="true" /><span><strong>{averageScore || '—'}</strong>Average proof score</span></div>
+      <div><Sparkles aria-hidden="true" /><span><strong>{categories}</strong>Categories explored</span></div>
+    </section>
+    <section className="content-panel">
+      <div className="panel-heading"><div><span className="section-kicker">YOUR PRIVATE LOG</span><h2>Every attempt tells the story.</h2></div><History aria-hidden="true" /></div>
+      <div className="history-list">{history.map(({ assignment, challenge, completion, recovery }, index) => {
+        const status = assignment.status === 'completed' ? 'Completed' : assignment.status === 'partial' ? 'Partial progress' : assignment.status === 'missed' ? 'Missed' : assignment.status
+        return <article key={assignment.id} className="history-row history-row--rich">
+          <div className="history-row__marker"><span>{history.length - index}</span><i /></div>
+          <time><strong>{new Date(`${assignment.dateKey}T12:00:00`).toLocaleDateString([], { day: '2-digit' })}</strong>{new Date(`${assignment.dateKey}T12:00:00`).toLocaleDateString([], { month: 'short' })}</time>
+          <div className="history-row__main"><div className="history-row__tags"><span>{challenge ? challengeCategoryLabels[challenge.category] : 'Archived'}</span>{challenge && <span>Level {challenge.difficulty}</span>}</div><h3>{challenge?.title ?? 'Challenge unavailable'}</h3><p>{status}{completion?.pointsAwarded ? ` · +${completion.pointsAwarded} points` : ''}</p></div>
+          <div className="history-row__score">{completion ? <><strong>{completion.score}</strong><span>score</span></> : <span>—</span>}</div>
+          <div className="history-row__outcome"><span className={`status-chip status-chip--${assignment.status}`}>{status}</span>{recovery && <small>Recovery {recovery.status}</small>}</div>
+        </article>
+      })}</div>
+    </section>
+  </div>
 }
 
 function MilestonesPanel({ profile, history }: { profile: Profile; history: HistoryEntry[] }) {
   const completed = history.filter((entry) => entry.assignment.status === 'completed').length
   const partial = history.filter((entry) => entry.assignment.status === 'partial').length
+  const attempts = history.filter((entry) => ['completed', 'partial', 'missed'].includes(entry.assignment.status)).length
+  const categories = new Set(history
+    .filter((entry) => ['completed', 'partial', 'missed'].includes(entry.assignment.status))
+    .map((entry) => entry.challenge?.category)
+    .filter(Boolean)).size
   const nextLevel = profile.level * 500
   const levelStart = (profile.level - 1) * 500
   const progress = Math.min(100, ((profile.couragePoints - levelStart) / Math.max(1, nextLevel - levelStart)) * 100)
-  return <section className="content-panel"><div className="panel-heading"><div><span className="section-kicker">MILESTONES</span><h2>Proof that practice adds up.</h2></div><Trophy aria-hidden="true" /></div><div className="milestone-hero"><div className="level-card__orbit"><span>{profile.level}</span></div><div><p>CURRENT LEVEL</p><h3>{profile.level < 2 ? 'Beginner' : profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><span>{profile.couragePoints} courage points</span></div></div><div className="milestone-progress"><div><span>Next level</span><strong>{Math.max(0, nextLevel - profile.couragePoints)} points to go</strong></div><div className="progress-bar" role="progressbar" aria-label="Progress to next level" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}><i style={{ width: `${progress}%` }} /></div></div><div className="stat-strip"><div><strong>{completed}</strong><span>Full challenges</span></div><div><strong>{partial}</strong><span>Partial attempts</span></div><div><strong>{profile.streak}</strong><span>Current streak</span></div></div></section>
+  const achievements = [
+    { title: 'First Spark', description: 'Record your first real attempt.', value: attempts, target: 1, icon: Sparkles },
+    { title: 'Three for Three', description: 'Complete three full challenges.', value: completed, target: 3, icon: CircleCheckBig },
+    { title: 'Week of Nerve', description: 'Build a seven-day completion streak.', value: profile.streak, target: 7, icon: Flame },
+    { title: 'Range Finder', description: 'Explore six challenge categories.', value: categories, target: 6, icon: Route },
+    { title: 'Point Collector', description: 'Earn 1,000 courage points.', value: profile.couragePoints, target: 1_000, icon: Medal },
+    { title: 'Twenty Strong', description: 'Complete twenty full challenges.', value: completed, target: 20, icon: Trophy },
+  ]
+  const earned = achievements.filter((achievement) => achievement.value >= achievement.target).length
+
+  return <div className="milestones-layout">
+    <section className="content-panel milestone-summary">
+      <div className="panel-heading"><div><span className="section-kicker">MILESTONES</span><h2>Your courage has receipts.</h2></div><Trophy aria-hidden="true" /></div>
+      <div className="milestone-hero"><div className="level-card__orbit"><span>{profile.level}</span></div><div><p>CURRENT LEVEL</p><h3>{profile.level < 2 ? 'Beginner' : profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><span>{profile.couragePoints} courage points · {earned} badges earned</span></div></div>
+      <div className="milestone-progress"><div><span>Level {profile.level + 1}</span><strong>{Math.max(0, nextLevel - profile.couragePoints)} points to go</strong></div><div className="progress-bar" role="progressbar" aria-label="Progress to next level" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}><i style={{ width: `${progress}%` }} /></div></div>
+      <div className="stat-strip stat-strip--four"><div><strong>{completed}</strong><span>Full challenges</span></div><div><strong>{partial}</strong><span>Partial attempts</span></div><div><strong>{profile.streak}</strong><span>Current streak</span></div><div><strong>{categories}</strong><span>Categories tried</span></div></div>
+    </section>
+    <section className="achievement-section"><div className="achievement-heading"><div><span className="section-kicker">BADGE BOARD</span><h3>Next stops on the map.</h3></div><Award aria-hidden="true" /></div><div className="achievement-grid">{achievements.map(({ title, description, value, target, icon: Icon }) => {
+      const unlocked = value >= target
+      const badgeProgress = Math.min(100, value / target * 100)
+      return <article className={`achievement-card ${unlocked ? 'achievement-card--earned' : ''}`} key={title}><div className="achievement-card__icon">{unlocked ? <Check aria-hidden="true" /> : <Icon aria-hidden="true" />}</div><span>{unlocked ? 'EARNED' : `${Math.min(value, target)} / ${target}`}</span><h4>{title}</h4><p>{description}</p><div className="achievement-card__bar"><i style={{ width: `${badgeProgress}%` }} /></div></article>
+    })}</div></section>
+  </div>
 }
 
 function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSignOut }: {
@@ -284,6 +364,9 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState('')
   const [deleteText, setDeleteText] = useState('')
+  const [aiSettings, setAiSettings] = useState(loadAiProviderSettings)
+  const [aiMessage, setAiMessage] = useState('')
+  const aiOption = AI_PROVIDER_OPTIONS.find((option) => option.id === aiSettings.provider) ?? AI_PROVIDER_OPTIONS[0]
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -338,6 +421,27 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
     catch (caught) { setMessage(caught instanceof Error ? caught.message : 'Could not delete your data.'); setBusy(false) }
   }
 
+  function selectAiProvider(provider: AiProviderId) {
+    const option = AI_PROVIDER_OPTIONS.find((candidate) => candidate.id === provider) ?? AI_PROVIDER_OPTIONS[0]
+    setAiSettings((current) => ({ ...current, provider, model: option.defaultModel }))
+    setAiMessage('')
+  }
+
+  function saveAiConnection() {
+    try {
+      const saved = saveAiProviderSettings(aiSettings)
+      setAiSettings(saved)
+      setAiMessage(`${aiProviderLabel(saved.provider)} is ready with ${saved.model}.`)
+    } catch (caught) {
+      setAiMessage(caught instanceof Error ? caught.message : 'Could not save that AI connection.')
+    }
+  }
+
+  function removeAiConnection() {
+    setAiSettings(clearAiProviderKey())
+    setAiMessage('The saved API key was removed from this browser.')
+  }
+
   return <section className="content-panel">
     <div className="panel-heading"><div><span className="section-kicker">SETTINGS & SAFETY</span><h2>Keep the challenge yours.</h2></div><Settings aria-hidden="true" /></div>
     <form className="settings-form" onSubmit={save}>
@@ -353,6 +457,17 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
           <div><strong>Formats</strong>{boundaryOptions.map(({ tag, label }) => <label className="check-row" key={tag}><input type="checkbox" name={`boundary-${tag}`} defaultChecked={settings.disabledBoundaryTags.includes(tag)} /><span>{label}</span></label>)}</div>
           <div><strong>Categories</strong>{categoryOptions.map(({ category, label }) => <label className="check-row" key={category}><input type="checkbox" name={`category-${category}`} defaultChecked={settings.disabledCategories.includes(category)} /><span>{label}</span></label>)}</div>
         </div>
+      </fieldset>
+      <fieldset className="ai-provider-settings"><legend><Bot aria-hidden="true" /> AI proof provider</legend><p>Bring your own key and choose the vision model that grades your images or videos. The key is never synced with your account or included in exports.</p>
+        <div className="ai-provider-status"><div><KeyRound aria-hidden="true" /><span><strong>{aiSettings.apiKey ? `${aiProviderLabel(aiSettings.provider)} connected` : 'No personal key connected'}</strong><small>{aiSettings.apiKey ? `Using ${aiSettings.model}` : backendMode === 'local' ? 'The demo uses its local proof rubric until you add one.' : 'The server-configured provider is used until you add one.'}</small></span></div><span className={aiSettings.apiKey ? 'provider-dot provider-dot--ready' : 'provider-dot'}>{aiSettings.apiKey ? 'READY' : 'OPTIONAL'}</span></div>
+        <div className="settings-grid ai-provider-grid">
+          <label className="field">Provider<select value={aiSettings.provider} onChange={(event) => selectAiProvider(event.target.value as AiProviderId)}>{AI_PROVIDER_OPTIONS.map((option) => <option value={option.id} key={option.id}>{option.label}</option>)}</select><span className="field-hint">{aiOption.note}</span></label>
+          <label className="field">Model ID<input list={`models-${aiSettings.provider}`} value={aiSettings.model} onChange={(event) => setAiSettings((current) => ({ ...current, model: event.target.value }))} autoComplete="off" /><datalist id={`models-${aiSettings.provider}`}>{aiOption.models.map((model) => <option value={model} key={model} />)}</datalist><span className="field-hint">Choose a preset or paste another compatible model ID.</span></label>
+          <label className="field ai-key-field">API key<input type="password" value={aiSettings.apiKey} onChange={(event) => setAiSettings((current) => ({ ...current, apiKey: event.target.value }))} placeholder={aiSettings.provider === 'openrouter' ? 'sk-or-v1-…' : aiSettings.provider === 'nvidia-nim' ? 'nvapi-…' : 'AIza…'} autoComplete="off" spellCheck={false} /><span className="field-hint">Stored in this tab by default. Use a restricted, low-limit key when the provider supports it.</span></label>
+        </div>
+        <label className="check-row"><input type="checkbox" checked={aiSettings.rememberKey} onChange={(event) => setAiSettings((current) => ({ ...current, rememberKey: event.target.checked }))} /><span>Remember this key on this device after I close the tab <small className="inline-warning">Not recommended on shared devices.</small></span></label>
+        <div className="ai-provider-actions"><button type="button" className="button button--ink" onClick={saveAiConnection}><KeyRound aria-hidden="true" /> Save AI connection</button>{aiSettings.apiKey && <button type="button" className="button button--outline" onClick={removeAiConnection}>Remove key</button>}</div>
+        {aiMessage && <p className="form-notice" role="status">{aiMessage}</p>}
       </fieldset>
       <fieldset><legend>Notifications</legend>
         <label className="check-row"><input type="checkbox" name="notifications" defaultChecked={settings.notificationsEnabled} /><span>Enable the private notification inbox</span></label>
@@ -495,7 +610,7 @@ export function Dashboard(props: DashboardProps) {
         : <div className="dashboard-content">{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 
-    <nav className="mobile-bottom-nav" aria-label="Mobile application navigation"><button className={section === 'today' ? 'active' : ''} onClick={() => chooseSection('today')}><Target aria-hidden="true" />Today</button><button className={section === 'journey' ? 'active' : ''} onClick={() => chooseSection('journey')}><CalendarDays aria-hidden="true" />Journey</button><button className={section === 'settings' ? 'active' : ''} onClick={() => chooseSection('settings')}><Settings aria-hidden="true" />Settings</button></nav>
+    <nav className="mobile-bottom-nav" aria-label="Mobile application navigation"><button className={section === 'today' ? 'active' : ''} onClick={() => chooseSection('today')}><Target aria-hidden="true" />Today</button><button className={section === 'journey' ? 'active' : ''} onClick={() => chooseSection('journey')}><CalendarDays aria-hidden="true" />Journey</button><button className={section === 'milestones' ? 'active' : ''} onClick={() => chooseSection('milestones')}><Trophy aria-hidden="true" />Milestones</button><button className={section === 'settings' ? 'active' : ''} onClick={() => chooseSection('settings')}><Settings aria-hidden="true" />Settings</button></nav>
     {props.daily.assignment && props.daily.challenge && <ProofDialog open={proofOpen} assignment={props.daily.assignment} challenge={props.daily.challenge} backendMode={props.backendMode} onClose={() => setProofOpen(false)} onRecorded={props.onRecordProof} />}
     {props.daily.challenge && <ReportDialog open={reportOpen} challengeTitle={props.daily.challenge.title} onClose={() => setReportOpen(false)} onSubmit={props.onReport} />}
     {props.daily.completion && <ShareDialog open={shareOpen} onClose={() => setShareOpen(false)} verdict={props.daily.status === 'completed' || props.daily.completion.verdict === 'complete' ? 'complete' : 'partial'} points={props.daily.completion.pointsAwarded ?? 0} streak={props.profile.streak} challengeTitle={props.daily.challenge?.title} />}

@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, LockKeyhole, MessageCircleMore, ShieldCheck, Sparkles, Star, Trophy, UserRound, Zap, Clock3 } from 'lucide-react'
+import { ArrowRight, Bell, Bot, Code2, Dumbbell, LockKeyhole, Laugh, ShieldCheck, Sparkles, Star, Trophy, UserRound, Users, Utensils, Zap, Clock3 } from 'lucide-react'
 import { Brand } from './Brand'
 
 interface LandingProps {
@@ -14,6 +14,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
         <Brand />
         <div className="landing-nav__links">
           <a href="#how">How it works</a>
+          <a href="#library">500 challenges</a>
           <a href="#safety">Safety</a>
         </div>
         <button className="button button--ink button--small" onClick={onAuth}>Sign in <ArrowRight size={16} aria-hidden="true" /></button>
@@ -23,7 +24,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
         <div className="hero__copy">
           <div className="eyebrow"><Sparkles size={15} aria-hidden="true" /> YOUR COMFORT ZONE CALLED. WE DECLINED.</div>
           <h1>Do one brave<br />thing <i>today.</i></h1>
-          <p className="hero__lede">Practice real social confidence with one private, level-appropriate challenge at a time.</p>
+          <p className="hero__lede">Pull one challenge from a 500-card library of funny, physical, creative, social, useful, and gloriously awkward things you can finish today.</p>
           <div className="hero__actions">
             <button className="button button--accent" onClick={onTry}>Try the working demo <ArrowRight size={19} aria-hidden="true" /></button>
             <span>No card required. No public posting. Your boundaries always win.</span>
@@ -34,17 +35,17 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
           </div>
         </div>
 
-        <div className="hero__visual" role="img" aria-label="Example daily challenge card: give someone a sincere, specific compliment">
+        <div className="hero__visual" role="img" aria-label="Example daily challenge card: perform a short robot dance">
           <div className="sun" aria-hidden="true" />
           <span className="scribble scribble--one" aria-hidden="true">tiny risk</span>
           <span className="scribble scribble--two" aria-hidden="true">real growth ↗</span>
           <div className="challenge-card challenge-card--hero" aria-hidden="true">
             <div className="challenge-card__topline"><span>DAY 04</span><span><Star size={14} fill="currentColor" /> LEVEL 2</span></div>
-            <div className="challenge-card__icon"><MessageCircleMore size={26} /></div>
+            <div className="challenge-card__icon"><Laugh size={26} /></div>
             <p className="challenge-card__label">TODAY’S CHALLENGE</p>
-            <h2>Say the<br />specific thing.</h2>
-            <p>Give someone a sincere compliment about a choice they made—not their appearance.</p>
-            <div className="challenge-card__footer"><span><Clock3 size={16} /> 5 MIN</span><span>+120 POINTS</span></div>
+            <h2>Robot mode:<br />activated.</h2>
+            <p>Perform a 30-second robot dance somewhere safe. Commit to the bit.</p>
+            <div className="challenge-card__footer"><span><Clock3 size={16} /> 3 MIN</span><span>+120 POINTS</span></div>
           </div>
           <div className="stamp" aria-hidden="true">AWKWARD<br />IS ALLOWED</div>
         </div>
@@ -52,6 +53,13 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
 
       <section className="ticker" aria-label="Product principles">
         <div>SMALL RISKS <span>✦</span> REAL PROGRESS <span>✦</span> ZERO PUBLIC SHAME <span>✦</span> YOUR BOUNDARIES, ALWAYS <span>✦</span></div>
+      </section>
+
+      <section id="library" className="library-showcase shell">
+        <div className="library-showcase__intro"><span className="section-kicker">THE FULL DECK IS LOADED</span><h2>Five hundred ways<br />to make today <i>count.</i></h2><p>Every card is same-day, designed for image or video proof, and organized from Easy through Nightmare. Filter the categories that do not fit and keep the rest unpredictable.</p></div>
+        <div className="library-showcase__stats"><article><strong>500</strong><span>playable challenges</span></article><article><strong>5</strong><span>difficulty levels</span></article><article><strong>11</strong><span>challenge categories</span></article></div>
+        <div className="library-showcase__categories" aria-label="Challenge categories"><span><Dumbbell aria-hidden="true" /> Fitness</span><span><Laugh aria-hidden="true" /> Comedy</span><span><Users aria-hidden="true" /> Social</span><span><Code2 aria-hidden="true" /> Coding</span><span><Utensils aria-hidden="true" /> Cooking</span><span><Sparkles aria-hidden="true" /> Creative</span></div>
+        <div className="byok-callout"><Bot aria-hidden="true" /><div><span>YOUR MODEL, YOUR KEY</span><strong>Connect Gemini, OpenRouter, or NVIDIA NIM.</strong><p>Pick the vision model in Settings. Keys stay in the current tab by default; remembering one on the device is opt-in.</p></div></div>
       </section>
 
       <section id="how" className="steps shell">

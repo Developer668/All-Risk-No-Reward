@@ -1,11 +1,13 @@
-import type { ProofAssessment } from '../types'
+import type { Challenge, ProofAssessment } from '../types'
 import { callRemoteRpc, invokeRemote, isInsforgeConfigured } from './insforge'
+import { assessWithAiProvider, loadAiProviderSettings, providerRequest } from './aiProvider'
 
 export interface ProofSubmission {
   assignmentId: string
   note: string
   proofName?: string
   mediaDataUrl?: string
+  challenge?: Challenge
   backendMode?: 'local' | 'insforge'
 }
 
@@ -53,6 +55,8 @@ export async function assessProof(submission: ProofSubmission): Promise<ProofRes
     ? submission.backendMode === 'insforge'
     : isInsforgeConfigured
 
+  const aiSettings = loadAiProviderSettings()
+
   if (useRemote) {
     // Consent is collected immediately beside the submission control. Persist it
     // before reserving a server-side verification attempt.
@@ -62,7 +66,22 @@ export async function assessProof(submission: ProofSubmission): Promise<ProofRes
       proofNote: submission.note,
       proofName: submission.proofName,
       mediaDataUrl: submission.mediaDataUrl,
+      provider: providerRequest(aiSettings),
     })
+  }
+
+  if (aiSettings.apiKey) {
+    if (!submission.challenge) throw new Error('The assigned challenge is unavailable for AI verification.')
+    const assessment = await assessWithAiProvider({
+      settings: aiSettings,
+      challenge: submission.challenge,
+      note: submission.note,
+      mediaDataUrl: submission.mediaDataUrl,
+    })
+    return {
+      ...assessment,
+      pointsAwarded: assessment.score >= 72 ? 120 : assessment.score >= 25 ? 60 : 0,
+    }
   }
 
   await new Promise((resolve) => window.setTimeout(resolve, 650))

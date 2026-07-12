@@ -1,12 +1,22 @@
-import { spawn } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 
 const testScripts = process.argv.slice(2)
 if (testScripts.length === 0) testScripts.push('scripts/runtime-audit.mjs')
 const baseUrl = process.env.E2E_BASE_URL ?? 'http://127.0.0.1:4173'
 const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm'
 const detached = process.platform !== 'win32'
+const npmCli = process.env.npm_execpath
 
-const preview = spawn(npmCommand, ['run', 'preview'], {
+// Node 24 on Windows can reject direct .cmd spawning with EINVAL. When npm
+// exposes its JavaScript entry point, launch that through the current Node
+// executable so the verification suite behaves the same across platforms.
+const preview = npmCli
+  ? spawn(process.execPath, [npmCli, 'run', 'preview'], {
+    detached,
+    env: { ...process.env, E2E_BASE_URL: baseUrl },
+    stdio: 'inherit',
+  })
+  : spawn(npmCommand, ['run', 'preview'], {
   detached,
   env: { ...process.env, E2E_BASE_URL: baseUrl },
   stdio: 'inherit',
@@ -17,6 +27,10 @@ let stopping = false
 function stopPreview() {
   if (stopping || preview.exitCode !== null) return
   stopping = true
+  if (process.platform === 'win32' && preview.pid) {
+    spawnSync('taskkill.exe', ['/pid', String(preview.pid), '/t', '/f'], { stdio: 'ignore' })
+    return
+  }
   if (detached && preview.pid) {
     try {
       process.kill(-preview.pid, 'SIGTERM')
