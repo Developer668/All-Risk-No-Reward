@@ -32,7 +32,7 @@ export interface ResetTask {
 
 export type CompletionVerdict = 'complete' | 'partial' | 'needs-more'
 
-/** A privacy-safe proof result. Image contents are deliberately never persisted locally. */
+/** A privacy-safe proof result. Photo and video contents are deliberately never persisted locally. */
 export interface Completion {
   challengeId: string
   score: number

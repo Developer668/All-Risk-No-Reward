@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS proof_verification_attempts (
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   assignment_id UUID NOT NULL REFERENCES daily_assignments(id) ON DELETE CASCADE,
   status TEXT NOT NULL DEFAULT 'reserved' CHECK (status IN ('reserved', 'accepted', 'failed')),
-  provider TEXT NOT NULL DEFAULT 'nvidia-nim',
+  provider TEXT NOT NULL DEFAULT 'google-gemini',
   score SMALLINT CHECK (score BETWEEN 0 AND 100),
   failure_code TEXT,
   requested_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -130,7 +130,11 @@ ALTER TABLE challenge_completions ADD COLUMN IF NOT EXISTS verdict TEXT CHECK (v
 ALTER TABLE challenge_completions ADD COLUMN IF NOT EXISTS points_awarded INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE challenge_completions ADD COLUMN IF NOT EXISTS proof_sha256 TEXT;
 ALTER TABLE challenge_completions ADD COLUMN IF NOT EXISTS proof_media_type TEXT;
-ALTER TABLE challenge_completions ADD COLUMN IF NOT EXISTS proof_size_bytes INTEGER CHECK (proof_size_bytes IS NULL OR proof_size_bytes BETWEEN 0 AND 184320);
+ALTER TABLE challenge_completions ADD COLUMN IF NOT EXISTS proof_size_bytes INTEGER;
+ALTER TABLE proof_verification_attempts ALTER COLUMN provider SET DEFAULT 'google-gemini';
+ALTER TABLE challenge_completions DROP CONSTRAINT IF EXISTS challenge_completions_proof_size_bytes_check;
+ALTER TABLE challenge_completions ADD CONSTRAINT challenge_completions_proof_size_bytes_check
+  CHECK (proof_size_bytes IS NULL OR proof_size_bytes BETWEEN 0 AND 5242880);
 
 CREATE TABLE IF NOT EXISTS recovery_tasks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -1518,7 +1522,7 @@ BEGIN
   IF char_length(btrim(COALESCE(p_note, ''))) NOT BETWEEN 12 AND 4000 THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_PROOF_NOTE';
   END IF;
-  IF p_proof_size_bytes IS NOT NULL AND p_proof_size_bytes NOT BETWEEN 0 AND 184320 THEN
+  IF p_proof_size_bytes IS NOT NULL AND p_proof_size_bytes NOT BETWEEN 0 AND 5242880 THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_PROOF_SIZE';
   END IF;
 

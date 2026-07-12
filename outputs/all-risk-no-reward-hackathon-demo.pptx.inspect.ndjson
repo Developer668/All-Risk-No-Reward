@@ -1,0 +1,159 @@
+{"kind":"deck","id":"pr/hz9yne","name":"Deck"}
+{"kind":"layout","layoutId":"fa1324a4-3245-4eb8-acd1-aeab97cfb35e","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"d7de9ef7-d957-41ce-8aa7-ba50c214432b","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/yz5dz3","slide":1,"title":"HACKATHON DEMO · 2026","textShapes":5}
+{"kind":"shape","id":"sh/hkna5s3m","slide":1,"bbox":[0,0,412,720]}
+{"kind":"shape","id":"sh/uxwradkv","slide":1,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/vy5s3ilg","slide":1,"text":"HACKATHON DEMO · 2026","textPreview":"HACKATHON DEMO · 2026","textChars":21,"textLines":1,"bbox":[64,56,280,20]}
+{"kind":"textbox","id":"sh/8ve98n25","slide":1,"text":"ALL RISK,\nNO REWARD.","textPreview":"ALL RISK, | NO REWARD.","textChars":20,"textLines":2,"bbox":[64,126,310,230]}
+{"kind":"textbox","id":"sh/9wna183a","slide":1,"text":"Social courage, gamified—with guardrails.","textPreview":"Social courage, gamified—with guardrails.","textChars":41,"textLines":1,"bbox":[64,388,285,72]}
+{"kind":"shape","id":"sh/mtcr6dkz","slide":1,"bbox":[92,533,190,92]}
+{"kind":"textbox","id":"sh/7ulszilk","slide":1,"text":"AWKWARD\nIS ALLOWED","textPreview":"AWKWARD | IS ALLOWED","textChars":18,"textLines":2,"bbox":[86,526,190,92]}
+{"kind":"shape","id":"sh/sryt4729","slide":1,"bbox":[496,89,704,550]}
+{"kind":"shape","id":"sh/x8nq10b2","slide":1,"bbox":[488,80,704,550]}
+{"kind":"textbox","id":"sh/w7e9svax","slide":1,"text":"ONE DAILY DROP. ZERO PUBLIC SHAME.","textPreview":"ONE DAILY DROP. ZERO PUBLIC SHAME.","textChars":34,"textLines":1,"bbox":[558,650,570,24]}
+{"kind":"image","id":"im/0nm1g7a9","slide":1,"name":"","geometry":"rect","alt":"All Risk, No Reward dashboard showing the red daily challenge card","bbox":[488,80,704,550]}
+{"kind":"notes","id":"nt/yz5dz3","slide":1,"text":"All Risk, No Reward is a consent-first social courage app. It turns one healthy, uncomfortable action into a daily game—without public shame, forced posting, or reckless dares."}
+{"kind":"slide","id":"sl/2ssgt3","slide":2,"title":"THE ACTUAL PROBLEM","textShapes":12}
+{"kind":"textbox","id":"sh/yt8vupsr","slide":2,"text":"THE ACTUAL PROBLEM","textPreview":"THE ACTUAL PROBLEM","textChars":18,"textLines":1,"bbox":[64,40,520,22]}
+{"kind":"textbox","id":"sh/lwje54bi","slide":2,"text":"Fear is not the bug.\nDelay is.","textPreview":"Fear is not the bug. | Delay is.","textChars":30,"textLines":2,"bbox":[64,86,520,126]}
+{"kind":"textbox","id":"sh/kvadwzax","slide":2,"text":"The gap between “I should” and “I did” eats every good intention.","textPreview":"The gap between “I should” and “I did” eats every good intention.","textChars":65,"textLines":1,"bbox":[64,232,480,72]}
+{"kind":"shape","id":"sh/bqhczut0","slide":2,"bbox":[658,51,520,438]}
+{"kind":"shape","id":"sh/xszu14b6","slide":2,"bbox":[650,42,520,438]}
+{"kind":"shape","id":"sh/crqdszal","slide":2,"bbox":[64,340,500,0]}
+{"kind":"shape","id":"sh/3mhcvat4","slide":2,"bbox":[64,386,170,8]}
+{"kind":"textbox","id":"sh/21ovm5cj","slide":2,"text":"RANDOM\nUNLOCK","textPreview":"RANDOM | UNLOCK","textChars":13,"textLines":2,"bbox":[64,412,170,58]}
+{"kind":"textbox","id":"sh/oz6pw7ap","slide":2,"text":"Surprise interrupts avoidance.","textPreview":"Surprise interrupts avoidance.","textChars":30,"textLines":1,"bbox":[64,488,170,66]}
+{"kind":"shape","id":"sh/90fq5cra","slide":2,"bbox":[270,386,170,8]}
+{"kind":"textbox","id":"sh/mx47uxsz","slide":2,"text":"ONE SPECIFIC\nACTION","textPreview":"ONE SPECIFIC | ACTION","textChars":19,"textLines":2,"bbox":[270,412,170,58]}
+{"kind":"textbox","id":"sh/nyx8329k","slide":2,"text":"Small enough to attempt today.","textPreview":"Small enough to attempt today.","textChars":30,"textLines":1,"bbox":[270,488,170,66]}
+{"kind":"shape","id":"sh/0bmps7at","slide":2,"bbox":[476,386,170,8]}
+{"kind":"textbox","id":"sh/1wvq1sre","slide":2,"text":"10 PM\nDEADLINE","textPreview":"10 PM | DEADLINE","textChars":14,"textLines":2,"bbox":[476,412,170,58]}
+{"kind":"textbox","id":"sh/e947qxsn","slide":2,"text":"The loophole closes on schedule.","textPreview":"The loophole closes on schedule.","textChars":32,"textLines":1,"bbox":[476,488,170,66]}
+{"kind":"shape","id":"sh/zad8z298","slide":2,"bbox":[738,533,330,92]}
+{"kind":"textbox","id":"sh/k7q94rqx","slide":2,"text":"YOUR COMFORT ZONE\nCALLED. WE DECLINED.","textPreview":"YOUR COMFORT ZONE | CALLED. WE DECLINED.","textChars":38,"textLines":2,"bbox":[732,526,330,92]}
+{"kind":"textbox","id":"sh/lszqdwri","slide":2,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[64,682,220,16]}
+{"kind":"textbox","id":"sh/tovqxwjm","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1180,682,36,16]}
+{"kind":"image","id":"im/by9snqh0","slide":2,"name":"","geometry":"rect","alt":"Landing page showing the social courage challenge card and demo call to action","bbox":[650,42,520,438]}
+{"kind":"notes","id":"nt/2ssgt3","slide":2,"text":"The problem is not a lack of advice. It is the infinite delay between intention and action. The app closes that gap with a randomized daytime unlock, one concrete task, and a real deadline."}
+{"kind":"slide","id":"sl/kzrc58","slide":3,"title":"THE DAILY LOOP","textShapes":12}
+{"kind":"textbox","id":"sh/fe18f6t4","slide":3,"text":"THE DAILY LOOP","textPreview":"THE DAILY LOOP","textChars":14,"textLines":1,"bbox":[64,40,520,22]}
+{"kind":"textbox","id":"sh/gfa98bap","slide":3,"text":"One day. One card.\nOne honest receipt.","textPreview":"One day. One card. | One honest receipt.","textChars":38,"textLines":2,"bbox":[64,78,560,120]}
+{"kind":"textbox","id":"sh/1g3qhgba","slide":3,"text":"No feed. No doom-scroll. Just one rep.","textPreview":"No feed. No doom-scroll. Just one rep.","textChars":38,"textLines":1,"bbox":[720,116,460,36]}
+{"kind":"textbox","id":"sh/6ps721sn","slide":3,"text":"01 · DEAL","textPreview":"01 · DEAL","textChars":9,"textLines":1,"bbox":[64,226,320,22]}
+{"kind":"shape","id":"sh/ra18b6t8","slide":3,"bbox":[70,265,320,270]}
+{"kind":"shape","id":"sh/tcjqdwby","slide":3,"bbox":[64,258,320,270]}
+{"kind":"textbox","id":"sh/il87yhsb","slide":3,"text":"A level-appropriate social challenge unlocks during the day.","textPreview":"A level-appropriate social challenge unlocks during the day.","textChars":60,"textLines":1,"bbox":[64,548,320,62]}
+{"kind":"textbox","id":"sh/jmh87mtw","slide":3,"text":"02 · PROVE","textPreview":"02 · PROVE","textChars":10,"textLines":1,"bbox":[442,226,320,22]}
+{"kind":"shape","id":"sh/jipkv65g","slide":3,"bbox":[448,265,320,270]}
+{"kind":"shape","id":"sh/5k72xwnm","slide":3,"bbox":[442,258,320,270]}
+{"kind":"textbox","id":"sh/kjy14rm1","slide":3,"text":"Add a private note—and optional cleaned media—with concrete details.","textPreview":"Add a private note—and optional cleaned media—with concrete details.","textChars":68,"textLines":1,"bbox":[442,548,320,62]}
+{"kind":"textbox","id":"sh/7mpkz65s","slide":3,"text":"03 · SCORE","textPreview":"03 · SCORE","textChars":10,"textLines":1,"bbox":[820,226,320,22]}
+{"kind":"shape","id":"sh/6lg36147","slide":3,"bbox":[826,265,320,270]}
+{"kind":"shape","id":"sh/snyl8bmd","slide":3,"bbox":[820,258,320,270]}
+{"kind":"textbox","id":"sh/nq5knm5o","slide":3,"text":"Full, partial, or needs-more becomes points, streaks, levels, and history.","textPreview":"Full, partial, or needs-more becomes points, streaks, levels, and history.","textChars":74,"textLines":1,"bbox":[820,548,320,62]}
+{"kind":"shape","id":"sh/mpwjuh43","slide":3,"bbox":[64,630,1136,32]}
+{"kind":"textbox","id":"sh/qlkn2por","slide":3,"text":"120 FULL CREDIT   ·   60 PARTIAL CREDIT   ·   0 NEEDS MORE DETAIL","textPreview":"120 FULL CREDIT   ·   60 PARTIAL CREDIT   ·   0 NEEDS MORE DETAIL","textChars":65,"textLines":1,"bbox":[284,636,700,20]}
+{"kind":"textbox","id":"sh/r6t4vapw","slide":3,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[64,682,220,16]}
+{"kind":"textbox","id":"sh/c7m54f6h","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1180,682,36,16]}
+{"kind":"image","id":"im/dgj21g7a","slide":3,"name":"","geometry":"rect","alt":"Daily challenge card","bbox":[64,258,320,270]}
+{"kind":"image","id":"im/xcnex836","slide":3,"name":"","geometry":"rect","alt":"Privacy-safe proof dialog","bbox":[442,258,320,270]}
+{"kind":"image","id":"im/mlcvitkj","slide":3,"name":"","geometry":"rect","alt":"Proof score and completion dialog","bbox":[820,258,320,270]}
+{"kind":"notes","id":"nt/kzrc58","slide":3,"text":"The entire product is one short loop: the app deals one challenge, the user records privacy-safe proof, and the system scores the evidence. The result feeds points, streaks, levels, milestones, and a private history—not a public social graph."}
+{"kind":"slide","id":"sl/evfu5z","slide":4,"title":"PROOF WITHOUT SURVEILLANCE","textShapes":15}
+{"kind":"textbox","id":"sh/9cvmd07m","slide":4,"text":"PROOF WITHOUT SURVEILLANCE","textPreview":"PROOF WITHOUT SURVEILLANCE","textChars":26,"textLines":1,"bbox":[64,42,520,22]}
+{"kind":"textbox","id":"sh/mpkn2l8b","slide":4,"text":"AI scores evidence—\nnot your worth.","textPreview":"AI scores evidence— | not your worth.","textChars":35,"textLines":2,"bbox":[64,88,520,120]}
+{"kind":"textbox","id":"sh/7qt4bqpg","slide":4,"text":"The system asks: did a concrete action happen? It never asks whether you were charismatic enough.","textPreview":"The system asks: did a concrete action happen? It never asks whether you were charismatic enough.","textChars":97,"textLines":1,"bbox":[64,232,500,84]}
+{"kind":"shape","id":"sh/kn250vq5","slide":4,"bbox":[702,77,470,566]}
+{"kind":"shape","id":"sh/ylknyl8z","slide":4,"bbox":[694,68,470,566]}
+{"kind":"textbox","id":"sh/zmt47qpk","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[64,354,42,34]}
+{"kind":"textbox","id":"sh/4jm5cfq9","slide":4,"text":"CONCRETE > PERFORMATIVE","textPreview":"CONCRETE > PERFORMATIVE","textChars":23,"textLines":1,"bbox":[122,355,430,24]}
+{"kind":"textbox","id":"sh/5kf6lk7u","slide":4,"text":"Specific actions and reflection earn the score.","textPreview":"Specific actions and reflection earn the score.","textChars":47,"textLines":1,"bbox":[122,382,455,44]}
+{"kind":"textbox","id":"sh/l0rqxcbu","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[64,436,42,34]}
+{"kind":"textbox","id":"sh/kzip47a9","slide":4,"text":"IDENTIFYING DETAILS: NOPE","textPreview":"IDENTIFYING DETAILS: NOPE","textChars":25,"textLines":1,"bbox":[122,437,430,24]}
+{"kind":"textbox","id":"sh/zy98v2to","slide":4,"text":"Names, faces, contacts, and private replies are never required.","textPreview":"Names, faces, contacts, and private replies are never required.","textChars":63,"textLines":1,"bbox":[122,464,455,44]}
+{"kind":"textbox","id":"sh/yx072hs3","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[64,518,42,34]}
+{"kind":"textbox","id":"sh/xw7qtcbi","slide":4,"text":"CONSENT BEFORE GEMINI","textPreview":"CONSENT BEFORE GEMINI","textChars":21,"textLines":1,"bbox":[122,519,430,24]}
+{"kind":"textbox","id":"sh/cvyp07ax","slide":4,"text":"Hosted mode asks explicitly before automated assessment.","textPreview":"Hosted mode asks explicitly before automated assessment.","textChars":56,"textLines":1,"bbox":[122,546,455,44]}
+{"kind":"shape","id":"sh/bup8r2tc","slide":4,"bbox":[772,583,320,80]}
+{"kind":"textbox","id":"sh/atg7yxs7","slide":4,"text":"AI OFFERS A SCORE.\nNEVER A MORAL JUDGMENT.","textPreview":"AI OFFERS A SCORE. | NEVER A MORAL JUDGMENT.","textChars":42,"textLines":2,"bbox":[766,576,320,80]}
+{"kind":"textbox","id":"sh/hsbq5wr2","slide":4,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[64,682,220,16]}
+{"kind":"textbox","id":"sh/wr29crah","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1180,682,36,16]}
+{"kind":"image","id":"im/sned0nqx","slide":4,"name":"","geometry":"rect","alt":"Proof submission dialog with optional media and privacy warning","bbox":[694,68,470,566]}
+{"kind":"notes","id":"nt/evfu5z","slide":4,"text":"Proof is designed to be useful without becoming surveillance. In local demo mode, a transparent concrete-detail heuristic runs in the browser. In hosted mode, the user must explicitly consent before Gemini receives the note or optional media through the secure backend proxy."}
+{"kind":"slide","id":"sl/lj7xih","slide":5,"title":"FAILURE IS A GAME STATE, NOT A CHARACTER FLAW","textShapes":12}
+{"kind":"textbox","id":"sh/29gjuh0r","slide":5,"text":"FAILURE IS A GAME STATE, NOT A CHARACTER FLAW","textPreview":"FAILURE IS A GAME STATE, NOT A CHARACTER FLAW","textChars":45,"textLines":1,"bbox":[64,40,520,22]}
+{"kind":"textbox","id":"sh/pc72pcj2","slide":5,"text":"Missed it? The app\nrolls dice. Literally.","textPreview":"Missed it? The app | rolls dice. Literally.","textChars":41,"textLines":2,"bbox":[64,82,590,128]}
+{"kind":"textbox","id":"sh/oby1w7ix","slide":5,"text":"A partial or missed challenge creates a bounded, private recovery task—then makes closing the loop weirdly compelling.","textPreview":"A partial or missed challenge creates a bounded, private recovery task—then makes closing the loop weirdly compelling.","textChars":118,"textLines":1,"bbox":[64,232,500,82]}
+{"kind":"shape","id":"sh/f650j210","slide":5,"bbox":[674,57,510,592]}
+{"kind":"shape","id":"sh/18n2lcj6","slide":5,"bbox":[666,48,510,592]}
+{"kind":"shape","id":"sh/g7e1s72l","slide":5,"bbox":[64,340,490,0]}
+{"kind":"textbox","id":"sh/ri50f214","slide":5,"text":"PRIVATE","textPreview":"PRIVATE","textChars":7,"textLines":1,"bbox":[64,378,230,24]}
+{"kind":"textbox","id":"sh/6hcjmxkj","slide":5,"text":"No public penalty. No shame spiral.","textPreview":"No public penalty. No shame spiral.","textChars":35,"textLines":1,"bbox":[64,405,470,42]}
+{"kind":"textbox","id":"sh/s7apkfm5","slide":5,"text":"2 IRREVERSIBLE ROLLS","textPreview":"2 IRREVERSIBLE ROLLS","textChars":20,"textLines":1,"bbox":[64,454,230,24]}
+{"kind":"textbox","id":"sh/t8j6tknq","slide":5,"text":"Easier or harder. Never a repeat for that account.","textPreview":"Easier or harder. Never a repeat for that account.","textChars":50,"textLines":1,"bbox":[64,481,470,42]}
+{"kind":"textbox","id":"sh/6ls7i54z","slide":5,"text":"CLOSE THE LOOP","textPreview":"CLOSE THE LOOP","textChars":14,"textLines":1,"bbox":[64,530,230,24]}
+{"kind":"textbox","id":"sh/rm1ora5k","slide":5,"text":"Finish the task—or spend a banked lifeline—to unlock what comes next.","textPreview":"Finish the task—or spend a banked lifeline—to unlock what comes next.","textChars":69,"textLines":1,"bbox":[64,557,470,42]}
+{"kind":"shape","id":"sh/4japgfm9","slide":5,"bbox":[114,613,250,68]}
+{"kind":"textbox","id":"sh/5kj6p0nu","slide":5,"text":"COULD GET WORSE.\nTHAT'S THE BIT.","textPreview":"COULD GET WORSE. | THAT'S THE BIT.","textChars":32,"textLines":2,"bbox":[108,606,250,68]}
+{"kind":"textbox","id":"sh/ih8ne543","slide":5,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[64,682,220,16]}
+{"kind":"textbox","id":"sh/ji1ona5o","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1180,682,36,16]}
+{"kind":"image","id":"im/fal4r2ps","slide":5,"name":"","geometry":"rect","alt":"Recovery task with punishment dice and private reflection","bbox":[666,48,510,592]}
+{"kind":"notes","id":"nt/lj7xih","slide":5,"text":"The app does not pretend every attempt is perfect. Partial or missed challenges create a private recovery task. Users get two irreversible, no-repeat dice rerolls that can get easier or harder. Completing the recovery—or spending a lifeline—closes the loop."}
+{"kind":"slide","id":"sl/gz5vxr","slide":6,"title":"OPTIONAL CHAOS","textShapes":9}
+{"kind":"textbox","id":"sh/a187mx4j","slide":6,"text":"OPTIONAL CHAOS","textPreview":"OPTIONAL CHAOS","textChars":14,"textLines":1,"bbox":[64,42,520,22]}
+{"kind":"textbox","id":"sh/x4j6hsna","slide":6,"text":"Finish too fast and the\napp gets suspicious.","textPreview":"Finish too fast and the | app gets suspicious.","textChars":44,"textLines":2,"bbox":[64,84,690,126]}
+{"kind":"textbox","id":"sh/w3aponmp","slide":6,"text":"Complete quickly and a bonus card may appear. Do one more tiny rep, then flip the reward machine.","textPreview":"Complete quickly and a bonus card may appear. Do one more tiny rep, then flip the reward machine.","textChars":97,"textLines":1,"bbox":[64,230,620,66]}
+{"kind":"shape","id":"sh/nyhobi58","slide":6,"bbox":[80,347,430,300]}
+{"kind":"shape","id":"sh/90z6dsny","slide":6,"bbox":[72,338,430,300]}
+{"kind":"textbox","id":"sh/ozqpknmt","slide":6,"text":"DO THE BONUS","textPreview":"DO THE BONUS","textChars":12,"textLines":1,"bbox":[186,650,210,22]}
+{"kind":"textbox","id":"sh/7ul8nm5c","slide":6,"text":"THEN THE GAME CHOOSES:","textPreview":"THEN THE GAME CHOOSES:","textChars":22,"textLines":1,"bbox":[612,334,410,24]}
+{"kind":"shape","id":"sh/6ts7uh4r","slide":6,"bbox":[618,387,258,220]}
+{"kind":"shape","id":"sh/903q1o76","slide":6,"bbox":[610,378,258,220]}
+{"kind":"shape","id":"sh/mxc7q9of","slide":6,"bbox":[932,387,258,220]}
+{"kind":"shape","id":"sh/kvapoj6p","slide":6,"bbox":[924,378,258,220]}
+{"kind":"textbox","id":"sh/lwjqx47a","slide":6,"text":"BANK A LIFELINE","textPreview":"BANK A LIFELINE","textChars":15,"textLines":1,"bbox":[610,622,258,24]}
+{"kind":"textbox","id":"sh/yts7m9oj","slide":6,"text":"ABSOLUTELY NOTHING","textPreview":"ABSOLUTELY NOTHING","textChars":18,"textLines":1,"bbox":[924,622,258,24]}
+{"kind":"textbox","id":"sh/zu18vep4","slide":6,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[64,682,220,16]}
+{"kind":"textbox","id":"sh/c7apkz6d","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1180,682,36,16]}
+{"kind":"image","id":"im/jqtsrqtc","slide":6,"name":"","geometry":"rect","alt":"Bonus challenge dialog saying Too fast. Suspicious.","bbox":[72,338,430,300]}
+{"kind":"image","id":"im/n690fy54","slide":6,"name":"","geometry":"rect","alt":"Bonus result showing a lifeline unlocked","bbox":[610,378,258,220]}
+{"kind":"image","id":"im/8721o36p","slide":6,"name":"","geometry":"rect","alt":"Bonus result saying HAHA. You get nothing this time.","bbox":[924,378,258,220]}
+{"kind":"notes","id":"nt/gz5vxr","slide":6,"text":"This is the intentionally unhinged layer. A suspiciously fast completion can trigger one optional bonus challenge. Finish it, then the game awards either a banked recovery lifeline or—very scientifically—absolutely nothing. Either way, the brave rep still counts."}
+{"kind":"slide","id":"sl/wy97ro","slide":7,"title":"THE BACKBONE","textShapes":14}
+{"kind":"textbox","id":"sh/ra14fy9o","slide":7,"text":"THE BACKBONE","textPreview":"THE BACKBONE","textChars":12,"textLines":1,"bbox":[64,40,520,22]}
+{"kind":"textbox","id":"sh/sva583q9","slide":7,"text":"Fun on top.\nSerious underneath.","textPreview":"Fun on top. | Serious underneath.","textChars":31,"textLines":2,"bbox":[64,80,540,126]}
+{"kind":"textbox","id":"sh/twjmhoru","slide":7,"text":"The hackathon demo works with no cloud keys—and has a real hosted path when the room gets serious.","textPreview":"The hackathon demo works with no cloud keys—and has a real hosted path when the room gets serious.","textChars":98,"textLines":1,"bbox":[64,228,510,72]}
+{"kind":"shape","id":"sh/i5832987","slide":7,"bbox":[64,341,12,54]}
+{"kind":"textbox","id":"sh/j6h4be9s","slide":7,"text":"OFFLINE-FIRST PWA","textPreview":"OFFLINE-FIRST PWA","textChars":17,"textLines":1,"bbox":[96,338,420,22]}
+{"kind":"textbox","id":"sh/47ql4jqd","slide":7,"text":"Local auth, 30-day sessions, deterministic daily assignments, cached offline reload.","textPreview":"Local auth, 30-day sessions, deterministic daily assignments, cached offline reload.","textChars":84,"textLines":1,"bbox":[96,365,440,44]}
+{"kind":"shape","id":"sh/58jmdory","slide":7,"bbox":[64,417,12,54]}
+{"kind":"textbox","id":"sh/u183y9sb","slide":7,"text":"LOCAL OR HOSTED","textPreview":"LOCAL OR HOSTED","textChars":15,"textLines":1,"bbox":[96,414,420,22]}
+{"kind":"textbox","id":"sh/v2h47e9w","slide":7,"text":"React + TypeScript + Vite; optional InsForge auth, RLS, schedules, and secure Gemini proxy.","textPreview":"React + TypeScript + Vite; optional InsForge auth, RLS, schedules, and secure Gemini proxy.","textChars":91,"textLines":1,"bbox":[96,441,440,44]}
+{"kind":"shape","id":"sh/ji5c32ds","slide":7,"bbox":[64,493,12,54]}
+{"kind":"textbox","id":"sh/yhwbuxw7","slide":7,"text":"AGENCY BUILT IN","textPreview":"AGENCY BUILT IN","textChars":15,"textLines":1,"bbox":[96,490,420,22]}
+{"kind":"textbox","id":"sh/lknu5cvy","slide":7,"text":"Report or replace; filter categories and formats; nothing is auto-sent or auto-posted.","textPreview":"Report or replace; filter categories and formats; nothing is auto-sent or auto-posted.","textChars":86,"textLines":1,"bbox":[96,517,440,44]}
+{"kind":"shape","id":"sh/kjetw7ed","slide":7,"bbox":[64,569,12,54]}
+{"kind":"textbox","id":"sh/7m5c72do","slide":7,"text":"SHARE BY CHOICE","textPreview":"SHARE BY CHOICE","textChars":15,"textLines":1,"bbox":[96,566,420,22]}
+{"kind":"textbox","id":"sh/6lwbyhw3","slide":7,"text":"Generate a branded result card. Private proof, reflections, contacts, and account details stay out.","textPreview":"Generate a branded result card. Private proof, reflections, contacts, and account details stay out.","textChars":99,"textLines":1,"bbox":[96,593,440,44]}
+{"kind":"shape","id":"sh/to7u9cvu","slide":7,"bbox":[690,67,472,574]}
+{"kind":"shape","id":"sh/nqlsvixk","slide":7,"bbox":[682,58,472,574]}
+{"kind":"shape","id":"sh/mpcbmdwz","slide":7,"bbox":[830,591,260,76]}
+{"kind":"textbox","id":"sh/qhknq5kz","slide":7,"text":"RESULTS OUT.\nPRIVATE DETAILS IN.","textPreview":"RESULTS OUT. | PRIVATE DETAILS IN.","textChars":32,"textLines":2,"bbox":[824,584,260,76]}
+{"kind":"textbox","id":"sh/bitoja14","slide":7,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[64,682,220,16]}
+{"kind":"textbox","id":"sh/cjm5sf2p","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1180,682,36,16]}
+{"kind":"image","id":"im/nydg3exk","slide":7,"name":"","geometry":"rect","alt":"Share by choice dialog showing a privacy-safe branded result card","bbox":[682,58,472,574]}
+{"kind":"notes","id":"nt/wy97ro","slide":7,"text":"The demo is local-first and requires no backend or API key. Underneath, the same product supports InsForge authentication, row-level security, scheduled maintenance, and a secure Gemini verification proxy. The agency rules remain identical in both modes."}
+{"kind":"slide","id":"sl/lgkke4","slide":8,"title":"THE ASK","textShapes":6}
+{"kind":"shape","id":"sh/sbu50vil","slide":8,"bbox":[0,0,18,720]}
+{"kind":"textbox","id":"sh/ra1orqh0","slide":8,"text":"THE ASK","textPreview":"THE ASK","textChars":7,"textLines":1,"bbox":[64,48,520,22]}
+{"kind":"textbox","id":"sh/6psnyl0f","slide":8,"text":"AVOIDANCE\nHAS A\nDEADLINE.","textPreview":"AVOIDANCE | HAS A | DEADLINE.","textChars":25,"textLines":3,"bbox":[64,106,600,286]}
+{"kind":"textbox","id":"sh/1g36x0z2","slide":8,"text":"Open the demo. Do one brave thing.","textPreview":"Open the demo. Do one brave thing.","textChars":34,"textLines":1,"bbox":[64,426,520,42]}
+{"kind":"textbox","id":"sh/gfu54fih","slide":8,"text":"No card. No public posting. No pretending this isn't a little scary.","textPreview":"No card. No public posting. No pretending this isn't a little scary.","textChars":68,"textLines":1,"bbox":[64,486,510,62]}
+{"kind":"shape","id":"sh/felovahw","slide":8,"bbox":[94,597,270,60]}
+{"kind":"textbox","id":"sh/edcn250b","slide":8,"text":"LET'S DEMO IT →","textPreview":"LET'S DEMO IT →","textChars":15,"textLines":1,"bbox":[88,590,270,60]}
+{"kind":"shape","id":"sh/hkjmlgzy","slide":8,"bbox":[798,59,340,610]}
+{"kind":"shape","id":"sh/m5o72t8n","slide":8,"bbox":[790,50,340,610]}
+{"kind":"textbox","id":"sh/n6xoby98","slide":8,"text":"ALL RISK, NO REWARD","textPreview":"ALL RISK, NO REWARD","textChars":19,"textLines":1,"bbox":[874,672,220,20]}
+{"kind":"image","id":"im/dkf6l0be","slide":8,"name":"","geometry":"rect","alt":"Mobile dashboard showing the completed challenge experience","bbox":[790,50,340,610]}
+{"kind":"notes","id":"nt/lgkke4","slide":8,"text":"The close is simple: avoidance has a deadline. Now I would leave the deck, open the working demo, and complete the product loop live."}

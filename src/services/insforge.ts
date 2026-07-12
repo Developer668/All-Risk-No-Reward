@@ -60,7 +60,7 @@ export async function getInsforge(): Promise<InsForgeClient | null> {
     clientPromise = import('@insforge/sdk').then(({ createClient }) => createClient({
       baseUrl: baseUrl!,
       anonKey: anonKey!,
-      timeout: 15_000,
+      timeout: 70_000,
       retryCount: 1,
     }))
   }

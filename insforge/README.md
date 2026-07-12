@@ -29,8 +29,9 @@ notifications are written only through narrow RPCs.
   challenge and punishment content after the schema is imported.
 
 No backend code sends a message, controls a social account, impersonates a user,
-or publishes proof. An optional image is sent ephemerally to NVIDIA; only its
-SHA-256 hash, media type, byte count, and user-provided filename are retained.
+or publishes proof. An optional image or short video is sent ephemerally to the
+Gemini Developer API; only its SHA-256 hash, media type, byte count, and
+user-provided filename are retained.
 
 ## Deploy
 
@@ -56,8 +57,8 @@ The edge runtime needs these values:
 |---|---:|---|
 | `INSFORGE_BASE_URL` | yes | Project base URL, such as `https://APP.REGION.insforge.app` |
 | `INSFORGE_API_KEY` | yes | Project-admin key used only inside trusted functions |
-| `NVIDIA_API_KEY` | yes | NVIDIA NIM API key |
-| `NVIDIA_PROOF_MODEL` | no | Defaults to `meta/llama-3.2-90b-vision-instruct` |
+| `GEMINI_API_KEY` | yes | Gemini Developer API key created in Google AI Studio (the free tier is sufficient) |
+| `GEMINI_PROOF_MODEL` | no | Defaults to `gemini-3.5-flash` |
 | `ALLOWED_ORIGINS` | yes in production | Comma-separated exact web origins; no paths or wildcards |
 | `DAILY_MAINTENANCE_SECRET` | yes | Independent random bearer secret for the schedule |
 
@@ -66,13 +67,19 @@ the project runtime. Confirm that before adding duplicates. Add the application
 secrets with the CLI (values below are placeholders):
 
 ```bash
-npx @insforge/cli secrets add NVIDIA_API_KEY YOUR_NVIDIA_KEY
-npx @insforge/cli secrets add NVIDIA_PROOF_MODEL meta/llama-3.2-90b-vision-instruct
+npx @insforge/cli secrets add GEMINI_API_KEY YOUR_GEMINI_API_KEY
+npx @insforge/cli secrets add GEMINI_PROOF_MODEL gemini-3.5-flash
 npx @insforge/cli secrets add ALLOWED_ORIGINS https://your-site.example
 npx @insforge/cli secrets add DAILY_MAINTENANCE_SECRET REPLACE_WITH_64_RANDOM_HEX_CHARACTERS
 npx @insforge/cli functions deploy verify-proof
 npx @insforge/cli functions deploy daily-maintenance
 ```
+
+Google states that content submitted through the free tier of the Gemini
+Developer API may be used to improve its products; content submitted through
+the paid tier is not used for that purpose. Do not submit confidential or
+identifying proof, disclose this provider behavior to users, and review
+Google's current terms before launch.
 
 Generate the maintenance value locally with `openssl rand -hex 32`. Keep it out
 of source control and use the same stored secret in the schedule header.
@@ -155,16 +162,24 @@ await insforge.functions.invoke('verify-proof', {
   body: {
     assignmentId,
     proofNote,
-    imageDataUrl, // optional PNG/JPEG/WebP data URL, decoded size <= 180 KiB
+    mediaDataUrl, // optional image/video data URL; limits below
     proofName,    // optional display name only
   },
 })
 ```
 
+`mediaDataUrl` accepts PNG, JPEG, or WebP images up to 180 KiB after browser
+compression, or MP4, MOV, or WebM videos up to 5 MiB. The browser also limits
+selected videos to 30 seconds; the edge function independently enforces bytes and MIME type. The entire
+request must be no larger than 7 MiB. The server temporarily accepts the legacy
+`imageDataUrl` field during rollout.
+
 The function authenticates the bearer token, loads the owned assignment and
-catalog prompt, reserves a rate-limited attempt, calls NVIDIA, and records the
-result through the project-admin-only `record_verified_completion` RPC. The
-client cannot provide a challenge prompt, score, verdict, points, or user ID.
+catalog prompt, reserves a rate-limited attempt, securely proxies it to the
+Gemini Developer API, and records the result through the project-admin-only
+`record_verified_completion` RPC. InsForge does not perform the AI assessment;
+its edge function is the authentication and provider proxy. The client cannot
+provide a challenge prompt, score, verdict, points, or user ID.
 Server scoring matches the product contract: a score of 72–100 awards 120 total
 assignment points, 25–71 awards 60 total assignment points, and 0–24 awards 0.
 Upgrading a partial result to complete awards only the remaining 60, preventing

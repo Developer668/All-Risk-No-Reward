@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { ArrowRight, Flame, ImagePlus, LockKeyhole, Sparkles } from 'lucide-react'
 import type { Challenge, DailyAssignment } from '../types'
-import { preparePrivateProofImage } from '../services/imageProof'
+import { preparePrivateProofMedia } from '../services/imageProof'
 import { assessProof, type ProofResult } from '../services/proof'
 import { Modal } from './Modal'
 
@@ -18,10 +18,10 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
   const [note, setNote] = useState('')
   const [file, setFile] = useState<File>()
   const [preview, setPreview] = useState<string>()
-  const [imageDataUrl, setImageDataUrl] = useState<string>()
+  const [mediaDataUrl, setMediaDataUrl] = useState<string>()
   const [assessment, setAssessment] = useState<ProofResult>()
   const [busy, setBusy] = useState(false)
-  const [imageBusy, setImageBusy] = useState(false)
+  const [mediaBusy, setMediaBusy] = useState(false)
   const [consent, setConsent] = useState(false)
   const [error, setError] = useState('')
 
@@ -30,7 +30,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
     setNote('')
     setFile(undefined)
     setPreview(undefined)
-    setImageDataUrl(undefined)
+    setMediaDataUrl(undefined)
     setAssessment(undefined)
     setConsent(false)
     setError('')
@@ -42,18 +42,18 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
     const next = event.target.files?.[0]
     setError('')
     if (!next) return
-    setImageBusy(true)
+    setMediaBusy(true)
     try {
       if (preview) URL.revokeObjectURL(preview)
       setFile(next)
       setPreview(URL.createObjectURL(next))
-      setImageDataUrl(await preparePrivateProofImage(next))
+      setMediaDataUrl(await preparePrivateProofMedia(next))
     } catch (caught) {
       setFile(undefined)
       setPreview(undefined)
-      setImageDataUrl(undefined)
-      setError(caught instanceof Error ? caught.message : 'Could not prepare that image.')
-    } finally { setImageBusy(false) }
+      setMediaDataUrl(undefined)
+      setError(caught instanceof Error ? caught.message : 'Could not prepare that photo or video.')
+    } finally { setMediaBusy(false) }
   }
 
   async function evaluate() {
@@ -64,7 +64,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         assignmentId: assignment.id,
         note,
         proofName: file?.name,
-        imageDataUrl,
+        mediaDataUrl,
         backendMode,
       })
       await onRecorded(result, note, file?.name)
@@ -81,14 +81,18 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         <h2 id="proof-title">Show what happened.</h2>
         <p>{challenge.proofHint}</p>
         <label className="proof-upload">
-          {preview ? <img src={preview} alt="Selected proof preview" /> : <><ImagePlus aria-hidden="true" /><strong>{imageBusy ? 'Removing metadata and resizing…' : 'Add an optional image'}</strong><span>Crop names and identifying details first</span></>}
-          <input type="file" aria-label="Choose optional proof image" accept="image/png,image/jpeg,image/webp" onChange={(event) => void pickFile(event)} disabled={imageBusy || busy} />
+          {preview
+            ? file?.type.startsWith('video/')
+              ? <video src={preview} aria-label="Selected proof video preview" controls muted playsInline />
+              : <img src={preview} alt="Selected proof preview" />
+            : <><ImagePlus aria-hidden="true" /><strong>{mediaBusy ? 'Preparing private proof…' : 'Add an optional photo or short video'}</strong><span>Images are cleaned; crop or record without identifying details</span></>}
+          <input type="file" aria-label="Choose optional proof photo or video" accept="image/png,image/jpeg,image/webp,video/mp4,video/quicktime,video/webm" onChange={(event) => void pickFile(event)} disabled={mediaBusy || busy} />
         </label>
         <label className="field">What did you do?<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="I said… I asked… The uncomfortable part was…" rows={5} maxLength={4000} /></label>
         <div className="privacy-note"><LockKeyhole size={17} aria-hidden="true" /> Don’t include names, faces, contact details, or another person’s private reply.</div>
-        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I understand this note and compressed image will be sent to NVIDIA for this automated assessment.</span></label>}
+        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I understand this note and optional photo or video will be sent to Google Gemini for this automated assessment.</span></label>}
         {error && <p className="form-error" role="alert">{error}</p>}
-        <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || imageBusy || note.trim().length < 12 || (backendMode === 'insforge' && !consent)}>{busy ? 'Checking concrete details…' : 'Check and record my proof'} <Sparkles size={18} aria-hidden="true" /></button>
+        <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || mediaBusy || note.trim().length < 12 || (backendMode === 'insforge' && !consent)}>{busy ? 'Checking concrete details…' : 'Check and record my proof'} <Sparkles size={18} aria-hidden="true" /></button>
       </> : <div className="assessment">
         <div className={`score-ring score-ring--${assessment.verdict}`}><strong>{assessment.score}</strong><span>PROOF SCORE</span></div>
         <p className="section-kicker">{assessment.verdict === 'complete' ? 'CHALLENGE COMPLETE' : assessment.verdict === 'partial' ? 'PROGRESS RECORDED' : 'MORE DETAIL NEEDED'}</p>

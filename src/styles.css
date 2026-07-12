@@ -292,7 +292,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .proof-upload svg { margin-bottom: 5px; }
 .proof-upload strong { font-size: 13px; }
 .proof-upload span { color: var(--muted); font-size: 11px; }
-.proof-upload img { width: 100%; height: 100%; object-fit: cover; }
+.proof-upload img, .proof-upload video { width: 100%; height: 100%; object-fit: cover; }
 .privacy-note { margin: 15px 0; display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 10px; }
 .privacy-note svg { flex: 0 0 auto; color: var(--green); }
 .assessment { display: grid; justify-items: center; text-align: center; padding: 10px 0; }
