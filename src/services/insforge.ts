@@ -2,6 +2,22 @@ import type { InsForgeClient } from '@insforge/sdk'
 
 const baseUrl = import.meta.env.VITE_INSFORGE_URL as string | undefined
 const anonKey = import.meta.env.VITE_INSFORGE_ANON_KEY as string | undefined
+const configuredFunctionsUrl = import.meta.env.VITE_INSFORGE_FUNCTIONS_URL as string | undefined
+
+function deriveFunctionsUrl(projectUrl: string | undefined): string | undefined {
+  if (configuredFunctionsUrl) return configuredFunctionsUrl
+  if (!projectUrl) return undefined
+  try {
+    const hostname = new URL(projectUrl).hostname
+    if (!hostname.endsWith('.insforge.app')) return undefined
+    const appKey = hostname.split('.')[0]
+    return appKey ? `https://${appKey}.function2.insforge.app` : undefined
+  } catch {
+    return undefined
+  }
+}
+
+const functionsUrl = deriveFunctionsUrl(baseUrl)
 
 export const isInsforgeConfigured = Boolean(baseUrl && anonKey)
 
@@ -60,6 +76,7 @@ export async function getInsforge(): Promise<InsForgeClient | null> {
     clientPromise = import('@insforge/sdk').then(({ createClient }) => createClient({
       baseUrl: baseUrl!,
       anonKey: anonKey!,
+      functionsUrl,
       timeout: 70_000,
       retryCount: 1,
     }))

@@ -28,8 +28,8 @@ async function show(title: string, body: string, tag: string) {
   await registration.showNotification(title, {
     body,
     tag,
-    icon: '/icons/icon-192.svg',
-    badge: '/icons/icon-192.svg',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-192.png',
     data: { url: '/app' },
   })
   return true

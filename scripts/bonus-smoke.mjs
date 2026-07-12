@@ -19,7 +19,7 @@ async function pageForTest() {
 
 async function startDemo(page) {
   await page.goto(baseUrl, { waitUntil: 'networkidle' })
-  await page.getByRole('button', { name: 'Try the working demo' }).click()
+  await page.getByRole('button', { name: 'Preview sample data' }).click()
   await page.getByRole('heading', { name: /Good evening, Alex\./ }).waitFor()
 }
 
@@ -38,8 +38,8 @@ async function makeCurrentCompletionFast(page) {
 async function recordFullProof(page, rewardRoll) {
   await page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
   await page.locator('input[type="file"]').setInputFiles('public/og.png')
-  await page.getByLabel('What did you do?').fill('I asked a thoughtful question, listened to the answer, and shared one honest detail. I felt nervous, then they responded kindly.')
-  await page.getByRole('button', { name: /Check and record my proof/ }).click()
+  await page.getByLabel('Optional context').fill('I asked a thoughtful question, listened to the answer, and shared one honest detail. I felt nervous, then they responded kindly.')
+  await page.getByRole('button', { name: /Preview proof result/ }).click()
   await page.locator('.assessment').waitFor()
   await page.evaluate((lastRoll) => {
     const rolls = [0, 0, lastRoll]
@@ -96,8 +96,8 @@ try {
   await redeem.page.reload({ waitUntil: 'networkidle' })
   await redeem.page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
   await redeem.page.locator('input[type="file"]').setInputFiles('public/og.png')
-  await redeem.page.getByLabel('What did you do?').fill('I spoke briefly today.')
-  await redeem.page.getByRole('button', { name: /Check and record my proof/ }).click()
+  await redeem.page.getByLabel('Optional context').fill('I spoke briefly today.')
+  await redeem.page.getByRole('button', { name: /Preview proof result/ }).click()
   await redeem.page.locator('.assessment').waitFor()
   await redeem.page.getByRole('button', { name: /View today’s log/ }).click()
   await redeem.page.locator('.recovery-card').waitFor()

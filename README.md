@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open the printed local URL and choose **Try the working demo**, or create a local account. No cloud project or API key is required for local mode.
+Open the printed local URL and choose **Preview sample data**, or create a local account. No cloud project or API key is required for local mode.
 
 Local mode includes:
 
@@ -21,29 +21,27 @@ Local mode includes:
 - Streaks, levels, history, milestones, settings, boundaries, and a private inbox
 - A one-time fast-finish bonus round that can bank a recovery lifeline—or playfully award nothing
 - Browser notification permission, installable PWA metadata, service worker caching, and offline reload
-- A concrete-detail proof heuristic for the no-backend demo; proof images are processed in memory and never stored
+- A clearly labelled on-device sample review; synced accounts use real OpenAI video-frame verification
 - Opt-in branded share cards with native share, caption copy, and PNG download; private proof is never included
 
 ## Optional InsForge + AI proof-provider mode
 
-Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. The proof edge function supports Google Gemini, OpenRouter, or NVIDIA NIM. Set `PROOF_AI_PROVIDER` to `gemini`, `openrouter`, `nvidia-nim`, or `auto`, then add the matching backend-only API key. `auto` uses the first configured key in this order: Gemini, OpenRouter, NVIDIA NIM. The browser never receives an operator key or project-admin secret.
-
-Players may instead connect their own provider key and model in **Settings → AI proof provider**. Personal keys stay in browser session storage by default, are never synced or exported, and are sent only to the selected provider (directly in local mode or ephemerally through the authenticated InsForge verifier in synced mode). An optional checkbox can remember the key in that browser's local storage; do not use it on a shared device.
+Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. Production is configured for OpenAI proof verification with `gpt-4.1-nano`. The browser extracts a small set of timestamped frames from a selected video and sends only those frames through the InsForge edge function; the full video never leaves the browser. The edge function retains optional Gemini, OpenRouter, and NVIDIA NIM adapters for development. The browser never receives a provider key or project-admin secret.
 
 The production backend in `insforge/` adds:
 
 - InsForge authentication, email verification/reset methods, OAuth-provider discovery, and row-level security
 - Timezone-aware server assignments, reminders, recovery locks, safety reports, deletion requests, and scheduled maintenance
-- Deterministic challenge loading, selection, filtering, and upload validation; Gemini, OpenRouter, or NVIDIA NIM is used only for authenticated image/video interpretation, with the InsForge `verify-proof` edge function acting as the secure proxy
-- Ephemeral proof images (PNG/JPEG/WebP, capped at 180 KiB after browser compression) or short videos (MP4/MOV/WebM; the browser enforces 5 MiB and 30 seconds, while the server independently enforces 5 MiB); only a hash, media type, size, and optional filename are retained
+- Deterministic challenge loading, selection, filtering, and upload validation; OpenAI is used only for authenticated interpretation of a proof image or sampled video frames, with the InsForge `verify-proof` edge function acting as the secure proxy
+- Ephemeral proof images (PNG/JPEG/WebP) or timestamped JPEG frames extracted from short videos (MP4/MOV/WebM; the browser enforces 80 MiB and 30 seconds); only a hash of the submitted evidence package, media type, size, and optional filename are retained
 - Server-owned scoring, points, streaks, rate limits, and idempotent completion upgrades
 - The repository-backed 500-challenge catalog, operator-fed punishment tasks, atomic two-roll dice limits, and an owner-readable no-repeat audit trail
 
 Follow [insforge/README.md](./insforge/README.md) for the exact schema import, secrets, edge-function deployment, schedule, and post-deployment security checks. The repository is ready to deploy, but it is intentionally not tied to a specific InsForge project.
 
-OpenRouter's `openrouter/free` router and NVIDIA's hosted Developer API access can be useful for development, but free-model capacity, rate limits, and availability vary; production use may require credits or different NVIDIA licensing. Provider retention and training terms also differ. Do not submit confidential or identifying proof, disclose the configured provider, and review its current terms before launch.
+OpenRouter, Gemini, and NVIDIA adapters remain available for development, but model capacity, rate limits, media support, and availability vary. Provider retention and training terms also differ. Do not submit confidential or identifying proof, disclose the configured provider, and review its current terms before launch.
 
-Never put `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `NVIDIA_NIM_API_KEY`, an InsForge admin key, or the maintenance secret in a `VITE_` variable. Vite-prefixed values are public browser configuration.
+Never put `OPENAI_API_KEY`, `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `NVIDIA_NIM_API_KEY`, an InsForge admin key, or the maintenance secret in a `VITE_` variable. Vite-prefixed values are public browser configuration.
 
 ## Verification
 
@@ -77,7 +75,7 @@ The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dia
 
 ## Challenge Library
 
-The application-ready dataset is in [`data/challenges`](data/challenges/README.md), and all **500 original same-day challenges are loaded into the playable local catalog**. They are designed around funny, filmable, social, creative, helpful, and physically scalable experiences:
+The application-ready dataset is in [`data/challenges`](data/challenges/README.md). It contains **500 original same-day challenges** designed around funny, filmable, social, creative, helpful, and physically scalable experiences:
 
 - Easy
 - Medium
@@ -88,8 +86,6 @@ The application-ready dataset is in [`data/challenges`](data/challenges/README.m
 Easy contains 90 challenges, Medium 95, Hard 100, Extreme 105, and Nightmare 110. Every challenge includes a description and structured image/video evidence rules for VLM grading. Retired IDs are recorded rather than reused.
 
 The final library includes level-scaled Instagram and friend connections, private ask-outs to people already known, group hangouts, scalable specialist workouts, cooking games, hackathons, video-game builds, VM-only operating-system projects, community tools, and coding challenges using local and cloud AI model families.
-
-`npm run catalog:generate` regenerates [`insforge/challenge-catalog.seed.sql`](insforge/challenge-catalog.seed.sql) from those canonical JSON files so the same reviewed library can be imported into the synced InsForge catalog. Use `npm run catalog:check` to verify it is current or `npm run catalog:apply` to import it through a linked InsForge CLI.
 
 ## Contributing
 

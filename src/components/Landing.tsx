@@ -2,12 +2,13 @@ import { ArrowRight, Bell, Bot, Code2, Dumbbell, LockKeyhole, Laugh, ShieldCheck
 import { Brand } from './Brand'
 
 interface LandingProps {
+  onStart: () => void
   onTry: () => void
   onAuth: () => void
   onNavigate: (route: 'privacy' | 'terms') => void
 }
 
-export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
+export function Landing({ onStart, onTry, onAuth, onNavigate }: LandingProps) {
   return (
     <main className="landing">
       <nav className="landing-nav shell" aria-label="Main navigation">
@@ -26,8 +27,9 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
           <h1>Do one brave<br />thing <i>today.</i></h1>
           <p className="hero__lede">Pull one challenge from a 500-card library of funny, physical, creative, social, useful, and gloriously awkward things you can finish today.</p>
           <div className="hero__actions">
-            <button className="button button--accent" onClick={onTry}>Try the working demo <ArrowRight size={19} aria-hidden="true" /></button>
-            <span>No card required. No public posting. Your boundaries always win.</span>
+            <button className="button button--accent" onClick={onStart}>Start today’s challenge <ArrowRight size={19} aria-hidden="true" /></button>
+            <button className="hero__demo-link" onClick={onTry}>Preview sample data</button>
+            <span>Create a synced account for real OpenAI video-frame verification.</span>
           </div>
           <div className="hero__trust">
             <div className="privacy-seal" aria-hidden="true"><LockKeyhole size={17} /></div>
@@ -40,7 +42,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
           <span className="scribble scribble--one" aria-hidden="true">tiny risk</span>
           <span className="scribble scribble--two" aria-hidden="true">real growth ↗</span>
           <div className="challenge-card challenge-card--hero" aria-hidden="true">
-            <div className="challenge-card__topline"><span>DAY 04</span><span><Star size={14} fill="currentColor" /> LEVEL 2</span></div>
+            <div className="challenge-card__topline"><span>SAMPLE CARD</span><span><Star size={14} fill="currentColor" /> STARTER</span></div>
             <div className="challenge-card__icon"><Laugh size={26} /></div>
             <p className="challenge-card__label">TODAY’S CHALLENGE</p>
             <h2>Robot mode:<br />activated.</h2>
@@ -59,7 +61,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
         <div className="library-showcase__intro"><span className="section-kicker">THE FULL DECK IS LOADED</span><h2>Five hundred ways<br />to make today <i>count.</i></h2><p>Every card is same-day, designed for image or video proof, and organized from Easy through Nightmare. Filter the categories that do not fit and keep the rest unpredictable.</p></div>
         <div className="library-showcase__stats"><article><strong>500</strong><span>playable challenges</span></article><article><strong>5</strong><span>difficulty levels</span></article><article><strong>11</strong><span>challenge categories</span></article></div>
         <div className="library-showcase__categories" aria-label="Challenge categories"><span><Dumbbell aria-hidden="true" /> Fitness</span><span><Laugh aria-hidden="true" /> Comedy</span><span><Users aria-hidden="true" /> Social</span><span><Code2 aria-hidden="true" /> Coding</span><span><Utensils aria-hidden="true" /> Cooking</span><span><Sparkles aria-hidden="true" /> Creative</span></div>
-        <div className="byok-callout"><Bot aria-hidden="true" /><div><span>YOUR MODEL, YOUR KEY</span><strong>Connect Gemini, OpenRouter, or NVIDIA NIM.</strong><p>Pick the vision model in Settings. Keys stay in the current tab by default; remembering one on the device is opt-in.</p></div></div>
+        <div className="byok-callout"><Bot aria-hidden="true" /><div><span>PRIVATE AI CHECK</span><strong>OpenAI checks the proof, not your optional note.</strong><p>Only a small timestamped frame sample is sent through the secure backend. Your full video and API credentials never enter the browser bundle.</p></div></div>
       </section>
 
       <section id="how" className="steps shell">
@@ -71,7 +73,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
         <div className="steps__grid">
           <article><span>01</span><Bell aria-hidden="true" /><h3>Wake up curious</h3><p>Your private challenge unlocks at a different daytime hour.</p></article>
           <article><span>02</span><Zap aria-hidden="true" /><h3>Take the tiny risk</h3><p>Do the challenge—or complete a smaller, valid version when life gets messy.</p></article>
-          <article><span>03</span><Trophy aria-hidden="true" /><h3>Show your work</h3><p>Submit privacy-safe image or video proof. AI is used only when visual interpretation is needed.</p></article>
+          <article><span>03</span><Trophy aria-hidden="true" /><h3>Show your work</h3><p>Upload privacy-safe video proof. A few sampled frames are checked against the exact challenge criteria; optional text only adds context.</p></article>
         </div>
       </section>
 
@@ -95,7 +97,7 @@ export function Landing({ onTry, onAuth, onNavigate }: LandingProps) {
         <div className="footer__links">
           <button onClick={() => onNavigate('privacy')}>Privacy</button>
           <button onClick={() => onNavigate('terms')}>Terms</button>
-          <button onClick={onTry}>OPEN THE DEMO <ArrowRight size={16} aria-hidden="true" /></button>
+          <button onClick={onStart}>OPEN THE APP <ArrowRight size={16} aria-hidden="true" /></button>
         </div>
       </footer>
     </main>

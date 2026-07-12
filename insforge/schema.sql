@@ -1537,7 +1537,7 @@ BEGIN
   IF p_score NOT BETWEEN 0 AND 100 THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_PROOF_SCORE';
   END IF;
-  IF char_length(btrim(COALESCE(p_note, ''))) NOT BETWEEN 12 AND 4000 THEN
+  IF char_length(btrim(COALESCE(p_note, ''))) > 4000 THEN
     RAISE EXCEPTION USING ERRCODE = '22023', MESSAGE = 'INVALID_PROOF_NOTE';
   END IF;
   IF p_proof_size_bytes IS NOT NULL AND p_proof_size_bytes NOT BETWEEN 0 AND 5242880 THEN
@@ -1628,7 +1628,7 @@ BEGIN
                THEN v_new_streak
              ELSE streak
            END,
-           level = LEAST(5, 1 + ((courage_points + v_points) / 600))
+           level = LEAST(5, 1 + ((courage_points + v_points) / 500))
      WHERE user_id = v_attempt.user_id;
   END IF;
 

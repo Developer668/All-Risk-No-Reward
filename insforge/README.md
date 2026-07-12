@@ -29,8 +29,9 @@ notifications are written only through narrow RPCs.
   generated rerunnable seed. The operator still supplies punishment content.
 
 No backend code sends a message, controls a social account, impersonates a user,
-or publishes proof. A submitted image or short video is sent ephemerally to the
-configured Gemini, OpenRouter, or NVIDIA NIM endpoint; only its SHA-256 hash,
+or publishes proof. A submitted image, or timestamped JPEG frames extracted from
+a selected video in the browser, is sent ephemerally to the configured AI endpoint.
+The full video never leaves the browser. Only the evidence package's SHA-256 hash,
 media type, byte count, and user-provided filename are retained by this app.
 
 ## Deploy
@@ -61,7 +62,9 @@ The edge runtime needs these values:
 |---|---:|---|
 | `INSFORGE_BASE_URL` | yes | Project base URL, such as `https://APP.REGION.insforge.app` |
 | `INSFORGE_API_KEY` | yes | Project-admin key used only inside trusted functions |
-| `PROOF_AI_PROVIDER` | no | `auto` (default), `gemini`, `openrouter`, or `nvidia-nim` |
+| `PROOF_AI_PROVIDER` | no | `auto` (default), `openai`, `gemini`, `openrouter`, or `nvidia-nim` |
+| `OPENAI_API_KEY` | for OpenAI | Backend-only OpenAI project API key |
+| `OPENAI_PROOF_MODEL` | no | Defaults to `gpt-4.1-nano` |
 | `GEMINI_API_KEY` | for Gemini | Gemini Developer API key created in Google AI Studio |
 | `GEMINI_PROOF_MODEL` | no | Defaults to `gemini-3.5-flash` |
 | `OPENROUTER_API_KEY` | for OpenRouter | Backend-only OpenRouter key |
@@ -79,16 +82,21 @@ the project runtime. Confirm that before adding duplicates. Add the application
 secrets with the CLI (values below are placeholders):
 
 ```bash
-npx @insforge/cli secrets add PROOF_AI_PROVIDER openrouter
-npx @insforge/cli secrets add OPENROUTER_API_KEY YOUR_OPENROUTER_API_KEY
-npx @insforge/cli secrets add OPENROUTER_PROOF_MODEL openrouter/free
+npx @insforge/cli secrets add PROOF_AI_PROVIDER openai
+npx @insforge/cli secrets add OPENAI_API_KEY YOUR_OPENAI_API_KEY
+npx @insforge/cli secrets add OPENAI_PROOF_MODEL gpt-4.1-nano
+
+# Or use OpenRouter instead:
+# npx @insforge/cli secrets add PROOF_AI_PROVIDER openrouter
+# npx @insforge/cli secrets add OPENROUTER_API_KEY YOUR_OPENROUTER_API_KEY
+# npx @insforge/cli secrets add OPENROUTER_PROOF_MODEL openrouter/free
 
 # Or use NVIDIA NIM instead:
 # npx @insforge/cli secrets add PROOF_AI_PROVIDER nvidia-nim
 # npx @insforge/cli secrets add NVIDIA_NIM_API_KEY YOUR_NVIDIA_NIM_API_KEY
 # npx @insforge/cli secrets add NVIDIA_NIM_PROOF_MODEL nvidia/nemotron-nano-12b-v2-vl
 
-# Or keep the existing Gemini provider:
+# Or use Gemini instead:
 # npx @insforge/cli secrets add PROOF_AI_PROVIDER gemini
 npx @insforge/cli secrets add GEMINI_API_KEY YOUR_GEMINI_API_KEY
 npx @insforge/cli secrets add GEMINI_PROOF_MODEL gemini-3.5-flash
@@ -98,8 +106,8 @@ npx @insforge/cli functions deploy verify-proof --file insforge/functions/verify
 npx @insforge/cli functions deploy daily-maintenance --file insforge/functions/daily-maintenance/index.ts
 ```
 
-`auto` selects the first configured key in this order: Gemini, OpenRouter,
-NVIDIA NIM. It does not silently retry proof through a different provider.
+`auto` selects the first configured key in this order: OpenAI, Gemini,
+OpenRouter, NVIDIA NIM. It does not silently retry proof through a different provider.
 OpenRouter's free router is rate-limited and model availability varies. NVIDIA
 Developer API access is intended for development and testing; production terms
 may differ. Do not submit confidential or identifying proof, disclose the
@@ -187,33 +195,30 @@ Invoke the edge function, not the completion table:
 await insforge.functions.invoke('verify-proof', {
   body: {
     assignmentId,
-    proofNote,
-    mediaDataUrl, // required image/video data URL; limits below
+    proofNote,    // optional context; may be an empty string
+    videoFrames,  // preferred: 2–6 timestamped JPEG frame data URLs
+    videoDurationSeconds,
+    mediaDataUrl, // alternatively, one prepared image data URL
     proofName,    // optional display name only
-    provider,     // optional { name, model, apiKey } BYOK override
   },
 })
 ```
 
-`mediaDataUrl` is required and accepts PNG, JPEG, or WebP images up to 180 KiB after browser
-compression, or MP4, MOV, or WebM videos up to 5 MiB. The browser also limits
-selected videos to 30 seconds; the edge function independently enforces bytes and MIME type. The entire
-request must be no larger than 7 MiB. The server temporarily accepts the legacy
+Supply either `videoFrames` or `mediaDataUrl`. The normal video flow accepts MP4,
+MOV, or WebM files up to 80 MiB and 30 seconds in the browser, then extracts six
+timestamped JPEG frames (three for videos shorter than three seconds). Each frame
+is resized to at most 720 px and capped at 170 KiB before submission. The full
+video stays in the browser. Image proof accepts PNG, JPEG, or WebP and is likewise
+resized and re-encoded. The edge function independently validates frame count,
+MIME type, and total evidence size. It temporarily accepts the legacy
 `imageDataUrl` field during rollout.
 
 The function performs request-size, MIME, ownership, assignment-state, and
 catalog evidence-type checks deterministically. Only then does it reserve a
-rate-limited attempt and send the image/video to the configured Gemini,
-OpenRouter, or NVIDIA NIM provider, because interpreting pixels or video frames
-is the part that requires a vision model.
-
-When `provider` is present, the function accepts only `gemini`, `openrouter`, or
-`nvidia-nim`, validates the model identifier and key length, and uses fixed
-official provider endpoints. The personal key is used for that request only; it
-is not written to the database or logs. Without this override, the function uses
-the operator-configured server secret selected by `PROOF_AI_PROVIDER`.
-
-It then records the result through the project-admin-only
+rate-limited attempt and send the image or timestamped frame sample to OpenAI in
+production, because interpreting pixels is the part that requires a vision model.
+The optional note is context only and cannot prove completion by itself. It records the result through the
+project-admin-only
 `record_verified_completion` RPC. InsForge does not perform the AI assessment;
 its edge function is the authentication and provider proxy. The client cannot
 provide a challenge prompt, score, verdict, points, or user ID.

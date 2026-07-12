@@ -57,7 +57,7 @@ try {
   await assert.doesNotReject(() => dialog.waitFor({ state: 'hidden' }))
   results.accessibility.escapeClosesAuth = true
 
-  await page.getByRole('button', { name: 'Try the working demo' }).click()
+  await page.getByRole('button', { name: 'Preview sample data' }).click()
   await page.getByRole('heading', { name: /Good evening, Alex\./ }).waitFor()
   await page.getByRole('button', { name: 'Open navigation' }).click()
   const sidebar = page.locator('.sidebar')
@@ -85,12 +85,12 @@ try {
   // Full completion, history, settings persistence, inbox, and reload restore.
   const full = await testPage()
   await full.page.goto(baseUrl, { waitUntil: 'networkidle' })
-  await full.page.getByRole('button', { name: 'Try the working demo' }).click()
+  await full.page.getByRole('button', { name: 'Preview sample data' }).click()
   const originalTitle = await full.page.locator('.active-challenge h2').innerText()
   await full.page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
   await full.page.locator('input[type="file"]').setInputFiles('public/og.png')
-  await full.page.getByLabel('What did you do?').fill('I asked a thoughtful follow-up question and listened to the complete answer. I felt nervous, then learned that the response was kind.')
-  await full.page.getByRole('button', { name: /Check and record my proof/ }).click()
+  await full.page.getByLabel('Optional context').fill('I asked a thoughtful follow-up question and listened to the complete answer. I felt nervous, then learned that the response was kind.')
+  await full.page.getByRole('button', { name: /Preview proof result/ }).click()
   const assessment = await full.page.locator('.assessment').innerText()
   assert.match(assessment, /CHALLENGE COMPLETE/)
   assert.match(assessment, /\+120 courage points/)
@@ -137,11 +137,11 @@ try {
   // the punishment twice without repeats, and the spent rolls survive reloads.
   const partial = await testPage()
   await partial.page.goto(baseUrl, { waitUntil: 'networkidle' })
-  await partial.page.getByRole('button', { name: 'Try the working demo' }).click()
+  await partial.page.getByRole('button', { name: 'Preview sample data' }).click()
   await partial.page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
   await partial.page.locator('input[type="file"]').setInputFiles('public/og.png')
-  await partial.page.getByLabel('What did you do?').fill('I spoke briefly today.')
-  await partial.page.getByRole('button', { name: /Check and record my proof/ }).click()
+  await partial.page.getByLabel('Optional context').fill('I spoke briefly today.')
+  await partial.page.getByRole('button', { name: /Preview proof result/ }).click()
   assert.match(await partial.page.locator('.assessment').innerText(), /PROGRESS RECORDED/)
   await partial.page.getByRole('button', { name: /View today’s log/ }).click()
   await partial.page.locator('.recovery-card').waitFor()
@@ -168,7 +168,7 @@ try {
   // Safety reporting replaces the card without exposing or messaging anyone.
   const report = await testPage()
   await report.page.goto(baseUrl, { waitUntil: 'networkidle' })
-  await report.page.getByRole('button', { name: 'Try the working demo' }).click()
+  await report.page.getByRole('button', { name: 'Preview sample data' }).click()
   const beforeReport = await report.page.locator('.active-challenge h2').innerText()
   await report.page.getByRole('button', { name: /Flag or replace/ }).click()
   await report.page.getByLabel('What is the problem?').selectOption('crosses-boundary')

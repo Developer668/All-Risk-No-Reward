@@ -8,10 +8,10 @@ const PRECACHE_URLS = [
   '/index.html',
   '/offline.html',
   '/manifest.webmanifest',
-  '/icons/icon.svg',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg',
-  '/icons/maskable-512.svg',
+  '/logo.png',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/maskable-512.png',
   /*__BUILD_ASSETS__*/
 ]
 
@@ -99,8 +99,8 @@ self.addEventListener('push', (event) => {
   const title = typeof message.title === 'string' ? message.title : 'Your challenge is ready'
   const options = {
     body: typeof message.body === 'string' ? message.body : 'Open All Risk to see what today has in store.',
-    icon: '/icons/icon-192.svg',
-    badge: '/icons/icon-192.svg',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-192.png',
     tag: typeof message.tag === 'string' ? message.tag : 'daily-challenge',
     renotify: false,
     data: { url: typeof message.url === 'string' ? message.url : '/' },

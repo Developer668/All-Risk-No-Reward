@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import {
-  ArrowRight, Award, BarChart3, Bell, Bot, CalendarDays, Check, ChevronRight, CircleCheckBig, Clock3,
-  Dices, Download, Flag, Flame, Gift, History, Inbox, KeyRound, Laugh, LifeBuoy, LockKeyhole, Medal,
+  ArrowRight, Award, BarChart3, Bell, CalendarDays, Check, ChevronRight, CircleCheckBig, Clock3,
+  Dices, Download, Flag, Flame, Gift, History, Inbox, Laugh, LifeBuoy, LockKeyhole, Medal,
   Menu, Package, RefreshCw, Route, Settings, ShieldCheck, Sparkles, Star, Share2, Target, Trash2,
   Trophy, Users, X, Zap,
 } from 'lucide-react'
@@ -15,14 +15,6 @@ import {
   type BonusRecord, type BonusState,
 } from '../services/bonusChallenge'
 import { notificationPermission, notificationsSupported, requestNotificationPermission, sendTestNotification } from '../services/notifications'
-import {
-  AI_PROVIDER_OPTIONS,
-  aiProviderLabel,
-  clearAiProviderKey,
-  loadAiProviderSettings,
-  saveAiProviderSettings,
-  type AiProviderId,
-} from '../services/aiProvider'
 import { Brand } from './Brand'
 import { Modal } from './Modal'
 import { ProofDialog } from './ProofDialog'
@@ -364,9 +356,6 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState('')
   const [deleteText, setDeleteText] = useState('')
-  const [aiSettings, setAiSettings] = useState(loadAiProviderSettings)
-  const [aiMessage, setAiMessage] = useState('')
-  const aiOption = AI_PROVIDER_OPTIONS.find((option) => option.id === aiSettings.provider) ?? AI_PROVIDER_OPTIONS[0]
 
   async function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -421,27 +410,6 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
     catch (caught) { setMessage(caught instanceof Error ? caught.message : 'Could not delete your data.'); setBusy(false) }
   }
 
-  function selectAiProvider(provider: AiProviderId) {
-    const option = AI_PROVIDER_OPTIONS.find((candidate) => candidate.id === provider) ?? AI_PROVIDER_OPTIONS[0]
-    setAiSettings((current) => ({ ...current, provider, model: option.defaultModel }))
-    setAiMessage('')
-  }
-
-  function saveAiConnection() {
-    try {
-      const saved = saveAiProviderSettings(aiSettings)
-      setAiSettings(saved)
-      setAiMessage(`${aiProviderLabel(saved.provider)} is ready with ${saved.model}.`)
-    } catch (caught) {
-      setAiMessage(caught instanceof Error ? caught.message : 'Could not save that AI connection.')
-    }
-  }
-
-  function removeAiConnection() {
-    setAiSettings(clearAiProviderKey())
-    setAiMessage('The saved API key was removed from this browser.')
-  }
-
   return <section className="content-panel">
     <div className="panel-heading"><div><span className="section-kicker">SETTINGS & SAFETY</span><h2>Keep the challenge yours.</h2></div><Settings aria-hidden="true" /></div>
     <form className="settings-form" onSubmit={save}>
@@ -457,17 +425,6 @@ function SettingsPanel({ settings, backendMode, onSave, onExport, onDelete, onSi
           <div><strong>Formats</strong>{boundaryOptions.map(({ tag, label }) => <label className="check-row" key={tag}><input type="checkbox" name={`boundary-${tag}`} defaultChecked={settings.disabledBoundaryTags.includes(tag)} /><span>{label}</span></label>)}</div>
           <div><strong>Categories</strong>{categoryOptions.map(({ category, label }) => <label className="check-row" key={category}><input type="checkbox" name={`category-${category}`} defaultChecked={settings.disabledCategories.includes(category)} /><span>{label}</span></label>)}</div>
         </div>
-      </fieldset>
-      <fieldset className="ai-provider-settings"><legend><Bot aria-hidden="true" /> AI proof provider</legend><p>Bring your own key and choose the vision model that grades your images or videos. The key is never synced with your account or included in exports.</p>
-        <div className="ai-provider-status"><div><KeyRound aria-hidden="true" /><span><strong>{aiSettings.apiKey ? `${aiProviderLabel(aiSettings.provider)} connected` : 'No personal key connected'}</strong><small>{aiSettings.apiKey ? `Using ${aiSettings.model}` : backendMode === 'local' ? 'The demo uses its local proof rubric until you add one.' : 'The server-configured provider is used until you add one.'}</small></span></div><span className={aiSettings.apiKey ? 'provider-dot provider-dot--ready' : 'provider-dot'}>{aiSettings.apiKey ? 'READY' : 'OPTIONAL'}</span></div>
-        <div className="settings-grid ai-provider-grid">
-          <label className="field">Provider<select value={aiSettings.provider} onChange={(event) => selectAiProvider(event.target.value as AiProviderId)}>{AI_PROVIDER_OPTIONS.map((option) => <option value={option.id} key={option.id}>{option.label}</option>)}</select><span className="field-hint">{aiOption.note}</span></label>
-          <label className="field">Model ID<input list={`models-${aiSettings.provider}`} value={aiSettings.model} onChange={(event) => setAiSettings((current) => ({ ...current, model: event.target.value }))} autoComplete="off" /><datalist id={`models-${aiSettings.provider}`}>{aiOption.models.map((model) => <option value={model} key={model} />)}</datalist><span className="field-hint">Choose a preset or paste another compatible model ID.</span></label>
-          <label className="field ai-key-field">API key<input type="password" value={aiSettings.apiKey} onChange={(event) => setAiSettings((current) => ({ ...current, apiKey: event.target.value }))} placeholder={aiSettings.provider === 'openrouter' ? 'sk-or-v1-…' : aiSettings.provider === 'nvidia-nim' ? 'nvapi-…' : 'AIza…'} autoComplete="off" spellCheck={false} /><span className="field-hint">Stored in this tab by default. Use a restricted, low-limit key when the provider supports it.</span></label>
-        </div>
-        <label className="check-row"><input type="checkbox" checked={aiSettings.rememberKey} onChange={(event) => setAiSettings((current) => ({ ...current, rememberKey: event.target.checked }))} /><span>Remember this key on this device after I close the tab <small className="inline-warning">Not recommended on shared devices.</small></span></label>
-        <div className="ai-provider-actions"><button type="button" className="button button--ink" onClick={saveAiConnection}><KeyRound aria-hidden="true" /> Save AI connection</button>{aiSettings.apiKey && <button type="button" className="button button--outline" onClick={removeAiConnection}>Remove key</button>}</div>
-        {aiMessage && <p className="form-notice" role="status">{aiMessage}</p>}
       </fieldset>
       <fieldset><legend>Notifications</legend>
         <label className="check-row"><input type="checkbox" name="notifications" defaultChecked={settings.notificationsEnabled} /><span>Enable the private notification inbox</span></label>
@@ -572,6 +529,7 @@ export function Dashboard(props: DashboardProps) {
   }, [menuOpen])
 
   const weekDone = useMemo(() => props.history.filter((entry) => ['completed','partial'].includes(entry.assignment.status) && (Date.now() - new Date(`${entry.assignment.dateKey}T12:00:00`).getTime()) < 7 * 86_400_000).length, [props.history])
+  const completedCount = useMemo(() => props.history.filter((entry) => entry.assignment.status === 'completed').length, [props.history])
   const unread = props.notifications.filter((record) => !record.readAt).length
 
   function chooseSection(next: AppSection) { setSection(next); setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }
@@ -606,7 +564,7 @@ export function Dashboard(props: DashboardProps) {
     <main className="dashboard">
       <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
 
-      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="level-card"><div className="level-card__orbit"><span>{props.profile.level}</span></div><div><span className="section-kicker">CURRENT LEVEL</span><h3>{props.profile.level < 2 ? 'Beginner' : props.profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><p>{props.profile.couragePoints} courage points</p></div><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
+      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
         : <div className="dashboard-content">{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 

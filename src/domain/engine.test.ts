@@ -137,6 +137,26 @@ describe('ChallengeEngine daily assignments', () => {
     expect(result.recovery).toBeUndefined()
   })
 
+  it('accepts video proof without requiring an optional text note', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const engine = new ChallengeEngine(createUserState({
+      id: 'user-video-only',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }))
+    const assignment = engine.sync(now).assignment!
+    const result = engine.submitCompletion({
+      assignmentId: assignment.id,
+      score: 100,
+      note: '',
+      proofName: 'challenge-proof.mp4',
+    }, new Date(2026, 6, 12, 20, 15))
+
+    expect(result.completion.verdict).toBe('complete')
+    expect(result.completion.proofName).toBe('challenge-proof.mp4')
+  })
+
   it('keeps a low-evidence proof retryable instead of creating a punishment', () => {
     const now = new Date(2026, 6, 12, 20)
     const engine = new ChallengeEngine(createUserState({

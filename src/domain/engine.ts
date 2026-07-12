@@ -183,8 +183,8 @@ export class ChallengeEngine {
     if (!Number.isFinite(input.score) || input.score < 0 || input.score > 100) {
       throw new DomainError('INVALID_SCORE', 'Proof score must be between 0 and 100.')
     }
-    if (input.note.trim().length < 3) {
-      throw new DomainError('INVALID_NOTE', 'Add a short, privacy-safe note about what happened.')
+    if (input.note.trim().length < 3 && !input.proofName) {
+      throw new DomainError('INVALID_NOTE', 'Upload proof or add a short, privacy-safe note about what happened.')
     }
 
     const assignment = this.state.assignments.find((item) => item.id === input.assignmentId)

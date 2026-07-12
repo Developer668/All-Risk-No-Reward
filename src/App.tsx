@@ -99,7 +99,7 @@ class AppErrorBoundary extends Component<{ children: ReactNode }, { error?: Erro
 }
 
 function LoadingScreen() {
-  return <main className="loading-screen" aria-live="polite"><div className="loading-mark" aria-hidden="true">AR</div><p className="section-kicker">PREPARING YOUR PRIVATE CARD</p><span>Checking today’s challenge state…</span></main>
+  return <main className="loading-screen" aria-live="polite"><div className="loading-mark" aria-hidden="true"><img src="/logo.png" alt="" /></div><p className="section-kicker">PREPARING YOUR PRIVATE CARD</p><span>Checking today’s challenge state…</span></main>
 }
 
 function ConnectionState({ message, onRetry, onExit }: { message: string; onRetry: () => void; onExit: () => void }) {
@@ -363,6 +363,7 @@ function AppContent() {
 
   return <>
     <Landing
+      onStart={() => { setAuthMode('signup'); setAuthOpen(true) }}
       onTry={() => void startDemo()}
       onAuth={() => { setAuthMode('signin'); setAuthOpen(true) }}
       onNavigate={(next) => navigate(next)}
