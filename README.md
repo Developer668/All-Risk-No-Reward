@@ -68,3 +68,25 @@ The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dia
 - Add a Web Push subscription/provider if notifications must arrive while the PWA is fully closed. Current local alerts run while the app is active; the remote outbox remains durable.
 - Add catalog moderation/admin operations and account-deletion processing for the pseudonymous deletion queue.
 - Obtain jurisdiction-specific legal, privacy, accessibility, and clinical-claims review.
+
+## Challenge Library
+
+The application-ready dataset is in [`data/challenges`](data/challenges/README.md). It contains **500 original same-day challenges** designed around funny, filmable, social, creative, helpful, and physically scalable experiences:
+
+- Easy
+- Medium
+- Hard
+- Extreme
+- Nightmare
+
+Easy contains 90 challenges, Medium 95, Hard 100, Extreme 105, and Nightmare 110. Every challenge includes a description and structured image/video evidence rules for VLM grading. Retired IDs are recorded rather than reused.
+
+The final library includes level-scaled Instagram and friend connections, private ask-outs to people already known, group hangouts, scalable specialist workouts, cooking games, hackathons, video-game builds, VM-only operating-system projects, community tools, and coding challenges using local and cloud AI model families.
+
+## Contributing
+
+Contributions, ideas, and bug reports are welcome. Open an issue to start a discussion.
+
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).

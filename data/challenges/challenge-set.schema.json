@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Developer668/All-Risk-No-Reward/blob/main/data/challenges/challenge-set.schema.json",
+  "title": "All Risk No Reward challenge level",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "level",
+    "description",
+    "challengeCount",
+    "challenges"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "level": {
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        "extreme",
+        "nightmare"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "challengeCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "challenges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/challenge"
+      }
+    }
+  },
+  "$defs": {
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "prompt",
+        "description",
+        "category",
+        "estimatedMinutes",
+        "timeWindow",
+        "mode",
+        "participants",
+        "ageGroup",
+        "requiresConsent",
+        "intensity",
+        "verification"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(easy|medium|hard|extreme|nightmare)-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 10
+        },
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "category": {
+          "enum": [
+            "comedy",
+            "coding",
+            "cooking",
+            "creative",
+            "fitness",
+            "kindness",
+            "outdoors",
+            "productivity",
+            "skill",
+            "social",
+            "wellness"
+          ]
+        },
+        "estimatedMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "timeWindow": {
+          "enum": [
+            "single_session",
+            "1_day"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "solo",
+            "solo_with_other_people",
+            "group"
+          ]
+        },
+        "participants": {
+          "$ref": "#/$defs/participants"
+        },
+        "ageGroup": {
+          "enum": [
+            "all",
+            "teen_or_adult"
+          ]
+        },
+        "requiresConsent": {
+          "type": "boolean"
+        },
+        "intensity": {
+          "enum": [
+            "none_to_light",
+            "light",
+            "none_to_moderate",
+            "moderate",
+            "moderate_to_vigorous",
+            "vigorous_optional_and_scalable",
+            "high_commitment_but_scalable"
+          ]
+        },
+        "equipment": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        }
+      }
+    },
+    "participants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumTotal",
+        "targetTotal",
+        "maximumTotal"
+      ],
+      "properties": {
+        "minimumTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "targetTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "maximumTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gradeableByVision",
+        "acceptedEvidence",
+        "captureInstructions",
+        "successCriteria",
+        "privacyNotes"
+      ],
+      "properties": {
+        "gradeableByVision": {
+          "const": true
+        },
+        "acceptedEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "image",
+              "video"
+            ]
+          }
+        },
+        "captureInstructions": {
+          "type": "string",
+          "minLength": 20
+        },
+        "successCriteria": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 10
+          }
+        },
+        "privacyNotes": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    }
+  }
+}
