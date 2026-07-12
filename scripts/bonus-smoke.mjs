@@ -23,37 +23,20 @@ async function startDemo(page) {
   await page.getByRole('heading', { name: /Good evening, Alex\./ }).waitFor()
 }
 
-async function makeCurrentCompletionFast(page) {
-  await page.evaluate(() => {
-    const key = 'all-risk-no-reward.local.v1'
-    const database = JSON.parse(localStorage.getItem(key))
-    const state = database.users[database.session.userId]
-    const assignment = state.assignments.at(-1)
-    assignment.unlockAt = '2026-07-13T02:58:00.000Z'
-    localStorage.setItem(key, JSON.stringify(database))
-  })
-  await page.reload({ waitUntil: 'networkidle' })
-}
-
-async function recordFullProof(page, rewardRoll) {
+async function recordFullProof(page) {
   await page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
   await page.locator('input[type="file"]').setInputFiles('public/og.png')
   await page.getByLabel('Optional context').fill('I asked a thoughtful question, listened to the answer, and shared one honest detail. I felt nervous, then they responded kindly.')
   await page.getByRole('button', { name: /Preview proof result/ }).click()
   await page.locator('.assessment').waitFor()
-  await page.evaluate((lastRoll) => {
-    const rolls = [0, 0, lastRoll]
-    Math.random = () => rolls.shift() ?? lastRoll
-  }, rewardRoll)
   await page.getByRole('button', { name: /View today’s log/ }).click()
 }
 
 try {
   const win = await pageForTest()
   await startDemo(win.page)
-  await makeCurrentCompletionFast(win.page)
-  await recordFullProof(win.page, 0)
-  const winDialog = win.page.getByRole('dialog', { name: 'Too fast. Suspicious.' })
+  await recordFullProof(win.page)
+  const winDialog = win.page.getByRole('dialog', { name: 'One more for future you?' })
   await winDialog.waitFor()
   await win.page.waitForTimeout(400)
   await win.page.screenshot({ path: 'output/playwright/bonus-challenge.png' })
@@ -62,36 +45,23 @@ try {
   await win.page.screenshot({ path: 'output/playwright/bonus-challenge-mobile.png' })
   assert.equal(await win.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), 0, 'Mobile bonus flow overflows horizontally.')
   await win.page.setViewportSize({ width: 1180, height: 900 })
-  await winDialog.getByRole('button', { name: /reveal my reward/i }).click()
-  const winResult = win.page.getByRole('dialog', { name: 'Lifeline unlocked.' })
+  await winDialog.getByRole('button', { name: /save my ticket/i }).click()
+  const winResult = win.page.getByRole('dialog', { name: 'Ticket saved.' })
   await winResult.waitFor()
-  assert.match(await winResult.innerText(), /1 lifeline banked/i)
+  assert.match(await winResult.innerText(), /1 Progress Ticket/i)
   await win.page.waitForTimeout(400)
-  await win.page.screenshot({ path: 'output/playwright/bonus-lifeline.png' })
-  await winResult.getByRole('button', { name: /Bank it/ }).click()
+  await win.page.screenshot({ path: 'output/playwright/bonus-progress-ticket.png' })
+  await winResult.getByRole('button', { name: /Keep going/ }).click()
   await win.page.reload({ waitUntil: 'networkidle' })
-  assert.match(await win.page.locator('.lifeline-balance').innerText(), /1 banked/)
+  assert.match(await win.page.locator('.progress-ticket-balance').innerText(), /1 banked/)
   await win.context.close()
-
-  const nothing = await pageForTest()
-  await startDemo(nothing.page)
-  await makeCurrentCompletionFast(nothing.page)
-  await recordFullProof(nothing.page, 0.99)
-  const nothingDialog = nothing.page.getByRole('dialog', { name: 'Too fast. Suspicious.' })
-  await nothingDialog.getByRole('button', { name: /reveal my reward/i }).click()
-  const nothingResult = nothing.page.getByRole('dialog', { name: 'HAHA. You get nothing this time.' })
-  await nothingResult.waitFor()
-  assert.match(await nothingResult.innerText(), /Joke’s on you/i)
-  await nothing.page.waitForTimeout(400)
-  await nothing.page.screenshot({ path: 'output/playwright/bonus-nothing.png' })
-  await nothing.context.close()
 
   const redeem = await pageForTest()
   await startDemo(redeem.page)
   await redeem.page.evaluate(() => {
     const database = JSON.parse(localStorage.getItem('all-risk-no-reward.local.v1'))
     const userId = database.session.userId
-    localStorage.setItem(`all-risk-no-reward.bonus.v1:${encodeURIComponent(userId)}`, JSON.stringify({ version: 1, lifelines: 1, records: {} }))
+    localStorage.setItem(`all-risk-no-reward.bonus.v1:${encodeURIComponent(userId)}`, JSON.stringify({ version: 2, progressTickets: 1, records: {} }))
   })
   await redeem.page.reload({ waitUntil: 'networkidle' })
   await redeem.page.getByRole('button', { name: /Add privacy-safe proof/ }).click()
@@ -100,14 +70,13 @@ try {
   await redeem.page.getByRole('button', { name: /Preview proof result/ }).click()
   await redeem.page.locator('.assessment').waitFor()
   await redeem.page.getByRole('button', { name: /View today’s log/ }).click()
-  await redeem.page.locator('.recovery-card').waitFor()
-  await redeem.page.getByRole('button', { name: 'Use lifeline' }).click()
-  await redeem.page.locator('.recovery-card').waitFor({ state: 'hidden' })
-  assert.equal(await redeem.page.locator('.lifeline-balance').count(), 0)
+  await redeem.page.locator('.progress-protected-card').waitFor()
+  assert.equal(await redeem.page.locator('.recovery-card').count(), 0)
+  assert.equal(await redeem.page.locator('.progress-ticket-balance').count(), 0)
   await redeem.context.close()
 
   assert.deepEqual(errors, [], `Browser errors occurred: ${errors.join('; ')}`)
-  console.log(JSON.stringify({ fastOffer: true, lifelineReward: true, nothingReward: true, lifelineRedemption: true, errors }, null, 2))
+  console.log(JSON.stringify({ guaranteedDailyOffer: true, progressTicketReward: true, automaticProtection: true, errors }, null, 2))
 } finally {
   await browser.close()
 }

@@ -1,10 +1,8 @@
 import type { DailyView } from '../types'
 
 const STORAGE_PREFIX = 'all-risk-no-reward.bonus.v1'
-const OFFER_CHANCE = 0.45
-const LIFELINE_CHANCE = 0.5
 
-export type BonusStatus = 'not-offered' | 'offered' | 'won-lifeline' | 'won-nothing'
+export type BonusStatus = 'offered' | 'earned-ticket' | 'declined'
 
 export interface BonusTask {
   id: string
@@ -13,16 +11,16 @@ export interface BonusTask {
 }
 
 export interface BonusRecord {
+  dateKey: string
   assignmentId: string
   taskId?: string
   status: BonusStatus
 }
 
 export interface BonusState {
-  version: 1
-  lifelines: number
+  version: 2
+  progressTickets: number
   records: Record<string, BonusRecord>
-  startedAtByAssignment: Record<string, string>
 }
 
 export interface BonusStorage {
@@ -54,7 +52,7 @@ export const bonusTasks: BonusTask[] = [
 ]
 
 function emptyState(): BonusState {
-  return { version: 1, lifelines: 0, records: {}, startedAtByAssignment: {} }
+  return { version: 2, progressTickets: 0, records: {} }
 }
 
 function storageKey(userId: string): string {
@@ -63,30 +61,25 @@ function storageKey(userId: string): string {
 
 export function loadBonusState(userId: string, storage: BonusStorage): BonusState {
   try {
-    const parsed = JSON.parse(storage.getItem(storageKey(userId)) ?? 'null') as Partial<BonusState> | null
-    if (!parsed || parsed.version !== 1 || typeof parsed.records !== 'object' || !parsed.records) return emptyState()
+    const parsed = JSON.parse(storage.getItem(storageKey(userId)) ?? 'null') as {
+      version?: number
+      lifelines?: number
+      progressTickets?: number
+      records?: Record<string, BonusRecord>
+    } | null
+    if (!parsed) return emptyState()
+    if (parsed.version === 1) {
+      return { version: 2, progressTickets: Math.max(0, Math.floor(Number(parsed.lifelines) || 0)), records: {} }
+    }
+    if (parsed.version !== 2 || typeof parsed.records !== 'object' || !parsed.records) return emptyState()
     return {
-      version: 1,
-      lifelines: Math.max(0, Math.floor(Number(parsed.lifelines) || 0)),
+      version: 2,
+      progressTickets: Math.max(0, Math.floor(Number(parsed.progressTickets) || 0)),
       records: parsed.records as Record<string, BonusRecord>,
-      startedAtByAssignment: typeof parsed.startedAtByAssignment === 'object' && parsed.startedAtByAssignment
-        ? parsed.startedAtByAssignment as Record<string, string>
-        : {},
     }
   } catch {
     return emptyState()
   }
-}
-
-export function markChallengeStarted(
-  userId: string,
-  assignmentId: string,
-  storage: BonusStorage,
-  now = new Date(),
-): BonusState {
-  const state = loadBonusState(userId, storage)
-  state.startedAtByAssignment[assignmentId] ??= now.toISOString()
-  return saveBonusState(userId, storage, state)
 }
 
 export function clearBonusState(
@@ -101,7 +94,7 @@ function saveBonusState(userId: string, storage: BonusStorage, state: BonusState
   return state
 }
 
-export function rollFastFinishBonus(
+export function offerDailyBonus(
   userId: string,
   daily: DailyView,
   storage: BonusStorage,
@@ -113,48 +106,50 @@ export function rollFastFinishBonus(
   if (!assignment || !challenge || !completion || completion.verdict !== 'complete') return undefined
 
   const state = loadBonusState(userId, storage)
-  const existing = state.records[assignment.id]
-  if (existing) return existing.status === 'not-offered' ? undefined : existing
+  const existing = state.records[daily.dateKey]
+  if (existing) return existing
 
-  const startedAt = state.startedAtByAssignment[assignment.id] ?? assignment.unlockAt
-  const elapsed = new Date(completion.completedAt).getTime() - new Date(startedAt).getTime()
-  const fastWindow = challenge.minutes * 60_000
-  const isFastFinish = Number.isFinite(elapsed) && elapsed >= 0 && elapsed <= fastWindow
-  const offered = isFastFinish && random() < OFFER_CHANCE
-  const record: BonusRecord = offered
-    ? {
-        assignmentId: assignment.id,
-        taskId: bonusTasks[Math.min(bonusTasks.length - 1, Math.floor(random() * bonusTasks.length))].id,
-        status: 'offered',
-      }
-    : { assignmentId: assignment.id, status: 'not-offered' }
+  const record: BonusRecord = {
+    dateKey: daily.dateKey,
+    assignmentId: assignment.id,
+    taskId: bonusTasks[Math.min(bonusTasks.length - 1, Math.floor(random() * bonusTasks.length))].id,
+    status: 'offered',
+  }
 
-  state.records[assignment.id] = record
+  state.records[daily.dateKey] = record
   saveBonusState(userId, storage, state)
-  return offered ? record : undefined
+  return record
 }
 
 export function completeBonusChallenge(
   userId: string,
-  assignmentId: string,
+  dateKey: string,
   storage: BonusStorage,
-  random: () => number = Math.random,
 ): { state: BonusState; record: BonusRecord } {
   const state = loadBonusState(userId, storage)
-  const record = state.records[assignmentId]
-  if (!record || record.status === 'not-offered') throw new Error('That bonus challenge is not available.')
+  const record = state.records[dateKey]
+  if (!record) throw new Error('That bonus challenge is not available.')
   if (record.status !== 'offered') return { state, record }
 
-  record.status = random() < LIFELINE_CHANCE ? 'won-lifeline' : 'won-nothing'
-  if (record.status === 'won-lifeline') state.lifelines += 1
-  state.records[assignmentId] = record
+  record.status = 'earned-ticket'
+  state.progressTickets += 1
+  state.records[dateKey] = record
   return { state: saveBonusState(userId, storage, state), record }
 }
 
-export function spendLifeline(userId: string, storage: BonusStorage): BonusState {
+export function declineBonusChallenge(userId: string, dateKey: string, storage: BonusStorage): { state: BonusState; record: BonusRecord } {
   const state = loadBonusState(userId, storage)
-  if (state.lifelines < 1) throw new Error('You do not have a lifeline to spend.')
-  state.lifelines -= 1
+  const record = state.records[dateKey]
+  if (!record) throw new Error('That bonus challenge is not available.')
+  if (record.status === 'offered') record.status = 'declined'
+  state.records[dateKey] = record
+  return { state: saveBonusState(userId, storage, state), record }
+}
+
+export function spendProgressTicket(userId: string, storage: BonusStorage): BonusState {
+  const state = loadBonusState(userId, storage)
+  if (state.progressTickets < 1) throw new Error('You do not have a progress ticket to spend.')
+  state.progressTickets -= 1
   return saveBonusState(userId, storage, state)
 }
 

@@ -276,6 +276,25 @@ export class ChallengeEngine {
     return this.sync(now)
   }
 
+  redeemProgressTicket(assignmentId: string, now = new Date()): DailyView {
+    const assignment = this.state.assignments.find((item) => item.id === assignmentId)
+    if (!assignment) throw new DomainError('ASSIGNMENT_NOT_FOUND', 'That daily challenge could not be found.')
+    if (assignment.status !== 'partial' && assignment.status !== 'missed') {
+      throw new DomainError('ASSIGNMENT_CLOSED', 'A progress ticket can protect only a partial or missed challenge.')
+    }
+    if (assignment.progressProtected) return this.buildView(now)
+
+    assignment.progressProtected = true
+    const recovery = this.state.recoveries.find((item) => item.sourceAssignmentId === assignment.id && item.status === 'open')
+    if (recovery) {
+      recovery.status = 'completed'
+      recovery.completedAt = now.toISOString()
+      recovery.completionNote = 'Automatically protected by a single-use Progress Ticket.'
+    }
+    this.state.profile.streak = this.calculateStreak(assignment.dateKey)
+    return this.buildView(now)
+  }
+
   rerollRecovery(recoveryId: string, now = new Date()): DailyView {
     this.sync(now)
     const recovery = this.state.recoveries.find((item) => item.id === recoveryId && item.status === 'open')
@@ -681,7 +700,7 @@ export class ChallengeEngine {
   private calculateStreak(completedDateKey: string): number {
     const dates = new Set(
       this.state.assignments
-        .filter((assignment) => assignment.status === 'completed')
+        .filter((assignment) => assignment.status === 'completed' || assignment.progressProtected)
         .map((assignment) => assignment.dateKey),
     )
     let streak = 0
@@ -695,7 +714,7 @@ export class ChallengeEngine {
 
   private refreshStreak(dateKey: string) {
     const latestCompleted = latestByDate(
-      this.state.assignments.filter((assignment) => assignment.status === 'completed'),
+      this.state.assignments.filter((assignment) => assignment.status === 'completed' || assignment.progressProtected),
     )
     if (!latestCompleted) {
       this.state.profile.streak = 0

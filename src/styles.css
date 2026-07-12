@@ -355,6 +355,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .bonus-task h3 { margin: 8px 0; font-family: var(--display); font-size: 29px; }
 .bonus-task p { margin: 0; color: color-mix(in oklch, var(--cream) 82%, transparent); line-height: 1.5; }
 .bonus-modal__odds { margin: 22px 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.bonus-modal__odds strong { color: var(--green); }
+.bonus-modal__choices { display: grid; grid-template-columns: 1.6fr .7fr; gap: 10px; }
+.bonus-modal__choices .button { min-height: 50px; box-shadow: none; }
 .bonus-result { display: grid; justify-items: center; text-align: center; }
 .bonus-result__mark { width: 88px; height: 88px; margin: 8px 0 26px; display: grid; place-items: center; border-radius: 50%; color: var(--cream); transform: rotate(-5deg); }
 .bonus-result__mark svg { width: 42px; height: 42px; }
@@ -362,6 +365,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .bonus-result__mark--nothing { background: var(--red); box-shadow: 7px 7px 0 var(--ink); }
 .bonus-result > p:not(.section-kicker) { margin: 5px 0 25px; color: var(--muted); line-height: 1.55; }
 .bonus-result > p strong { color: var(--ink); }
+.progress-protected-card { margin-top: 22px; padding: 28px 30px; border: 1px solid var(--green); color: var(--cream); background: var(--green); box-shadow: 7px 8px 0 var(--yellow); }
+.progress-protected-card > div { display: flex; align-items: center; gap: 9px; color: var(--yellow); font-size: 9px; font-weight: 850; letter-spacing: .11em; }
+.progress-protected-card > div svg { width: 22px; }
+.progress-protected-card h2 { margin: 19px 0 7px; font-family: var(--display); font-size: 40px; font-weight: 540; }
+.progress-protected-card p { max-width: 630px; margin: 0; color: rgba(255,255,255,.75); font-size: 13px; line-height: 1.55; }
 
 .proof-modal { width: min(570px, 100%); }
 .verification-mode { margin-top: 16px; padding: 11px 13px; border: 1px solid var(--border); display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--muted); background: color-mix(in oklch, var(--ink) 3%, var(--cream)); font-size: 10px; line-height: 1.4; }
@@ -494,12 +502,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .recovery-dice__button svg { width: 16px; }
 .recovery-dice__notice { margin: -6px 0 16px; }
 .recovery-dice__rolling { animation: dice-roll .45s linear infinite; }
-.lifeline-card { margin: 0 0 18px; padding: 14px; border: 1px solid color-mix(in oklch, var(--green) 55%, var(--border)); display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 11px; background: color-mix(in oklch, var(--green) 8%, var(--cream)); }
-.lifeline-card > svg { width: 28px; color: var(--green); }
-.lifeline-card > span { display: grid; gap: 2px; }
-.lifeline-card strong { font-family: var(--display); font-size: 17px; }
-.lifeline-card small { color: var(--muted); font-size: 10px; line-height: 1.35; }
-.lifeline-card .button { min-height: 40px; padding-inline: 13px; font-size: 10px; background: var(--cream); }
 .recovery-card .field { margin-bottom: 16px; }
 
 @keyframes dice-roll { to { transform: rotate(360deg); } }
@@ -507,11 +509,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @keyframes recording-pulse { 50% { opacity: .35; transform: scale(.8); } }
 
 .dashboard-content { max-width: 1080px; margin: 0 auto; padding-top: 44px; }
-.lifeline-balance { min-height: 78px; padding: 15px 18px; border: 1px solid var(--green); display: flex; align-items: center; gap: 13px; color: var(--cream); background: var(--green); box-shadow: 5px 5px 0 var(--yellow); }
-.lifeline-balance > svg { width: 31px; height: 31px; }
-.lifeline-balance > div { display: grid; gap: 2px; }
-.lifeline-balance span { font-size: 8px; font-weight: 850; letter-spacing: .12em; }
-.lifeline-balance strong { font-family: var(--display); font-size: 21px; }
+.progress-ticket-balance { min-height: 92px; padding: 16px 18px; border: 1px solid var(--green); display: flex; align-items: center; gap: 13px; color: var(--cream); background: var(--green); box-shadow: 5px 5px 0 var(--yellow); }
+.progress-ticket-balance > svg { width: 34px; height: 34px; flex: 0 0 auto; }
+.progress-ticket-balance > div { display: grid; gap: 2px; }
+.progress-ticket-balance span { font-size: 8px; font-weight: 850; letter-spacing: .12em; }
+.progress-ticket-balance strong { font-family: var(--display); font-size: 21px; }
+.progress-ticket-balance small { color: rgba(255,255,255,.68); font-size: 9px; line-height: 1.35; }
 .content-panel { border: 1px solid var(--border); background: var(--cream); box-shadow: 8px 9px 0 var(--ink); }
 .panel-heading { min-height: 150px; padding: 34px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 25px; }
 .panel-heading h2 { margin: 8px 0 0; font-family: var(--display); font-size: clamp(35px, 5vw, 52px); font-weight: 520; line-height: 1; }
@@ -786,8 +789,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .recovery-card__level { width: 68px; height: 72px; }
   .recovery-dice { align-items: stretch; flex-direction: column; }
   .recovery-dice__button { width: 100%; }
-  .lifeline-card { grid-template-columns: 34px 1fr; }
-  .lifeline-card .button { grid-column: 1 / -1; width: 100%; }
+  .bonus-modal__choices { grid-template-columns: 1fr; }
   .panel-heading { min-height: 125px; padding: 26px 22px; }
   .panel-heading > svg { width: 30px; height: 30px; }
   .journey-overview { grid-template-columns: repeat(2, 1fr); }

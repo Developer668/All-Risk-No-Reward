@@ -147,6 +147,8 @@ export interface DailyAssignment {
   completedAt?: string
   completionId?: string
   replacementForAssignmentId?: string
+  /** A single-use bonus ticket preserved streak continuity for this incomplete day. */
+  progressProtected?: boolean
 }
 
 export type RecoveryStatus = 'open' | 'completed'

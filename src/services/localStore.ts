@@ -291,6 +291,10 @@ export class LocalStore {
     return this.useEngine((engine) => engine.completeRecovery(recoveryId, note, now))
   }
 
+  redeemProgressTicket(assignmentId: string, now = this.now()): DailyView {
+    return this.useEngine((engine) => engine.redeemProgressTicket(assignmentId, now))
+  }
+
   rerollRecovery(recoveryId: string, now = this.now()): DailyView {
     return this.useEngine((engine) => engine.rerollRecovery(recoveryId, now))
   }

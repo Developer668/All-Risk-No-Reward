@@ -2,9 +2,10 @@ import { describe, expect, it } from 'vitest'
 import type { DailyView } from '../types'
 import {
   completeBonusChallenge,
+  declineBonusChallenge,
   loadBonusState,
-  rollFastFinishBonus,
-  spendLifeline,
+  offerDailyBonus,
+  spendProgressTicket,
   type BonusStorage,
 } from './bonusChallenge'
 
@@ -50,48 +51,35 @@ function completedDaily(completedAt: string): DailyView {
   }
 }
 
-describe('fast-finish bonus challenge', () => {
-  it('offers a persisted bonus only when a full completion is unusually fast', () => {
+describe('daily progress-ticket bonus', () => {
+  it('always offers one persisted optional bonus after a full daily completion', () => {
     const storage = new MemoryStorage()
-    const fast = completedDaily('2026-07-12T20:04:00.000Z')
-    const offered = rollFastFinishBonus('user-1', fast, storage, () => 0)
+    const daily = completedDaily('2026-07-12T20:40:00.000Z')
+    const offered = offerDailyBonus('user-1', daily, storage, () => 0)
 
-    expect(offered).toMatchObject({ assignmentId: 'assignment-1', status: 'offered' })
-    expect(rollFastFinishBonus('user-1', fast, storage, () => 0.99)).toEqual(offered)
-
-    const slowStorage = new MemoryStorage()
-    const slow = completedDaily('2026-07-12T20:06:00.000Z')
-    expect(rollFastFinishBonus('user-1', slow, slowStorage, () => 0)).toBeUndefined()
+    expect(offered).toMatchObject({ dateKey: '2026-07-12', assignmentId: 'assignment-1', status: 'offered' })
+    expect(offerDailyBonus('user-1', daily, storage, () => 0.99)).toEqual(offered)
   })
 
-  it('persists no-offer rolls so refreshing cannot reroll the result', () => {
+  it('persists a decline so the same day cannot ask again', () => {
     const storage = new MemoryStorage()
     const daily = completedDaily('2026-07-12T20:01:00.000Z')
+    offerDailyBonus('user-1', daily, storage, () => 0)
 
-    expect(rollFastFinishBonus('user-1', daily, storage, () => 0.99)).toBeUndefined()
-    expect(rollFastFinishBonus('user-1', daily, storage, () => 0)).toBeUndefined()
+    expect(declineBonusChallenge('user-1', daily.dateKey, storage).record.status).toBe('declined')
+    expect(offerDailyBonus('user-1', daily, storage, () => 0.99)?.status).toBe('declined')
   })
 
-  it('awards and spends a lifeline without allowing reward rerolls', () => {
+  it('always awards one single-use progress ticket without duplicate rewards', () => {
     const storage = new MemoryStorage()
     const daily = completedDaily('2026-07-12T20:01:00.000Z')
-    rollFastFinishBonus('user-1', daily, storage, () => 0)
+    offerDailyBonus('user-1', daily, storage, () => 0)
 
-    const first = completeBonusChallenge('user-1', 'assignment-1', storage, () => 0)
-    expect(first.record.status).toBe('won-lifeline')
-    expect(first.state.lifelines).toBe(1)
-    expect(completeBonusChallenge('user-1', 'assignment-1', storage, () => 0.99).record.status).toBe('won-lifeline')
-    expect(loadBonusState('user-1', storage).lifelines).toBe(1)
-    expect(spendLifeline('user-1', storage).lifelines).toBe(0)
-  })
-
-  it('can reveal the one-time joke outcome with no reward', () => {
-    const storage = new MemoryStorage()
-    const daily = completedDaily('2026-07-12T20:01:00.000Z')
-    rollFastFinishBonus('user-1', daily, storage, () => 0)
-
-    const result = completeBonusChallenge('user-1', 'assignment-1', storage, () => 0.99)
-    expect(result.record.status).toBe('won-nothing')
-    expect(result.state.lifelines).toBe(0)
+    const first = completeBonusChallenge('user-1', daily.dateKey, storage)
+    expect(first.record.status).toBe('earned-ticket')
+    expect(first.state.progressTickets).toBe(1)
+    expect(completeBonusChallenge('user-1', daily.dateKey, storage).record.status).toBe('earned-ticket')
+    expect(loadBonusState('user-1', storage).progressTickets).toBe(1)
+    expect(spendProgressTicket('user-1', storage).progressTickets).toBe(0)
   })
 })

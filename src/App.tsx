@@ -27,7 +27,7 @@ import {
   updateRemoteSettings,
 } from './services/remoteStore'
 import { registerAppServiceWorker, scheduleUnlockNotification } from './services/notifications'
-import { clearBonusState, loadBonusState } from './services/bonusChallenge'
+import { clearBonusState, loadBonusState, spendProgressTicket } from './services/bonusChallenge'
 import type { ProofResult } from './services/proof'
 import type { DeveloperChallengeFilters, DeveloperScenario } from './domain/engine'
 
@@ -55,9 +55,18 @@ function authRedirectNotice() {
 }
 
 function localSnapshot(): AppSnapshot {
+  let daily = localStore.getDashboard()
+  let profile = localStore.getProfile()
+  const bonus = loadBonusState(profile.id, window.localStorage)
+  if (daily.recovery && bonus.progressTickets > 0) {
+    localStore.redeemProgressTicket(daily.recovery.sourceAssignmentId)
+    spendProgressTicket(profile.id, window.localStorage)
+    profile = localStore.getProfile()
+    daily = localStore.getDashboard()
+  }
   return {
-    profile: localStore.getProfile(),
-    daily: localStore.getDashboard(),
+    profile,
+    daily,
     history: localStore.getHistory(),
     notifications: localStore.getNotifications(),
     settings: localStore.getSettings(),

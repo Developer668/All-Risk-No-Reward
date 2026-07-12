@@ -23,7 +23,7 @@ Local mode includes:
 - Exact awards: score 72+ → 120 points, 25–71 → 60 points, below 25 → 0
 - Immediate recovery after partial proof, plus two irreversible punishment-dice rerolls that never repeat an item for that account
 - Streaks, levels, history, milestones, settings, boundaries, and a private inbox
-- A one-time fast-finish bonus round that can bank a recovery lifeline—or playfully award nothing
+- One guaranteed optional bonus offer per completed day; completing it banks a single-use Progress Ticket that automatically protects one future partial or missed day
 - Browser notification permission, installable PWA metadata, service worker caching, and offline reload
 - A clearly labelled on-device sample review; synced accounts use real OpenAI video-frame verification
 - Opt-in branded share cards with native share, caption copy, and PNG download; private proof is never included
@@ -58,7 +58,7 @@ npm run e2e:visual   # regenerate desktop/mobile visual QA screenshots
 500 records directly. `npm run catalog:generate` deterministically rebuilds the
 rerunnable InsForge seed without using an AI model.
 
-The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dialog focus and Escape behavior; local auth; full and partial proof; immediate recovery; both no-repeat dice rolls and reload persistence; recovery completion; fast-finish bonus outcomes and lifeline redemption; report-and-replace; branded share privacy, copy, PNG export; settings persistence; notifications; and browser console errors.
+The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dialog focus and Escape behavior; local auth; full and partial proof; immediate recovery; both no-repeat dice rolls and reload persistence; recovery completion; daily bonus offers and Progress Ticket redemption; report-and-replace; branded share privacy, copy, PNG export; settings persistence; notifications; and browser console errors.
 
 ## Product guardrails
 

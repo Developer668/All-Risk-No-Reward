@@ -161,6 +161,26 @@ describe('ChallengeEngine daily assignments', () => {
     expect(engine.sync(new Date(2026, 6, 13, 12)).status).toBe('blocked')
   })
 
+  it('uses a progress ticket to preserve streak continuity and close recovery', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const state = createUserState({ id: 'ticket-user', name: 'Alex', email: 'alex@example.com', now })
+    state.profile.streak = 2
+    state.assignments.push(
+      { id: 'prior-1', userId: state.profile.id, dateKey: '2026-07-10', challengeId: 'easy-comedy-001', status: 'completed', unlockAt: new Date(2026, 6, 10, 10).toISOString(), deadlineAt: new Date(2026, 6, 10, 22).toISOString(), createdAt: new Date(2026, 6, 10, 10).toISOString() },
+      { id: 'prior-2', userId: state.profile.id, dateKey: '2026-07-11', challengeId: 'easy-comedy-002', status: 'completed', unlockAt: new Date(2026, 6, 11, 10).toISOString(), deadlineAt: new Date(2026, 6, 11, 22).toISOString(), createdAt: new Date(2026, 6, 11, 10).toISOString() },
+    )
+    const engine = new ChallengeEngine(state)
+    const assignment = engine.sync(now).assignment!
+    const partial = engine.submitCompletion({ assignmentId: assignment.id, score: 50, note: 'I made a visible partial attempt.' }, new Date(2026, 6, 12, 20, 5))
+
+    expect(partial.view.status).toBe('blocked')
+    const protectedView = engine.redeemProgressTicket(assignment.id, new Date(2026, 6, 12, 20, 6))
+    expect(protectedView.status).toBe('partial')
+    expect(protectedView.assignment?.progressProtected).toBe(true)
+    expect(protectedView.recovery).toBeUndefined()
+    expect(engine.getState().profile.streak).toBe(3)
+  })
+
   it('uses the proof service threshold and fixed point awards consistently', () => {
     const engine = new ChallengeEngine(createUserState({
       id: 'user-threshold',
