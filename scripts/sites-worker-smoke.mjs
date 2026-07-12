@@ -23,6 +23,10 @@ const deployedIndex = await readFile(resolve(clientRoot, 'index.html'), 'utf8')
 assert.doesNotMatch(deployedIndex, /__SITE_ORIGIN__/)
 assert.match(deployedIndex, /https:\/\/all-risk-no-reward\.decipherer71951502\.chatgpt\.site\/og\.png/)
 assert.equal((await readFile(resolve(clientRoot, '_redirects'), 'utf8')).trim(), '/* /index.html 200')
+for (const route of ['app', 'privacy', 'terms', 'reset-password', 'sign-in']) {
+  const routeHtml = await readFile(resolve(clientRoot, route, 'index.html'), 'utf8')
+  assert.equal(routeHtml, deployedIndex, `The /${route} route shell must match the app shell.`)
+}
 
 await assert.rejects(
   access(resolve(root, 'dist/index.html')),

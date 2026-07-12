@@ -10,6 +10,7 @@ const clientIndexPath = resolve(clientOutputPath, 'index.html')
 const serverOutputPath = resolve(root, 'dist/server/index.js')
 const hostingOutputPath = resolve(root, 'dist/.openai/hosting.json')
 const defaultSiteOrigin = 'https://all-risk-no-reward.decipherer71951502.chatgpt.site'
+const spaRoutes = ['app', 'privacy', 'terms', 'reset-password', 'sign-in']
 
 const hostingSource = await readFile(hostingPath, 'utf8')
 const hosting = JSON.parse(hostingSource)
@@ -41,6 +42,12 @@ if (!clientHtml.includes('__SITE_ORIGIN__')) {
   throw new Error('The client shell is missing the __SITE_ORIGIN__ metadata placeholder')
 }
 await writeFile(clientIndexPath, clientHtml.replaceAll('__SITE_ORIGIN__', configuredOrigin))
+const deployedHtml = await readFile(clientIndexPath, 'utf8')
+for (const route of spaRoutes) {
+  const routeDirectory = resolve(clientOutputPath, route)
+  await mkdir(routeDirectory, { recursive: true })
+  await writeFile(resolve(routeDirectory, 'index.html'), deployedHtml)
+}
 
 await mkdir(resolve(root, 'dist/server'), { recursive: true })
 await mkdir(resolve(root, 'dist/.openai'), { recursive: true })
