@@ -149,6 +149,10 @@ ALTER TABLE recovery_tasks ADD COLUMN IF NOT EXISTS catalog_id TEXT REFERENCES r
 ALTER TABLE recovery_tasks ADD COLUMN IF NOT EXISTS escalation_level SMALLINT NOT NULL DEFAULT 0;
 ALTER TABLE recovery_tasks ADD COLUMN IF NOT EXISTS last_escalated_at TIMESTAMPTZ;
 ALTER TABLE recovery_tasks ADD COLUMN IF NOT EXISTS completion_note TEXT;
+ALTER TABLE recovery_tasks ADD COLUMN IF NOT EXISTS reroll_count SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE recovery_tasks DROP CONSTRAINT IF EXISTS recovery_tasks_reroll_count_check;
+ALTER TABLE recovery_tasks ADD CONSTRAINT recovery_tasks_reroll_count_check
+  CHECK (reroll_count BETWEEN 0 AND 2);
 
 CREATE TABLE IF NOT EXISTS notification_outbox (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -194,6 +198,39 @@ CREATE TABLE IF NOT EXISTS challenge_reports (
   UNIQUE (user_id, assignment_id)
 );
 
+-- Immutable per-user assignment history. Catalog text is snapshotted so an
+-- audit remains understandable even if an administrator later edits a catalog
+-- row. All writes go through SECURITY DEFINER orchestration routines.
+CREATE TABLE IF NOT EXISTS recovery_assignment_history (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  recovery_task_id UUID NOT NULL REFERENCES recovery_tasks(id) ON DELETE CASCADE,
+  catalog_id TEXT NOT NULL REFERENCES recovery_catalog(id),
+  previous_catalog_id TEXT REFERENCES recovery_catalog(id),
+  assignment_kind TEXT NOT NULL CHECK (assignment_kind IN ('initial', 'reroll', 'escalation')),
+  assignment_sequence INTEGER NOT NULL CHECK (assignment_sequence >= 0),
+  reroll_number SMALLINT NOT NULL CHECK (reroll_number BETWEEN 0 AND 2),
+  assigned_title TEXT NOT NULL,
+  assigned_prompt TEXT NOT NULL,
+  assigned_difficulty SMALLINT NOT NULL CHECK (assigned_difficulty BETWEEN 1 AND 5),
+  assigned_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (recovery_task_id, assignment_sequence)
+);
+
+-- Existing installations may already have open or completed recovery rows.
+-- Record their current catalog item so it is never selected by a future roll.
+INSERT INTO recovery_assignment_history (
+  user_id, recovery_task_id, catalog_id, previous_catalog_id, assignment_kind,
+  assignment_sequence, reroll_number, assigned_title, assigned_prompt,
+  assigned_difficulty, assigned_at
+)
+SELECT
+  user_id, id, catalog_id, NULL, 'initial', 0, reroll_count, title, prompt,
+  difficulty, created_at
+FROM recovery_tasks
+WHERE catalog_id IS NOT NULL
+ON CONFLICT (recovery_task_id, assignment_sequence) DO NOTHING;
+
 -- ---------------------------------------------------------------------------
 -- Indexes
 -- ---------------------------------------------------------------------------
@@ -209,6 +246,10 @@ CREATE INDEX IF NOT EXISTS proof_attempts_user_requested_idx ON proof_verificati
 CREATE INDEX IF NOT EXISTS proof_attempts_assignment_idx ON proof_verification_attempts(assignment_id, requested_at DESC);
 CREATE INDEX IF NOT EXISTS recovery_tasks_user_status_idx ON recovery_tasks(user_id, status, due_at);
 CREATE UNIQUE INDEX IF NOT EXISTS recovery_tasks_source_assignment_uidx ON recovery_tasks(source_assignment_id);
+CREATE INDEX IF NOT EXISTS recovery_assignment_history_user_catalog_idx
+  ON recovery_assignment_history(user_id, catalog_id);
+CREATE INDEX IF NOT EXISTS recovery_assignment_history_task_sequence_idx
+  ON recovery_assignment_history(recovery_task_id, assignment_sequence DESC);
 CREATE INDEX IF NOT EXISTS notification_outbox_user_available_idx ON notification_outbox(user_id, available_at DESC);
 CREATE INDEX IF NOT EXISTS profiles_maintenance_idx ON profiles(maintenance_checked_at NULLS FIRST);
 CREATE INDEX IF NOT EXISTS challenge_reports_user_created_idx ON challenge_reports(user_id, created_at DESC);
@@ -222,174 +263,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS daily_assignments_current_user_date_uidx
   ON daily_assignments(user_id, assignment_date)
   WHERE status <> 'replaced';
 
--- ---------------------------------------------------------------------------
--- Safety-reviewed content. These rows intentionally exclude humiliation,
--- romantic declarations, contact scraping, impersonation, and auto-messaging.
--- ---------------------------------------------------------------------------
-
-INSERT INTO challenge_catalog (
-  id, title, prompt, why, category, difficulty, estimated_minutes, proof_hint,
-  suggested_script, is_active, safety_reviewed_at, safety_notes, boundary_tags
-)
-VALUES
-  (
-    'specific-compliment',
-    'Say the specific thing',
-    'Give someone a sincere compliment about a choice they made—not their appearance.',
-    'Specific appreciation trains you to initiate warmth without needing a perfect opening.',
-    'warm-up', 1, 5,
-    'Write what you said and how they responded. No names needed.',
-    'That was a really thoughtful way to handle ___.',
-    true, now(),
-    'Use an ordinary, appropriate setting. Do not comment on bodies, protected traits, or private information.',
-    ARRAY[]::TEXT[]
-  ),
-  (
-    'ask-recommendation',
-    'Borrow a good opinion',
-    'Ask someone you do not usually talk to for a recommendation: music, food, a show, or a local spot.',
-    'Low-stakes questions create natural conversation without forcing intimacy.',
-    'conversation', 1, 8,
-    'Share the recommendation and one detail you learned.',
-    'Quick question—you seem like you would have a good answer. What is one ___ you would recommend?',
-    true, now(),
-    'Ask once, accept a short answer or no answer, and do not target someone who is working or unable to disengage.',
-    ARRAY[]::TEXT[]
-  ),
-  (
-    'voice-note',
-    'Use your real voice',
-    'Send a 20–40 second voice note to a friend you normally only text.',
-    'Letting your voice be heard is a small, controllable exposure to being more present.',
-    'connection', 2, 7,
-    'Upload your own draft or describe what you shared. Never upload someone else''s private message.',
-    NULL,
-    true, now(),
-    'The user chooses the recipient and manually reviews and sends the message. Never contact strangers automatically.',
-    ARRAY['voice-message', 'direct-message']::TEXT[]
-  ),
-  (
-    'small-preference',
-    'State a preference',
-    'When a small choice appears today, say what you actually prefer instead of “anything is fine.”',
-    'Confidence grows when you practice taking up a reasonable amount of space.',
-    'assertiveness', 2, 3,
-    'Describe the choice, your preference, and what happened next.',
-    NULL,
-    true, now(),
-    'Keep the preference low-stakes and respect the other person''s equal right to disagree.',
-    ARRAY[]::TEXT[]
-  ),
-  (
-    'three-questions',
-    'Go one question deeper',
-    'Have a conversation where you ask three genuine follow-up questions instead of planning your next answer.',
-    'Curiosity takes pressure off performance and makes connection easier.',
-    'conversation', 2, 12,
-    'List the three questions, with identifying details removed.',
-    NULL,
-    true, now(),
-    'Avoid sensitive or invasive topics, notice disengagement, and let the conversation end naturally.',
-    ARRAY[]::TEXT[]
-  ),
-  (
-    'invite-light',
-    'Make the light invite',
-    'Invite someone to a low-pressure activity: coffee, a walk, lunch, a game, or studying together.',
-    'Clear invitations teach you that a “no” is information, not a verdict on you.',
-    'connection', 3, 10,
-    'Share the invitation with names and avatars covered.',
-    'I am planning to ___ this week. Want to join? No worries if your week is packed.',
-    true, now(),
-    'Invite once, make declining easy, and do not pressure, repeatedly follow up, or use a power imbalance.',
-    ARRAY['invitation', 'direct-message']::TEXT[]
-  ),
-  (
-    'kind-boundary',
-    'Use a kind no',
-    'Decline one small request or suggestion you do not want, kindly and without inventing an excuse.',
-    'Healthy boundaries reduce resentment and build trust in your own judgment.',
-    'assertiveness', 3, 5,
-    'Write the boundary and rate the discomfort from 1–10.',
-    'Thanks for thinking of me. I am going to pass this time.',
-    true, now(),
-    'Do not use this exercise for emergencies, dependent care, legal duties, or safety-critical responsibilities.',
-    ARRAY[]::TEXT[]
-  ),
-  (
-    'honest-appreciation',
-    'Name what they mean',
-    'Tell someone you trust one concrete way they have made your life better.',
-    'Direct appreciation is vulnerable, useful, and safer than dramatic declarations.',
-    'connection', 3, 12,
-    'Share what you chose to express and how it felt. Their response stays private.',
-    NULL,
-    true, now(),
-    'Choose someone trusted. This never requires a romantic declaration, disclosure of secrets, or a public post.',
-    ARRAY['vulnerability']::TEXT[]
-  )
-ON CONFLICT (id) DO UPDATE SET
-  title = EXCLUDED.title,
-  prompt = EXCLUDED.prompt,
-  why = EXCLUDED.why,
-  category = EXCLUDED.category,
-  difficulty = EXCLUDED.difficulty,
-  estimated_minutes = EXCLUDED.estimated_minutes,
-  proof_hint = EXCLUDED.proof_hint,
-  suggested_script = EXCLUDED.suggested_script,
-  is_active = EXCLUDED.is_active,
-  safety_reviewed_at = EXCLUDED.safety_reviewed_at,
-  safety_notes = EXCLUDED.safety_notes,
-  boundary_tags = EXCLUDED.boundary_tags;
-
-INSERT INTO recovery_catalog (
-  id, title, prompt, difficulty, estimated_minutes, is_active, private_only,
-  safety_notes, safety_reviewed_at
-)
-VALUES
-  (
-    'reflection-60', 'The 60-second debrief',
-    'Record a private note: what got in the way, what was in your control, and the smallest version you could try tomorrow.',
-    1, 3, true, true,
-    'Private reflection only; no disclosure to another person is required.', now()
-  ),
-  (
-    'micro-hello', 'Three tiny hellos',
-    'Make eye contact if comfortable and say hello to three people in ordinary, appropriate settings.',
-    2, 10, true, true,
-    'Do not follow anyone, interrupt private moments, or persist if someone does not engage.', now()
-  ),
-  (
-    'repair-message', 'Close one open loop',
-    'Reply to one non-sensitive message you have been avoiding with a short, honest response. You review and send it yourself.',
-    3, 10, true, true,
-    'The app never sends on the user''s behalf. Exclude abusive contacts, legal matters, and unsafe relationships.', now()
-  ),
-  (
-    'ask-small-help', 'Ask for one small thing',
-    'Ask a trusted or appropriate person for a small recommendation, clarification, or practical favor, and accept either answer.',
-    4, 15, true, true,
-    'Keep the request reasonable, non-financial, non-romantic, and easy to decline.', now()
-  ),
-  (
-    'initiate-safe-plan', 'Initiate a low-pressure plan',
-    'Invite someone you already know to a simple, appropriate activity. Send it yourself, ask once, and accept no response or a no.',
-    5, 20, true, true,
-    'Never requires contacting a stranger, declaring love, public embarrassment, repeated messaging, or surrendering account control.', now()
-  )
-ON CONFLICT (id) DO UPDATE SET
-  title = EXCLUDED.title,
-  prompt = EXCLUDED.prompt,
-  difficulty = EXCLUDED.difficulty,
-  estimated_minutes = EXCLUDED.estimated_minutes,
-  is_active = EXCLUDED.is_active,
-  private_only = EXCLUDED.private_only,
-  safety_notes = EXCLUDED.safety_notes,
-  safety_reviewed_at = EXCLUDED.safety_reviewed_at;
-
--- The product contract caps recovery severity at three. Historical level-four
--- and level-five rows remain referentially intact but cannot be selected.
-UPDATE recovery_catalog SET is_active = false WHERE difficulty > 3;
+-- Catalogs are intentionally empty. The operator supplies and safety-reviews
+-- challenge_catalog and recovery_catalog content after importing this schema.
 
 -- ---------------------------------------------------------------------------
 -- Updated-at trigger
@@ -447,6 +322,144 @@ BEGIN
 END;
 $$;
 
+-- Assign the first punishment for one partial or missed challenge. Keeping this
+-- in one narrow helper makes the proof and deadline paths use the same
+-- score-to-difficulty rules, no-repeat catalog selection, audit row, and
+-- notification idempotency. The assignment row lock plus the unique source
+-- index guarantee that concurrent proof/maintenance calls create at most one.
+CREATE OR REPLACE FUNCTION public._create_recovery_for_assignment(
+  p_user_id UUID,
+  p_assignment_id UUID,
+  p_now TIMESTAMPTZ DEFAULT now()
+)
+RETURNS recovery_tasks
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+DECLARE
+  v_profile profiles%ROWTYPE;
+  v_assignment daily_assignments%ROWTYPE;
+  v_recovery recovery_tasks%ROWTYPE;
+  v_catalog recovery_catalog%ROWTYPE;
+  v_initial_difficulty SMALLINT;
+BEGIN
+  SELECT * INTO v_assignment
+    FROM daily_assignments
+   WHERE id = p_assignment_id
+     AND user_id = p_user_id
+   FOR UPDATE;
+
+  IF v_assignment.id IS NULL THEN
+    RETURN NULL;
+  END IF;
+
+  SELECT * INTO v_recovery
+    FROM recovery_tasks
+   WHERE source_assignment_id = v_assignment.id
+   FOR UPDATE;
+
+  IF v_recovery.id IS NOT NULL THEN
+    RETURN v_recovery;
+  END IF;
+
+  v_initial_difficulty := CASE
+    WHEN v_assignment.completion_score IS NULL THEN 3
+    WHEN v_assignment.completion_score >= 60 THEN 1
+    WHEN v_assignment.completion_score >= 25 THEN 2
+    ELSE 3
+  END;
+
+  SELECT * INTO v_catalog
+    FROM recovery_catalog
+   WHERE is_active = true
+     AND difficulty = v_initial_difficulty
+     AND NOT EXISTS (
+       SELECT 1 FROM recovery_assignment_history history
+        WHERE history.user_id = p_user_id
+          AND history.catalog_id = recovery_catalog.id
+     )
+     AND NOT EXISTS (
+       SELECT 1 FROM recovery_tasks prior
+        WHERE prior.user_id = p_user_id
+          AND prior.catalog_id = recovery_catalog.id
+     )
+   ORDER BY md5(v_assignment.id::text || ':' || id)
+   LIMIT 1;
+
+  IF v_catalog.id IS NULL THEN
+    SELECT * INTO v_catalog
+      FROM recovery_catalog
+     WHERE is_active = true
+       AND NOT EXISTS (
+         SELECT 1 FROM recovery_assignment_history history
+          WHERE history.user_id = p_user_id
+            AND history.catalog_id = recovery_catalog.id
+       )
+       AND NOT EXISTS (
+         SELECT 1 FROM recovery_tasks prior
+          WHERE prior.user_id = p_user_id
+            AND prior.catalog_id = recovery_catalog.id
+       )
+     ORDER BY abs(difficulty - v_initial_difficulty), difficulty, id
+     LIMIT 1;
+  END IF;
+
+  -- An empty/exhausted operator catalog cannot produce a safe punishment. The
+  -- partial result is still recorded; a later maintenance pass can retry after
+  -- the operator adds reviewed content.
+  IF v_catalog.id IS NULL THEN
+    RETURN NULL;
+  END IF;
+
+  INSERT INTO recovery_tasks (
+    user_id, source_assignment_id, catalog_id, title, prompt, difficulty,
+    due_at, escalation_level, last_escalated_at
+  )
+  VALUES (
+    p_user_id, v_assignment.id, v_catalog.id, v_catalog.title,
+    v_catalog.prompt, v_catalog.difficulty, p_now + interval '24 hours', 0, p_now
+  )
+  ON CONFLICT (source_assignment_id) DO NOTHING
+  RETURNING * INTO v_recovery;
+
+  IF v_recovery.id IS NULL THEN
+    SELECT * INTO v_recovery
+      FROM recovery_tasks
+     WHERE source_assignment_id = v_assignment.id;
+    RETURN v_recovery;
+  END IF;
+
+  INSERT INTO recovery_assignment_history (
+    user_id, recovery_task_id, catalog_id, previous_catalog_id,
+    assignment_kind, assignment_sequence, reroll_number, assigned_title,
+    assigned_prompt, assigned_difficulty, assigned_at
+  ) VALUES (
+    p_user_id, v_recovery.id, v_catalog.id, NULL, 'initial', 0, 0,
+    v_catalog.title, v_catalog.prompt, v_catalog.difficulty, p_now
+  )
+  ON CONFLICT (recovery_task_id, assignment_sequence) DO NOTHING;
+
+  SELECT * INTO v_profile FROM profiles WHERE user_id = p_user_id;
+  IF v_profile.notification_enabled THEN
+    PERFORM public._queue_notification(
+      p_user_id,
+      'recovery-created:' || v_recovery.id::text,
+      'recovery-created',
+      CASE
+        WHEN v_assignment.completion_score IS NOT NULL
+          THEN 'Progress saved—close the loop'
+        ELSE 'A reset is ready'
+      END,
+      'Complete the private recovery task before the next daily challenge.',
+      p_now
+    );
+  END IF;
+
+  RETURN v_recovery;
+END;
+$$;
+
 CREATE OR REPLACE FUNCTION public._process_user_state(
   p_user_id UUID,
   p_now TIMESTAMPTZ DEFAULT now()
@@ -461,8 +474,9 @@ DECLARE
   v_assignment daily_assignments%ROWTYPE;
   v_recovery recovery_tasks%ROWTYPE;
   v_catalog recovery_catalog%ROWTYPE;
-  v_initial_difficulty SMALLINT;
   v_next_difficulty SMALLINT;
+  v_previous_catalog_id TEXT;
+  v_assignment_sequence INTEGER;
 BEGIN
   SELECT * INTO v_profile FROM profiles WHERE user_id = p_user_id;
   IF v_profile.user_id IS NULL THEN
@@ -535,9 +549,9 @@ BEGIN
     END IF;
   END LOOP;
 
-  -- A missed/partial assignment creates exactly one recovery task. More genuine
-  -- progress produces a lighter initial recovery; repeated missed recovery due
-  -- dates escalate one level at a time, never beyond the reviewed catalog.
+  -- A deadline miss creates exactly one recovery. Partial proof calls the same
+  -- helper immediately from record_verified_completion rather than waiting for
+  -- this maintenance path.
   FOR v_assignment IN
     UPDATE daily_assignments
        SET status = 'missed',
@@ -547,59 +561,34 @@ BEGIN
        AND deadline_at < p_now
      RETURNING *
   LOOP
-    v_initial_difficulty := CASE
-      WHEN v_assignment.completion_score IS NULL THEN 3
-      WHEN v_assignment.completion_score >= 75 THEN 1
-      WHEN v_assignment.completion_score >= 50 THEN 2
-      WHEN v_assignment.completion_score >= 25 THEN 3
-      ELSE 3
-    END;
-
-    SELECT * INTO v_catalog
-      FROM recovery_catalog
-     WHERE is_active = true
-       AND difficulty = v_initial_difficulty
-     ORDER BY md5(v_assignment.id::text || ':' || id)
-     LIMIT 1;
-
-    IF v_catalog.id IS NULL THEN
-      SELECT * INTO v_catalog
-       FROM recovery_catalog
-       WHERE is_active = true
-         AND difficulty <= 3
-       ORDER BY abs(difficulty - v_initial_difficulty), difficulty, id
-       LIMIT 1;
-    END IF;
-
-    IF v_catalog.id IS NOT NULL THEN
-      INSERT INTO recovery_tasks (
-        user_id, source_assignment_id, catalog_id, title, prompt, difficulty,
-        due_at, escalation_level, last_escalated_at
-      )
-      VALUES (
-        p_user_id, v_assignment.id, v_catalog.id, v_catalog.title,
-        v_catalog.prompt, v_catalog.difficulty, p_now + interval '24 hours', 0, p_now
-      )
-      ON CONFLICT (source_assignment_id) DO NOTHING
-      RETURNING * INTO v_recovery;
-
-      IF v_recovery.id IS NOT NULL AND v_profile.notification_enabled THEN
-        PERFORM public._queue_notification(
-          p_user_id,
-          'recovery-created:' || v_recovery.id::text,
-          'recovery-created',
-          'A reset is ready',
-          'Complete the private recovery task before the next daily challenge.',
-          p_now
-        );
-      END IF;
-    END IF;
-
     UPDATE profiles SET streak = 0 WHERE user_id = p_user_id;
   END LOOP;
 
-  -- Escalate at most once per due interval. A level-three recovery remains level
-  -- three with a fresh due date; it never turns into an unsafe dare.
+  -- This also retries an earlier partial/miss if the operator catalog was empty
+  -- when it was first recorded. Existing recoveries are excluded before the
+  -- helper is called, so a retry cannot add another history row or event.
+  FOR v_assignment IN
+    SELECT assignment.*
+      FROM daily_assignments assignment
+     WHERE assignment.user_id = p_user_id
+       AND assignment.status IN ('partial', 'missed')
+       AND NOT EXISTS (
+         SELECT 1 FROM recovery_tasks recovery
+          WHERE recovery.source_assignment_id = assignment.id
+       )
+     ORDER BY assignment.assignment_date, assignment.created_at
+     FOR UPDATE
+  LOOP
+    v_recovery := public._create_recovery_for_assignment(
+      p_user_id,
+      v_assignment.id,
+      p_now
+    );
+    UPDATE profiles SET streak = 0 WHERE user_id = p_user_id;
+  END LOOP;
+
+  -- Escalate at most once per due interval and only through active,
+  -- operator-reviewed catalog content. Difficulty five is the schema maximum.
   FOR v_recovery IN
     SELECT *
       FROM recovery_tasks
@@ -609,12 +598,23 @@ BEGIN
      ORDER BY due_at
      FOR UPDATE
   LOOP
-    v_next_difficulty := LEAST(3, v_recovery.difficulty + 1);
+    v_next_difficulty := LEAST(5, v_recovery.difficulty + 1);
+    v_previous_catalog_id := v_recovery.catalog_id;
 
     SELECT * INTO v_catalog
       FROM recovery_catalog
      WHERE is_active = true
        AND difficulty = v_next_difficulty
+       AND NOT EXISTS (
+         SELECT 1 FROM recovery_assignment_history history
+          WHERE history.user_id = p_user_id
+            AND history.catalog_id = recovery_catalog.id
+       )
+       AND NOT EXISTS (
+         SELECT 1 FROM recovery_tasks prior
+          WHERE prior.user_id = p_user_id
+            AND prior.catalog_id = recovery_catalog.id
+       )
      ORDER BY md5(v_recovery.id::text || ':' || (v_recovery.escalation_level + 1)::text || ':' || id)
      LIMIT 1;
 
@@ -629,6 +629,21 @@ BEGIN
              due_at = p_now + interval '24 hours'
        WHERE id = v_recovery.id
        RETURNING * INTO v_recovery;
+
+      SELECT COALESCE(max(assignment_sequence), -1) + 1
+        INTO v_assignment_sequence
+        FROM recovery_assignment_history
+       WHERE recovery_task_id = v_recovery.id;
+
+      INSERT INTO recovery_assignment_history (
+        user_id, recovery_task_id, catalog_id, previous_catalog_id,
+        assignment_kind, assignment_sequence, reroll_number, assigned_title,
+        assigned_prompt, assigned_difficulty, assigned_at
+      ) VALUES (
+        p_user_id, v_recovery.id, v_catalog.id, v_previous_catalog_id,
+        'escalation', v_assignment_sequence, v_recovery.reroll_count,
+        v_catalog.title, v_catalog.prompt, v_catalog.difficulty, p_now
+      );
 
       IF v_profile.notification_enabled THEN
         PERFORM public._queue_notification(
@@ -1283,6 +1298,125 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE FUNCTION public.reroll_recovery_task(p_recovery_id UUID)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+DECLARE
+  v_user_id UUID := auth.uid();
+  v_recovery recovery_tasks%ROWTYPE;
+  v_catalog recovery_catalog%ROWTYPE;
+  v_previous_catalog_id TEXT;
+  v_previous_difficulty SMALLINT;
+  v_assignment_sequence INTEGER;
+BEGIN
+  IF v_user_id IS NULL THEN
+    RAISE EXCEPTION USING ERRCODE = '28000', MESSAGE = 'AUTH_REQUIRED';
+  END IF;
+
+  -- The row lock serializes two rapid clicks or requests from multiple tabs, so
+  -- the two-roll allowance cannot be overspent.
+  SELECT * INTO v_recovery
+    FROM recovery_tasks
+   WHERE id = p_recovery_id AND user_id = v_user_id
+   FOR UPDATE;
+
+  IF v_recovery.id IS NULL THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'RECOVERY_NOT_FOUND';
+  END IF;
+  IF v_recovery.status <> 'open' THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'RECOVERY_NOT_OPEN';
+  END IF;
+  IF v_recovery.reroll_count >= 2 THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'RECOVERY_REROLL_LIMIT';
+  END IF;
+
+  -- Backfill the current assignment defensively for installations upgraded
+  -- from a schema version that predated assignment history.
+  IF v_recovery.catalog_id IS NOT NULL AND NOT EXISTS (
+    SELECT 1 FROM recovery_assignment_history
+     WHERE user_id = v_user_id AND catalog_id = v_recovery.catalog_id
+  ) THEN
+    SELECT COALESCE(max(assignment_sequence), -1) + 1
+      INTO v_assignment_sequence
+      FROM recovery_assignment_history
+     WHERE recovery_task_id = v_recovery.id;
+
+    INSERT INTO recovery_assignment_history (
+      user_id, recovery_task_id, catalog_id, previous_catalog_id,
+      assignment_kind, assignment_sequence, reroll_number, assigned_title,
+      assigned_prompt, assigned_difficulty, assigned_at
+    ) VALUES (
+      v_user_id, v_recovery.id, v_recovery.catalog_id, NULL, 'initial',
+      v_assignment_sequence, v_recovery.reroll_count, v_recovery.title,
+      v_recovery.prompt, v_recovery.difficulty, v_recovery.created_at
+    );
+  END IF;
+
+  -- random() gives every remaining active row equal weight. Difficulty is not
+  -- part of the predicate: accepting a roll can make the task easier or harder.
+  SELECT * INTO v_catalog
+    FROM recovery_catalog
+   WHERE is_active = true
+     AND NOT EXISTS (
+       SELECT 1 FROM recovery_assignment_history history
+        WHERE history.user_id = v_user_id
+          AND history.catalog_id = recovery_catalog.id
+     )
+     AND NOT EXISTS (
+       SELECT 1 FROM recovery_tasks prior
+        WHERE prior.user_id = v_user_id
+          AND prior.catalog_id = recovery_catalog.id
+     )
+   ORDER BY random()
+   LIMIT 1;
+
+  IF v_catalog.id IS NULL THEN
+    RAISE EXCEPTION USING ERRCODE = 'P0001', MESSAGE = 'NO_UNUSED_RECOVERY_AVAILABLE';
+  END IF;
+
+  v_previous_catalog_id := v_recovery.catalog_id;
+  v_previous_difficulty := v_recovery.difficulty;
+
+  UPDATE recovery_tasks
+     SET catalog_id = v_catalog.id,
+         title = v_catalog.title,
+         prompt = v_catalog.prompt,
+         difficulty = v_catalog.difficulty,
+         reroll_count = reroll_count + 1
+   WHERE id = v_recovery.id
+   RETURNING * INTO v_recovery;
+
+  SELECT COALESCE(max(assignment_sequence), -1) + 1
+    INTO v_assignment_sequence
+    FROM recovery_assignment_history
+   WHERE recovery_task_id = v_recovery.id;
+
+  INSERT INTO recovery_assignment_history (
+    user_id, recovery_task_id, catalog_id, previous_catalog_id,
+    assignment_kind, assignment_sequence, reroll_number, assigned_title,
+    assigned_prompt, assigned_difficulty, assigned_at
+  ) VALUES (
+    v_user_id, v_recovery.id, v_catalog.id, v_previous_catalog_id, 'reroll',
+    v_assignment_sequence, v_recovery.reroll_count, v_catalog.title,
+    v_catalog.prompt, v_catalog.difficulty, now()
+  );
+
+  RETURN jsonb_build_object(
+    'recovery', to_jsonb(v_recovery),
+    'rerollsRemaining', 2 - v_recovery.reroll_count,
+    'previousDifficulty', v_previous_difficulty,
+    'direction', CASE
+      WHEN v_recovery.difficulty < v_previous_difficulty THEN 'easier'
+      WHEN v_recovery.difficulty > v_previous_difficulty THEN 'harder'
+      ELSE 'same'
+    END
+  );
+END;
+$$;
+
 CREATE OR REPLACE FUNCTION public.mark_notifications_read(p_notification_ids UUID[])
 RETURNS INTEGER
 LANGUAGE plpgsql
@@ -1371,6 +1505,7 @@ DECLARE
   v_attempt proof_verification_attempts%ROWTYPE;
   v_assignment daily_assignments%ROWTYPE;
   v_completion challenge_completions%ROWTYPE;
+  v_recovery recovery_tasks%ROWTYPE;
   v_verdict TEXT;
   v_target_points INTEGER := 0;
   v_points INTEGER := 0;
@@ -1401,6 +1536,9 @@ BEGIN
       FROM challenge_completions
      WHERE verification_attempt_id = v_attempt.id;
     SELECT * INTO v_assignment FROM daily_assignments WHERE id = v_attempt.assignment_id;
+    SELECT * INTO v_recovery
+      FROM recovery_tasks
+     WHERE source_assignment_id = v_assignment.id;
     RETURN jsonb_build_object(
       'assessment', jsonb_build_object(
         'score', v_completion.score,
@@ -1409,6 +1547,7 @@ BEGIN
       ),
       'completion', to_jsonb(v_completion),
       'assignment', to_jsonb(v_assignment),
+      'recovery', CASE WHEN v_recovery.id IS NULL THEN NULL ELSE to_jsonb(v_recovery) END,
       'idempotent', true
     );
   END IF;
@@ -1509,6 +1648,24 @@ BEGIN
          completed_at = now()
    WHERE id = v_attempt.id;
 
+  -- Partial proof should change the user's next action now, not at the nightly
+  -- deadline. This stays inside the completion transaction: either the score,
+  -- assignment, one recovery, its one audit row, and its one notification all
+  -- commit together, or none of them do. The helper applies the same
+  -- score-based starting difficulty as the missed-deadline path.
+  IF v_verdict = 'partial' THEN
+    UPDATE profiles SET streak = 0 WHERE user_id = v_attempt.user_id;
+    v_recovery := public._create_recovery_for_assignment(
+      v_attempt.user_id,
+      v_assignment.id,
+      now()
+    );
+  ELSE
+    SELECT * INTO v_recovery
+      FROM recovery_tasks
+     WHERE source_assignment_id = v_assignment.id;
+  END IF;
+
   RETURN jsonb_build_object(
     'assessment', jsonb_build_object(
       'score', p_score,
@@ -1517,6 +1674,7 @@ BEGIN
     ),
     'completion', to_jsonb(v_completion),
     'assignment', to_jsonb(v_assignment),
+    'recovery', CASE WHEN v_recovery.id IS NULL THEN NULL ELSE to_jsonb(v_recovery) END,
     'idempotent', false
   );
 END;
@@ -1625,6 +1783,7 @@ ALTER TABLE recovery_tasks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE notification_outbox ENABLE ROW LEVEL SECURITY;
 ALTER TABLE account_deletion_requests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE challenge_reports ENABLE ROW LEVEL SECURITY;
+ALTER TABLE recovery_assignment_history ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS authenticated_read_catalog ON challenge_catalog;
 CREATE POLICY authenticated_read_catalog ON challenge_catalog
@@ -1670,18 +1829,25 @@ DROP POLICY IF EXISTS users_read_own_challenge_reports ON challenge_reports;
 CREATE POLICY users_read_own_challenge_reports ON challenge_reports
   FOR SELECT TO authenticated USING (user_id = auth.uid());
 
+DROP POLICY IF EXISTS users_read_own_recovery_history ON recovery_assignment_history;
+CREATE POLICY users_read_own_recovery_history ON recovery_assignment_history
+  FOR SELECT TO authenticated USING (user_id = auth.uid());
+
 GRANT USAGE ON SCHEMA public TO authenticated;
 GRANT SELECT ON challenge_catalog, recovery_catalog, profiles, daily_assignments,
   proof_verification_attempts, challenge_completions, recovery_tasks,
-  notification_outbox, account_deletion_requests, challenge_reports TO authenticated;
+  recovery_assignment_history, notification_outbox, account_deletion_requests,
+  challenge_reports TO authenticated;
 
 REVOKE INSERT, UPDATE, DELETE ON profiles, daily_assignments,
   proof_verification_attempts, challenge_completions, recovery_tasks,
-  notification_outbox, account_deletion_requests, challenge_reports FROM authenticated;
+  recovery_assignment_history, notification_outbox, account_deletion_requests,
+  challenge_reports FROM authenticated;
 REVOKE INSERT, UPDATE, DELETE ON challenge_catalog, recovery_catalog FROM authenticated;
 
 REVOKE ALL ON FUNCTION public.set_updated_at() FROM PUBLIC;
 REVOKE ALL ON FUNCTION public._queue_notification(UUID, TEXT, TEXT, TEXT, TEXT, TIMESTAMPTZ) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public._create_recovery_for_assignment(UUID, UUID, TIMESTAMPTZ) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public._process_user_state(UUID, TIMESTAMPTZ) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public._ensure_assignment_for(UUID, TIMESTAMPTZ) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.ensure_daily_assignment() FROM PUBLIC;
@@ -1689,6 +1855,7 @@ REVOKE ALL ON FUNCTION public.update_profile_preferences(TEXT, TEXT, BOOLEAN, SM
 REVOKE ALL ON FUNCTION public.reserve_proof_verification(UUID) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.report_challenge(UUID, TEXT, TEXT) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.complete_recovery_task(UUID, TEXT) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.reroll_recovery_task(UUID) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.mark_notifications_read(UUID[]) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.delete_my_app_data(TEXT) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.record_verified_completion(UUID, INTEGER, TEXT, TEXT, TEXT, TEXT, TEXT, INTEGER) FROM PUBLIC;
@@ -1700,6 +1867,7 @@ GRANT EXECUTE ON FUNCTION public.update_profile_preferences(TEXT, TEXT, BOOLEAN,
 GRANT EXECUTE ON FUNCTION public.reserve_proof_verification(UUID) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.report_challenge(UUID, TEXT, TEXT) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.complete_recovery_task(UUID, TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.reroll_recovery_task(UUID) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.mark_notifications_read(UUID[]) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.delete_my_app_data(TEXT) TO authenticated;
 

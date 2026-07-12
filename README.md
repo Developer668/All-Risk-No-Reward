@@ -17,7 +17,9 @@ Local mode includes:
 - Deterministic per-user daily assignments, random 10:00–18:00 unlocks, and a 22:00 deadline
 - Full, partial, missed, reported, recovery-blocked, and recovered states
 - Exact awards: score 72+ → 120 points, 25–71 → 60 points, below 25 → 0
+- Immediate recovery after partial proof, plus two irreversible punishment-dice rerolls that never repeat an item for that account
 - Streaks, levels, history, milestones, settings, boundaries, and a private inbox
+- A one-time fast-finish bonus round that can bank a recovery lifeline—or playfully award nothing
 - Browser notification permission, installable PWA metadata, service worker caching, and offline reload
 - A concrete-detail proof heuristic for the no-backend demo; proof images are processed in memory and never stored
 - Opt-in branded share cards with native share, caption copy, and PNG download; private proof is never included
@@ -33,6 +35,7 @@ The production backend in `insforge/` adds:
 - Authenticated NVIDIA NIM proof assessment through `verify-proof`
 - Ephemeral, metadata-stripped images capped at 180 KiB; only a hash, media type, size, and optional filename are retained
 - Server-owned scoring, points, streaks, rate limits, and idempotent completion upgrades
+- Operator-fed challenge and punishment catalogs, atomic two-roll dice limits, and an owner-readable no-repeat audit trail
 
 Follow [insforge/README.md](./insforge/README.md) for the exact schema import, secrets, edge-function deployment, schedule, and post-deployment security checks. The repository is ready to deploy, but it is intentionally not tied to a specific InsForge project.
 
@@ -41,11 +44,11 @@ Never put `NVIDIA_API_KEY`, an InsForge admin key, or the maintenance secret in 
 ## Verification
 
 ```bash
-npm run verify       # lint, 19 unit/domain tests, Sites build, dependency audit, runtime E2E, PWA/offline test
+npm run verify       # lint, unit/domain tests, Sites build, dependency audit, runtime E2E, PWA/offline test
 npm run e2e:visual   # regenerate desktop/mobile visual QA screenshots
 ```
 
-The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dialog focus and Escape behavior; local auth; full and partial proof; recovery completion; report-and-replace; branded share privacy, copy, PNG export; settings and reload persistence; notifications; and browser console errors.
+The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dialog focus and Escape behavior; local auth; full and partial proof; immediate recovery; both no-repeat dice rolls and reload persistence; recovery completion; fast-finish bonus outcomes and lifeline redemption; report-and-replace; branded share privacy, copy, PNG export; settings persistence; notifications; and browser console errors.
 
 ## Product guardrails
 
@@ -54,7 +57,7 @@ The runtime suite exercises 320, 390, 768, 1024, and 1440 px layouts; native-dia
 - The app never controls Instagram, scrapes contacts, impersonates a user, or sends a message automatically.
 - Every suggestion is user-reviewed and user-sent. Every challenge can be resized, filtered, reported, or replaced.
 - Proof never requires another person’s name, face, contact information, or private reply.
-- Recovery is private, constructive, and hard-capped at level 3. It is not framed as punishment.
+- Only active, operator-reviewed catalog rows can be assigned. The ranked 1–5 punishment catalog must remain legal, constructive, consent-respecting, and easy for another person to decline.
 - This is a self-guided habit tool, not therapy, diagnosis, treatment, or emergency support.
 
 ## Before a public commercial launch

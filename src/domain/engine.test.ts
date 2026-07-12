@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { ChallengeEngine, createUserState } from './engine'
+import type { ResetTask } from '../types'
+
+const diceCatalog: ResetTask[] = [
+  { id: 'easy', title: 'Easy', prompt: 'Easy task', difficulty: 1, minutes: 1, privateOnly: true },
+  { id: 'medium', title: 'Medium', prompt: 'Medium task', difficulty: 2, minutes: 2, privateOnly: true },
+  { id: 'hard', title: 'Hard', prompt: 'Hard task', difficulty: 5, minutes: 3, privateOnly: true },
+]
 
 describe('ChallengeEngine daily assignments', () => {
   it('creates the same per-user assignment and local schedule when synced repeatedly', () => {
@@ -35,7 +42,7 @@ describe('ChallengeEngine daily assignments', () => {
     expect(second.challengeId).not.toBe(first.challengeId)
   })
 
-  it('turns partial progress into a proportional reward and a recovery that blocks tomorrow', () => {
+  it('turns partial progress into an immediate proportional recovery lock', () => {
     const engine = new ChallengeEngine(createUserState({
       id: 'user-partial',
       name: 'Alex',
@@ -52,6 +59,8 @@ describe('ChallengeEngine daily assignments', () => {
     expect(result.completion.verdict).toBe('partial')
     expect(result.completion.pointsAwarded).toBe(60)
     expect(result.recovery?.severity).toBe(2)
+    expect(result.view.status).toBe('blocked')
+    expect(result.view.recovery?.id).toBe(result.recovery?.id)
     expect(engine.sync(new Date(2026, 6, 13, 12)).status).toBe('blocked')
   })
 
@@ -85,8 +94,9 @@ describe('ChallengeEngine daily assignments', () => {
     const missed = engine.sync(new Date(2026, 6, 12, 22, 0, 1))
     engine.sync(new Date(2026, 6, 12, 23))
 
-    expect(missed.status).toBe('missed')
-    expect(missed.recovery).toBeDefined()
+    expect(missed.status).toBe('blocked')
+    expect(missed.assignment?.status).toBe('missed')
+    expect(missed.recovery?.severity).toBe(3)
     expect(engine.getState().recoveries).toHaveLength(1)
   })
 
@@ -105,6 +115,7 @@ describe('ChallengeEngine daily assignments', () => {
     }, new Date(2026, 6, 12, 20, 30))
     const recoveryId = partial.recovery!.id
 
+    expect(partial.recovery?.severity).toBe(1)
     expect(engine.sync(new Date(2026, 6, 13, 9)).recovery?.severity).toBe(2)
     expect(engine.sync(new Date(2026, 6, 13, 18)).recovery?.severity).toBe(2)
     expect(engine.sync(new Date(2026, 6, 20, 9)).recovery?.severity).toBe(3)
@@ -113,6 +124,62 @@ describe('ChallengeEngine daily assignments', () => {
     const unblocked = engine.completeRecovery(recoveryId, 'Closed the loop.', new Date(2026, 7, 20, 12))
     expect(unblocked.status).not.toBe('blocked')
     expect(unblocked.assignment).toBeDefined()
+  })
+
+  it('lets a user gamble twice across the entire unseen punishment catalog, then locks the result', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const engine = new ChallengeEngine(createUserState({
+      id: 'user-dice',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }), undefined, diceCatalog, () => 0)
+    const assignment = engine.sync(now).assignment!
+    const partial = engine.submitCompletion({
+      assignmentId: assignment.id,
+      score: 50,
+      note: 'I made a meaningful partial attempt.',
+    }, new Date(2026, 6, 12, 20, 5))
+
+    expect(partial.recovery?.taskId).toBe('medium')
+    const firstRoll = engine.rerollRecovery(partial.recovery!.id, new Date(2026, 6, 12, 20, 6))
+    expect(firstRoll.recoveryTask?.id).toBe('easy')
+    expect(firstRoll.recovery?.rerollCount).toBe(1)
+    expect(firstRoll.recoveryRerollsRemaining).toBe(1)
+
+    // Reconstructing the engine models a reload/sign-in and proves that both
+    // the spent roll and every prior result remain excluded.
+    const restored = new ChallengeEngine(engine.getState(), undefined, diceCatalog, () => 0)
+    const secondRoll = restored.rerollRecovery(partial.recovery!.id, new Date(2026, 6, 12, 20, 7))
+    expect(secondRoll.recoveryTask?.id).toBe('hard')
+    expect(secondRoll.recovery?.severity).toBe(5)
+    expect(secondRoll.recovery?.rerollCount).toBe(2)
+    expect(secondRoll.recoveryRerollStatus).toBe('limit-reached')
+    expect(restored.getState().assignedRecoveryTaskIds).toEqual(['medium', 'easy', 'hard'])
+    expect(() => restored.rerollRecovery(partial.recovery!.id, new Date(2026, 6, 12, 20, 8)))
+      .toThrowError(expect.objectContaining({ code: 'REROLL_LIMIT_REACHED' }))
+  })
+
+  it('keeps the current punishment and disables dice when no unseen catalog item remains', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const oneTaskCatalog = [diceCatalog[1]]
+    const engine = new ChallengeEngine(createUserState({
+      id: 'user-dice-exhausted',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }), undefined, oneTaskCatalog, () => 0)
+    const assignment = engine.sync(now).assignment!
+    const partial = engine.submitCompletion({
+      assignmentId: assignment.id,
+      score: 50,
+      note: 'I made a meaningful partial attempt.',
+    }, new Date(2026, 6, 12, 20, 5))
+
+    expect(partial.view.recoveryRerollStatus).toBe('catalog-exhausted')
+    expect(() => engine.rerollRecovery(partial.recovery!.id, new Date(2026, 6, 12, 20, 6)))
+      .toThrowError(expect.objectContaining({ code: 'RECOVERY_CATALOG_EXHAUSTED' }))
+    expect(engine.getState().recoveries[0]).toMatchObject({ taskId: 'medium', rerollCount: 0 })
   })
 
   it('tracks points, streak, history, and deduplicated inbox notifications', () => {

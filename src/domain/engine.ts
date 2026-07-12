@@ -31,6 +31,7 @@ const COMPLETE_SCORE = 72
 const BASE_POINTS = 120
 const MAX_RECOVERY_SEVERITY = 3
 const MAX_RECOVERY_ESCALATIONS = 2
+const MAX_RECOVERY_REROLLS = 2
 
 export const DEFAULT_SETTINGS: UserSettings = {
   unlockWindowStart: '10:00',
@@ -56,6 +57,8 @@ export type DomainErrorCode =
   | 'INVALID_NOTE'
   | 'INVALID_SETTINGS'
   | 'CHALLENGE_NOT_FOUND'
+  | 'REROLL_LIMIT_REACHED'
+  | 'RECOVERY_CATALOG_EXHAUSTED'
 
 export class DomainError extends Error {
   constructor(public readonly code: DomainErrorCode, message: string) {
@@ -117,6 +120,7 @@ export function createUserState(input: CreateUserStateInput): UserDomainState {
     recoveries: [],
     notifications: [],
     reports: [],
+    assignedRecoveryTaskIds: [],
   }
 }
 
@@ -141,9 +145,11 @@ export class ChallengeEngine {
     state: UserDomainState,
     private readonly catalog: Challenge[] = defaultChallenges,
     private readonly recoveryCatalog: ResetTask[] = defaultResetTasks,
+    private readonly random: () => number = Math.random,
   ) {
     this.state = copyState(state)
     this.state.settings = mergeSettings(this.state.settings)
+    this.normalizeRecoveryHistory()
     validateScheduleSettings(this.state.settings)
   }
 
@@ -253,6 +259,38 @@ export class ChallengeEngine {
       recoveryId: recovery.id,
     })
     return this.sync(now)
+  }
+
+  rerollRecovery(recoveryId: string, now = new Date()): DailyView {
+    this.sync(now)
+    const recovery = this.state.recoveries.find((item) => item.id === recoveryId && item.status === 'open')
+    if (!recovery) throw new DomainError('RECOVERY_NOT_FOUND', 'That recovery task is not open.')
+
+    const rerollCount = recovery.rerollCount ?? 0
+    if (rerollCount >= MAX_RECOVERY_REROLLS) {
+      throw new DomainError('REROLL_LIMIT_REACHED', 'Both dice rolls are already used. This result is locked.')
+    }
+
+    const seen = new Set(this.state.assignedRecoveryTaskIds ?? [])
+    seen.add(recovery.taskId)
+    const available = this.recoveryCatalog.filter((task) => !seen.has(task.id))
+    if (available.length === 0) {
+      throw new DomainError(
+        'RECOVERY_CATALOG_EXHAUSTED',
+        'You have already seen every available punishment. Your current result stays in place.',
+      )
+    }
+
+    const roll = this.random()
+    const randomValue = Number.isFinite(roll)
+      ? Math.max(0, Math.min(0.9999999999999999, roll))
+      : 0
+    const selected = available[Math.floor(randomValue * available.length)]
+    recovery.taskId = selected.id
+    recovery.severity = selected.difficulty
+    recovery.rerollCount = rerollCount + 1
+    this.rememberRecoveryTask(recovery, selected.id)
+    return this.buildView(now)
   }
 
   updateSettings(patch: Partial<UserSettings>, now = new Date()): DailyView {
@@ -399,19 +437,24 @@ export class ChallengeEngine {
     }
   }
 
-  private recoverySeverity(score: number): 1 | 2 {
-    return score >= 60 ? 1 : 2
+  private recoverySeverity(score: number): 1 | 2 | 3 {
+    if (score >= 60) return 1
+    if (score >= 25) return 2
+    return 3
   }
 
-  private recoveryTaskFor(severity: number, seed: string): ResetTask {
-    const exact = this.recoveryCatalog.filter((task) => task.difficulty === severity)
+  private recoveryTaskFor(severity: number, seed: string, exactOnly = false): ResetTask | undefined {
+    const seen = new Set(this.state.assignedRecoveryTaskIds ?? [])
+    const unseen = this.recoveryCatalog.filter((task) => !seen.has(task.id))
+    const exact = unseen.filter((task) => task.difficulty === severity)
     const pool = exact.length > 0
       ? exact
-      : this.recoveryCatalog.filter((task) => task.difficulty <= severity)
+      : exactOnly ? [] : unseen.filter((task) => task.difficulty <= severity)
+    if (pool.length === 0) return undefined
     return pool[stableHash(seed) % pool.length]
   }
 
-  private createRecovery(assignment: DailyAssignment, score: number, now: Date): RecoveryItem {
+  private createRecovery(assignment: DailyAssignment, score: number, now: Date): RecoveryItem | undefined {
     const existing = this.state.recoveries.find((item) => item.sourceAssignmentId === assignment.id)
     if (existing) return existing
     const open = this.openRecovery()
@@ -419,6 +462,9 @@ export class ChallengeEngine {
 
     const severity = this.recoverySeverity(score)
     const task = this.recoveryTaskFor(severity, assignment.id)
+    // A finite catalog can eventually run out. Never repeat an old punishment
+    // or trap the user behind an impossible recovery when that happens.
+    if (!task) return undefined
     const recovery: RecoveryItem = {
       id: `recovery:${assignment.id}`,
       userId: this.state.profile.id,
@@ -428,10 +474,13 @@ export class ChallengeEngine {
       severity,
       initialProgressScore: score,
       escalationCount: 0,
+      rerollCount: 0,
+      assignedTaskIds: [task.id],
       createdAt: now.toISOString(),
       lastEscalatedDateKey: localDateKey(now),
     }
     this.state.recoveries.push(recovery)
+    this.rememberRecoveryTask(recovery, task.id)
     this.addNotification({
       id: `recovery-created:${recovery.id}`,
       kind: 'recovery-created',
@@ -453,16 +502,23 @@ export class ChallengeEngine {
     const availableEscalations = MAX_RECOVERY_ESCALATIONS - recovery.escalationCount
     const applied = Math.min(elapsedDays, availableEscalations)
     const previousSeverity = recovery.severity
-    recovery.severity = Math.min(
-      MAX_RECOVERY_SEVERITY,
-      recovery.severity + applied,
+    recovery.severity = Math.max(
+      previousSeverity,
+      Math.min(MAX_RECOVERY_SEVERITY, recovery.severity + applied),
     ) as RecoveryItem['severity']
     recovery.escalationCount += applied
     recovery.lastEscalatedDateKey = dateKey
-    const task = this.recoveryTaskFor(recovery.severity, `${recovery.id}:${recovery.severity}`)
-    recovery.taskId = task.id
+    const task = this.recoveryTaskFor(
+      recovery.severity,
+      `${recovery.id}:${recovery.severity}`,
+      true,
+    )
+    if (task) {
+      recovery.taskId = task.id
+      this.rememberRecoveryTask(recovery, task.id)
+    }
 
-    if (recovery.severity > previousSeverity) {
+    if (recovery.severity > previousSeverity && task) {
       this.addNotification({
         id: `recovery-escalated:${recovery.id}:${dateKey}`,
         kind: 'recovery-escalated',
@@ -508,6 +564,29 @@ export class ChallengeEngine {
     if (!this.state.settings.notificationsEnabled) return
     if (this.state.notifications.some((item) => item.id === input.id)) return
     this.state.notifications.push({ ...input, userId: this.state.profile.id })
+  }
+
+  private normalizeRecoveryHistory() {
+    const history = new Set(this.state.assignedRecoveryTaskIds ?? [])
+    for (const recovery of this.state.recoveries) {
+      recovery.rerollCount = Math.max(0, Math.min(MAX_RECOVERY_REROLLS, recovery.rerollCount ?? 0))
+      const assigned = recovery.assignedTaskIds?.length
+        ? recovery.assignedTaskIds
+        : recovery.taskId ? [recovery.taskId] : []
+      recovery.assignedTaskIds = [...new Set(assigned)]
+      for (const taskId of recovery.assignedTaskIds) history.add(taskId)
+      if (recovery.taskId) history.add(recovery.taskId)
+    }
+    this.state.assignedRecoveryTaskIds = [...history]
+  }
+
+  private rememberRecoveryTask(recovery: RecoveryItem, taskId: string) {
+    recovery.assignedTaskIds ??= []
+    if (!recovery.assignedTaskIds.includes(taskId)) recovery.assignedTaskIds.push(taskId)
+    this.state.assignedRecoveryTaskIds ??= []
+    if (!this.state.assignedRecoveryTaskIds.includes(taskId)) {
+      this.state.assignedRecoveryTaskIds.push(taskId)
+    }
   }
 
   private createTimedNotifications(now: Date) {
@@ -568,9 +647,22 @@ export class ChallengeEngine {
     const recoveryTask = recovery
       ? this.recoveryCatalog.find((item) => item.id === recovery.taskId)
       : undefined
+    const rerollCount = recovery?.rerollCount ?? 0
+    const unseenRecoveryTasks = recovery
+      ? this.recoveryCatalog.filter((task) =>
+          !(this.state.assignedRecoveryTaskIds ?? []).includes(task.id),
+        ).length
+      : 0
+    const recoveryRerollStatus = recovery
+      ? rerollCount >= MAX_RECOVERY_REROLLS
+        ? 'limit-reached'
+        : unseenRecoveryTasks === 0
+          ? 'catalog-exhausted'
+          : 'available'
+      : undefined
 
     let status: DailyView['status'] = 'unavailable'
-    if (!assignment && recovery) status = 'blocked'
+    if (recovery) status = 'blocked'
     else if (assignment) status = assignment.status === 'reported' ? 'unavailable' : assignment.status
 
     return {
@@ -584,6 +676,8 @@ export class ChallengeEngine {
       unlockAt: assignment?.unlockAt,
       deadlineAt: assignment?.deadlineAt,
       unreadNotificationCount: this.state.notifications.filter((item) => !item.readAt).length,
+      recoveryRerollStatus,
+      recoveryRerollsRemaining: recovery ? Math.max(0, MAX_RECOVERY_REROLLS - rerollCount) : undefined,
     }
   }
 }

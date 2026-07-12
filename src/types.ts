@@ -113,10 +113,14 @@ export interface RecoveryItem {
   sourceAssignmentId: string
   taskId: string
   status: RecoveryStatus
-  /** 1 is gentle; 3 is the intentionally safe maximum. */
-  severity: 1 | 2 | 3
+  /** Operator-ranked catalog difficulty, from gentle (1) through hardest (5). */
+  severity: Difficulty
   initialProgressScore: number
   escalationCount: number
+  /** Dice rolls already spent on this recovery. Two is the permanent limit. */
+  rerollCount?: number
+  /** Ordered audit trail of every task shown during this recovery. */
+  assignedTaskIds?: string[]
   createdAt: string
   lastEscalatedDateKey: string
   completedAt?: string
@@ -170,6 +174,8 @@ export interface UserDomainState {
   recoveries: RecoveryItem[]
   notifications: NotificationRecord[]
   reports: ChallengeReport[]
+  /** Account-scoped no-repeat history for recovery task assignment and rerolls. */
+  assignedRecoveryTaskIds?: string[]
 }
 
 export type DailyViewStatus =
@@ -192,6 +198,9 @@ export interface DailyView {
   unlockAt?: string
   deadlineAt?: string
   unreadNotificationCount: number
+  /** Server- or device-owned state for the active punishment dice. */
+  recoveryRerollStatus?: 'available' | 'limit-reached' | 'catalog-exhausted'
+  recoveryRerollsRemaining?: number
 }
 
 export interface HistoryEntry {

@@ -126,8 +126,15 @@ interface RemoteRecoveryRow {
   escalation_level?: number
   last_escalated_at?: string | null
   completion_note?: string | null
+  reroll_count?: number
   created_at: string
   completed_at?: string | null
+}
+
+interface RemoteRecoveryHistoryRow {
+  recovery_task_id: string
+  catalog_id: string
+  assignment_sequence: number
 }
 
 interface RemoteRecoveryCatalogRow {
@@ -200,6 +207,9 @@ const friendlyErrors: Array<[string, string]> = [
   ['INVALID_BOUNDARIES', 'Keep your boundary list to 25 short, privacy-safe items.'],
   ['RECOVERY_NOTE_REQUIRED', 'Write at least 12 characters about how you completed the recovery.'],
   ['RECOVERY_NOT_FOUND', 'That recovery task is no longer available. Refresh and try again.'],
+  ['RECOVERY_NOT_OPEN', 'That punishment is already closed and cannot be rolled.'],
+  ['RECOVERY_REROLL_LIMIT', 'Both dice rolls are already used. This result is locked.'],
+  ['NO_UNUSED_RECOVERY_AVAILABLE', 'You have already seen every active punishment. Your current result stays in place.'],
   ['ASSIGNMENT_NOT_FOUND', 'That challenge is no longer available. Refresh and try again.'],
   ['ASSIGNMENT_CANNOT_BE_REPORTED', 'This challenge is already closed and cannot be replaced.'],
   ['REPORT_RATE_LIMIT_24_HOURS', 'You have reached today’s replacement limit. Try again tomorrow.'],
@@ -258,8 +268,7 @@ function difficulty(value: unknown): Difficulty {
 }
 
 function recoverySeverity(value: unknown): RecoveryItem['severity'] {
-  // The UI intentionally caps escalation at the reviewed, non-humiliating level 3.
-  return clampInteger(value, 1, 3) as RecoveryItem['severity']
+  return clampInteger(value, 1, 5) as RecoveryItem['severity']
 }
 
 function category(value: unknown): ChallengeCategory {
@@ -380,7 +389,11 @@ function mapCompletion(row: RemoteCompletionRow, assignment?: RemoteAssignmentRo
   }
 }
 
-function mapRecovery(row: RemoteRecoveryRow, source?: RemoteAssignmentRow): RecoveryItem {
+function mapRecovery(
+  row: RemoteRecoveryRow,
+  source?: RemoteAssignmentRow,
+  assignedTaskIds: string[] = [],
+): RecoveryItem {
   const createdDate = datePart(row.created_at, new Date().toISOString().slice(0, 10))
   return {
     id: String(row.id),
@@ -391,6 +404,8 @@ function mapRecovery(row: RemoteRecoveryRow, source?: RemoteAssignmentRow): Reco
     severity: recoverySeverity(row.difficulty),
     initialProgressScore: clampInteger(source?.completion_score ?? 0, 0, 100),
     escalationCount: Math.max(0, Math.round(row.escalation_level || 0)),
+    rerollCount: clampInteger(row.reroll_count, 0, 2),
+    assignedTaskIds,
     createdAt: String(row.created_at),
     lastEscalatedDateKey: datePart(row.last_escalated_at, createdDate),
     completedAt: row.completed_at || undefined,
@@ -542,13 +557,14 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
   )
   const state = asObject<EnsureDailyState>(rawState, 'The daily state response was incomplete.')
 
-  const [assignmentsResult, challengesResult, recoveryCatalogResult, completionsResult, recoveriesResult, notificationsResult] =
+  const [assignmentsResult, challengesResult, recoveryCatalogResult, completionsResult, recoveriesResult, recoveryHistoryResult, notificationsResult] =
     await Promise.all([
       client.database.from('daily_assignments').select('*').order('assignment_date', { ascending: false }).limit(120),
       client.database.from('challenge_catalog').select('*').order('difficulty', { ascending: true }),
       client.database.from('recovery_catalog').select('*').order('difficulty', { ascending: true }),
       client.database.from('challenge_completions').select('*').order('completed_at', { ascending: false }).limit(360),
       client.database.from('recovery_tasks').select('*').order('created_at', { ascending: false }).limit(120),
+      client.database.from('recovery_assignment_history').select('recovery_task_id,catalog_id,assignment_sequence').order('assignment_sequence', { ascending: true }).limit(1000),
       client.database.from('notification_outbox').select('*').lte('available_at', new Date().toISOString()).order('available_at', { ascending: false }).limit(250),
     ])
 
@@ -572,6 +588,10 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
     recoveriesResult as DatabaseResult<RemoteRecoveryRow[]>,
     'Could not load your recovery history.',
   )
+  const recoveryHistory = requireData(
+    recoveryHistoryResult as DatabaseResult<RemoteRecoveryHistoryRow[]>,
+    'Could not load your punishment roll history.',
+  )
   const notificationRows = requireData(
     notificationsResult as DatabaseResult<RemoteNotificationRow[]>,
     'Could not load your notifications.',
@@ -584,6 +604,16 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
   const assignmentById = new Map(assignments.map((row) => [row.id, row]))
   const bestCompletionByAssignment = bestCompletionsByAssignment(completions)
   const recoveryByAssignment = new Map(recoveries.map((row) => [row.source_assignment_id, row]))
+  const recoveryHistoryByTask = new Map<string, string[]>()
+  for (const row of recoveryHistory) {
+    const ids = recoveryHistoryByTask.get(row.recovery_task_id) ?? []
+    ids.push(row.catalog_id)
+    recoveryHistoryByTask.set(row.recovery_task_id, ids)
+  }
+  const assignedRecoveryIds = new Set([
+    ...recoveryHistory.map((row) => row.catalog_id),
+    ...recoveries.map((row) => row.catalog_id).filter((id): id is string => Boolean(id)),
+  ])
 
   const history: HistoryEntry[] = assignments.map((row) => {
     const completionRow = bestCompletionByAssignment.get(row.id)
@@ -594,7 +624,9 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
       assignment: mapAssignment(row, completionRow),
       challenge: challengeRow ? mapChallenge(challengeRow) : undefined,
       completion: completionRow ? mapCompletion(completionRow, row) : undefined,
-      recovery: recoveryRow ? mapRecovery(recoveryRow, row) : undefined,
+      recovery: recoveryRow
+        ? mapRecovery(recoveryRow, row, recoveryHistoryByTask.get(recoveryRow.id) ?? [])
+        : undefined,
     }
   })
 
@@ -612,6 +644,15 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
     ?? null
   const visibleChallengeRow = state.challenge
 
+  const currentRerollCount = clampInteger(currentRecoveryRow?.reroll_count, 0, 2)
+  const recoveryRerollStatus: DailyView['recoveryRerollStatus'] = currentRecoveryRow
+    ? currentRerollCount >= 2
+      ? 'limit-reached'
+      : recoveryCatalog.every((row) => row.is_active === false || assignedRecoveryIds.has(row.id))
+        ? 'catalog-exhausted'
+        : 'available'
+    : undefined
+
   const daily: DailyView = {
     dateKey: state.assignment?.assignment_date || localDateKey(state.profile?.timezone),
     status: dailyStatus(state.assignment, state),
@@ -624,7 +665,11 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
       ? mapCompletion(currentCompletionRow, currentAssignmentRow || undefined)
       : undefined,
     recovery: currentRecoveryRow
-      ? mapRecovery(currentRecoveryRow, assignmentById.get(currentRecoveryRow.source_assignment_id))
+      ? mapRecovery(
+          currentRecoveryRow,
+          assignmentById.get(currentRecoveryRow.source_assignment_id),
+          recoveryHistoryByTask.get(currentRecoveryRow.id) ?? [],
+        )
       : undefined,
     recoveryTask: currentRecoveryRow
       ? mapRecoveryTask(
@@ -637,6 +682,8 @@ export async function loadRemoteSnapshot(user?: AppAuthUser): Promise<AppSnapsho
     unlockAt: state.assignment?.unlock_at,
     deadlineAt: state.assignment?.deadline_at,
     unreadNotificationCount: notifications.filter((record) => !record.readAt).length,
+    recoveryRerollStatus,
+    recoveryRerollsRemaining: currentRecoveryRow ? Math.max(0, 2 - currentRerollCount) : undefined,
   }
 
   return { profile, daily, history, notifications, settings }
@@ -653,6 +700,15 @@ export async function completeRemoteRecovery(recoveryId: string, note: string): 
     p_recovery_id: normalizedId,
     p_completion_note: normalizedNote,
   }, 'Could not complete the recovery task.')
+  return loadRemoteSnapshot()
+}
+
+export async function rerollRemoteRecovery(recoveryId: string): Promise<AppSnapshot> {
+  const normalizedId = recoveryId.trim()
+  if (!normalizedId) throw new Error('Choose a punishment to roll.')
+  await remoteRpc<unknown>('reroll_recovery_task', {
+    p_recovery_id: normalizedId,
+  }, 'Could not roll the punishment dice.')
   return loadRemoteSnapshot()
 }
 
@@ -774,13 +830,14 @@ async function exportTable(table: string, orderColumn: string): Promise<unknown[
 
 export async function exportRemoteData(): Promise<string> {
   const user = await authenticatedUser()
-  const [profiles, assignments, attempts, completions, recoveries, notifications, reports] =
+  const [profiles, assignments, attempts, completions, recoveries, recoveryAssignmentHistory, notifications, reports] =
     await Promise.all([
       exportTable('profiles', 'created_at'),
       exportTable('daily_assignments', 'created_at'),
       exportTable('proof_verification_attempts', 'requested_at'),
       exportTable('challenge_completions', 'created_at'),
       exportTable('recovery_tasks', 'created_at'),
+      exportTable('recovery_assignment_history', 'assigned_at'),
       exportTable('notification_outbox', 'created_at'),
       exportTable('challenge_reports', 'created_at'),
     ])
@@ -788,7 +845,16 @@ export async function exportRemoteData(): Promise<string> {
     schemaVersion: 1,
     exportedAt: new Date().toISOString(),
     account: { id: user.id, email: user.email, name: user.name },
-    data: { profiles, assignments, proofVerificationAttempts: attempts, completions, recoveries, notifications, reports },
+    data: {
+      profiles,
+      assignments,
+      proofVerificationAttempts: attempts,
+      completions,
+      recoveries,
+      recoveryAssignmentHistory,
+      notifications,
+      reports,
+    },
   }, null, 2)
 }
 

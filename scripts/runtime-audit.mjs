@@ -129,7 +129,8 @@ try {
   results.flows.fullCompletionSharingAndPersistence = true
   await full.context.close()
 
-  // Partial proof creates a private recovery, which can be completed.
+  // Partial proof creates a private recovery immediately. Its dice can replace
+  // the punishment twice without repeats, and the spent rolls survive reloads.
   const partial = await testPage()
   await partial.page.goto(baseUrl, { waitUntil: 'networkidle' })
   await partial.page.getByRole('button', { name: 'Try the working demo' }).click()
@@ -139,10 +140,24 @@ try {
   assert.match(await partial.page.locator('.assessment').innerText(), /PROGRESS RECORDED/)
   await partial.page.getByRole('button', { name: /View today’s log/ }).click()
   await partial.page.locator('.recovery-card').waitFor()
+  const firstPunishment = await partial.page.locator('.recovery-card h2').innerText()
+  await partial.page.getByRole('button', { name: /Roll the punishment dice, 2 rolls remaining/ }).click()
+  await partial.page.getByText('The dice picked a new punishment. This roll cannot be undone.').waitFor()
+  const secondPunishment = await partial.page.locator('.recovery-card h2').innerText()
+  assert.notEqual(secondPunishment, firstPunishment, 'The first dice roll repeated a punishment.')
+  await partial.page.reload({ waitUntil: 'networkidle' })
+  assert.equal(await partial.page.locator('.recovery-card h2').innerText(), secondPunishment, 'The first dice result did not persist after reload.')
+  await partial.page.getByRole('button', { name: /Roll the punishment dice, 1 roll remaining/ }).click()
+  const thirdPunishment = await partial.page.locator('.recovery-card h2').innerText()
+  assert.notEqual(thirdPunishment, firstPunishment, 'The second dice roll reused the initial punishment.')
+  assert.notEqual(thirdPunishment, secondPunishment, 'The second dice roll reused the first dice result.')
+  const lockedDice = partial.page.getByRole('button', { name: 'Punishment dice locked' })
+  assert.equal(await lockedDice.isDisabled(), true, 'The dice did not lock after two rolls.')
+  assert.match(await lockedDice.innerText(), /Result locked/)
   await partial.page.getByLabel(/Private reflection/).fill('I completed the private reset and chose one smaller next step.')
   await partial.page.getByRole('button', { name: /I completed this recovery/ }).click()
   await partial.page.locator('.recovery-card').waitFor({ state: 'hidden' })
-  results.flows.partialRecovery = true
+  results.flows.partialRecoveryAndDice = true
   await partial.context.close()
 
   // Safety reporting replaces the card without exposing or messaging anyone.

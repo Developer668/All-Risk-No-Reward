@@ -437,6 +437,7 @@ export default async function (req: Request): Promise<Response> {
     assessment?: Assessment
     assignment?: Record<string, unknown>
     completion?: Record<string, unknown>
+    recovery?: Record<string, unknown> | null
   }
   const pointsAwarded = Number(result.completion?.points_awarded ?? 0)
   return json(req, {
@@ -444,5 +445,6 @@ export default async function (req: Request): Promise<Response> {
     pointsAwarded: Number.isFinite(pointsAwarded) ? Math.max(0, Math.round(pointsAwarded)) : 0,
     assignment: result.assignment ?? null,
     completion: result.completion ?? null,
+    recovery: result.recovery ?? null,
   })
 }

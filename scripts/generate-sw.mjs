@@ -4,9 +4,9 @@ import { dirname, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)))
-const distDirectory = join(projectRoot, 'dist')
-const assetsDirectory = join(distDirectory, 'assets')
-const serviceWorkerPath = join(distDirectory, 'sw.js')
+const clientDirectory = join(projectRoot, 'dist', 'client')
+const assetsDirectory = join(clientDirectory, 'assets')
+const serviceWorkerPath = join(clientDirectory, 'sw.js')
 
 async function listFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true })
@@ -19,17 +19,17 @@ async function listFiles(directory) {
   return files.flat()
 }
 
-const buildFiles = (await listFiles(distDirectory)).sort()
+const buildFiles = (await listFiles(clientDirectory)).sort()
 const assetFiles = (await listFiles(assetsDirectory)).sort()
 const hasher = createHash('sha256')
 
 for (const file of buildFiles) {
-  hasher.update(relative(distDirectory, file))
+  hasher.update(relative(clientDirectory, file))
   hasher.update(await readFile(file))
 }
 
 const version = hasher.digest('hex').slice(0, 12)
-const assetUrls = assetFiles.map((file) => `/${relative(distDirectory, file).split(sep).join('/')}`)
+const assetUrls = assetFiles.map((file) => `/${relative(clientDirectory, file).split(sep).join('/')}`)
 const injectedAssets = assetUrls.map((url) => `  ${JSON.stringify(url)},`).join('\n')
 const source = await readFile(serviceWorkerPath, 'utf8')
 

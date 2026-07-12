@@ -260,6 +260,30 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .complete-card__points small { display: block; font-family: 'Bricolage Grotesque Variable'; font-size: 8px; font-weight: 820; letter-spacing: .1em; }
 .complete-card__share { margin-top: 24px; background: var(--cream); }
 .complete-card__share svg { width: 18px; }
+.bonus-callout { width: 100%; min-height: 88px; margin-top: 24px; padding: 17px 20px; border: 1px solid var(--ink); display: grid; grid-template-columns: 48px 1fr 22px; align-items: center; gap: 14px; color: var(--ink); background: var(--yellow); text-align: left; box-shadow: 6px 7px 0 var(--ink); cursor: pointer; transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.bonus-callout:hover { transform: translateY(-2px); box-shadow: 8px 9px 0 var(--ink); }
+.bonus-callout > span:first-child { width: 46px; height: 46px; display: grid; place-items: center; color: var(--cream); background: var(--red); transform: rotate(-5deg); }
+.bonus-callout > span:nth-child(2) { display: grid; gap: 3px; }
+.bonus-callout strong { font-family: var(--display); font-size: 21px; }
+.bonus-callout small { color: color-mix(in oklch, var(--ink) 68%, transparent); font-size: 11px; line-height: 1.35; }
+.bonus-callout > svg { width: 18px; }
+.bonus-callout--resolved { background: var(--cream); }
+
+.bonus-modal .modal__sheet { overflow: hidden; }
+.bonus-modal__icon { width: 58px; height: 58px; margin-bottom: 24px; display: grid; place-items: center; color: var(--ink); background: var(--yellow); box-shadow: 4px 4px 0 var(--ink); transform: rotate(-6deg); }
+.bonus-modal__icon svg { width: 29px; }
+.bonus-task { margin: 25px 0 16px; padding: 22px; border: 1px solid var(--ink); background: var(--red); color: var(--cream); box-shadow: 6px 7px 0 var(--ink); transform: rotate(-1deg); }
+.bonus-task > span { color: var(--yellow); font-size: 9px; font-weight: 850; letter-spacing: .12em; }
+.bonus-task h3 { margin: 8px 0; font-family: var(--display); font-size: 29px; }
+.bonus-task p { margin: 0; color: color-mix(in oklch, var(--cream) 82%, transparent); line-height: 1.5; }
+.bonus-modal__odds { margin: 22px 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.bonus-result { display: grid; justify-items: center; text-align: center; }
+.bonus-result__mark { width: 88px; height: 88px; margin: 8px 0 26px; display: grid; place-items: center; border-radius: 50%; color: var(--cream); transform: rotate(-5deg); }
+.bonus-result__mark svg { width: 42px; height: 42px; }
+.bonus-result__mark--win { background: var(--green); box-shadow: 7px 7px 0 var(--yellow); }
+.bonus-result__mark--nothing { background: var(--red); box-shadow: 7px 7px 0 var(--ink); }
+.bonus-result > p:not(.section-kicker) { margin: 5px 0 25px; color: var(--muted); line-height: 1.55; }
+.bonus-result > p strong { color: var(--ink); }
 
 .proof-modal { width: min(570px, 100%); }
 .proof-upload { height: 145px; margin: 22px 0 17px; border: 1px dashed rgba(23,26,23,.4); display: grid; align-content: center; justify-items: center; gap: 5px; overflow: hidden; color: var(--blue); background: #ebe5d7; cursor: pointer; }
@@ -321,9 +345,32 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .recovery-card__meta { margin-bottom: 18px; display: flex; flex-wrap: wrap; gap: 8px 15px; color: var(--muted); font-size: 10px; font-weight: 720; text-transform: uppercase; }
 .recovery-card__meta span { display: inline-flex; align-items: center; gap: 5px; }
 .recovery-card__meta svg { width: 14px; }
+.recovery-dice { margin: 0 0 20px; padding: 14px; border: 1px solid color-mix(in oklch, var(--blue) 34%, var(--border)); display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--blue); background: color-mix(in oklch, var(--yellow) 17%, var(--cream)); }
+.recovery-dice > div { display: flex; align-items: center; gap: 11px; }
+.recovery-dice > div > svg { width: 25px; height: 25px; flex: 0 0 auto; color: var(--red); }
+.recovery-dice span { display: grid; gap: 2px; }
+.recovery-dice strong { font-family: var(--display); font-size: 17px; }
+.recovery-dice small { color: var(--muted); font-size: 10px; line-height: 1.35; }
+.recovery-dice__button { min-width: 164px; min-height: 42px; padding: 10px 13px; font-size: 10px; white-space: nowrap; }
+.recovery-dice__button svg { width: 16px; }
+.recovery-dice__notice { margin: -6px 0 16px; }
+.recovery-dice__rolling { animation: dice-roll .45s linear infinite; }
+.lifeline-card { margin: 0 0 18px; padding: 14px; border: 1px solid color-mix(in oklch, var(--green) 55%, var(--border)); display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 11px; background: color-mix(in oklch, var(--green) 8%, var(--cream)); }
+.lifeline-card > svg { width: 28px; color: var(--green); }
+.lifeline-card > span { display: grid; gap: 2px; }
+.lifeline-card strong { font-family: var(--display); font-size: 17px; }
+.lifeline-card small { color: var(--muted); font-size: 10px; line-height: 1.35; }
+.lifeline-card .button { min-height: 40px; padding-inline: 13px; font-size: 10px; background: var(--cream); }
 .recovery-card .field { margin-bottom: 16px; }
 
+@keyframes dice-roll { to { transform: rotate(360deg); } }
+
 .dashboard-content { max-width: 1080px; margin: 0 auto; padding-top: 44px; }
+.lifeline-balance { min-height: 78px; padding: 15px 18px; border: 1px solid var(--green); display: flex; align-items: center; gap: 13px; color: var(--cream); background: var(--green); box-shadow: 5px 5px 0 var(--yellow); }
+.lifeline-balance > svg { width: 31px; height: 31px; }
+.lifeline-balance > div { display: grid; gap: 2px; }
+.lifeline-balance span { font-size: 8px; font-weight: 850; letter-spacing: .12em; }
+.lifeline-balance strong { font-family: var(--display); font-size: 21px; }
 .content-panel { border: 1px solid var(--border); background: var(--cream); box-shadow: 8px 9px 0 var(--ink); }
 .panel-heading { min-height: 150px; padding: 34px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 25px; }
 .panel-heading h2 { margin: 8px 0 0; font-family: var(--display); font-size: clamp(35px, 5vw, 52px); font-weight: 520; line-height: 1; }
@@ -518,6 +565,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .locked-card h2 { font-size: 43px; }
   .recovery-card { padding: 22px; grid-template-columns: 1fr; }
   .recovery-card__level { width: 68px; height: 72px; }
+  .recovery-dice { align-items: stretch; flex-direction: column; }
+  .recovery-dice__button { width: 100%; }
+  .lifeline-card { grid-template-columns: 34px 1fr; }
+  .lifeline-card .button { grid-column: 1 / -1; width: 100%; }
   .panel-heading { min-height: 125px; padding: 26px 22px; }
   .panel-heading > svg { width: 30px; height: 30px; }
   .history-row { padding: 18px; grid-template-columns: 52px 1fr 48px; gap: 12px; }

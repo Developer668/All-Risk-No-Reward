@@ -13,6 +13,10 @@ notifications are written only through narrow RPCs.
 - Server-owned partial/full completion scoring and points.
 - Missed-assignment recovery tasks whose starting difficulty reflects genuine
   progress and whose reviewed task escalates once per missed due date.
+- Up to two atomic punishment dice rerolls per open recovery. A roll samples
+  uniformly from every active catalog item, can be easier or harder, never
+  repeats an item previously assigned to that account, and is permanently
+  recorded in an owner-readable audit trail.
 - A recovery lock that prevents the next challenge from loading.
 - Durable notification-outbox events for unlocks and recovery changes.
 - Five-per-10-minute and 20-per-24-hour AI proof rate limits.
@@ -21,7 +25,8 @@ notifications are written only through narrow RPCs.
   challenge from that user's future selection.
 - Immediate app-data erasure plus an account-deletion queue for the remaining
   InsForge Auth account.
-- All eight frontend challenges and three private, safety-reviewed recovery levels.
+- Empty production catalogs: the operator supplies and safety-reviews all
+  challenge and punishment content after the schema is imported.
 
 No backend code sends a message, controls a social account, impersonates a user,
 or publishes proof. An optional image is sent ephemerally to NVIDIA; only its
@@ -38,6 +43,12 @@ npx @insforge/cli current
 npx @insforge/cli metadata --json
 npx @insforge/cli db import insforge/schema.sql
 ```
+
+The import creates empty `challenge_catalog` and `recovery_catalog` tables; it
+does not generate product content. Populate them with your reviewed dataset.
+Use stable, unique text IDs because assignment history uses those IDs to enforce
+account-wide no-repeat rolls. Set `is_active = true` only after a row has passed
+your legal and safety review; inactive rows are never assigned or rolled.
 
 The edge runtime needs these values:
 
@@ -159,6 +170,18 @@ assignment points, 25–71 awards 60 total assignment points, and 0–24 awards 
 Upgrading a partial result to complete awards only the remaining 60, preventing
 repeat submissions from farming points.
 
+A partial result (25–71) creates its recovery task in the same database
+transaction as the verified completion. The function response includes that
+`recovery`, and the next `ensure_daily_assignment` call immediately returns
+`blocked: true` with `reason: 'recovery-required'`; it does not wait for the
+assignment deadline or the maintenance schedule. Initial difficulty is derived
+from the verified score, and the selected item is taken only from the
+operator-supplied, active, account-unseen recovery catalog. If that catalog is
+empty or exhausted, the partial result is preserved and maintenance retries
+after reviewed content is added rather than inventing a punishment.
+Scores of 60–71 start at difficulty 1, scores of 25–59 start at difficulty 2,
+and a missed or lower-scoring attempt starts at difficulty 3.
+
 ### Complete recovery
 
 ```ts
@@ -169,6 +192,37 @@ const { data } = await insforge.database.rpc('complete_recovery_task', {
 ```
 
 The note must be 12–1000 characters. The response is the refreshed daily state.
+
+### Roll the punishment dice
+
+```ts
+const { data } = await insforge.database.rpc('reroll_recovery_task', {
+  p_recovery_id: recoveryId,
+})
+```
+
+Only the owner of an open recovery can call this RPC. The recovery row is locked
+for the transaction, so simultaneous requests cannot spend more than two rolls.
+Each successful roll draws with equal probability from the full active
+`recovery_catalog`, excluding the current item and every catalog item ever
+assigned to that user. The difficulty is deliberately not filtered, so the new
+result can be easier, the same difficulty, or harder. A failed roll caused by an
+exhausted catalog does not consume an allowance.
+
+Returns:
+
+```ts
+{
+  recovery: RecoveryTask
+  rerollsRemaining: 0 | 1
+  previousDifficulty: 1 | 2 | 3 | 4 | 5
+  direction: 'easier' | 'same' | 'harder'
+}
+```
+
+`recovery_assignment_history` stores an immutable content snapshot for initial
+assignments, automatic escalations, and dice rerolls. Authenticated users can
+read only their own history; direct client writes remain revoked.
 
 ### Report and replace a challenge
 

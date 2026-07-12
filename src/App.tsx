@@ -23,6 +23,7 @@ import {
   markAllRemoteNotifications,
   markRemoteNotification,
   reportRemoteChallenge,
+  rerollRemoteRecovery,
   updateRemoteSettings,
 } from './services/remoteStore'
 import { registerAppServiceWorker, scheduleUnlockNotification } from './services/notifications'
@@ -255,6 +256,15 @@ function AppContent() {
     } else setSnapshot(await completeRemoteRecovery(id, note))
   }
 
+  async function rerollRecovery(id: string) {
+    if (backendMode === 'local') {
+      localStore.rerollRecovery(id)
+      await refresh()
+    } else {
+      setSnapshot(await rerollRemoteRecovery(id))
+    }
+  }
+
   async function reportChallenge(reason: ChallengeReportReason, details: string) {
     const assignmentId = snapshot?.daily.assignment?.id
     const challengeId = snapshot?.daily.assignment?.challengeId
@@ -331,6 +341,7 @@ function AppContent() {
         onRefresh={refresh}
         onRecordProof={recordProof}
         onCompleteRecovery={completeRecovery}
+        onRerollRecovery={rerollRecovery}
         onReport={reportChallenge}
         onUpdateSettings={updateSettings}
         onMarkNotification={markNotification}

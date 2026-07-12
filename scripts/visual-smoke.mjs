@@ -55,5 +55,32 @@ const mobileSidebar = await page.locator('.sidebar').evaluate((element) => {
 assert.deepEqual({ landingOverflow, dashboardOverflow, mobileOverflow }, { landingOverflow: 0, dashboardOverflow: 0, mobileOverflow: 0 })
 assert.ok(mobileSidebar.right <= 0, `Closed mobile sidebar remains visible: ${JSON.stringify(mobileSidebar)}`)
 assert.deepEqual(errors, [], `Browser errors occurred: ${errors.join('; ')}`)
-console.log(JSON.stringify({ landingOverflow, dashboardOverflow, mobileOverflow, mobileSidebar, errors }, null, 2))
+
+const recoveryContext = await browser.newContext({
+  viewport: { width: 1440, height: 1000 },
+  deviceScaleFactor: 1,
+  timezoneId: 'America/Los_Angeles',
+})
+const recoveryPage = await recoveryContext.newPage()
+const recoveryErrors = []
+await recoveryPage.clock.setFixedTime(new Date('2026-07-12T20:00:00-07:00'))
+recoveryPage.on('console', (message) => message.type() === 'error' && recoveryErrors.push(message.text()))
+recoveryPage.on('pageerror', (error) => recoveryErrors.push(error.message))
+await recoveryPage.goto(baseUrl, { waitUntil: 'networkidle' })
+await recoveryPage.getByRole('button', { name: 'Try the working demo' }).click()
+await recoveryPage.getByRole('button', { name: /Add privacy-safe proof/ }).click()
+await recoveryPage.getByLabel('What did you do?').fill('I spoke briefly today.')
+await recoveryPage.getByRole('button', { name: /Check and record my proof/ }).click()
+await recoveryPage.getByRole('button', { name: /View today’s log/ }).click()
+await recoveryPage.locator('.recovery-dice').waitFor()
+await recoveryPage.screenshot({ path: 'output/playwright/recovery-dice-desktop.png', fullPage: true })
+await recoveryPage.setViewportSize({ width: 390, height: 844 })
+await recoveryPage.waitForTimeout(250)
+await recoveryPage.screenshot({ path: 'output/playwright/recovery-dice-mobile.png', fullPage: true })
+const recoveryMobileOverflow = await recoveryPage.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+assert.equal(recoveryMobileOverflow, 0, 'The punishment dice card overflows on mobile.')
+assert.deepEqual(recoveryErrors, [], `Recovery browser errors occurred: ${recoveryErrors.join('; ')}`)
+
+console.log(JSON.stringify({ landingOverflow, dashboardOverflow, mobileOverflow, recoveryMobileOverflow, mobileSidebar, errors, recoveryErrors }, null, 2))
+await recoveryContext.close()
 await browser.close()

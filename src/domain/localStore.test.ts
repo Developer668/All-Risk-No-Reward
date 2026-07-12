@@ -68,6 +68,29 @@ describe('LocalStore authentication and persistence', () => {
     expect(restored.getNotifications().every((item) => item.readAt)).toBe(true)
   })
 
+  it('persists punishment dice usage and no-repeat history for each local account', async () => {
+    const storage = new MemoryStorage()
+    const now = new Date(2026, 6, 12, 20)
+    const first = new LocalStore({ storage, now: () => now })
+    await first.signUp('Alex', 'alex@example.com', 'correct horse')
+    const assignment = first.getDashboard().assignment!
+    const partial = first.submitCompletion({
+      assignmentId: assignment.id,
+      score: 50,
+      note: 'I made a meaningful partial attempt.',
+    })
+    const originalTaskId = partial.recovery!.taskId
+    first.rerollRecovery(partial.recovery!.id)
+
+    const restored = new LocalStore({ storage, now: () => now })
+    expect(restored.restoreSession()).not.toBeNull()
+    const dashboard = restored.getDashboard()
+    expect(dashboard.recovery?.rerollCount).toBe(1)
+    expect(dashboard.recovery?.assignedTaskIds).toHaveLength(2)
+    expect(dashboard.recovery?.assignedTaskIds).toContain(originalTaskId)
+    expect(new Set(restored.exportData().state.assignedRecoveryTaskIds).size).toBe(2)
+  })
+
   it('expires a local session after thirty days while retaining the account data', async () => {
     const storage = new MemoryStorage()
     let now = new Date(2026, 6, 12, 12)

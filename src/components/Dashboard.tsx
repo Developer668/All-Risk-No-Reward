@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import {
-  ArrowRight, Bell, CalendarDays, Check, ChevronRight, Clock3, Download, Flag, Flame,
-  History, Inbox, LockKeyhole, Menu, RefreshCw, Settings, ShieldCheck, Sparkles, Star,
+  ArrowRight, Bell, CalendarDays, Check, ChevronRight, Clock3, Dices, Download, Flag, Flame, Gift,
+  History, Inbox, Laugh, LifeBuoy, LockKeyhole, Menu, RefreshCw, Settings, ShieldCheck, Sparkles, Star,
   Share2, Target, Trash2, Trophy, X, Zap,
 } from 'lucide-react'
 import type {
@@ -9,6 +9,10 @@ import type {
   NotificationRecord, Profile, UserSettings,
 } from '../types'
 import type { ProofResult } from '../services/proof'
+import {
+  completeBonusChallenge, loadBonusState, rollFastFinishBonus, spendLifeline, taskForBonus,
+  type BonusRecord, type BonusState,
+} from '../services/bonusChallenge'
 import { notificationPermission, notificationsSupported, requestNotificationPermission, sendTestNotification } from '../services/notifications'
 import { Brand } from './Brand'
 import { Modal } from './Modal'
@@ -28,6 +32,7 @@ interface DashboardProps {
   onRefresh: () => Promise<void>
   onRecordProof: (result: ProofResult, note: string, proofName?: string) => Promise<void>
   onCompleteRecovery: (recoveryId: string, note: string) => Promise<void>
+  onRerollRecovery: (recoveryId: string) => Promise<void>
   onReport: (reason: ChallengeReportReason, details: string) => Promise<void>
   onUpdateSettings: (patch: Partial<UserSettings>) => Promise<void>
   onMarkNotification: (id: string) => Promise<void>
@@ -119,19 +124,106 @@ function CompletionCard({ daily, onShare }: { daily: DailyView; onShare: () => v
   </article>
 }
 
-function RecoveryCard({ daily, onComplete }: { daily: DailyView; onComplete: (note: string) => Promise<void> }) {
+function BonusChallengeCard({ record, onOpen }: { record?: BonusRecord; onOpen: () => void }) {
+  if (!record) return null
+  const pending = record.status === 'offered'
+  return <button type="button" className={`bonus-callout ${pending ? '' : 'bonus-callout--resolved'}`} onClick={onOpen}>
+    <span>{pending ? <Gift aria-hidden="true" /> : record.status === 'won-lifeline' ? <LifeBuoy aria-hidden="true" /> : <Laugh aria-hidden="true" />}</span>
+    <span><strong>{pending ? 'Bonus challenge waiting' : record.status === 'won-lifeline' ? 'Lifeline banked' : 'The game chose chaos'}</strong><small>{pending ? 'You finished suspiciously fast. Take the extra round.' : 'Tap to see your bonus result.'}</small></span>
+    <ChevronRight aria-hidden="true" />
+  </button>
+}
+
+function BonusChallengeDialog({ open, record, lifelines, onClose, onComplete }: {
+  open: boolean
+  record?: BonusRecord
+  lifelines: number
+  onClose: () => void
+  onComplete: () => void
+}) {
+  const task = taskForBonus(record)
+  if (!record || !task) return null
+  const pending = record.status === 'offered'
+  return <Modal open={open} onClose={onClose} labelledBy="bonus-title" className="bonus-modal">
+    {pending ? <>
+      <div className="bonus-modal__icon"><Gift aria-hidden="true" /></div>
+      <p className="section-kicker">SPEED CHECK · BONUS ROUND</p>
+      <h2 id="bonus-title">Too fast. Suspicious.</h2>
+      <p>You crushed the main challenge before the clock expected it, so the game dealt you one more.</p>
+      <div className="bonus-task"><span>OPTIONAL CHAOS</span><h3>{task.title}</h3><p>{task.prompt}</p></div>
+      <p className="bonus-modal__odds">Finish it, then flip for either a lifeline or—very scientifically—absolutely nothing.</p>
+      <button type="button" className="button button--accent button--full" onClick={onComplete}>I did it — reveal my reward <Sparkles aria-hidden="true" /></button>
+    </> : record.status === 'won-lifeline' ? <div className="bonus-result">
+      <div className="bonus-result__mark bonus-result__mark--win"><LifeBuoy aria-hidden="true" /></div>
+      <p className="section-kicker">LUCKY FLIP</p>
+      <h2 id="bonus-title">Lifeline unlocked.</h2>
+      <p>You can erase one future recovery task. You now have <strong>{lifelines} {lifelines === 1 ? 'lifeline' : 'lifelines'}</strong> banked.</p>
+      <button type="button" className="button button--ink button--full" onClick={onClose}>Bank it <Check aria-hidden="true" /></button>
+    </div> : <div className="bonus-result">
+      <div className="bonus-result__mark bonus-result__mark--nothing"><Laugh aria-hidden="true" /></div>
+      <p className="section-kicker">THE GAME IS MESSING WITH YOU</p>
+      <h2 id="bonus-title">HAHA. You get nothing this time.</h2>
+      <p>Joke’s on you. The bonus challenge still counts as a brave rep, but the reward machine says: absolutely zilch.</p>
+      <button type="button" className="button button--ink button--full" onClick={onClose}>Rude. Continue anyway <ArrowRight aria-hidden="true" /></button>
+    </div>}
+  </Modal>
+}
+
+function RecoveryCard({ daily, onComplete, onReroll, onUseLifeline, lifelines, diceEnabled }: {
+  daily: DailyView
+  onComplete: (note: string) => Promise<void>
+  onReroll: () => Promise<void>
+  onUseLifeline: () => Promise<void>
+  lifelines: number
+  diceEnabled: boolean
+}) {
   const [note, setNote] = useState('')
   const [busy, setBusy] = useState(false)
+  const [rolling, setRolling] = useState(false)
   const [error, setError] = useState('')
+  const [rollNotice, setRollNotice] = useState('')
   const recovery = daily.recovery!
   const task = daily.recoveryTask!
+  const rollsRemaining = daily.recoveryRerollsRemaining ?? Math.max(0, 2 - (recovery.rerollCount ?? 0))
+  const rollStatus = daily.recoveryRerollStatus ?? (rollsRemaining > 0 ? 'available' : 'limit-reached')
+
+  async function rollDice() {
+    setRolling(true)
+    setError('')
+    setRollNotice('')
+    try {
+      await onReroll()
+      setNote('')
+      setRollNotice('The dice picked a new punishment. This roll cannot be undone.')
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'The dice could not be rolled.')
+    } finally {
+      setRolling(false)
+    }
+  }
+
   return <article className="recovery-card">
     <div className="recovery-card__level"><span>LEVEL</span><strong>{recovery.severity}</strong></div>
     <div>
       <p className="section-kicker">PRIVATE RECOVERY · NO SHAME</p>
       <h2>{task.title}</h2>
       <p>{task.prompt}</p>
-      <div className="recovery-card__meta"><span><Clock3 aria-hidden="true" /> {task.minutes} min</span><span><LockKeyhole aria-hidden="true" /> private</span><span><ShieldCheck aria-hidden="true" /> safe cap: level 3</span></div>
+      <div className="recovery-card__meta"><span><Clock3 aria-hidden="true" /> {task.minutes} min</span><span><LockKeyhole aria-hidden="true" /> private</span><span><ShieldCheck aria-hidden="true" /> reviewed catalog</span></div>
+      {diceEnabled && <div className="recovery-dice">
+        <div><Dices className={rolling ? 'recovery-dice__rolling' : ''} aria-hidden="true" /><span><strong>Gamble this punishment</strong><small>A roll can get easier or harder. You will never see a repeat.</small></span></div>
+        <button
+          type="button"
+          className="button button--ink recovery-dice__button"
+          disabled={busy || rolling || rollStatus !== 'available'}
+          onClick={() => void rollDice()}
+          aria-label={rollStatus === 'available' ? `Roll the punishment dice, ${rollsRemaining} ${rollsRemaining === 1 ? 'roll' : 'rolls'} remaining` : 'Punishment dice locked'}
+        >
+          <Dices aria-hidden="true" />
+          {rolling ? 'Rolling…' : rollStatus === 'limit-reached' ? 'Result locked' : rollStatus === 'catalog-exhausted' ? 'No unseen punishments' : `Roll dice · ${rollsRemaining} left`}
+        </button>
+      </div>}
+      {rollNotice && <p className="form-notice recovery-dice__notice" role="status">{rollNotice}</p>}
+      {lifelines > 0 && <div className="lifeline-card"><LifeBuoy aria-hidden="true" /><span><strong>Use a lifeline</strong><small>Clear this recovery instantly. You have {lifelines} banked.</small></span><button type="button" className="button button--outline" disabled={busy || rolling} onClick={() => { setBusy(true); setError(''); void onUseLifeline().catch((caught) => setError(caught instanceof Error ? caught.message : 'Could not use that lifeline.')).finally(() => setBusy(false)) }}>Use lifeline</button></div>}
       <label className="field">Private reflection <span className="field-hint">12 characters minimum</span><textarea rows={3} minLength={12} maxLength={1000} required value={note} onChange={(event) => setNote(event.target.value)} placeholder="What did you do, and what will you try next?" /></label>
       {error && <p className="form-error" role="alert">{error}</p>}
       <button className="button button--accent" disabled={busy || note.trim().length < 12} onClick={() => { setBusy(true); setError(''); void onComplete(note.trim()).catch((caught) => setError(caught instanceof Error ? caught.message : 'Could not close the recovery loop.')).finally(() => setBusy(false)) }}>{busy ? 'Closing the loop…' : 'I completed this recovery'} <Check aria-hidden="true" /></button>
@@ -139,16 +231,16 @@ function RecoveryCard({ daily, onComplete }: { daily: DailyView; onComplete: (no
   </article>
 }
 
-function TodayPanel({ daily, onProof, onReport, onShare, onCompleteRecovery, onEnableNotifications, now }: {
-  daily: DailyView; onProof: () => void; onReport: () => void; onShare: () => void; onCompleteRecovery: (note: string) => Promise<void>; onEnableNotifications: () => void; now: Date
+function TodayPanel({ daily, bonusRecord, lifelines, onOpenBonus, onProof, onReport, onShare, onCompleteRecovery, onRerollRecovery, onUseLifeline, diceEnabled, onEnableNotifications, now }: {
+  daily: DailyView; bonusRecord?: BonusRecord; lifelines: number; onOpenBonus: () => void; onProof: () => void; onReport: () => void; onShare: () => void; onCompleteRecovery: (note: string) => Promise<void>; onRerollRecovery: () => Promise<void>; onUseLifeline: () => Promise<void>; diceEnabled: boolean; onEnableNotifications: () => void; now: Date
 }) {
   const hasRecovery = Boolean(daily.recovery && daily.recoveryTask)
   return <div className="main-column">
     <div className="today-heading"><div><span className="section-kicker">YOUR DAILY DROP</span><h2>{daily.status === 'locked' ? 'A little suspense.' : hasRecovery ? 'Close the loop.' : daily.status === 'completed' ? 'Filed under: brave.' : 'The card is yours.'}</h2></div>{daily.deadlineAt && <div className="deadline"><Clock3 aria-hidden="true" /><span>PROOF DUE<strong>{formatTime(daily.deadlineAt)}</strong></span></div>}</div>
     {daily.status === 'locked' ? <LockedCard daily={daily} now={now} onEnableNotifications={onEnableNotifications} />
-      : hasRecovery ? <><CompletionCard daily={daily} onShare={onShare} /><RecoveryCard daily={daily} onComplete={onCompleteRecovery} /></>
+      : hasRecovery ? <><CompletionCard daily={daily} onShare={onShare} /><RecoveryCard daily={daily} onComplete={onCompleteRecovery} onReroll={onRerollRecovery} onUseLifeline={onUseLifeline} lifelines={lifelines} diceEnabled={diceEnabled} /></>
       : daily.status === 'available' && daily.challenge ? <ActiveChallengeCard daily={daily} onProof={onProof} onReport={onReport} />
-      : daily.status === 'completed' || daily.status === 'partial' ? <CompletionCard daily={daily} onShare={onShare} />
+      : daily.status === 'completed' || daily.status === 'partial' ? <><CompletionCard daily={daily} onShare={onShare} /><BonusChallengeCard record={bonusRecord} onOpen={onOpenBonus} /></>
       : <EmptyState title="No challenge is available." body="Your boundaries filtered the catalog or today’s deadline has passed. Review Settings, then refresh." />}
   </div>
 }
@@ -270,17 +362,36 @@ export function Dashboard(props: DashboardProps) {
   const [proofOpen, setProofOpen] = useState(false)
   const [reportOpen, setReportOpen] = useState(false)
   const [shareOpen, setShareOpen] = useState(false)
+  const [bonusOpen, setBonusOpen] = useState(false)
+  const [bonusState, setBonusState] = useState<BonusState>(() => loadBonusState(props.profile.id, window.localStorage))
+  const [bonusRecord, setBonusRecord] = useState<BonusRecord>()
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [now, setNow] = useState(new Date())
   const [compactNavigation, setCompactNavigation] = useState(() => window.matchMedia('(max-width: 900px)').matches)
   const sidebarRef = useRef<HTMLElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const autoOpenedBonusRef = useRef('')
   const { daily, onRefresh } = props
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000)
     return () => window.clearInterval(timer)
   }, [])
+  useEffect(() => {
+    setBonusState(loadBonusState(props.profile.id, window.localStorage))
+    setBonusRecord(undefined)
+    autoOpenedBonusRef.current = ''
+  }, [props.profile.id])
+  useEffect(() => {
+    if (proofOpen) return
+    const record = rollFastFinishBonus(props.profile.id, daily, window.localStorage)
+    setBonusState(loadBonusState(props.profile.id, window.localStorage))
+    setBonusRecord(record)
+    if (record?.status === 'offered' && autoOpenedBonusRef.current !== record.assignmentId) {
+      autoOpenedBonusRef.current = record.assignmentId
+      setBonusOpen(true)
+    }
+  }, [daily, proofOpen, props.profile.id])
   useEffect(() => {
     if (!daily.unlockAt || daily.status !== 'locked') return
     const delay = new Date(daily.unlockAt).getTime() - Date.now()
@@ -325,6 +436,18 @@ export function Dashboard(props: DashboardProps) {
     const permission = await requestNotificationPermission()
     if (permission === 'granted') { await props.onUpdateSettings({ notificationsEnabled: true }); await sendTestNotification() }
   }
+  function finishBonus() {
+    const assignmentId = bonusRecord?.assignmentId
+    if (!assignmentId) return
+    const result = completeBonusChallenge(props.profile.id, assignmentId, window.localStorage)
+    setBonusRecord({ ...result.record })
+    setBonusState(result.state)
+  }
+  async function useLifeline() {
+    if (!props.daily.recovery) throw new Error('That recovery task is no longer open.')
+    await props.onCompleteRecovery(props.daily.recovery.id, 'Cleared with a bonus challenge lifeline.')
+    setBonusState(spendLifeline(props.profile.id, window.localStorage))
+  }
 
   return <div className="app-shell">
     <aside ref={sidebarRef} className={`sidebar ${menuOpen ? 'sidebar--open' : ''}`} aria-label="Application navigation" aria-hidden={compactNavigation && !menuOpen ? true : undefined}>
@@ -338,7 +461,7 @@ export function Dashboard(props: DashboardProps) {
     <main className="dashboard">
       <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
 
-      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column"><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="level-card"><div className="level-card__orbit"><span>{props.profile.level}</span></div><div><span className="section-kicker">CURRENT LEVEL</span><h3>{props.profile.level < 2 ? 'Beginner' : props.profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><p>{props.profile.couragePoints} courage points</p></div><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
+      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusRecord} lifelines={bonusState.lifelines} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="level-card"><div className="level-card__orbit"><span>{props.profile.level}</span></div><div><span className="section-kicker">CURRENT LEVEL</span><h3>{props.profile.level < 2 ? 'Beginner' : props.profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><p>{props.profile.couragePoints} courage points</p></div><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
         : <div className="dashboard-content">{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 
@@ -346,6 +469,7 @@ export function Dashboard(props: DashboardProps) {
     {props.daily.assignment && props.daily.challenge && <ProofDialog open={proofOpen} assignment={props.daily.assignment} challenge={props.daily.challenge} backendMode={props.backendMode} onClose={() => setProofOpen(false)} onRecorded={props.onRecordProof} />}
     {props.daily.challenge && <ReportDialog open={reportOpen} challengeTitle={props.daily.challenge.title} onClose={() => setReportOpen(false)} onSubmit={props.onReport} />}
     {props.daily.completion && <ShareDialog open={shareOpen} onClose={() => setShareOpen(false)} verdict={props.daily.status === 'completed' || props.daily.completion.verdict === 'complete' ? 'complete' : 'partial'} points={props.daily.completion.pointsAwarded ?? 0} streak={props.profile.streak} challengeTitle={props.daily.challenge?.title} />}
+    <BonusChallengeDialog open={bonusOpen} record={bonusRecord} lifelines={bonusState.lifelines} onClose={() => setBonusOpen(false)} onComplete={finishBonus} />
     <NotificationsDialog open={notificationsOpen} records={props.notifications} onClose={() => setNotificationsOpen(false)} onRead={props.onMarkNotification} onReadAll={props.onMarkAllNotifications} />
   </div>
 }
