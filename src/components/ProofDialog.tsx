@@ -21,8 +21,8 @@ const MAX_RECORDING_SECONDS = 30
 function preferredRecordingMimeType(): string | undefined {
   if (typeof MediaRecorder === 'undefined') return undefined
   return [
-    'video/webm;codecs=vp9,opus',
-    'video/webm;codecs=vp8,opus',
+    'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8',
     'video/webm',
     'video/mp4;codecs=h264,aac',
     'video/mp4',
@@ -31,7 +31,7 @@ function preferredRecordingMimeType(): string | undefined {
 
 function recordingErrorMessage(caught: unknown): string {
   if (caught instanceof DOMException) {
-    if (caught.name === 'NotAllowedError' || caught.name === 'SecurityError') return 'Camera access was blocked. Allow camera and microphone access in your browser, then try again.'
+    if (caught.name === 'NotAllowedError' || caught.name === 'SecurityError') return 'Camera access was blocked. Allow camera access in your browser, then try again.'
     if (caught.name === 'NotFoundError' || caught.name === 'DevicesNotFoundError') return 'No available camera was found on this device.'
     if (caught.name === 'NotReadableError' || caught.name === 'TrackStartError') return 'Your camera is busy in another app. Close that app, then try again.'
   }
@@ -158,19 +158,10 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
     const requestId = recorderRequestIdRef.current + 1
     recorderRequestIdRef.current = requestId
     try {
-      let stream: MediaStream
-      try {
-        stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
-          audio: { echoCancellation: true, noiseSuppression: true },
-        })
-      } catch (caught) {
-        if (!(caught instanceof DOMException) || !['NotFoundError', 'DevicesNotFoundError', 'OverconstrainedError'].includes(caught.name)) throw caught
-        stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
-          audio: false,
-        })
-      }
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false,
+      })
       if (recorderRequestIdRef.current !== requestId) {
         stream.getTracks().forEach((track) => track.stop())
         return
@@ -300,7 +291,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
             {recorderState === 'recording' && <button type="button" className="button button--ink" onClick={stopRecording}><Square fill="currentColor" aria-hidden="true" /> Stop &amp; use video</button>}
             {(recorderState === 'ready' || recorderState === 'requesting') && <button type="button" className="proof-recorder__cancel" onClick={closeRecorder}><X aria-hidden="true" /> Cancel</button>}
           </div>
-          <p>The camera and microphone turn off after you stop. The full recording stays in this browser; only sampled frames are used for verification.</p>
+          <p>The camera turns off after you stop. Audio is not recorded. The full recording stays in this browser; only sampled frames are used for verification.</p>
         </div> : <label className="proof-upload" htmlFor="proof-file-input">
           {preview
             ? isVideo
