@@ -2,6 +2,10 @@ import type { ProofAssessment } from '../types'
 import type { PreparedVideoFrame } from './imageProof'
 import { callRemoteRpc, invokeRemote, isInsforgeConfigured } from './insforge'
 
+export type ProofMediaItem =
+  | { kind: 'image'; name?: string; dataUrl: string }
+  | { kind: 'video'; name?: string; frames: PreparedVideoFrame[]; durationSeconds: number }
+
 export interface ProofSubmission {
   assignmentId: string
   note: string
@@ -9,7 +13,8 @@ export interface ProofSubmission {
   mediaDataUrl?: string
   videoFrames?: PreparedVideoFrame[]
   videoDurationSeconds?: number
-  mediaKind?: 'image' | 'video'
+  mediaItems?: ProofMediaItem[]
+  mediaKind?: 'image' | 'video' | 'mixed'
   backendMode?: 'local' | 'insforge'
 }
 
@@ -17,7 +22,7 @@ export interface ProofResult extends ProofAssessment {
   pointsAwarded: number
   provider?: 'openai' | 'google-gemini' | 'openrouter' | 'nvidia-nim' | 'on-device-preview'
   model?: string
-  mediaKind?: 'image' | 'video'
+  mediaKind?: 'image' | 'video' | 'mixed'
   criteriaChecked?: number
   completion?: unknown
   assignment?: unknown
@@ -25,7 +30,7 @@ export interface ProofResult extends ProofAssessment {
   recovery?: unknown
 }
 
-function localAssessment(note: string, mediaKind?: 'image' | 'video'): ProofResult {
+function localAssessment(note: string, mediaKind?: 'image' | 'video' | 'mixed'): ProofResult {
   const normalized = note.trim()
   const words = normalized.split(/\s+/).filter(Boolean)
   const concreteSignals = /\b(said|asked|sent|told|gave|built|created|made|cooked|walked|ran|completed|recorded|designed|wrote|tested|practiced|performed|organized|photographed|shared|responded)\b/i.test(normalized) ? 16 : 0
@@ -63,7 +68,7 @@ function localAssessment(note: string, mediaKind?: 'image' | 'video'): ProofResu
 }
 
 export async function assessProof(submission: ProofSubmission): Promise<ProofResult> {
-  if (!submission.mediaDataUrl && !submission.videoFrames?.length) throw new Error('Upload a proof video or image before submitting.')
+  if (!submission.mediaItems?.length && !submission.mediaDataUrl && !submission.videoFrames?.length) throw new Error('Upload at least one proof video or image before submitting.')
   const useRemote = submission.backendMode
     ? submission.backendMode === 'insforge'
     : isInsforgeConfigured
@@ -80,6 +85,7 @@ export async function assessProof(submission: ProofSubmission): Promise<ProofRes
       videoFrames: submission.videoFrames,
       videoDurationSeconds: submission.videoDurationSeconds,
       mediaKind: submission.mediaKind,
+      mediaItems: submission.mediaItems,
     })
   }
 

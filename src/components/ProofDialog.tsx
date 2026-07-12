@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { ArrowRight, Camera, CheckCircle2, Circle, Flame, LockKeyhole, Sparkles, Square, Upload, Video, X } from 'lucide-react'
+import { ArrowRight, Camera, CheckCircle2, Circle, Flame, Images, LockKeyhole, Sparkles, Square, Trash2, Upload, Video, X } from 'lucide-react'
 import type { Challenge, DailyAssignment } from '../types'
 import { preparePrivateProofMedia, type PreparedProofMedia } from '../services/imageProof'
 import { assessProof, type ProofResult } from '../services/proof'
@@ -15,8 +15,19 @@ interface ProofDialogProps {
 }
 
 type RecorderState = 'idle' | 'requesting' | 'ready' | 'recording' | 'finalizing'
+type MediaMode = 'images' | 'videos' | 'both'
+
+interface ProofAttachment {
+  id: string
+  file: File
+  preview: string
+  prepared: PreparedProofMedia
+}
 
 const MAX_RECORDING_SECONDS = 30
+const MAX_ATTACHMENTS = 4
+const MAX_VIDEO_ATTACHMENTS = 3
+const MAX_VISUAL_ITEMS = 18
 
 function preferredRecordingMimeType(): string | undefined {
   if (typeof MediaRecorder === 'undefined') return undefined
@@ -40,9 +51,8 @@ function recordingErrorMessage(caught: unknown): string {
 
 export function ProofDialog({ open, assignment, challenge, backendMode, onClose, onRecorded }: ProofDialogProps) {
   const [note, setNote] = useState('')
-  const [file, setFile] = useState<File>()
-  const [preview, setPreview] = useState<string>()
-  const [preparedMedia, setPreparedMedia] = useState<PreparedProofMedia>()
+  const [mediaMode, setMediaMode] = useState<MediaMode>('both')
+  const [attachments, setAttachments] = useState<ProofAttachment[]>([])
   const [assessment, setAssessment] = useState<ProofResult>()
   const [busy, setBusy] = useState(false)
   const [mediaBusy, setMediaBusy] = useState(false)
@@ -60,14 +70,16 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
   const recorderRequestIdRef = useRef(0)
   const recordingIntervalRef = useRef<number>()
   const recordingTimeoutRef = useRef<number>()
-  const isVideo = Boolean(file?.type.startsWith('video/'))
 
   useEffect(() => {
     if (!open) return
     setNote('')
-    setFile(undefined)
-    setPreview(undefined)
-    setPreparedMedia(undefined)
+    const accepted = challenge.acceptedEvidence ?? ['image', 'video']
+    setMediaMode(accepted.length === 1 ? accepted[0] === 'image' ? 'images' : 'videos' : 'both')
+    setAttachments((current) => {
+      current.forEach(({ preview }) => URL.revokeObjectURL(preview))
+      return []
+    })
     setAssessment(undefined)
     setConsent(false)
     setError('')
@@ -90,36 +102,64 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
       mediaRecorderRef.current = undefined
       recordingChunksRef.current = []
     }
-  }, [open, assignment.id])
+  }, [open, assignment.id, challenge.acceptedEvidence])
 
-  useEffect(() => () => { if (preview) URL.revokeObjectURL(preview) }, [preview])
+  useEffect(() => {
+    if (open) return
+    setAttachments((current) => {
+      current.forEach(({ preview }) => URL.revokeObjectURL(preview))
+      return []
+    })
+  }, [open])
 
   useEffect(() => {
     if (!recorderOpen || !liveVideoRef.current) return
     liveVideoRef.current.srcObject = streamRef.current ?? null
   }, [recorderOpen, recorderState])
 
-  async function prepareFile(next: File) {
+  async function addFiles(files: File[]) {
     setError('')
+    if (!files.length) return
+    const openSlots = MAX_ATTACHMENTS - attachments.length
+    if (openSlots <= 0) {
+      setError(`You can attach up to ${MAX_ATTACHMENTS} images or videos.`)
+      return
+    }
+    const selected = files.slice(0, openSlots)
+    const videoCount = attachments.filter(({ prepared }) => prepared.kind === 'video').length + selected.filter((file) => file.type.startsWith('video/')).length
+    if (videoCount > MAX_VIDEO_ATTACHMENTS) {
+      setError(`You can attach up to ${MAX_VIDEO_ATTACHMENTS} videos in one proof.`)
+      return
+    }
     setMediaBusy(true)
-    setPreparedMedia(undefined)
+    const nextAttachments: ProofAttachment[] = []
     try {
-      setFile(next)
-      setPreview(URL.createObjectURL(next))
-      setPreparedMedia(await preparePrivateProofMedia(next))
+      for (const file of selected) {
+        const prepared = await preparePrivateProofMedia(file)
+        nextAttachments.push({ id: `${file.name}:${file.size}:${file.lastModified}:${crypto.randomUUID()}`, file, preview: URL.createObjectURL(file), prepared })
+      }
+      const visualItems = [...attachments, ...nextAttachments].reduce((total, item) => total + (item.prepared.kind === 'video' ? item.prepared.frames.length : 1), 0)
+      if (visualItems > MAX_VISUAL_ITEMS) throw new Error('That combination contains too many video frames. Use fewer or shorter videos.')
+      setAttachments((current) => [...current, ...nextAttachments])
+      if (files.length > openSlots) setError(`Only the first ${openSlots} files were added. The limit is ${MAX_ATTACHMENTS}.`)
     } catch (caught) {
-      setFile(undefined)
-      setPreview(undefined)
-      setPreparedMedia(undefined)
-      setError(caught instanceof Error ? caught.message : 'Could not prepare that photo or video.')
+      nextAttachments.forEach(({ preview }) => URL.revokeObjectURL(preview))
+      setError(caught instanceof Error ? caught.message : 'Could not prepare those photos or videos.')
     } finally { setMediaBusy(false) }
   }
 
   async function pickFile(event: ChangeEvent<HTMLInputElement>) {
-    const next = event.target.files?.[0]
+    const next = [...(event.target.files ?? [])]
     event.target.value = ''
-    if (!next) return
-    await prepareFile(next)
+    await addFiles(next)
+  }
+
+  function removeAttachment(id: string) {
+    setAttachments((current) => {
+      const removed = current.find((item) => item.id === id)
+      if (removed) URL.revokeObjectURL(removed.preview)
+      return current.filter((item) => item.id !== id)
+    })
   }
 
   function stopCameraTracks() {
@@ -219,7 +259,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         const extension = outputType.includes('mp4') ? 'mp4' : 'webm'
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
         const recordedFile = new File([blob], `proof-recording-${timestamp}.${extension}`, { type: outputType })
-        void prepareFile(recordedFile).finally(() => {
+        void addFiles([recordedFile]).finally(() => {
           mediaRecorderRef.current = undefined
           setRecorderOpen(false)
           setRecorderState('idle')
@@ -247,17 +287,21 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
     setBusy(true)
     setError('')
     try {
+      const mediaItems = attachments.map(({ file, prepared }) => prepared.kind === 'image'
+        ? { kind: 'image' as const, name: file.name, dataUrl: prepared.dataUrl }
+        : { kind: 'video' as const, name: file.name, frames: prepared.frames, durationSeconds: prepared.durationSeconds })
+      const proofName = attachments.map(({ file }) => file.name).join(', ').slice(0, 255)
+      const kinds = new Set(mediaItems.map(({ kind }) => kind))
+      const mediaKind = kinds.size > 1 ? 'mixed' as const : mediaItems[0]?.kind
       const result = await assessProof({
         assignmentId: assignment.id,
         note,
-        proofName: file?.name,
-        mediaKind: preparedMedia?.kind,
-        mediaDataUrl: preparedMedia?.kind === 'image' ? preparedMedia.dataUrl : undefined,
-        videoFrames: preparedMedia?.kind === 'video' ? preparedMedia.frames : undefined,
-        videoDurationSeconds: preparedMedia?.kind === 'video' ? preparedMedia.durationSeconds : undefined,
+        proofName,
+        mediaKind,
+        mediaItems,
         backendMode,
       })
-      await onRecorded(result, note, file?.name)
+      await onRecorded(result, note, proofName)
       setAssessment(result)
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'We could not check this proof. Your note is still here—try again.')
@@ -270,12 +314,17 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         <div className="section-kicker">PRIVATE PROOF CHECK</div>
         <h2 id="proof-title">Show what happened.</h2>
         <p>{challenge.proofHint}</p>
-        <div className={`verification-mode ${backendMode === 'insforge' ? 'verification-mode--live' : ''}`}><Sparkles aria-hidden="true" /><span><strong>{backendMode === 'insforge' ? 'OpenAI verification is live' : 'Sample review mode'}</strong>{backendMode === 'insforge' ? 'Sampled video frames are checked against this challenge’s completion criteria.' : 'Demo results stay on this device and are not OpenAI-verified.'}</span></div>
-        <div className="proof-source-options" role="group" aria-label="Choose how to add proof">
-          <button type="button" onClick={() => fileInputRef.current?.click()} disabled={mediaBusy || busy || recorderState === 'recording' || recorderState === 'finalizing'}><Upload aria-hidden="true" /><span><strong>Upload</strong><small>Choose an existing file</small></span></button>
-          <button type="button" className={recorderOpen ? 'active' : ''} onClick={() => void openRecorder()} disabled={mediaBusy || busy || recorderOpen}><Camera aria-hidden="true" /><span><strong>Record</strong><small>Use this device</small></span></button>
+        <div className={`verification-mode ${backendMode === 'insforge' ? 'verification-mode--live' : ''}`}><Sparkles aria-hidden="true" /><span><strong>{backendMode === 'insforge' ? 'OpenAI verification is live' : 'Sample review mode'}</strong>{backendMode === 'insforge' ? 'Your selected images and sampled video frames are checked together against the completion criteria.' : 'Demo results stay on this device and are not OpenAI-verified.'}</span></div>
+        <div className="proof-media-mode" role="group" aria-label="Accepted attachment types">
+          <button type="button" className={mediaMode === 'images' ? 'active' : ''} onClick={() => setMediaMode('images')} disabled={!(challenge.acceptedEvidence ?? ['image','video']).includes('image')}><Images aria-hidden="true" /> Images</button>
+          <button type="button" className={mediaMode === 'videos' ? 'active' : ''} onClick={() => setMediaMode('videos')} disabled={!(challenge.acceptedEvidence ?? ['image','video']).includes('video')}><Video aria-hidden="true" /> Videos</button>
+          <button type="button" className={mediaMode === 'both' ? 'active' : ''} onClick={() => setMediaMode('both')} disabled={!['image','video'].every((kind) => (challenge.acceptedEvidence ?? ['image','video']).includes(kind as 'image' | 'video'))}><Images aria-hidden="true" /> Both</button>
         </div>
-        <input id="proof-file-input" ref={fileInputRef} className="proof-file-input" type="file" aria-label="Choose proof video or image" accept="video/mp4,video/quicktime,video/mov,video/webm,image/png,image/jpeg,image/webp" onChange={(event) => void pickFile(event)} disabled={mediaBusy || busy} />
+        <div className="proof-source-options" role="group" aria-label="Choose how to add proof">
+          <button type="button" onClick={() => fileInputRef.current?.click()} disabled={mediaBusy || busy || attachments.length >= MAX_ATTACHMENTS || recorderState === 'recording' || recorderState === 'finalizing'}><Upload aria-hidden="true" /><span><strong>Choose files</strong><small>Add up to {MAX_ATTACHMENTS} attachments</small></span></button>
+          <button type="button" className={recorderOpen ? 'active' : ''} onClick={() => void openRecorder()} disabled={mediaMode === 'images' || mediaBusy || busy || recorderOpen || attachments.length >= MAX_ATTACHMENTS}><Camera aria-hidden="true" /><span><strong>Record video</strong><small>Add a camera recording</small></span></button>
+        </div>
+        <input id="proof-file-input" ref={fileInputRef} className="proof-file-input" type="file" multiple aria-label="Choose proof videos or images" accept={mediaMode === 'images' ? 'image/png,image/jpeg,image/webp' : mediaMode === 'videos' ? 'video/mp4,video/quicktime,video/mov,video/webm' : 'video/mp4,video/quicktime,video/mov,video/webm,image/png,image/jpeg,image/webp'} onChange={(event) => void pickFile(event)} disabled={mediaBusy || busy} />
         {recorderOpen ? <div className={`proof-recorder proof-recorder--${recorderState}`}>
           <div className="proof-recorder__stage">
             <video ref={liveVideoRef} aria-label="Live camera preview" autoPlay muted playsInline />
@@ -291,27 +340,32 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
             {recorderState === 'recording' && <button type="button" className="button button--ink" onClick={stopRecording}><Square fill="currentColor" aria-hidden="true" /> Stop &amp; use video</button>}
             {(recorderState === 'ready' || recorderState === 'requesting') && <button type="button" className="proof-recorder__cancel" onClick={closeRecorder}><X aria-hidden="true" /> Cancel</button>}
           </div>
-          <p>The camera turns off after you stop. Audio is not recorded. The full recording stays in this browser; only sampled frames are used for verification.</p>
+          <p>The camera turns off after you stop. Audio is not recorded. The full recording stays in this browser; only sampled frames are added to this proof.</p>
+        </div> : attachments.length ? <div className="proof-attachment-grid" aria-label={`${attachments.length} proof attachments selected`}>
+          {attachments.map(({ id, file, preview, prepared }, index) => <article className="proof-attachment" key={id}>
+            {prepared.kind === 'video' ? <video src={preview} aria-label={`Proof video ${index + 1}`} controls muted playsInline /> : <img src={preview} alt={`Proof image ${index + 1}`} />}
+            <div><span>{prepared.kind === 'video' ? `${prepared.frames.length} FRAMES` : 'IMAGE'}</span><strong>{file.name}</strong><small>{(file.size / 1024 / 1024).toFixed(1)} MB</small></div>
+            <button type="button" onClick={() => removeAttachment(id)} disabled={busy || mediaBusy} aria-label={`Remove ${file.name}`}><Trash2 aria-hidden="true" /></button>
+          </article>)}
+          {attachments.length < MAX_ATTACHMENTS && <button type="button" className="proof-add-more" onClick={() => fileInputRef.current?.click()} disabled={busy || mediaBusy}><Upload aria-hidden="true" /> Add more</button>}
         </div> : <label className="proof-upload" htmlFor="proof-file-input">
-          {preview
-            ? isVideo
-              ? <video src={preview} aria-label="Selected proof video preview" controls muted playsInline />
-              : <img src={preview} alt="Selected proof preview" />
-            : <><Video aria-hidden="true" /><strong>{mediaBusy ? 'Sampling private video frames…' : 'Upload or record your proof video'}</strong><span>Best: 5–30 seconds, MP4/MOV/WebM, under 80 MB. Six timestamped frames are sent for verification; the full video stays in your browser.</span></>}
+          {mediaMode === 'images' ? <Images aria-hidden="true" /> : <Video aria-hidden="true" />}
+          <strong>{mediaBusy ? 'Preparing private media…' : mediaMode === 'images' ? 'Choose one or more proof images' : mediaMode === 'videos' ? 'Choose or record one or more videos' : 'Choose images, videos, or both'}</strong>
+          <span>Up to {MAX_ATTACHMENTS} attachments. Videos must be 30 seconds or shorter; only timestamped frames are sent for verification.</span>
         </label>}
-        {file && preparedMedia && <div className="proof-file-ready"><CheckCircle2 aria-hidden="true" /><span><strong>{isVideo ? `${preparedMedia.kind === 'video' ? preparedMedia.frames.length : 1} video frames ready for OpenAI` : 'Image ready for OpenAI'}</strong>{file.name} · {(file.size / 1024 / 1024).toFixed(1)} MB</span></div>}
+        {attachments.length > 0 && <div className="proof-file-ready"><CheckCircle2 aria-hidden="true" /><span><strong>{attachments.length} {attachments.length === 1 ? 'attachment' : 'attachments'} ready for {backendMode === 'insforge' ? 'OpenAI' : 'sample review'}</strong>{attachments.filter(({ prepared }) => prepared.kind === 'image').length} images · {attachments.filter(({ prepared }) => prepared.kind === 'video').length} videos</span></div>}
         <label className="field">Optional context<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="Anything the verifier should know about what happened? You can leave this blank." rows={4} maxLength={4000} /></label>
         <div className="privacy-note"><LockKeyhole size={17} aria-hidden="true" /> {challenge.privacyNotes || 'Don’t include names, faces, contact details, or another person’s private reply.'}</div>
-        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I agree to send sampled video frames or this image—and my optional context—to OpenAI for one private completion check. The full video is not uploaded.</span></label>}
+        {backendMode === 'insforge' && <label className="check-row proof-consent"><input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} /><span>I agree to send these images and sampled video frames—and my optional context—to OpenAI for one private completion check. Full videos are not uploaded.</span></label>}
         {error && <p className="form-error" role="alert">{error}</p>}
-        {busy && <div className="verification-progress" role="status" aria-live="polite"><span /><div><strong>{backendMode === 'insforge' ? 'OpenAI is reviewing the sampled frames…' : 'Reviewing the sample proof…'}</strong><small>Comparing the visible action with {challenge.successCriteria?.length || 1} completion {challenge.successCriteria?.length === 1 ? 'criterion' : 'criteria'}.</small></div></div>}
-        <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || mediaBusy || !preparedMedia || (backendMode === 'insforge' && !consent)}>{busy ? 'Processing video…' : backendMode === 'insforge' ? 'Verify video with OpenAI' : 'Preview proof result'} <Sparkles size={18} aria-hidden="true" /></button>
+        {busy && <div className="verification-progress" role="status" aria-live="polite"><span /><div><strong>{backendMode === 'insforge' ? 'OpenAI is reviewing all attachments…' : 'Reviewing the sample proof…'}</strong><small>Comparing the visible action with {challenge.successCriteria?.length || 1} completion {challenge.successCriteria?.length === 1 ? 'criterion' : 'criteria'}.</small></div></div>}
+        <button className="button button--accent button--full" onClick={() => void evaluate()} disabled={busy || mediaBusy || attachments.length === 0 || (backendMode === 'insforge' && !consent)}>{busy ? 'Processing attachments…' : backendMode === 'insforge' ? `Verify ${attachments.length || ''} ${attachments.length === 1 ? 'attachment' : 'attachments'} with OpenAI` : 'Preview proof result'} <Sparkles size={18} aria-hidden="true" /></button>
       </> : <div className="assessment">
         <div className={`score-ring score-ring--${assessment.verdict}`}><strong>{assessment.score}</strong><span>PROOF SCORE</span></div>
         <p className="section-kicker">{assessment.verdict === 'complete' ? 'CHALLENGE COMPLETE' : assessment.verdict === 'partial' ? 'PROGRESS RECORDED' : 'MORE DETAIL NEEDED'}</p>
         <h2 id="proof-title">{assessment.verdict === 'complete' ? 'You did the brave thing.' : assessment.verdict === 'partial' ? 'You moved forward.' : 'The attempt still matters.'}</h2>
         <p>{assessment.feedback}</p>
-        <div className={`verification-receipt ${assessment.provider === 'openai' ? 'verification-receipt--live' : ''}`}><CheckCircle2 aria-hidden="true" /><span><strong>{assessment.provider === 'openai' ? 'Processed by OpenAI' : 'On-device sample result'}</strong>{assessment.provider === 'openai' ? `${assessment.criteriaChecked || challenge.successCriteria?.length || 1} completion criteria checked against the ${assessment.mediaKind === 'video' ? 'sampled video frames' : 'image'}.` : 'Sign in with a synced account for real OpenAI verification.'}</span></div>
+        <div className={`verification-receipt ${assessment.provider === 'openai' ? 'verification-receipt--live' : ''}`}><CheckCircle2 aria-hidden="true" /><span><strong>{assessment.provider === 'openai' ? 'Processed by OpenAI' : 'On-device sample result'}</strong>{assessment.provider === 'openai' ? `${assessment.criteriaChecked || challenge.successCriteria?.length || 1} completion criteria checked against the submitted ${assessment.mediaKind === 'video' ? 'video frames' : assessment.mediaKind === 'mixed' ? 'images and video frames' : 'images'}.` : 'Sign in with a synced account for real OpenAI verification.'}</span></div>
         <div className="assessment__xp">+{assessment.pointsAwarded} courage points <Flame size={18} aria-hidden="true" /></div>
         <button className="button button--ink button--full" onClick={onClose}>View today’s log <ArrowRight size={18} aria-hidden="true" /></button>
       </div>}

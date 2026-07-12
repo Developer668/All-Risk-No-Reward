@@ -30,13 +30,13 @@ Local mode includes:
 
 ## Optional InsForge + AI proof-provider mode
 
-Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. Production is configured for OpenAI proof verification with `gpt-4.1-nano`. The browser extracts a small set of timestamped frames from a selected video and sends only those frames through the InsForge edge function; the full video never leaves the browser. The edge function retains optional Gemini, OpenRouter, and NVIDIA NIM adapters for development. The browser never receives a provider key or project-admin secret.
+Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. Production is configured for OpenAI proof verification with `gpt-4.1-nano`. A proof may contain up to four images or videos, including mixed submissions and multiple videos. The browser extracts a small set of timestamped frames from every selected video and sends only those frames through the InsForge edge function; full videos never leave the browser. The edge function retains optional Gemini, OpenRouter, and NVIDIA NIM adapters for development. The browser never receives a provider key or project-admin secret.
 
 The production backend in `insforge/` adds:
 
 - InsForge authentication, email verification/reset methods, OAuth-provider discovery, and row-level security
 - Timezone-aware server assignments, reminders, recovery locks, safety reports, deletion requests, and scheduled maintenance
-- Deterministic challenge loading, selection, filtering, and upload validation; OpenAI is used only for authenticated interpretation of a proof image or sampled video frames, with the InsForge `verify-proof` edge function acting as the secure proxy
+- Deterministic challenge loading, selection, filtering, and upload validation; OpenAI is used only for authenticated interpretation of submitted proof images and sampled video frames, with the InsForge `verify-proof` edge function acting as the secure proxy
 - Ephemeral proof images (PNG/JPEG/WebP) or timestamped JPEG frames extracted from short videos (MP4/MOV/WebM; the browser enforces 80 MiB and 30 seconds); only a hash of the submitted evidence package, media type, size, and optional filename are retained
 - Server-owned scoring, points, streaks, rate limits, and idempotent completion upgrades
 - The repository-backed 500-challenge catalog, operator-fed punishment tasks, atomic two-roll dice limits, and an owner-readable no-repeat audit trail

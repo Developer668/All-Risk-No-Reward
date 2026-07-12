@@ -195,27 +195,29 @@ Invoke the edge function, not the completion table:
 await insforge.functions.invoke('verify-proof', {
   body: {
     assignmentId,
-    proofNote,    // optional context; may be an empty string
-    videoFrames,  // preferred: 2–6 timestamped JPEG frame data URLs
-    videoDurationSeconds,
-    mediaDataUrl, // alternatively, one prepared image data URL
-    proofName,    // optional display name only
+    proofNote, // optional context; may be an empty string
+    mediaItems: [
+      { kind: 'image', name: 'photo.jpg', dataUrl },
+      { kind: 'video', name: 'clip.webm', frames: videoFrames, durationSeconds: 12.4 },
+    ],
+    proofName, // optional combined display name only
   },
 })
 ```
 
-Supply either `videoFrames` or `mediaDataUrl`. The normal video flow accepts MP4,
-MOV, or WebM files up to 80 MiB and 30 seconds in the browser, then extracts six
-timestamped JPEG frames (three for videos shorter than three seconds). Each frame
-is resized to at most 720 px and capped at 170 KiB before submission. The full
-video stays in the browser. Image proof accepts PNG, JPEG, or WebP and is likewise
-resized and re-encoded. The edge function independently validates frame count,
-MIME type, and total evidence size. It temporarily accepts the legacy
-`imageDataUrl` field during rollout.
+`mediaItems` accepts up to four images or sampled videos, including mixed image/video
+submissions and up to three videos. The normal video flow accepts MP4, MOV, or WebM
+files up to 80 MiB and 30 seconds in the browser, then extracts six timestamped JPEG
+frames (three for videos shorter than three seconds). Each frame is resized to at
+most 720 px and capped at 170 KiB before submission. Full videos stay in the browser.
+Image proof accepts PNG, JPEG, or WebP and is likewise resized and re-encoded. The
+edge function independently validates attachment count, frame count, MIME type, and
+total evidence size. It temporarily accepts the legacy `videoFrames`, `mediaDataUrl`,
+and `imageDataUrl` fields during rollout.
 
 The function performs request-size, MIME, ownership, assignment-state, and
 catalog evidence-type checks deterministically. Only then does it reserve a
-rate-limited attempt and send the image or timestamped frame sample to OpenAI in
+rate-limited attempt and send the images and timestamped frame samples to OpenAI in
 production, because interpreting pixels is the part that requires a vision model.
 The optional note is context only and cannot prove completion by itself. It records the result through the
 project-admin-only
