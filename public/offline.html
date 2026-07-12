@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f1ecdf" />
+    <title>You're offline · All Risk, No Reward</title>
+    <style>
+      :root { color: #17241e; background: #f1ecdf; font-family: ui-sans-serif, system-ui, sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
+      main { width: min(100%, 560px); border: 2px solid currentColor; border-radius: 28px; padding: clamp(28px, 7vw, 52px); box-shadow: 8px 8px 0 #17241e; }
+      img { width: 64px; height: 64px; }
+      p { font-size: 1.05rem; line-height: 1.6; }
+      a { min-height: 48px; width: fit-content; display: inline-flex; align-items: center; border-radius: 999px; padding: 0 24px; color: #fff; background: #9d2f12; font-weight: 750; text-decoration: none; }
+      a:focus-visible { outline: 3px solid #17241e; outline-offset: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/icons/icon.svg" alt="" />
+      <h1>Your courage log is safe.</h1>
+      <p>You're offline right now. Challenges you've already opened remain available. Reconnect before submitting proof so it can be verified securely.</p>
+      <a href="/">Try again</a>
+    </main>
+  </body>
+</html>

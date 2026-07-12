@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f1ecdf" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content="Daily social courage challenges, built around consent and real progress." />
+    <meta name="application-name" content="All Risk, No Reward" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="All Risk" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="All Risk, No Reward" />
+    <meta property="og:description" content="Daily social courage challenges, built around consent and real progress." />
+    <meta property="og:image" content="__SITE_ORIGIN__/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="All Risk, No Reward — Do one brave thing today." />
+    <meta property="og:url" content="__SITE_ORIGIN__/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="All Risk, No Reward" />
+    <meta name="twitter:description" content="Daily social courage challenges, built around consent and real progress." />
+    <meta name="twitter:image" content="__SITE_ORIGIN__/og.png" />
+    <link rel="canonical" href="__SITE_ORIGIN__/" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
+    <title>All Risk, No Reward</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+      if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js', { scope: '/', updateViaCache: 'none' })
+            .then((registration) => registration.update())
+            .catch((error) => console.warn('Offline support could not start.', error))
+        })
+      }
+    </script>
+  </body>
+</html>
