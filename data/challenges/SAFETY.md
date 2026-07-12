@@ -52,6 +52,31 @@ Every generated challenge must finish in one session or within the same calendar
 - Never enter or approach restricted, runway, baggage, staff-only, or security-only areas; leave bags unattended; film screening or security operations; impersonate staff; prank travelers; block circulation; or interfere with airport operations.
 - Parties, singing, dancing, costumes, and performances belong in homes, booked rooms, registered events, or clearly permitted areas. Never start a party in a public restroom or another place where privacy, sanitation, access, work, or safe exit would be disrupted.
 
+## Short-form videos and pranks
+
+- Design completion evidence like an Instagram Reel or short video, but never require public posting. Private app upload is the default.
+- No surprise pranks, fake emergencies, humiliation, property interference, account swapping, hidden recording, frightening strangers, or pretending to be staff or officials.
+- The joke should be visible from the user's performance, costume, edit, or prop. It must not depend on making another person confused, afraid, angry, exposed, or responsible for the user's score.
+
+## Silly movement
+
+- Backward walking is limited to a few slow steps in a flat, empty, private or designated exercise space with a spotter. Never use roads, crossings, stairs, treadmills, platforms, crowded areas, or routes with obstacles.
+- Hopping is optional, brief, and only for users whose current ability supports it. Always provide a normal-walk or step-touch alternative.
+- Floor rolls are allowed only as a single gentle sideways log roll on a clear padded private floor for someone already comfortable doing it. Provide a seated camera-spin edit as the default alternative. Never require flips, somersaults, dives, falls, inversions, or head/neck loading.
+- Silly walks should move forward on short, inspected routes. Creativity—not speed, risk, or physical pain—is the goal.
+
+## Costumes, cross-style cosplay, and hair
+
+- Cross-style cosplay may invite a user to portray a character with a gender presentation different from their usual style, but it must be voluntary, respectful, nonsexual, and never imply that any gender identity or clothing is inferior or inherently humiliating.
+- Costumes must preserve normal breathing, sight, hearing, circulation, footwear, mobility, identification, and weather comfort. Follow venue mask, prop, body-paint, and dress rules.
+- Hair challenges use clean temporary wigs, hats, or clip-on accessories. Never require cutting, shaving, bleaching, dye, glue, heat, unknown products, or changes to another person's hair.
+
+## Café, restaurant, and job roleplay
+
+- Café and restaurant roleplay belongs at home, in a classroom, at a booked activity, or in another explicitly authorized setting using toy food or normal allergy-safe food.
+- Never go behind a real business counter, touch employee equipment, prepare customer orders, impersonate an employee, disrupt service, or pressure workers into participating.
+- At a real café or restaurant, users may order normally, ask one appropriate menu question when staff are available, and film only where venue rules and participant consent allow it.
+
 ## Social and privacy
 
 - No challenge may make another person responsible for the user's score, streak, punishment, mood, or public reputation.

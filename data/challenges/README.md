@@ -9,15 +9,15 @@ This directory contains an original, application-ready challenge library for **A
 | `manifest.json` | Dataset version, level files, and expected counts |
 | `challenge-set.schema.json` | JSON Schema for validating every level file |
 | `easy.json` | 90 short, funny, social, creative, and low-pressure challenges |
-| `medium.json` | 90 challenges requiring more time, teamwork, or confidence |
-| `hard.json` | 90 substantial, funny, group, creative, and social-courage challenges |
-| `extreme.json` | 125 difficult, funny, social, fitness, travel, and creative challenges |
-| `nightmare.json` | 127 epic but still same-day challenges |
+| `medium.json` | 95 challenges requiring more time, teamwork, comedy, or confidence |
+| `hard.json` | 100 substantial, funny, group, creative, dress-up, food, and social-courage challenges |
+| `extreme.json` | 105 difficult, funny, social, fitness, travel, cosplay, and creative challenges |
+| `nightmare.json` | 110 epic, highly filmable, but still same-day challenges |
 | `SAFETY.md` | Required product and moderation rules |
 | `SOURCES.md` | Research sources and content-origin notes |
 | `VLM_GRADING.md` | Evidence capture and vision-model grading contract |
 
-Total: **522 original challenges**. Every challenge ends in one session or by the end of the same day.
+Total: **500 original active challenges**. Every challenge ends in one session or by the end of the same day. Deleted challenge IDs remain listed in `manifest.json` under `retiredChallengeIds` and must not be reused.
 
 ## Challenge object
 

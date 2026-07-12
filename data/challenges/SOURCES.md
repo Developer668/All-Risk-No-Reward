@@ -26,3 +26,13 @@ Publicly indexed social posts and challenge collections were reviewed for broad 
 - [Cosplay photography and consent discussion](https://www.pcgamer.com/games/cosplay-is-not-consent-and-i-wish-wed-stop-feeling-so-entitled-to-shoving-our-phones-in-peoples-faces-without-asking-them-first/) — reinforces asking before deliberately photographing or recording people, including at public events.
 
 Instagram, Threads, and TikTok pages may restrict automated viewing, so only publicly indexed material was used. Common unsafe patterns were deliberately rejected, including fake emergency messages, prank calls to workers, random-number calls, pressure to expose private messages, required public posting, forced account access, humiliation, and refusal to accept a social or romantic rejection.
+
+## Fun-first redesign references
+
+- [Play Café](https://offline.kids/activity/play-cafe/) — café roleplay combines menus, safe food, costumes, communication, and rotating jobs in an authorized home activity.
+- [The Ministry of Silly Walks youth-group game](https://actuallyfun.com/the-ministry-of-silly-walks/) — reviewed for short marked routes, creative movement categories, and group participation.
+- [Safe walking games](https://iwalksafe.org/download/25522/) — supports adding observation games and short silly-walk sections while treating safety as the first rule.
+- [Anime Central convention policies](https://www.acen.org/about-us/convention-policies/) — costumes must follow venue rules and avoid unsafe props, blocked awareness, and hazardous construction.
+- [Cosplay photography and consent](https://www.pcgamer.com/games/cosplay-is-not-consent-and-i-wish-wed-stop-feeling-so-entitled-to-shoving-our-phones-in-peoples-faces-without-asking-them-first/) — public cosplay does not grant permission for targeted photography or recording.
+
+Indexed Reel and short-video idea lists were used only to identify broad formats—freeze edits, character glitches, funny outfits, dramatic speeches, restaurant roleplay, fake commercials, and transformation cuts. The repository prompts are original and reject surprise pranks, unsafe stunts, forced account access, unwanted filming, and interference with workers or the public.
