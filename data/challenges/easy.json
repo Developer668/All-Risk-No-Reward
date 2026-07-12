@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "level": "easy",
   "description": "Short, low-pressure same-day challenges designed to be accessible, silly, useful, or easy to modify.",
-  "challengeCount": 75,
+  "challengeCount": 90,
   "challenges": [
     {
       "id": "easy-001",
@@ -14,7 +14,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Do 8 controlled wall push-ups.  Keep your body straight and stop if anything hurts.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-001: Wall Push-Up Starter.",
+          "Do 8 controlled wall push-ups.  Keep your body straight and stop if anything hurts.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-002",
@@ -26,7 +42,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Do 10 slow sit-to-stands using a stable chair that cannot roll.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-002: Chair Squat Ten.",
+          "Do 10 slow sit-to-stands using a stable chair that cannot roll.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-003",
@@ -38,7 +70,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "March comfortably in place for 2 minutes while swinging your arms.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-003: March in Place.",
+          "March comfortably in place for 2 minutes while swinging your arms.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-004",
@@ -50,19 +98,51 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Dance through one favorite song in a clear, non-slippery space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-004: One-Song Dance.",
+          "Dance through one favorite song in a clear, non-slippery space.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-005",
-      "title": "Balance Switch",
-      "prompt": "Stand near a wall or sturdy chair and balance on each foot for 20 seconds.",
-      "category": "fitness",
-      "estimatedMinutes": 2,
+      "title": "Flamingo News Reporter",
+      "prompt": "Stand near a wall or sturdy chair, balance on each foot for up to 20 seconds, and report one ridiculous piece of imaginary breaking news; step down whenever needed.",
+      "category": "comedy",
+      "estimatedMinutes": 4,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "none_to_light",
+      "description": "Stand near a wall or sturdy chair, balance on each foot for up to 20 seconds, and report one ridiculous piece of imaginary breaking news; step down whenever needed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-005: Flamingo News Reporter.",
+          "Stand near a wall or sturdy chair, balance on each foot for up to 20 seconds, and report one ridiculous piece of imaginary breaking news; step down whenever needed.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-006",
@@ -74,7 +154,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Circle your shoulders, ankles, and wrists slowly for one minute without forcing any joint.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-006: Gentle Mobility Minute.",
+          "Circle your shoulders, ankles, and wrists slowly for one minute without forcing any joint.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-007",
@@ -86,7 +182,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Hold a stable surface and complete 10 controlled calf raises.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-007: Ten Calf Raises.",
+          "Hold a stable surface and complete 10 controlled calf raises.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-008",
@@ -98,19 +210,51 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Take five relaxed laps through a safe indoor route without running.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-008: Hallway Lap.",
+          "Take five relaxed laps through a safe indoor route without running.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-009",
-      "title": "Invisible Jump Rope",
-      "prompt": "Pretend to jump rope for 30 seconds; step side to side instead if jumping is uncomfortable.",
+      "title": "Invisible-Rope Championship",
+      "prompt": "Pretend to jump rope for 30 seconds while announcing your own championship commentary; step side to side instead of jumping if preferred.",
       "category": "fitness",
-      "estimatedMinutes": 2,
+      "estimatedMinutes": 3,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Pretend to jump rope for 30 seconds while announcing your own championship commentary; step side to side instead of jumping if preferred.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-009: Invisible-Rope Championship.",
+          "Pretend to jump rope for 30 seconds while announcing your own championship commentary; step side to side instead of jumping if preferred.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-010",
@@ -122,7 +266,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Take five slow breaths while gently reaching overhead only as far as comfortable.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-010: Reach and Breathe.",
+          "Take five slow breaths while gently reaching overhead only as far as comfortable.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-011",
@@ -134,7 +294,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Write a complete funny story using exactly six words.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-011: Six-Word Story.",
+          "Write a complete funny story using exactly six words.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-012",
@@ -146,7 +322,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Turn a random squiggle into a recognizable character.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-012: Tiny Doodle.",
+          "Turn a random squiggle into a recognizable character.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-013",
@@ -158,7 +350,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Make a wearable paper hat using one sheet of paper; use only safe craft supplies.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-013: Paper Hat Prototype.",
+          "Make a wearable paper hat using one sheet of paper; use only safe craft supplies.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-014",
@@ -170,7 +378,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Give a nearby object a voice and perform a 20-second monologue.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-014: Object Voice Actor.",
+          "Give a nearby object a voice and perform a 20-second monologue.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-015",
@@ -182,7 +406,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Describe an imaginary movie using no more than six emojis, then reveal the title.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-015: Emoji Movie Pitch.",
+          "Describe an imaginary movie using no more than six emojis, then reveal the title.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-016",
@@ -194,7 +434,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Write your first name three times with your non-dominant hand.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-016: Wrong-Hand Signature.",
+          "Write your first name three times with your non-dominant hand.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-017",
@@ -206,7 +462,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Choose a word and write three clean rhymes for it in 60 seconds.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-017: Three-Rhyme Sprint.",
+          "Choose a word and write three clean rhymes for it in 60 seconds.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-018",
@@ -218,7 +489,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Build the tallest freestanding tower you can from three sheets of paper.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-018: Mini Paper Tower.",
+          "Build the tallest freestanding tower you can from three sheets of paper.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-019",
@@ -230,7 +517,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Make a clean sock puppet and give it a ten-second introduction.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-019: Sock Puppet Hello.",
+          "Make a clean sock puppet and give it a ten-second introduction.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-020",
@@ -242,7 +544,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Create a harmless sound effect using two household objects without damaging them.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-020: Mystery Sound.",
+          "Create a harmless sound effect using two household objects without damaging them.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-021",
@@ -254,7 +572,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Give someone you know one sincere, specific compliment with no expectation in return.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-021: Specific Compliment.",
+          "Give someone you know one sincere, specific compliment with no expectation in return.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-022",
@@ -266,7 +600,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Send a short thank-you message to someone who helped you recently.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-022: Thank-You Text.",
+          "Send a short thank-you message to someone who helped you recently.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-023",
@@ -278,7 +628,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Ask a friend or relative how their day is going and listen to the answer.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-023: Friendly Check-In.",
+          "Ask a friend or relative how their day is going and listen to the answer.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-024",
@@ -290,19 +656,51 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Tell or text a family-friendly joke to someone who enjoys jokes.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-024: Share a Clean Joke.",
+          "Tell or text a family-friendly joke to someone who enjoys jokes.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-025",
-      "title": "Gratitude Trio",
-      "prompt": "Write down three ordinary things you appreciate today.",
+      "title": "Gratitude Game Show",
+      "prompt": "Record a 20-second game-show announcement revealing three ordinary things you appreciate as today's grand-prize winners.",
       "category": "wellness",
-      "estimatedMinutes": 4,
+      "estimatedMinutes": 5,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Record a 20-second game-show announcement revealing three ordinary things you appreciate as today's grand-prize winners.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-025: Gratitude Game Show.",
+          "Record a 20-second game-show announcement revealing three ordinary things you appreciate as today's grand-prize winners.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-026",
@@ -314,7 +712,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Set a two-minute timer and tidy only your own space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-026: Two-Minute Tidy.",
+          "Set a two-minute timer and tidy only your own space.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-027",
@@ -326,19 +739,49 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Return five misplaced items you own to their proper places.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-027: Put Away Five.",
+          "Return five misplaced items you own to their proper places.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-028",
-      "title": "Delete Ten Screenshots",
-      "prompt": "Remove ten unneeded screenshots without deleting anything important.",
-      "category": "productivity",
-      "estimatedMinutes": 5,
+      "title": "Tiny Cleaning Commercial",
+      "prompt": "Tidy one small work surface, then record a ten-second advertisement showing why the clean surface is the invention of the century.",
+      "category": "comedy",
+      "estimatedMinutes": 10,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Tidy one small work surface, then record a ten-second advertisement showing why the clean surface is the invention of the century.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-028: Tiny Cleaning Commercial.",
+          "Tidy one small work surface, then record a ten-second advertisement showing why the clean surface is the invention of the century.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-029",
@@ -350,19 +793,49 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Clear one small work surface and wipe it with an appropriate cleaner.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-029: Desk Reset.",
+          "Clear one small work surface and wipe it with an appropriate cleaner.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-030",
-      "title": "Tomorrow Note",
-      "prompt": "Write the single most useful thing to remember tomorrow.",
+      "title": "Future-Self Mission Video",
+      "prompt": "Record a 15-second private video telling tomorrow's version of you the single most useful thing to remember.",
       "category": "productivity",
-      "estimatedMinutes": 2,
+      "estimatedMinutes": 4,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Record a 15-second private video telling tomorrow's version of you the single most useful thing to remember.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-030: Future-Self Mission Video.",
+          "Record a 15-second private video telling tomorrow's version of you the single most useful thing to remember.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-031",
@@ -374,7 +847,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Find and photograph five different colors without photographing people or private information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-031: Color Hunt.",
+          "Find and photograph five different colors without photographing people or private information.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-032",
@@ -386,7 +875,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Look at the sky from a safe place and name a shape you see in the clouds.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-032: Cloud Character.",
+          "Look at the sky from a safe place and name a shape you see in the clouds.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-033",
@@ -398,7 +903,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "List five textures you can see outdoors without touching or removing anything.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-033: Nature Texture List.",
+          "List five textures you can see outdoors without touching or removing anything.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-034",
@@ -410,7 +931,22 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "With gloves or a litter grabber, safely bin one ordinary piece of litter; skip sharp, wet, or hazardous items.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-034: Clean-Litter One.",
+          "With gloves or a litter grabber, safely bin one ordinary piece of litter; skip sharp, wet, or hazardous items.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-035",
@@ -422,7 +958,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Observe a bird or insect from a distance for one minute without feeding or disturbing it.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-035: Window Wildlife Watch.",
+          "Observe a bird or insect from a distance for one minute without feeding or disturbing it.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-036",
@@ -434,7 +986,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Find objects around you beginning with five consecutive letters.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-036: Alphabet Spotting.",
+          "Find objects around you beginning with five consecutive letters.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-037",
@@ -446,7 +1014,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Say a family-friendly tongue twister correctly three times at a comfortable pace.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-037: Tongue-Twister Three.",
+          "Say a family-friendly tongue twister correctly three times at a comfortable pace.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-038",
@@ -458,7 +1042,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "On a clear table, practice spinning a coin for three minutes; keep it away from small children and pets.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-038: Coin Spin Practice.",
+          "On a clear table, practice spinning a coin for three minutes; keep it away from small children and pets.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-039",
@@ -470,7 +1070,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Study five safe objects for 20 seconds, cover them, and list what you remember.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-039: Memory Tray Five.",
+          "Study five safe objects for 20 seconds, cover them, and list what you remember.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-040",
@@ -482,7 +1098,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Fold a simple paper airplane and try to land it on a clear floor target; never throw toward people or animals.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-040: Paper Airplane Landing.",
+          "Fold a simple paper airplane and try to land it on a clear floor target; never throw toward people or animals.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-041",
@@ -494,7 +1126,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Cross a room once using your funniest slow robot walk in a clear space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-041: Robot Walk.",
+          "Cross a room once using your funniest slow robot walk in a clear space.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-042",
@@ -506,7 +1154,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Report a boring household event like breaking news for 20 seconds.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-042: News Anchor Mundane.",
+          "Report a boring household event like breaking news for 20 seconds.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-043",
@@ -518,7 +1182,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Act out surprise, confusion, and victory using only facial expressions.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-043: Silent Movie Face.",
+          "Act out surprise, confusion, and victory using only facial expressions.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-044",
@@ -530,7 +1210,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Wear one harmless accessory backward for ten minutes if it does not block vision or movement.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-044: Backward Outfit Detail.",
+          "Wear one harmless accessory backward for ten minutes if it does not block vision or movement.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-045",
@@ -542,7 +1238,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Narrate your next simple task in a family-friendly animal voice.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-045: Animal Narrator.",
+          "Narrate your next simple task in a family-friendly animal voice.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-046",
@@ -554,7 +1266,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Refill a reusable water bottle and take a normal drink—no speed or excessive drinking.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-046: Water Break Reminder.",
+          "Refill a reusable water bottle and take a normal drink—no speed or excessive drinking.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-047",
@@ -566,7 +1294,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Put your device aside for five minutes and notice what is around you.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-047: Screen-Free Five.",
+          "Put your device aside for five minutes and notice what is around you.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-048",
@@ -578,7 +1322,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Breathe normally and slowly for four cycles; stop if focusing on breathing feels uncomfortable.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-048: Slow Breathing Pause.",
+          "Breathe normally and slowly for four cycles; stop if focusing on breathing feels uncomfortable.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-049",
@@ -590,7 +1350,22 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Recommend one favorite clean song to a friend without playing it loudly in public.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-049: Favorite Song Share.",
+          "Recommend one favorite clean song to a friend without playing it loudly in public.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-050",
@@ -602,7 +1377,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Offer a friend two harmless options, like pen colors or snack flavors, and let them choose one for you.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-050: Choose-for-a-Friend Poll.",
+          "Offer a friend two harmless options, like pen colors or snack flavors, and let them choose one for you.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-051",
@@ -614,7 +1405,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Send one clean meme to a friend who normally enjoys receiving memes; do not demand a reaction.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-051: Meme Delivery.",
+          "Send one clean meme to a friend who normally enjoys receiving memes; do not demand a reaction.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-052",
@@ -626,7 +1433,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Text a family member two normal snack choices and ask which one wins; follow your usual dietary needs.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-052: Family Snack Poll.",
+          "Text a family member two normal snack choices and ask which one wins; follow your usual dietary needs.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-053",
@@ -638,7 +1461,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Send a willing friend a ten-second voice note reporting the weather in an overdramatic announcer voice.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-053: Tiny Weather Report.",
+          "Send a willing friend a ten-second voice note reporting the weather in an overdramatic announcer voice.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-054",
@@ -650,7 +1489,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Place a clean hat on a harmless household object and take a funny photo without including private details.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-054: Object in a Hat.",
+          "Place a clean hat on a harmless household object and take a funny photo without including private details.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-055",
@@ -662,7 +1516,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Do 20 comfortable alternating knee lifts while holding a stable surface if needed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-055: Knee-Lift Twenty.",
+          "Do 20 comfortable alternating knee lifts while holding a stable surface if needed.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-056",
@@ -674,7 +1544,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Do eight controlled incline push-ups against a sturdy countertop that will not move.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-056: Countertop Push Eight.",
+          "Do eight controlled incline push-ups against a sturdy countertop that will not move.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-057",
@@ -686,7 +1572,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Hold your funniest safe statue pose for 30 seconds while a friend tries to make you laugh using words only and no touching.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-057: Statue Face.",
+          "Hold your funniest safe statue pose for 30 seconds while a friend tries to make you laugh using words only and no touching.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-058",
@@ -698,7 +1600,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Try saying the alphabet backward for one minute, then check how far you got.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-058: Backward Alphabet Attempt.",
+          "Try saying the alphabet backward for one minute, then check how far you got.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-059",
@@ -710,7 +1628,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Balance a lightweight paper crown on your head while walking once across a clear room.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-059: Paper Crown Walk.",
+          "Balance a lightweight paper crown on your head while walking once across a clear room.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-060",
@@ -722,7 +1656,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "With a willing friend, take turns adding one line to a shared drawing until it becomes something funny.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-060: One-Line Drawing Swap.",
+          "With a willing friend, take turns adding one line to a shared drawing until it becomes something funny.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-061",
@@ -734,7 +1684,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Ask someone you know for their most defensible pizza topping and give them 30 seconds to argue for it.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-061: Best Topping Debate.",
+          "Ask someone you know for their most defensible pizza topping and give them 30 seconds to argue for it.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-062",
@@ -746,7 +1712,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Give a brief genuine thank-you to a worker who is already helping you, without delaying them or filming.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-062: Quick Public Thank-You.",
+          "Give a brief genuine thank-you to a worker who is already helping you, without delaying them or filming.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-063",
@@ -758,7 +1740,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Read one ordinary paragraph you own like it is the final scene of an epic movie.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-063: Dramatic Paragraph.",
+          "Read one ordinary paragraph you own like it is the final scene of an epic movie.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-064",
@@ -770,7 +1768,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Arrange five of your own small items by color, take a picture, then put them back.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-064: Color-Sort and Restore.",
+          "Arrange five of your own small items by color, take a picture, then put them back.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-065",
@@ -782,7 +1795,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "If stairs are comfortable for you, walk one flight using the handrail; otherwise take a flat two-minute walk.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-065: One Flight of Stairs.",
+          "If stairs are comfortable for you, walk one flight using the handrail; otherwise take a flat two-minute walk.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-066",
@@ -794,7 +1823,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Close your eyes only while seated safely and identify five ordinary sounds around you.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-066: Five-Sound Detective.",
+          "Close your eyes only while seated safely and identify five ordinary sounds around you.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-067",
@@ -806,7 +1851,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Add a clean original caption to a photo you took that contains no unconsented people or private details.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-067: Original Photo Meme.",
+          "Add a clean original caption to a photo you took that contains no unconsented people or private details.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-068",
@@ -818,7 +1879,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Ask a friend who likes sharing music to send one song recommendation for today.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-068: Song Recommendation Text.",
+          "Ask a friend who likes sharing music to send one song recommendation for today.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-069",
@@ -830,7 +1907,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Invite willing family members to make one silly group pose; everyone chooses whether the photo is taken or shared.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-069: Family Pose Photo.",
+          "Invite willing family members to make one silly group pose; everyone chooses whether the photo is taken or shared.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-070",
@@ -842,7 +1935,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "light"
+      "intensity": "light",
+      "description": "Hold a comfortable supported wall sit for up to 20 seconds, or do five chair sit-to-stands instead.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-070: Wall Sit Option.",
+          "Hold a comfortable supported wall sit for up to 20 seconds, or do five chair sit-to-stands instead.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-071",
@@ -854,7 +1963,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Close or bookmark ten browser tabs you no longer need without losing unfinished work.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-071: Close Ten Tabs.",
+          "Close or bookmark ten browser tabs you no longer need without losing unfinished work.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-072",
@@ -866,7 +1990,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Wear two clean mismatched socks for the rest of the day if they fit comfortably.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-072: Mismatched Socks.",
+          "Wear two clean mismatched socks for the rest of the day if they fit comfortably.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-073",
@@ -878,7 +2017,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "With your eyes closed and seated safely, draw a 30-second self-portrait without looking at the page.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-073: Eyes-Closed Self-Portrait.",
+          "With your eyes closed and seated safely, draw a 30-second self-portrait without looking at the page.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-074",
@@ -890,7 +2045,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "Send rock, paper, or scissors to a willing friend at the same agreed time and compare choices.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-074: Text Rock-Paper-Scissors.",
+          "Send rock, paper, or scissors to a willing friend at the same agreed time and compare choices.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "easy-075",
@@ -902,7 +2073,444 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_light"
+      "intensity": "none_to_light",
+      "description": "From a respectful distance, narrate a pet's ordinary activity for 20 seconds without bothering, touching, or waking the animal.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-075: Pet Documentary Voice.",
+          "From a respectful distance, narrate a pet's ordinary activity for 20 seconds without bothering, touching, or waking the animal.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-076",
+      "title": "Spoon Microphone News",
+      "prompt": "Use a clean spoon as a pretend microphone and record a 15-second news report about something boring nearby.",
+      "category": "comedy",
+      "estimatedMinutes": 4,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_light",
+      "description": "Use a clean spoon as a pretend microphone and record a 15-second news report about something boring nearby.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-076: Spoon Microphone News.",
+          "Use a clean spoon as a pretend microphone and record a 15-second news report about something boring nearby.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-077",
+      "title": "Group Statue Freeze",
+      "prompt": "With willing friends, strike different harmless statue poses for ten seconds and capture one group photo after everyone agrees.",
+      "category": "comedy",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_light",
+      "description": "With willing friends, strike different harmless statue poses for ten seconds and capture one group photo after everyone agrees.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-077: Group Statue Freeze.",
+          "With willing friends, strike different harmless statue poses for ten seconds and capture one group photo after everyone agrees.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-078",
+      "title": "Fifteen-Second Family Dance",
+      "prompt": "Invite willing family members to perform one simple 15-second dance in a clear space and record only participants who agree.",
+      "category": "fitness",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "light",
+      "description": "Invite willing family members to perform one simple 15-second dance in a clear space and record only participants who agree.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-078: Fifteen-Second Family Dance.",
+          "Invite willing family members to perform one simple 15-second dance in a clear space and record only participants who agree.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-079",
+      "title": "One Perfect Meme",
+      "prompt": "Create one clean original meme from your own photo and send it to a friend who normally enjoys memes.",
+      "category": "creative",
+      "estimatedMinutes": 8,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_light",
+      "description": "Create one clean original meme from your own photo and send it to a friend who normally enjoys memes.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-079: One Perfect Meme.",
+          "Create one clean original meme from your own photo and send it to a friend who normally enjoys memes.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-080",
+      "title": "Paper Mustache Portrait",
+      "prompt": "Make a paper mustache, hold it safely below your nose, and take one ridiculous self-portrait.",
+      "category": "comedy",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_light",
+      "description": "Make a paper mustache, hold it safely below your nose, and take one ridiculous self-portrait.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-080: Paper Mustache Portrait.",
+          "Make a paper mustache, hold it safely below your nose, and take one ridiculous self-portrait.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-081",
+      "title": "Robot Wall Push-Ups",
+      "prompt": "Do eight controlled wall push-ups while making your best robot movements between repetitions; keep normal form during each push-up.",
+      "category": "fitness",
+      "estimatedMinutes": 4,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "light",
+      "description": "Do eight controlled wall push-ups while making your best robot movements between repetitions; keep normal form during each push-up.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-081: Robot Wall Push-Ups.",
+          "Do eight controlled wall push-ups while making your best robot movements between repetitions; keep normal form during each push-up.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-082",
+      "title": "Balloon Tap Ten",
+      "prompt": "Tap a balloon upward ten times in a clear space without running, diving, or reaching near lights, fans, pets, or breakables.",
+      "category": "fitness",
+      "estimatedMinutes": 4,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "light",
+      "equipment": [
+        "balloon"
+      ],
+      "description": "Tap a balloon upward ten times in a clear space without running, diving, or reaching near lights, fans, pets, or breakables.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-082: Balloon Tap Ten.",
+          "Tap a balloon upward ten times in a clear space without running, diving, or reaching near lights, fans, pets, or breakables.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-083",
+      "title": "Fancy Water Commercial",
+      "prompt": "Make a ten-second commercial for an ordinary glass or bottle of water, then take one normal drink without speed or excess.",
+      "category": "comedy",
+      "estimatedMinutes": 4,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_light",
+      "description": "Make a ten-second commercial for an ordinary glass or bottle of water, then take one normal drink without speed or excess.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-083: Fancy Water Commercial.",
+          "Make a ten-second commercial for an ordinary glass or bottle of water, then take one normal drink without speed or excess.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-084",
+      "title": "Sock-Puppet Debate",
+      "prompt": "Use two clean sock puppets to debate whether cereal is soup for 20 seconds.",
+      "category": "comedy",
+      "estimatedMinutes": 6,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_light",
+      "description": "Use two clean sock puppets to debate whether cereal is soup for 20 seconds.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-084: Sock-Puppet Debate.",
+          "Use two clean sock puppets to debate whether cereal is soup for 20 seconds.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-085",
+      "title": "Reverse Charades Mini-Round",
+      "prompt": "Have two or more willing people act out one simple clue together while one person guesses; keep movements safe and optional.",
+      "category": "social",
+      "estimatedMinutes": 8,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_light",
+      "description": "Have two or more willing people act out one simple clue together while one person guesses; keep movements safe and optional.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-085: Reverse Charades Mini-Round.",
+          "Have two or more willing people act out one simple clue together while one person guesses; keep movements safe and optional.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-086",
+      "title": "Floor-Is-Blue",
+      "prompt": "Place five blue paper markers on a clear floor and step between them without jumping, climbing, or touching furniture.",
+      "category": "fitness",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "light",
+      "description": "Place five blue paper markers on a clear floor and step between them without jumping, climbing, or touching furniture.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-086: Floor-Is-Blue.",
+          "Place five blue paper markers on a clear floor and step between them without jumping, climbing, or touching furniture.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-087",
+      "title": "Slow-Motion High Five",
+      "prompt": "With a willing friend, record one slow-motion air high-five or gentle high-five after agreeing on whether contact is comfortable.",
+      "category": "comedy",
+      "estimatedMinutes": 4,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_light",
+      "description": "With a willing friend, record one slow-motion air high-five or gentle high-five after agreeing on whether contact is comfortable.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-087: Slow-Motion High Five.",
+          "With a willing friend, record one slow-motion air high-five or gentle high-five after agreeing on whether contact is comfortable.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-088",
+      "title": "Five Voices One Phrase",
+      "prompt": "Say the same family-friendly sentence in five original silly voices and record the sequence.",
+      "category": "comedy",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_light",
+      "description": "Say the same family-friendly sentence in five original silly voices and record the sequence.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-088: Five Voices One Phrase.",
+          "Say the same family-friendly sentence in five original silly voices and record the sequence.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-089",
+      "title": "Friend as a Potato",
+      "prompt": "With a friend's permission, draw them as a friendly cartoon potato and let them decide whether the drawing is saved or shared.",
+      "category": "creative",
+      "estimatedMinutes": 10,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_light",
+      "description": "With a friend's permission, draw them as a friendly cartoon potato and let them decide whether the drawing is saved or shared.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-089: Friend as a Potato.",
+          "With a friend's permission, draw them as a friendly cartoon potato and let them decide whether the drawing is saved or shared.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "easy-090",
+      "title": "Opera Name Greeting",
+      "prompt": "Ask a friend who enjoys silly messages if they want an opera-style greeting, then send a five-second voice note singing only their first name.",
+      "category": "comedy",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_light",
+      "description": "Ask a friend who enjoys silly messages if they want an opera-style greeting, then send a five-second voice note singing only their first name.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge easy-090: Opera Name Greeting.",
+          "Ask a friend who enjoys silly messages if they want an opera-style greeting, then send a five-second voice note singing only their first name.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     }
   ]
 }

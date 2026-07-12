@@ -14,7 +14,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "If this fits your current ability, warm up, complete up to 45 minutes of familiar cardio and bodyweight movements with breaks, then cool down; never train through pain, dizziness, or illness.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-001: Sixty-Minute Mixed Workout.",
+          "If this fits your current ability, warm up, complete up to 45 minutes of familiar cardio and bodyweight movements with breaks, then cool down; never train through pain, dizziness, or illness.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-002",
@@ -26,7 +42,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "After warming up, complete up to five rounds of 12 supported squats, 10 incline push-ups, 30 marching steps, and a 20-second wall plank; scale reps and rest freely.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-002: Five-Round Adaptable Circuit.",
+          "After warming up, complete up to five rounds of 12 supported squats, 10 incline push-ups, 30 marching steps, and a 20-second wall plank; scale reps and rest freely.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-003",
@@ -38,7 +70,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Learn, rehearse, and perform a two-minute beginner-to-intermediate dance routine in a clear, suitable space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-003: Dance Routine Two Minutes.",
+          "Learn, rehearse, and perform a two-minute beginner-to-intermediate dance routine in a clear, suitable space.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-004",
@@ -50,7 +98,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a capable buddy, follow a marked legal trail for up to two hours after checking weather, daylight, closures, water, footwear, and your abilities; turn back early whenever needed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-004: Daylight Trail Adventure.",
+          "With a capable buddy, follow a marked legal trail for up to two hours after checking weather, daylight, closures, water, footwear, and your abilities; turn back early whenever needed.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-005",
@@ -62,7 +126,23 @@
       "mode": "group",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "If already competent on a bicycle, ride for up to 60 minutes on a legal low-traffic or protected route with a helmet, visible clothing, route plan, and buddy; obey all traffic rules.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-005: Protected-Route Bike Ride.",
+          "If already competent on a bicycle, ride for up to 60 minutes on a legal low-traffic or protected route with a helmet, visible clothing, route plan, and buddy; obey all traffic rules.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-006",
@@ -74,7 +154,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Design and run five low-risk events such as paper toss, puzzle relay, balance walk, charades, and cup stacking for willing players in a clear space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-006: Team Mini-Olympics.",
+          "Design and run five low-risk events such as paper toss, puzzle relay, balance walk, charades, and cup stacking for willing players in a clear space.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-007",
@@ -86,7 +182,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Choose a distance only slightly above your normal comfortable walk, use a safe route and buddy if appropriate, and finish with breaks rather than speed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-007: Walk a Personal Distance Goal.",
+          "Choose a distance only slightly above your normal comfortable walk, use a safe route and buddy if appropriate, and finish with breaks rather than speed.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-008",
@@ -98,7 +210,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Spend 60 minutes learning one low-risk movement skill from a qualified source, using beginner progressions and a clear area; exclude flips, inversions, heavy lifting, or contact.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-008: Movement Skill Tutorial.",
+          "Spend 60 minutes learning one low-risk movement skill from a qualified source, using beginner progressions and a clear area; exclude flips, inversions, heavy lifting, or contact.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-009",
@@ -110,7 +238,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "In one day, complete three different 20-minute activities you already know, with breaks of at least 30 minutes between them and no training through pain or unusual symptoms.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-009: One-Day Activity Sampler.",
+          "In one day, complete three different 20-minute activities you already know, with breaks of at least 30 minutes between them and no training through pain or unusual symptoms.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-010",
@@ -122,7 +266,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "With a willing friend, accumulate 60 total minutes of walking or light exercise across a day; split the time however each person needs.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-010: Cooperative Fitness Quest.",
+          "With a willing friend, accumulate 60 total minutes of walking or light exercise across a day; split the time however each person needs.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-011",
@@ -134,7 +294,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write, rehearse, and perform five minutes of original clean comedy for a willing audience; never target protected traits, trauma, appearance, or private information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-011: Five-Minute Clean Comedy Set.",
+          "Write, rehearse, and perform five minutes of original clean comedy for a willing audience; never target protected traits, trauma, appearance, or private information.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-012",
@@ -146,7 +321,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Plan, shoot, and edit a three-minute original film in one day using legal locations and only participants who consent to their role, recording, and sharing level.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-012: One-Day Short Film.",
+          "Plan, shoot, and edit a three-minute original film in one day using legal locations and only participants who consent to their role, recording, and sharing level.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-013",
@@ -158,7 +349,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write lyrics and melody for a two-minute original song and record a simple demo using only sounds you created or may legally use.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-013: Original Song Demo.",
+          "Write lyrics and melody for a two-minute original song and record a simple demo using only sounds you created or may legally use.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-014",
@@ -170,7 +377,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Build a playable tabletop arcade-style game from clean reused materials; use only age-appropriate tools and preserve clear walkways.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-014: Cardboard Arcade Game.",
+          "Build a playable tabletop arcade-style game from clean reused materials; use only age-appropriate tools and preserve clear walkways.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-015",
@@ -182,7 +404,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create a coherent original photo essay of 30 images in one day; avoid private property, identifying details, and unconsented people.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-015: Thirty-Photo Story.",
+          "Create a coherent original photo essay of 30 images in one day; avoid private property, identifying details, and unconsented people.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-016",
@@ -194,7 +432,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With kitchen permission and appropriate supervision, plan, cook, serve, and clean up a simple three-part meal while handling allergies and food safety.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-016: Three-Course Pretend Restaurant.",
+          "With kitchen permission and appropriate supervision, plan, cook, serve, and clean up a simple three-part meal while handling allergies and food safety.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-017",
@@ -206,7 +459,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Design a wearable outfit accent from clean reused material, ensuring it cannot restrict breathing, sight, hearing, circulation, or movement.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-017: Wearable Recycled Fashion.",
+          "Design a wearable outfit accent from clean reused material, ensuring it cannot restrict breathing, sight, hearing, circulation, or movement.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-018",
@@ -218,7 +486,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write, illustrate, and assemble a five-page original mini-zine, then share it only with people who want it.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-018: Five-Page Mini Zine.",
+          "Write, illustrate, and assemble a five-page original mini-zine, then share it only with people who want it.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-019",
@@ -230,7 +514,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create one minute of stop-motion animation from at least 100 original frames using safe objects and an original or licensed soundtrack.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-019: Stop-Motion Minute.",
+          "Create one minute of stop-motion animation from at least 100 original frames using safe objects and an original or licensed soundtrack.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-020",
@@ -242,7 +542,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With household permission, temporarily transform one room around a harmless theme using only removable decorations, then fully restore it.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-020: Room Transformation.",
+          "With household permission, temporarily transform one room around a harmless theme using only removable decorations, then fully restore it.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-021",
@@ -254,7 +570,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Privately ask an age-appropriate person you already know on a specific, simple public date.  Ask once, make no grand public gesture, and respond respectfully to yes, no, uncertainty, or silence.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-021: Invite Someone You Like.",
+          "Privately ask an age-appropriate person you already know on a specific, simple public date.  Ask once, make no grand public gesture, and respond respectfully to yes, no, uncertainty, or silence.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-022",
@@ -266,7 +598,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Plan and host a two-hour low-cost hangout for willing friends, including a clear start/end time, accessible activities, and an easy way to decline or leave.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-022: Host a Themed Hangout.",
+          "Plan and host a two-hour low-cost hangout for willing friends, including a clear start/end time, accessible activities, and an easy way to decline or leave.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-023",
@@ -278,7 +626,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send three separate no-pressure messages to people you already know and have positive history with; do not chase replies.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-023: Reconnect with Three People.",
+          "Send three separate no-pressure messages to people you already know and have positive history with; do not chase replies.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-024",
@@ -290,7 +654,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Attend a legitimate club or community event with a buddy and have respectful brief conversations with three peers; leave anyone alone who seems unavailable.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-024: Conversation Courage Hour.",
+          "Attend a legitimate club or community event with a buddy and have respectful brief conversations with three peers; leave anyone alone who seems unavailable.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-025",
@@ -302,7 +682,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Perform an original song, poem, story, or comedy piece for a willing small audience; public posting is optional and requires everyone's permission.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-025: Share a Creative Performance.",
+          "Perform an original song, poem, story, or comedy piece for a willing small audience; public posting is optional and requires everyone's permission.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-026",
@@ -314,7 +710,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a willing friend, plan and complete a safe half-day local outing using legal public places, a budget everyone approves, transport plans, and guardian approval where required.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-026: Plan a Friend Adventure.",
+          "With a willing friend, plan and complete a safe half-day local outing using legal public places, a budget everyone approves, transport plans, and guardian approval where required.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-027",
@@ -326,7 +738,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Show a piece of your work to three trusted people and ask one specific feedback question; thank them without arguing.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-027: Ask for Constructive Feedback.",
+          "Show a piece of your work to three trusted people and ask one specific feedback question; thank them without arguing.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-028",
@@ -338,7 +766,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Invite willing friends or family to place optional devices aside for one hour while keeping emergency access available.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-028: Device-Free Group Hour.",
+          "Invite willing friends or family to place optional devices aside for one hour while keeping emergency access available.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-029",
@@ -350,7 +794,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Complete three useful, consent-respecting acts of kindness before the day ends; do not film recipients or expect praise.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-029: One-Day Kindness Quest.",
+          "Complete three useful, consent-respecting acts of kindness before the day ends; do not film recipients or expect praise.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-030",
@@ -362,7 +822,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Serve for two to four hours through a reputable organization, following all training, age, guardian, privacy, and safety requirements.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-030: Volunteer Half-Day.",
+          "Serve for two to four hours through a reputable organization, following all training, age, guardian, privacy, and safety requirements.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-031",
@@ -374,7 +850,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Join an authorized cleanup with a buddy and proper gear; handle only ordinary litter and follow organizers' hazardous-waste rules.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-031: Community Cleanup Hour.",
+          "Join an authorized cleanup with a buddy and proper gear; handle only ordinary litter and follow organizers' hazardous-waste rules.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-032",
@@ -386,7 +878,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Spend two hours helping a willing person or legitimate group with a safe skill you actually have, without accessing sensitive accounts or information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-032: Skill Donation.",
+          "Spend two hours helping a willing person or legitimate group with a safe skill you actually have, without accessing sensitive accounts or information.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-033",
@@ -398,7 +906,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write three thoughtful letters of specific appreciation and deliver them privately; recipients owe no response.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-033: Gratitude Letters Three.",
+          "Write three thoughtful letters of specific appreciation and deliver them privately; recipients owe no response.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-034",
@@ -410,7 +934,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create and verify a useful guide to ten free legal local activities using official sources; do not publish private or unsafe locations.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-034: Free Local Guide.",
+          "Create and verify a useful guide to ten free legal local activities using official sources; do not publish private or unsafe locations.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-035",
@@ -422,7 +962,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Learn and test yourself on 50 useful words or phrases in a language you are studying, using reputable pronunciation examples and several breaks.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-035: Fifty-Phrase Day.",
+          "Learn and test yourself on 50 useful words or phrases in a language you are studying, using reputable pronunciation examples and several breaks.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-036",
@@ -434,7 +990,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Follow reputable documentation to build a small original app or web page with one interactive feature and a README.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-036: Build a Tiny App.",
+          "Follow reputable documentation to build a small original app or web page with one interactive feature and a README.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-037",
@@ -446,7 +1018,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Mend or restore three low-risk personal items using proper instructions and tools; exclude electrical, gas, vehicle, structural, and safety equipment repairs.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-037: Repair Workshop.",
+          "Mend or restore three low-risk personal items using proper instructions and tools; exclude electrical, gas, vehicle, structural, and safety equipment repairs.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-038",
@@ -458,7 +1045,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With permission and appropriate supervision, research and cook a dish from a cuisine new to you, credit the source, and follow allergy and food-safety rules.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-038: Cook from a New Cuisine.",
+          "With permission and appropriate supervision, research and cook a dish from a cuisine new to you, credit the source, and follow allergy and food-safety rules.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-039",
@@ -470,7 +1073,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Use a memory technique to learn 50 harmless words or facts, then test recall after a 30-minute break.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-039: Memory Challenge Fifty.",
+          "Use a memory technique to learn 50 harmless words or facts, then test recall after a 30-minute break.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-040",
@@ -482,7 +1101,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create and perform a polished three-minute magic act using non-dangerous props for a willing audience.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-040: Three-Minute Magic Act.",
+          "Create and perform a polished three-minute magic act using non-dangerous props for a willing audience.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-041",
@@ -494,7 +1129,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a buddy, complete a two-hour observation scavenger hunt on legal marked routes, leaving all plants, rocks, and wildlife untouched.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-041: Public-Land Nature Quest.",
+          "With a buddy, complete a two-hour observation scavenger hunt on legal marked routes, leaving all plants, rocks, and wildlife untouched.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-042",
@@ -506,7 +1157,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Plan a legal sunrise viewing with a buddy only if you can still get a full normal night's sleep; use a safe public location and never drive while tired.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-042: Sunrise Without Sleep Loss.",
+          "Plan a legal sunrise viewing with a buddy only if you can still get a full normal night's sleep; use a safe public location and never drive while tired.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-043",
@@ -518,7 +1185,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Document one ordinary day with 24 original photos while protecting everyone's privacy and never using the phone while walking, cycling, or driving.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-043: One-Day Phone Photo Documentary.",
+          "Document one ordinary day with 24 original photos while protecting everyone's privacy and never using the phone while walking, cycling, or driving.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-044",
@@ -530,7 +1213,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Back up important data, then spend two focused hours organizing your own email and digital files without opening, moving, or deleting anyone else's information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-044: Inbox and Files Reset.",
+          "Back up important data, then spend two focused hours organizing your own email and digital files without opening, moving, or deleting anyone else's information.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-045",
@@ -542,7 +1241,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Complete three 40-minute focus blocks on one meaningful project, taking movement and eye breaks between blocks.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-045: Deep-Work Triple.",
+          "Complete three 40-minute focus blocks on one meaningful project, taking movement and eye breaks between blocks.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-046",
@@ -554,7 +1268,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Sort only your own clothing into keep, repair, recycle, and donate groups, then complete the cleanup without discarding anything owned by others.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-046: Closet Responsibility Reset.",
+          "Sort only your own clothing into keep, repair, recycle, and donate groups, then complete the cleanup without discarding anything owned by others.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-047",
@@ -566,7 +1295,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Avoid optional social-media feeds for one day while retaining access to calls, direct messages, navigation, school/work tools, news alerts, and emergency information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-047: No-Social-Feed Day.",
+          "Avoid optional social-media feeds for one day while retaining access to calls, direct messages, navigation, school/work tools, news alerts, and emergency information.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-048",
@@ -578,7 +1323,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At three different points today, record five specific things that went well without pretending difficult moments were positive.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-048: One-Day Gratitude Record.",
+          "At three different points today, record five specific things that went well without pretending difficult moments were positive.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-049",
@@ -590,7 +1351,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Read a short book or 75 pages across a day with regular posture, movement, food, and eye breaks.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-049: Read-One-Sitting Challenge.",
+          "Read a short book or 75 pages across a day with regular posture, movement, food, and eye breaks.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-050",
@@ -602,7 +1379,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Design a 60-minute mystery or scavenger game for willing friends using only legal locations, harmless clues, accessible tasks, and no deception about real emergencies.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-050: Mystery Event for Friends.",
+          "Design a 60-minute mystery or scavenger game for willing friends using only legal locations, harmless clues, accessible tasks, and no deception about real emergencies.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-051",
@@ -614,7 +1407,23 @@
       "mode": "group",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Using a safe, affordable plan and a buddy, travel to the publicly accessible area of a local airport, photograph only an airport name sign, and return the same day; no ticket, restricted-area entry, security filming, loitering, or staff interference.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-051: Public Airport Sign Quest.",
+          "Using a safe, affordable plan and a buddy, travel to the publicly accessible area of a local airport, photograph only an airport name sign, and return the same day; no ticket, restricted-area entry, security filming, loitering, or staff interference.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-052",
@@ -626,7 +1435,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Text an age-appropriate person you already know: 'Using my brave message today: would you want to get coffee, food, or take a walk sometime?' Ask once and respect any response or silence.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-052: Brave but Normal Ask.",
+          "Text an age-appropriate person you already know: 'Using my brave message today: would you want to get coffee, food, or take a walk sometime?' Ask once and respect any response or silence.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-053",
@@ -638,7 +1463,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send someone you like a clean meme tied to a shared interest and ask, 'Does this pass the vibe check?' Do not chase a response.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-053: Meme Vibe Check.",
+          "Send someone you like a clean meme tied to a shared interest and ask, 'Does this pass the vibe check?' Do not chase a response.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-054",
@@ -650,7 +1491,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Call a willing family member and perform a one-minute sincere but overdramatic awards speech honoring something ordinary they do well.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-054: Family Awards Speech.",
+          "Call a willing family member and perform a one-minute sincere but overdramatic awards speech honoring something ordinary they do well.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-055",
@@ -662,7 +1519,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Wear a comfortable harmless silly hat for one hour in public places where it is allowed; it cannot hide identity, obstruct senses, imitate authority, or disturb anyone.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-055: Silly Hat Public Hour.",
+          "Wear a comfortable harmless silly hat for one hour in public places where it is allowed; it cannot hide identity, obstruct senses, imitate authority, or disturb anyone.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-056",
@@ -674,7 +1547,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Perform one full song at a lawful karaoke venue or private room, following age, volume, recording, and venue rules.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-056: Legitimate Karaoke Performance.",
+          "Perform one full song at a lawful karaoke venue or private room, following age, volume, recording, and venue rules.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-057",
@@ -686,7 +1575,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a buddy, photograph yourself beside five different legal public landmark signs in one day without blocking paths or including unconsented people.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-057: Five Public Signs.",
+          "With a buddy, photograph yourself beside five different legal public landmark signs in one day without blocking paths or including unconsented people.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-058",
@@ -698,7 +1603,23 @@
       "mode": "group",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a buddy and an official schedule, ride one public transit line from a safe boarding point to its public endpoint and back during operating hours; pay fares and keep a backup route home.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-058: Transit End-to-End.",
+          "With a buddy and an official schedule, ride one public transit line from a safe boarding point to its public endpoint and back during operating hours; pay fares and keep a backup route home.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-059",
@@ -710,7 +1631,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Warm up, complete four different familiar 10-minute activity blocks with breaks, then cool down; use only movements suited to your current ability.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-059: Sixty-Minute Fitness Sampler.",
+          "Warm up, complete four different familiar 10-minute activity blocks with breaks, then cool down; use only movements suited to your current ability.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-060",
@@ -722,7 +1659,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Design a 45-minute original party game, test it, then host it for willing players with opt-out rules and no forced disclosure.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-060: Build and Host a Game.",
+          "Design a 45-minute original party game, test it, then host it for willing players with opt-out rules and no forced disclosure.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-061",
@@ -734,7 +1687,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a business you are already using and when staff are not busy, ask one worker for their most underrated appropriate item, thank them, and leave without requiring a purchase.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-061: Underrated Pick Interview.",
+          "At a business you are already using and when staff are not busy, ask one worker for their most underrated appropriate item, thank them, and leave without requiring a purchase.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-062",
@@ -746,7 +1715,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Ask a librarian for a surprising but age-appropriate recommendation outside your usual genre, borrow it properly if you want, and read 30 pages that day.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-062: Librarian's Wild Card.",
+          "Ask a librarian for a surprising but age-appropriate recommendation outside your usual genre, borrow it properly if you want, and read 30 pages that day.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-063",
@@ -758,7 +1743,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send a trusted friend who enjoys jokes a 20-second original 'happy unbirthday' song and clearly say it is today's challenge.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-063: Unbirthday Voice Note.",
+          "Send a trusted friend who enjoys jokes a 20-second original 'happy unbirthday' song and clearly say it is today's challenge.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-064",
@@ -770,7 +1771,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send one intentionally overdramatic but privacy-safe selfie to a trusted friend who enjoys this kind of message; do not post it publicly or include anyone else.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-064: Overdramatic Selfie.",
+          "Send one intentionally overdramatic but privacy-safe selfie to a trusted friend who enjoys this kind of message; do not post it publicly or include anyone else.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-065",
@@ -782,7 +1799,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Text a partner or romantic interest who normally welcomes your messages: 'Serious question: would you still hang out with me if I were terrible at mini golf?' Accept no reply without follow-up.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-065: Corny Question Text.",
+          "Text a partner or romantic interest who normally welcomes your messages: 'Serious question: would you still hang out with me if I were terrible at mini golf?' Accept no reply without follow-up.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-066",
@@ -794,7 +1827,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Give two separate brief non-body compliments in appropriate public moments, then disengage unless each person clearly continues the conversation; never film.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-066: Two Public Compliments.",
+          "Give two separate brief non-body compliments in appropriate public moments, then disengage unless each person clearly continues the conversation; never film.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-067",
@@ -806,7 +1855,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Perform a one-minute dance only in a private room, booked studio, legal performance space, or willing event area where you will not block or surprise others.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-067: Designated Dance Spot.",
+          "Perform a one-minute dance only in a private room, booked studio, legal performance space, or willing event area where you will not block or surprise others.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-068",
@@ -818,7 +1883,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create five original clean memes from your own photos or public-domain material and send the best one to a willing friend.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-068: Five-Meme Original Pack.",
+          "Create five original clean memes from your own photos or public-domain material and send the best one to a willing friend.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-069",
@@ -830,7 +1911,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Let a trusted friend choose between three comfortable, weather-appropriate outfits you already own, then wear the choice for one appropriate outing.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-069: Friend Picks the Challenge Outfit.",
+          "Let a trusted friend choose between three comfortable, weather-appropriate outfits you already own, then wear the choice for one appropriate outing.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-070",
@@ -842,7 +1939,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Ask three people you know for one song recommendation each, then listen to all three at a safe volume.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-070: Ask Three People for Songs.",
+          "Ask three people you know for one song recommendation each, then listen to all three at a safe volume.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-071",
@@ -854,7 +1967,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Spend an hour sketching in a legal public place without drawing identifiable strangers unless they explicitly agree.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-071: Public-Place Sketchbook Hour.",
+          "Spend an hour sketching in a legal public place without drawing identifiable strangers unless they explicitly agree.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-072",
@@ -866,7 +1995,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create a one-minute private lip-sync video with willing family members using audio you may legally use; every participant controls sharing.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-072: Family Lip-Sync Video.",
+          "Create a one-minute private lip-sync video with willing family members using audio you may legally use; every participant controls sharing.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-073",
@@ -878,7 +2023,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a willing buddy, each person chooses one legal public stop without revealing it until arrival; agree on budget, transport, boundaries, and a safe return plan first.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-073: Same-Day Mystery Tour.",
+          "With a willing buddy, each person chooses one legal public stop without revealing it until arrival; agree on budget, transport, boundaries, and a safe return plan first.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-074",
@@ -890,7 +2051,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Give a willing friend group a five-minute speech about something you genuinely care about and answer two respectful questions.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-074: Five-Minute Honest Speech.",
+          "Give a willing friend group a five-minute speech about something you genuinely care about and answer two respectful questions.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-075",
@@ -902,7 +2079,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Complete five overdue ordinary errands in one day using a written route, normal traffic rules, breaks, and no reward for speed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-075: Boring Errand Speed-Free Marathon.",
+          "Complete five overdue ordinary errands in one day using a written route, normal traffic rules, breaks, and no reward for speed.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-076",
@@ -914,7 +2106,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "If push-ups already fit your ability, earn 100 points across the day in sets of 10 or fewer: wall, countertop, knee, or standard push-ups each count equally.  Warm up, keep good form, rest at least several minutes between sets, and stop early for pain or unusual symptoms.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-076: Hundred Push-Up Point Quest.",
+          "If push-ups already fit your ability, earn 100 points across the day in sets of 10 or fewer: wall, countertop, knee, or standard push-ups each count equally.  Warm up, keep good form, rest at least several minutes between sets, and stop early for pain or unusual symptoms.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-077",
@@ -926,7 +2134,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "If appropriate for your current ability, complete up to 100 controlled chair sit-to-stands across the day in sets of 10 or fewer using a stable chair and long breaks; stop before form fails.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-077: Hundred Sit-to-Stand Quest.",
+          "If appropriate for your current ability, complete up to 100 controlled chair sit-to-stands across the day in sets of 10 or fewer using a stable chair and long breaks; stop before form fails.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-078",
@@ -938,7 +2162,22 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "With a buddy, do five controlled wall push-ups at ten different legal, clean, stable walls during one local outing; avoid private property, fragile surfaces, traffic, and crowded walkways.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-078: Wall Push-Up World Tour.",
+          "With a buddy, do five controlled wall push-ups at ten different legal, clean, stable walls during one local outing; avoid private property, fragile surfaces, traffic, and crowded walkways.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-079",
@@ -950,7 +2189,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Do five normal wall push-ups with safe form while a friend rotates the camera framing to make you appear sideways; film only in a private or permitted place and label the result as an illusion.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-079: Sideways Push-Up Illusion.",
+          "Do five normal wall push-ups with safe form while a friend rotates the camera framing to make you appear sideways; film only in a private or permitted place and label the result as an illusion.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-080",
@@ -962,7 +2217,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Lie flat on a clear floor, place your hands toward a nearby wall without supporting body weight, and film a forced-perspective clip that looks like ceiling push-ups; never invert, climb, or attach yourself to anything.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-080: Ceiling Push-Up Illusion.",
+          "Lie flat on a clear floor, place your hands toward a nearby wall without supporting body weight, and film a forced-perspective clip that looks like ceiling push-ups; never invert, climb, or attach yourself to anything.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-081",
@@ -974,7 +2245,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "Complete a 30-minute scalable workout while wearing a comfortable homemade superhero accessory that cannot snag equipment, block senses, overheat you, or restrict movement.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-081: Superhero Workout Costume.",
+          "Complete a 30-minute scalable workout while wearing a comfortable homemade superhero accessory that cannot snag equipment, block senses, overheat you, or restrict movement.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-082",
@@ -986,7 +2273,22 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "On a clean flat surface, host a relay of short bear-walk, crab-walk, penguin-waddle, and normal-walk sections for willing players; keep sections brief and replace any uncomfortable movement.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-082: Animal-Walk Relay.",
+          "On a clean flat surface, host a relay of short bear-walk, crab-walk, penguin-waddle, and normal-walk sections for willing players; keep sections brief and replace any uncomfortable movement.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-083",
@@ -1001,7 +2303,23 @@
       "intensity": "vigorous_optional_and_scalable",
       "equipment": [
         "balloon"
-      ]
+      ],
+      "description": "With willing friends, waddle through a short flat obstacle course while holding a balloon gently between the knees; walk forward only, clear hazards first, and never race for speed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-083: Balloon Penguin Course.",
+          "With willing friends, waddle through a short flat obstacle course while holding a balloon gently between the knees; walk forward only, clear hazards first, and never race for speed.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-084",
@@ -1013,7 +2331,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Hold a slow-motion walking race across a short clear route where the last safe finisher wins; no backward walking, contact, blocking, or sudden sprints.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-084: Slow-Motion Championship.",
+          "Hold a slow-motion walking race across a short clear route where the last safe finisher wins; no backward walking, contact, blocking, or sudden sprints.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-085",
@@ -1025,7 +2359,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At home, alone in a dry private bathroom, perform one full lip-sync or original song to the mirror; keep water off the floor, do not climb fixtures, and share a clip only if you choose.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-085: Bathroom-Mirror Concert.",
+          "At home, alone in a dry private bathroom, perform one full lip-sync or original song to the mirror; keep water off the floor, do not climb fixtures, and share a clip only if you choose.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-086",
@@ -1037,7 +2387,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Wear a comfortable, non-revealing anime-inspired outfit for one ordinary public errand where costumes are allowed; no masks, prop weapons, impersonation, blocked senses, or filming strangers.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-086: Anime Protagonist Errand.",
+          "Wear a comfortable, non-revealing anime-inspired outfit for one ordinary public errand where costumes are allowed; no masks, prop weapons, impersonation, blocked senses, or filming strangers.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-087",
@@ -1049,7 +2415,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create a 45-second anime-opening parody in a private or permitted space using original poses and audio you may legally use; everyone filmed must agree to filming and sharing.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-087: Anime Opening Recreation.",
+          "Create a 45-second anime-opening parody in a private or permitted space using original poses and audio you may legally use; everyone filmed must agree to filming and sharing.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-088",
@@ -1061,7 +2443,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Explain an age-appropriate anime episode to a willing friend in exactly one minute using your most dramatic narrator voice and no major spoilers they did not request.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-088: One-Minute Anime Recap.",
+          "Explain an age-appropriate anime episode to a willing friend in exactly one minute using your most dramatic narrator voice and no major spoilers they did not request.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-089",
@@ -1073,7 +2471,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Let a friend choose one age-appropriate legally available anime episode, watch only that episode today, then send them a three-sentence review.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-089: Friend-Picked Anime Pilot.",
+          "Let a friend choose one age-appropriate legally available anime episode, watch only that episode today, then send them a three-sentence review.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-090",
@@ -1085,7 +2499,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Spend an hour in a legal public place sketching a completely original anime-style hero inspired by the surroundings without drawing identifiable strangers unless they agree.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-090: Original Anime Hero in Public.",
+          "Spend an hour in a legal public place sketching a completely original anime-style hero inspired by the surroundings without drawing identifiable strangers unless they agree.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-091",
@@ -1097,7 +2527,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "In a suitable public social setting, politely ask one adult peer who appears available, 'May I ask your favorite song for a challenge?' Thank them for any answer or decline, do not follow them, and do not record.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-091: Favorite-Song Stranger Question.",
+          "In a suitable public social setting, politely ask one adult peer who appears available, 'May I ask your favorite song for a challenge?' Thank them for any answer or decline, do not follow them, and do not record.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-092",
@@ -1109,7 +2555,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a safe public event, ask one adult peer, 'Would you be comfortable taking a funny challenge photo together?' Take no photo unless they clearly agree, avoid physical contact unless separately invited, and ask again before posting.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-092: Permission-First Stranger Photo.",
+          "At a safe public event, ask one adult peer, 'Would you be comfortable taking a funny challenge photo together?' Take no photo unless they clearly agree, avoid physical contact unless separately invited, and ask again before posting.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-093",
@@ -1121,7 +2583,22 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "In an appropriate public social setting, ask one adult peer, 'Would you like to hear a clean ten-second joke?' If they say no or hesitate, smile, say no problem, and leave them alone.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-093: Offer One Clean Joke.",
+          "In an appropriate public social setting, ask one adult peer, 'Would you like to hear a clean ten-second joke?' If they say no or hesitate, smile, say no problem, and leave them alone.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-094",
@@ -1133,7 +2610,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a social event, ask one available adult peer to choose between two harmless options such as red or blue for your next drawing; thank them and end the interaction unless they continue it.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-094: Choose A or B.",
+          "At a social event, ask one available adult peer to choose between two harmless options such as red or blue for your next drawing; thank them and end the interaction unless they continue it.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-095",
@@ -1145,7 +2638,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "During one outing, give three brief non-body compliments about choices such as shoes, art, or a bag; never film, touch, follow, flirt after disinterest, or expect conversation.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-095: Three Public Compliments.",
+          "During one outing, give three brief non-body compliments about choices such as shoes, art, or a bag; never film, touch, follow, flirt after disinterest, or expect conversation.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-096",
@@ -1157,7 +2666,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Start a five-minute dance party with willing friends in a home, booked room, or permitted party area; never use a restroom, workplace, transit vehicle, store aisle, or space where others cannot easily leave.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-096: Five-Minute Private Party.",
+          "Start a five-minute dance party with willing friends in a home, booked room, or permitted party area; never use a restroom, workplace, transit vehicle, store aisle, or space where others cannot easily leave.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-097",
@@ -1169,7 +2694,22 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "From a public airport display area or official airport website, choose five destinations and connect them into one ridiculous but clean travel story; obey all airport rules and do not film security operations or travelers.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-097: Airport Board Story.",
+          "From a public airport display area or official airport website, choose five destinations and connect them into one ridiculous but clean travel story; obey all airport rules and do not film security operations or travelers.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-098",
@@ -1181,7 +2721,23 @@
       "mode": "group",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a buddy, wear comfortable business-style clothes you already own to a publicly accessible airport area, take a photo only of yourselves by an allowed sign, and return the same day; do not impersonate staff or enter restricted areas.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-098: Business-Traveler Airport Outfit.",
+          "With a buddy, wear comfortable business-style clothes you already own to a publicly accessible airport area, take a photo only of yourselves by an allowed sign, and return the same day; do not impersonate staff or enter restricted areas.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-099",
@@ -1193,7 +2749,23 @@
       "mode": "group",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a buddy, official schedules, fares, and a backup route, take public transit to a local airport's public passenger area and return before service ends; no ticket purchase, restricted areas, or security interference.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-099: Airport by Public Transit.",
+          "With a buddy, official schedules, fares, and a backup route, take public transit to a local airport's public passenger area and return before service ends; no ticket purchase, restricted areas, or security interference.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-100",
@@ -1205,7 +2777,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create three clean original memes about harmless shared jokes and privately send one to each of three friends who normally welcome memes; no response is required.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-100: Three-Meme Friendship Test.",
+          "Create three clean original memes about harmless shared jokes and privately send one to each of three friends who normally welcome memes; no response is required.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-101",
@@ -1217,7 +2805,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send one clean shared-interest meme to an age-appropriate person you like who normally welcomes messages, followed by 'This made me think of you'; do not send another message if they do not respond.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-101: Crush Meme Courage.",
+          "Send one clean shared-interest meme to an age-appropriate person you like who normally welcomes messages, followed by 'This made me think of you'; do not send another message if they do not respond.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-102",
@@ -1229,7 +2833,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write a four-line intentionally corny but respectful poem for a partner or romantic interest who welcomes your messages, send it once, and do not demand a reaction.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-102: Partner's Corny Poem.",
+          "Write a four-line intentionally corny but respectful poem for a partner or romantic interest who welcomes your messages, send it once, and do not demand a reaction.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-103",
@@ -1241,7 +2861,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Ask a willing friend to call you for a two-minute fake press conference about an ordinary achievement such as making toast; clearly say it is a challenge and avoid deceptive claims.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-103: Friend Press Conference.",
+          "Ask a willing friend to call you for a two-minute fake press conference about an ordinary achievement such as making toast; clearly say it is a challenge and avoid deceptive claims.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-104",
@@ -1253,7 +2889,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Sing your own grocery or to-do list in an opera voice and send the 20-second voice note to a trusted friend who enjoys silly messages.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-104: Opera Grocery List.",
+          "Sing your own grocery or to-do list in an opera voice and send the 20-second voice note to a trusted friend who enjoys silly messages.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-105",
@@ -1265,7 +2917,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Make a safe crown from a clean lightweight household item, take one overdramatic selfie without anyone else, and send it privately to a willing friend.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-105: Household-Object Crown Selfie.",
+          "Make a safe crown from a clean lightweight household item, take one overdramatic selfie without anyone else, and send it privately to a willing friend.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-106",
@@ -1277,7 +2944,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Wear one comfortable layer inside-out for an hour in an appropriate setting, ensuring seams, labels, and fit do not irritate skin or interfere with movement.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-106: Inside-Out Fashion Hour.",
+          "Wear one comfortable layer inside-out for an hour in an appropriate setting, ensuring seams, labels, and fit do not irritate skin or interfere with movement.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-107",
@@ -1289,7 +2972,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Around friends who agreed to play, speak like a friendly video-game character for 30 minutes; immediately use your normal voice for serious questions, emergencies, or anyone outside the game.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-107: NPC Mode Thirty.",
+          "Around friends who agreed to play, speak like a friendly video-game character for 30 minutes; immediately use your normal voice for serious questions, emergencies, or anyone outside the game.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-108",
@@ -1301,7 +3000,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Host a two-minute imaginary press conference for a relaxed pet from a respectful distance; do not costume, restrain, wake, feed, or bother the animal.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-108: Pet Press Conference.",
+          "Host a two-minute imaginary press conference for a relaxed pet from a respectful distance; do not costume, restrain, wake, feed, or bother the animal.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-109",
@@ -1313,7 +3028,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At home, give a one-minute championship speech to a potato or another ordinary object as if it is about to compete in the finals.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-109: Motivate a Potato.",
+          "At home, give a one-minute championship speech to a potato or another ordinary object as if it is about to compete in the finals.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-110",
@@ -1325,7 +3056,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a legitimate party or dance event, ask one peer who is already participating, 'Want to do a friendly 20-second dance-off?' Accept no immediately, keep space, and never record without agreement.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-110: Permission-First Dance-Off.",
+          "At a legitimate party or dance event, ask one peer who is already participating, 'Want to do a friendly 20-second dance-off?' Accept no immediately, keep space, and never record without agreement.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-111",
@@ -1337,7 +3084,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a legal karaoke venue or private room, perform one suitable song in a harmless fictional-character voice without mocking a real identity or culture.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-111: Karaoke Character Voice.",
+          "At a legal karaoke venue or private room, perform one suitable song in a harmless fictional-character voice without mocking a real identity or culture.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-112",
@@ -1349,7 +3112,22 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a legitimate age-appropriate open mic where you are registered or accepted, perform a clean original poem and follow every venue and recording rule.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-112: Original Poem Open Mic.",
+          "At a legitimate age-appropriate open mic where you are registered or accepted, perform a clean original poem and follow every venue and recording rule.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-113",
@@ -1361,7 +3139,23 @@
       "mode": "group",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With three willing friends and venue permission, perform a rehearsed 30-second dance in a designated event or performance area without blocking, startling, surrounding, or filming bystanders.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-113: Tiny Flash-Mob Rehearsal.",
+          "With three willing friends and venue permission, perform a rehearsed 30-second dance in a designated event or performance area without blocking, startling, surrounding, or filming bystanders.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-114",
@@ -1373,7 +3167,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Recreate a funny pose from a photo you own using safe costumes and only willing participants; no dangerous positions, restricted locations, or unapproved posting.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-114: Costume Photo Recreation.",
+          "Recreate a funny pose from a photo you own using safe costumes and only willing participants; no dangerous positions, restricted locations, or unapproved posting.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-115",
@@ -1388,7 +3198,23 @@
       "intensity": "vigorous_optional_and_scalable",
       "equipment": [
         "deck_of_cards"
-      ]
+      ],
+      "description": "Assign each card rank a safe familiar movement and each suit a small rep count from one to four, then complete a shuffled deck with breaks; skip duplicates or stop when form changes.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-115: Fifty-Two Card Movement Deck.",
+          "Assign each card rank a safe familiar movement and each suit a small rep count from one to four, then complete a shuffled deck with breaks; skip duplicates or stop when form changes.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-116",
@@ -1400,7 +3226,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "vigorous_optional_and_scalable"
+      "intensity": "vigorous_optional_and_scalable",
+      "description": "If 1,000 steps fits your current ability, take a legal flat walk in a comfortable silly accessory that does not obstruct senses, imitate authority, or attract unsafe attention.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-116: Costume Thousand-Step Walk.",
+          "If 1,000 steps fits your current ability, take a legal flat walk in a comfortable silly accessory that does not obstruct senses, imitate authority, or attract unsafe attention.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-117",
@@ -1412,7 +3254,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Watch three age-appropriate legally available anime episodes from different series in one day with movement and eye breaks, then rank only the opening minutes without spoilers.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-117: Three-Episode Anime Sampler.",
+          "Watch three age-appropriate legally available anime episodes from different series in one day with movement and eye breaks, then rank only the opening minutes without spoilers.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-118",
@@ -1424,7 +3282,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create a one-minute advertisement explaining why nobody should buy an imaginary useless product, using only original visuals and sounds.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-118: Reverse Commercial.",
+          "Create a one-minute advertisement explaining why nobody should buy an imaginary useless product, using only original visuals and sounds.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-119",
@@ -1436,7 +3310,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Make five safe hats from paper or clean lightweight objects, photograph yourself in each, and restore every item afterward.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-119: Five-Strange-Hats Photo Set.",
+          "Make five safe hats from paper or clean lightweight objects, photograph yourself in each, and restore every item afterward.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-120",
@@ -1448,7 +3337,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "While seated in a legal public place, quietly record a 30-second trailer starring only yourself and the scenery; avoid identifiable bystanders and follow venue filming rules.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-120: Public Bench Movie Trailer.",
+          "While seated in a legal public place, quietly record a 30-second trailer starring only yourself and the scenery; avoid identifiable bystanders and follow venue filming rules.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-121",
@@ -1460,7 +3365,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Perform a two-minute clean movie-villain monologue about doing household chores for willing family members.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-121: Family Villain Monologue.",
+          "Perform a two-minute clean movie-villain monologue about doing household chores for willing family members.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-122",
@@ -1472,7 +3392,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Have a household member choose three ordinary compatible ingredients from a pre-approved allergy-safe list, make a tiny normal portion, and taste only if it looks and smells safe; never mix chemicals, unknown items, raw-risk foods, medicines, or excessive spice.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-122: Random Approved Snack Trio.",
+          "Have a household member choose three ordinary compatible ingredients from a pre-approved allergy-safe list, make a tiny normal portion, and taste only if it looks and smells safe; never mix chemicals, unknown items, raw-risk foods, medicines, or excessive spice.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-123",
@@ -1484,7 +3420,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With a buddy, take ten staged funny photos of only yourselves at legal public landmarks without blocking paths, climbing, or capturing strangers.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-123: Ten-Stop Funny Photo Walk.",
+          "With a buddy, take ten staged funny photos of only yourselves at legal public landmarks without blocking paths, climbing, or capturing strangers.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-124",
@@ -1496,7 +3448,23 @@
       "mode": "solo",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Complete one normal public errand while dressed as an original harmless character, staying able to speak normally to staff and follow every venue rule.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-124: One-Hour Character Errand.",
+          "Complete one normal public errand while dressed as an original harmless character, staying able to speak normally to staff and follow every venue rule.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "extreme-125",
@@ -1508,7 +3476,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Watch or perform family-friendly comedy with friends for 30 minutes while trying not to laugh; breathing, blinking, breaks, and quitting are always allowed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge extreme-125: Thirty-Minute No-Laugh Show.",
+          "Watch or perform family-friendly comedy with friends for 30 minutes while trying not to laugh; breathing, blinking, breaks, and quitting are always allowed.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "level": "medium",
   "description": "Same-day challenges requiring more time, confidence, focus, creativity, or physical effort.",
-  "challengeCount": 75,
+  "challengeCount": 90,
   "challenges": [
     {
       "id": "medium-001",
@@ -14,7 +14,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Take a 15-minute walk on a familiar safe route at a pace where you can still speak in sentences.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-001: Brisk Walk Fifteen.",
+          "Take a 15-minute walk on a familiar safe route at a pace where you can still speak in sentences.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-002",
@@ -26,7 +42,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "After warming up, do two rounds of 8 chair squats, 8 wall push-ups, and 20 seconds of marching; rest as needed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-002: Two-Round Basics.",
+          "After warming up, do two rounds of 8 chair squats, 8 wall push-ups, and 20 seconds of marching; rest as needed.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-003",
@@ -38,7 +70,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Dance for three songs in a clear space, taking a break whenever needed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-003: Three-Song Dance Set.",
+          "Dance for three songs in a clear space, taking a break whenever needed.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-004",
@@ -50,7 +98,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Use a safe staircase with a handrail or a low stable step for five easy minutes; do not race.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-004: Stair or Step Five.",
+          "Use a safe staircase with a handrail or a low stable step for five easy minutes; do not race.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-005",
@@ -62,7 +126,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Do three rounds of a 15-second wall plank or countertop plank with comfortable rest.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-005: Core Control Trio.",
+          "Do three rounds of a 15-second wall plank or countertop plank with comfortable rest.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-006",
@@ -74,7 +154,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Walk for 12 minutes and mentally note five sounds and five colors without using your phone while moving.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-006: Walk-and-Notice.",
+          "Walk for 12 minutes and mentally note five sounds and five colors without using your phone while moving.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-007",
@@ -86,31 +182,79 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Follow ten minutes of gentle, beginner-friendly mobility and never stretch into pain.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-007: Mobility Flow Ten.",
+          "Follow ten minutes of gentle, beginner-friendly mobility and never stretch into pain.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-008",
-      "title": "Shadowbox Basics",
-      "prompt": "Do four 30-second rounds of light shadowboxing with open space and no contact, resting between rounds.",
+      "title": "Invisible Villain Fight",
+      "prompt": "Do four 30-second rounds of light no-contact shadowboxing in a clear space while acting as if an invisible cartoon villain keeps making dramatic escapes; rest between rounds.",
       "category": "fitness",
-      "estimatedMinutes": 6,
+      "estimatedMinutes": 8,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Do four 30-second rounds of light no-contact shadowboxing in a clear space while acting as if an invisible cartoon villain keeps making dramatic escapes; rest between rounds.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-008: Invisible Villain Fight.",
+          "Do four 30-second rounds of light no-contact shadowboxing in a clear space while acting as if an invisible cartoon villain keeps making dramatic escapes; rest between rounds.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-009",
-      "title": "Slow Squat Ladder",
-      "prompt": "Complete 2, 4, 6, 8, then 10 supported chair squats; stop early if form changes or pain appears.",
+      "title": "Royal Throne Squat Ladder",
+      "prompt": "Treat a stable chair like a royal throne and complete 2, 4, 6, 8, then up to 10 controlled sit-to-stands while announcing each set like a royal ceremony.",
       "category": "fitness",
-      "estimatedMinutes": 10,
+      "estimatedMinutes": 12,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Treat a stable chair like a royal throne and complete 2, 4, 6, 8, then up to 10 controlled sit-to-stands while announcing each set like a royal ceremony.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-009: Royal Throne Squat Ladder.",
+          "Treat a stable chair like a royal throne and complete 2, 4, 6, 8, then up to 10 controlled sit-to-stands while announcing each set like a royal ceremony.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-010",
@@ -125,7 +269,23 @@
       "intensity": "moderate",
       "equipment": [
         "balloon"
-      ]
+      ],
+      "description": "Keep a balloon off the floor for two minutes in a clear indoor space; avoid lights, fans, and breakables.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-010: Balloon Keep-Up.",
+          "Keep a balloon off the floor for two minutes in a clear indoor space; avoid lights, fans, and breakables.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-011",
@@ -137,7 +297,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Perform a one-minute original character for a friend who agrees to watch.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-011: One-Minute Character.",
+          "Perform a one-minute original character for a friend who agrees to watch.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-012",
@@ -149,7 +325,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create and perform a 30-second overdramatic commercial for an ordinary safe object.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-012: Commercial for a Spoon.",
+          "Create and perform a 30-second overdramatic commercial for an ordinary safe object.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-013",
@@ -161,7 +353,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write five original family-friendly captions for one photo you own.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-013: Clean Meme Caption Set.",
+          "Write five original family-friendly captions for one photo you own.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-014",
@@ -173,7 +381,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Draw a four-panel comic with a beginning, surprise, and ending.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-014: Mini Comic Four.",
+          "Draw a four-panel comic with a beginning, surprise, and ending.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-015",
@@ -185,7 +409,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Arrange five objects you own into temporary art, photograph it, then put everything back.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-015: Found-Object Sculpture.",
+          "Arrange five objects you own into temporary art, photograph it, then put everything back.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-016",
@@ -197,7 +437,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write a one-page mystery in which the missing item is something silly.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-016: One-Page Mystery.",
+          "Write a one-page mystery in which the missing item is something silly.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-017",
@@ -209,7 +465,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create one wearable costume accessory from paper and tape; keep vision and movement unobstructed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-017: Paper Costume Detail.",
+          "Create one wearable costume accessory from paper and tape; keep vision and movement unobstructed.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-018",
@@ -221,7 +493,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Make a 30-second rhythm using safe, unbreakable kitchen items without striking hard or disturbing others.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-018: Kitchen Rhythm.",
+          "Make a 30-second rhythm using safe, unbreakable kitchen items without striking hard or disturbing others.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-019",
@@ -233,7 +521,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Take ten original photos around one theme without including people or private details unless they consent.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-019: Photo Theme Ten.",
+          "Take ten original photos around one theme without including people or private details unless they consent.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-020",
@@ -245,7 +549,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Recreate the pose and composition of an album cover using your own props; do not copy or post artwork without permission.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-020: Recreate an Album Pose.",
+          "Recreate the pose and composition of an album cover using your own props; do not copy or post artwork without permission.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-021",
@@ -257,7 +577,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Call a friend or relative who is usually happy to hear from you and have a real five-minute conversation.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-021: Call Someone You Miss.",
+          "Call a friend or relative who is usually happy to hear from you and have a real five-minute conversation.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-022",
@@ -269,7 +605,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Invite someone you know to join a walk, study session, or game; accept no or no response without pressure.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-022: Invite a Friend Along.",
+          "Invite someone you know to join a walk, study session, or game; accept no or no response without pressure.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-023",
@@ -281,7 +633,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "In a normal conversation, ask someone three respectful questions and listen without interrupting.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-023: Ask Three Curious Questions.",
+          "In a normal conversation, ask someone three respectful questions and listen without interrupting.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-024",
@@ -293,7 +661,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send a 20-second appreciation voice message to someone comfortable receiving voice messages.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-024: Voice-Message Appreciation.",
+          "Send a 20-second appreciation voice message to someone comfortable receiving voice messages.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-025",
@@ -305,7 +689,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Message someone you already know with a simple no-pressure check-in; do not repeatedly message if they do not respond.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-025: Reconnect Gently.",
+          "Message someone you already know with a simple no-pressure check-in; do not repeatedly message if they do not respond.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-026",
@@ -317,7 +717,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Ask a relative or trusted adult to tell you a short story from their childhood if they want to share.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-026: Family Story Request.",
+          "Ask a relative or trusted adult to tell you a short story from their childhood if they want to share.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-027",
@@ -329,7 +745,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Teach a willing friend one small skill you know in under ten minutes.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-027: Teach a Tiny Skill.",
+          "Teach a willing friend one small skill you know in under ten minutes.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-028",
@@ -341,7 +773,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Play one round of a board, card, or word game with willing participants.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-028: Offline Game Round.",
+          "Play one round of a board, card, or word game with willing participants.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-029",
@@ -353,7 +801,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Give three different people you know sincere, non-appearance-based compliments.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-029: Compliment Chain Three.",
+          "Give three different people you know sincere, non-appearance-based compliments.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-030",
@@ -365,7 +829,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Complete one ordinary household chore you are allowed to do before being asked.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-030: Helpful Chore Surprise.",
+          "Complete one ordinary household chore you are allowed to do before being asked.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-031",
@@ -381,7 +861,23 @@
       "equipment": [
         "gloves_or_grabber",
         "trash_bag"
-      ]
+      ],
+      "description": "With gloves or a grabber, collect ordinary litter for ten minutes in a safe public area; never handle hazardous objects.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-031: Litter Loop.",
+          "With gloves or a grabber, collect ordinary litter for ten minutes in a safe public area; never handle hazardous objects.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-032",
@@ -393,7 +889,22 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Choose ten clean items you own that you genuinely no longer need and set them aside for an appropriate donation site.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-032: Donation Sort Ten.",
+          "Choose ten clean items you own that you genuinely no longer need and set them aside for an appropriate donation site.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-033",
@@ -405,7 +916,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write an honest, specific positive review for a local place or creator you have actually used.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-033: Positive Review.",
+          "Write an honest, specific positive review for a local place or creator you have actually used.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-034",
@@ -417,7 +944,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Politely thank a teacher, coach, coworker, or service worker for something specific without delaying their work.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-034: Thank a Worker.",
+          "Politely thank a teacher, coach, coworker, or service worker for something specific without delaying their work.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-035",
@@ -429,7 +972,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Learn and practice ten basic signs from a reputable sign-language source appropriate to your region.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-035: Learn Ten Signs.",
+          "Learn and practice ten basic signs from a reputable sign-language source appropriate to your region.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-036",
@@ -441,7 +1000,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Complete one beginner origami model, correcting mistakes without throwing the paper away.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-036: Origami Without Restarting.",
+          "Complete one beginner origami model, correcting mistakes without throwing the paper away.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-037",
@@ -456,7 +1031,23 @@
       "intensity": "none_to_moderate",
       "equipment": [
         "two_light_scarves"
-      ]
+      ],
+      "description": "Practice juggling two lightweight scarves for ten minutes in a clear space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-037: Juggle Scarf Start.",
+          "Practice juggling two lightweight scarves for ten minutes in a clear space.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-038",
@@ -468,7 +1059,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Study a simple map of a familiar area for two minutes, hide it, and redraw the main landmarks from memory.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-038: Map Memory.",
+          "Study a simple map of a familiar area for two minutes, hide it, and redraw the main landmarks from memory.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-039",
@@ -480,7 +1087,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Learn and correctly use five keyboard shortcuts for an app you already use.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-039: Keyboard Shortcut Five.",
+          "Learn and correctly use five keyboard shortcuts for an app you already use.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-040",
@@ -492,7 +1115,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Choose a simple recipe and explain every step before cooking anything; get kitchen permission first.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-040: Recipe Reading Challenge.",
+          "Choose a simple recipe and explain every step before cooking anything; get kitchen permission first.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-041",
@@ -504,7 +1143,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "From a safe distance, land five paper balls in a recycling bin; retrieve every miss.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-041: One-Hand Paper Toss.",
+          "From a safe distance, land five paper balls in a recycling bin; retrieve every miss.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-042",
@@ -516,7 +1171,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Work on an age-appropriate jigsaw or logic puzzle for twenty focused minutes.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-042: Speed Puzzle Twenty.",
+          "Work on an age-appropriate jigsaw or logic puzzle for twenty focused minutes.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-043",
@@ -528,7 +1199,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create a 3-by-3 list of common outdoor sights and safely spot a row without leaving public paths.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-043: Nature Bingo Nine.",
+          "Create a 3-by-3 list of common outdoor sights and safely spot a row without leaving public paths.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-044",
@@ -540,7 +1227,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "From a legal, safe viewing place, record five color changes near sunset; never stare at the sun.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-044: Sunset Color Study.",
+          "From a legal, safe viewing place, record five color changes near sunset; never stare at the sun.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-045",
@@ -552,7 +1255,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "On a familiar public route, photograph circles, squares, and triangles without capturing private information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-045: Neighborhood Shape Hunt.",
+          "On a familiar public route, photograph circles, squares, and triangles without capturing private information.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-046",
@@ -564,7 +1283,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Sit in a legal public outdoor place for ten minutes, respect others, and list what you noticed.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-046: Quiet Park Sit.",
+          "Sit in a legal public outdoor place for ten minutes, respect others, and list what you noticed.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-047",
@@ -576,43 +1311,105 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Eat one normal meal without a phone or other screen; follow your usual dietary needs.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-047: Screen-Free Meal.",
+          "Eat one normal meal without a phone or other screen; follow your usual dietary needs.",
+          "The evidence shows the requested list, timer, app summary, or observable completion artifact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-048",
-      "title": "Inbox Ten",
-      "prompt": "Process ten non-sensitive emails or notifications by replying, filing, or deleting only what you recognize.",
+      "title": "Notification Game Show",
+      "prompt": "Process ten of your own non-sensitive notifications while narrating each choice—reply, file, or delete—like a game-show host; hide private content from the recording.",
       "category": "productivity",
       "estimatedMinutes": 15,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Process ten of your own non-sensitive notifications while narrating each choice—reply, file, or delete—like a game-show host; hide private content from the recording.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-048: Notification Game Show.",
+          "Process ten of your own non-sensitive notifications while narrating each choice—reply, file, or delete—like a game-show host; hide private content from the recording.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-049",
-      "title": "Drawer Reset",
-      "prompt": "Organize one drawer containing only your belongings; keep important documents and medications untouched.",
-      "category": "productivity",
-      "estimatedMinutes": 20,
+      "title": "Drawer Museum",
+      "prompt": "Organize one drawer of your own belongings, then film a 20-second museum tour of its three most ordinary exhibits; keep documents and medication private.",
+      "category": "comedy",
+      "estimatedMinutes": 25,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Organize one drawer of your own belongings, then film a 20-second museum tour of its three most ordinary exhibits; keep documents and medication private.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-049: Drawer Museum.",
+          "Organize one drawer of your own belongings, then film a 20-second museum tour of its three most ordinary exhibits; keep documents and medication private.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-050",
-      "title": "Tomorrow Top Three",
-      "prompt": "Choose three realistic priorities for tomorrow and put them in order.",
+      "title": "Tomorrow Mission Briefing",
+      "prompt": "Create a 30-second secret-agent briefing that names tomorrow's three realistic priorities in order without revealing private information.",
       "category": "productivity",
-      "estimatedMinutes": 8,
+      "estimatedMinutes": 10,
       "timeWindow": "single_session",
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create a 30-second secret-agent briefing that names tomorrow's three realistic priorities in order without revealing private information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-050: Tomorrow Mission Briefing.",
+          "Create a 30-second secret-agent briefing that names tomorrow's three realistic priorities in order without revealing private information.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-051",
@@ -624,7 +1421,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send one clean meme that fits the established tone of a group chat and do not tag or pressure anyone to react.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-051: Group-Chat Meme Curator.",
+          "Send one clean meme that fits the established tone of a group chat and do not tag or pressure anyone to react.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-052",
@@ -636,7 +1449,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send a willing friend a 20-second over-the-top motivational voice note about completing an ordinary task.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-052: Coach Voice Note.",
+          "Send a willing friend a 20-second over-the-top motivational voice note about completing an ordinary task.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-053",
@@ -648,7 +1477,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Invent a restaurant name and text a friend a three-sentence pitch; ask them to rate it from one to ten.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-053: Fictional Restaurant Pitch.",
+          "Invent a restaurant name and text a friend a three-sentence pitch; ask them to rate it from one to ten.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-054",
@@ -660,7 +1505,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send a clean meme about a shared interest to someone you like who normally welcomes your messages; no reply is required.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-054: Shared-Interest Meme.",
+          "Send a clean meme about a shared interest to someone you like who normally welcomes your messages; no reply is required.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-055",
@@ -672,7 +1533,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Let a coin choose left or right at up to three familiar legal intersections during a 20-minute daylight walk, while keeping a known safe route home.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-055: Twenty-Minute Choice Walk.",
+          "Let a coin choose left or right at up to three familiar legal intersections during a 20-minute daylight walk, while keeping a known safe route home.",
+          "The evidence contains enough location context to support that the legal outdoor or travel task occurred."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-056",
@@ -684,7 +1561,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "After warming up, complete three rounds of eight chair squats, eight wall push-ups, and 30 seconds of marching with free rest.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-056: Three-Round Movement Mix.",
+          "After warming up, complete three rounds of eight chair squats, eight wall push-ups, and 30 seconds of marching with free rest.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-057",
@@ -696,7 +1589,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "moderate"
+      "intensity": "moderate",
+      "description": "Learn and perform 30 seconds of beginner-friendly choreography in a clear space.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-057: Learn a 30-Second Dance.",
+          "Learn and perform 30 seconds of beginner-friendly choreography in a clear space.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-058",
@@ -708,7 +1617,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With kitchen permission, assemble a normal snack plate while following allergies, dietary needs, and food hygiene.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-058: Make a Safe Snack Plate.",
+          "With kitchen permission, assemble a normal snack plate while following allergies, dietary needs, and food hygiene.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-059",
@@ -720,7 +1645,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a shop or library you are already using, briefly ask an available worker for one recommendation within their normal role and thank them.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-059: Recommendation Question.",
+          "At a shop or library you are already using, briefly ask an available worker for one recommendation within their normal role and thank them.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-060",
@@ -732,7 +1673,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "At a legitimate event, ask one peer who appears open to talking what brought them there; end politely if they give a short answer.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-060: Event Icebreaker.",
+          "At a legitimate event, ask one peer who appears open to talking what brought them there; end politely if they give a short answer.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-061",
@@ -744,7 +1701,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Build a comfortable outfit around one color using clothes you already own and wear it if appropriate for today's setting.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-061: Single-Color Outfit.",
+          "Build a comfortable outfit around one color using clothes you already own and wear it if appropriate for today's setting.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-062",
@@ -756,7 +1729,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Look up five public departures from the nearest airport and invent a clean movie title inspired by each destination; do not book anything.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-062: Airport Movie Board.",
+          "Look up five public departures from the nearest airport and invent a clean movie title inspired by each destination; do not book anything.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-063",
@@ -768,7 +1756,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Send a clean meme to a parent or guardian who enjoys texting and ask for an honest one-to-five rating.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-063: Meme Rating from a Parent.",
+          "Send a clean meme to a parent or guardian who enjoys texting and ask for an honest one-to-five rating.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-064",
@@ -780,7 +1784,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Create your own simple phone wallpaper and use it for the rest of the day without exposing private information.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-064: Doodle Wallpaper Day.",
+          "Create your own simple phone wallpaper and use it for the rest of the day without exposing private information.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-065",
@@ -792,7 +1812,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Read a short original poem to one or more willing friends using your most dramatic voice.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-065: Poem for a Friendly Audience.",
+          "Read a short original poem to one or more willing friends using your most dramatic voice.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-066",
@@ -804,7 +1840,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "With household permission, empty, clean, check, and correctly reload one refrigerator shelf; follow food-safety rules.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-066: Fridge-Shelf Reset.",
+          "With household permission, empty, clean, check, and correctly reload one refrigerator shelf; follow food-safety rules.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-067",
@@ -816,7 +1867,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Land 20 paper balls in a recycling bin from a reasonable distance and retrieve every miss.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-067: Paper Toss Twenty.",
+          "Land 20 paper balls in a recycling bin from a reasonable distance and retrieve every miss.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-068",
@@ -828,7 +1895,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "On an agreed video call, act out five ordinary activities without speaking while a friend guesses.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-068: Silent Charades Call.",
+          "On an agreed video call, act out five ordinary activities without speaking while a friend guesses.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-069",
@@ -840,7 +1923,22 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Tidy only your belongings for five songs, stopping safely rather than rushing when the music ends.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-069: Five-Song Cleanup.",
+          "Tidy only your belongings for five songs, stopping safely rather than rushing when the music ends.",
+          "The finished state or before-and-after change is visible without exposing sensitive information."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-070",
@@ -852,7 +1950,23 @@
       "mode": "solo_with_other_people",
       "ageGroup": "teen_or_adult",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "If a natural moment arises in a safe public place, give one brief non-body compliment such as liking someone's bag or shoes, then continue on without filming or expecting conversation.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a photo or short video showing the legal public location, recognizable non-sensitive landmark or sign, and the completed challenge action. Keep bystanders out of frame unless they agreed to appear.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-070: Public-Space Compliment.",
+          "If a natural moment arises in a safe public place, give one brief non-body compliment such as liking someone's bag or shoes, then continue on without filming or expecting conversation.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-071",
@@ -864,7 +1978,23 @@
       "mode": "group",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Write ten family-friendly trivia questions and host a short round for willing participants.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-071: Family Trivia Host.",
+          "Write ten family-friendly trivia questions and host a short round for willing participants.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-072",
@@ -876,7 +2006,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Record a 30-second trailer for an imaginary movie using only your voice and sounds you create safely.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-072: Voice-Only Movie Trailer.",
+          "Record a 30-second trailer for an imaginary movie using only your voice and sounds you create safely.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-073",
@@ -888,7 +2034,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Read for 20 focused minutes, then write a two-sentence summary.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-073: Twenty-Minute Reading Sprint.",
+          "Read for 20 focused minutes, then write a two-sentence summary.",
+          "The evidence visibly demonstrates the requested skill attempt or finished output."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-074",
@@ -900,7 +2062,23 @@
       "mode": "solo",
       "ageGroup": "all",
       "requiresConsent": false,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Photograph one ordinary object from ten unusual safe angles without climbing or blocking walkways.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-074: Photo Angle Challenge.",
+          "Photograph one ordinary object from ten unusual safe angles without climbing or blocking walkways.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     },
     {
       "id": "medium-075",
@@ -912,7 +2090,445 @@
       "mode": "solo_with_other_people",
       "ageGroup": "all",
       "requiresConsent": true,
-      "intensity": "none_to_moderate"
+      "intensity": "none_to_moderate",
+      "description": "Reply thoughtfully to three non-urgent messages you have been meaning to answer, respecting boundaries and not restarting unwanted contact.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-075: Kind Reply Sweep.",
+          "Reply thoughtfully to three non-urgent messages you have been meaning to answer, respecting boundaries and not restarting unwanted contact.",
+          "The evidence shows the helpful result while protecting the recipient's identity and dignity."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-076",
+      "title": "Villain Wall Push-Ups",
+      "prompt": "Do ten controlled wall push-ups while delivering a clean cartoon-villain monologue between repetitions; preserve normal form during each repetition.",
+      "category": "fitness",
+      "estimatedMinutes": 8,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "moderate",
+      "description": "Do ten controlled wall push-ups while delivering a clean cartoon-villain monologue between repetitions; preserve normal form during each repetition.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "before_after_images",
+          "video"
+        ],
+        "captureInstructions": "Submit privacy-safe before-and-after images from matching angles or a short video showing the completed result. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-076: Villain Wall Push-Ups.",
+          "Do ten controlled wall push-ups while delivering a clean cartoon-villain monologue between repetitions; preserve normal form during each repetition.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-077",
+      "title": "Balloon Volleyball Trio",
+      "prompt": "With willing players, keep a balloon in the air for three minutes across a clear room using gentle taps and no diving.",
+      "category": "fitness",
+      "estimatedMinutes": 8,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "moderate",
+      "equipment": [
+        "balloon"
+      ],
+      "description": "With willing players, keep a balloon in the air for three minutes across a clear room using gentle taps and no diving.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-077: Balloon Volleyball Trio.",
+          "With willing players, keep a balloon in the air for three minutes across a clear room using gentle taps and no diving.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-078",
+      "title": "Anime Victory Pose",
+      "prompt": "Create an original anime-style victory pose and photograph yourself in a safe legal place without props that resemble weapons.",
+      "category": "creative",
+      "estimatedMinutes": 10,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_moderate",
+      "description": "Create an original anime-style victory pose and photograph yourself in a safe legal place without props that resemble weapons.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-078: Anime Victory Pose.",
+          "Create an original anime-style victory pose and photograph yourself in a safe legal place without props that resemble weapons.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-079",
+      "title": "Animal Weather Voice Note",
+      "prompt": "Send a willing friend a 20-second weather report in an original animal character voice.",
+      "category": "comedy",
+      "estimatedMinutes": 6,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "Send a willing friend a 20-second weather report in an original animal character voice.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-079: Animal Weather Voice Note.",
+          "Send a willing friend a 20-second weather report in an original animal character voice.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-080",
+      "title": "Friend-Picked Funny Hat",
+      "prompt": "Let a trusted friend choose between three comfortable harmless hats, then wear the choice for one appropriate hour.",
+      "category": "social",
+      "estimatedMinutes": 70,
+      "timeWindow": "1_day",
+      "mode": "solo_with_other_people",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "Let a trusted friend choose between three comfortable harmless hats, then wear the choice for one appropriate hour.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-080: Friend-Picked Funny Hat.",
+          "Let a trusted friend choose between three comfortable harmless hats, then wear the choice for one appropriate hour.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-081",
+      "title": "Snack Cooking Show",
+      "prompt": "With kitchen permission, record a one-minute cooking-show segment while assembling a normal allergy-safe snack and cleaning afterward.",
+      "category": "comedy",
+      "estimatedMinutes": 20,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_moderate",
+      "description": "With kitchen permission, record a one-minute cooking-show segment while assembling a normal allergy-safe snack and cleaning afterward.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear photo, short video, or screenshot that visibly demonstrates the completed action and current attempt. Keep the app attempt code or current date visible when practical.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-081: Snack Cooking Show.",
+          "With kitchen permission, record a one-minute cooking-show segment while assembling a normal allergy-safe snack and cleaning afterward.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-082",
+      "title": "Favorite-Song Public Question",
+      "prompt": "In a suitable public social setting, ask one available adult peer for their favorite song, thank them for any answer or decline, and record only your own post-interaction recap unless they separately agree to appear.",
+      "category": "social",
+      "estimatedMinutes": 12,
+      "timeWindow": "single_session",
+      "mode": "solo_with_other_people",
+      "ageGroup": "teen_or_adult",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "In a suitable public social setting, ask one available adult peer for their favorite song, thank them for any answer or decline, and record only your own post-interaction recap unless they separately agree to appear.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-082: Favorite-Song Public Question.",
+          "In a suitable public social setting, ask one available adult peer for their favorite song, thank them for any answer or decline, and record only your own post-interaction recap unless they separately agree to appear.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-083",
+      "title": "Consent-First Pose Photo",
+      "prompt": "Ask a willing friend to create one ridiculous pose photo together, agree on contact and framing first, and ask separately before sharing.",
+      "category": "social",
+      "estimatedMinutes": 10,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "Ask a willing friend to create one ridiculous pose photo together, agree on contact and framing first, and ask separately before sharing.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-083: Consent-First Pose Photo.",
+          "Ask a willing friend to create one ridiculous pose photo together, agree on contact and framing first, and ask separately before sharing.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-084",
+      "title": "Synchronized Silly Walk",
+      "prompt": "With willing friends, rehearse and record a 20-second synchronized silly walk on a flat clear route without backward steps or collisions.",
+      "category": "fitness",
+      "estimatedMinutes": 15,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "moderate",
+      "description": "With willing friends, rehearse and record a 20-second synchronized silly walk on a flat clear route without backward steps or collisions.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-084: Synchronized Silly Walk.",
+          "With willing friends, rehearse and record a 20-second synchronized silly walk on a flat clear route without backward steps or collisions.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-085",
+      "title": "Family Product Commercial",
+      "prompt": "With willing family members, create a 30-second advertisement for an imaginary useless product using only safe household props.",
+      "category": "comedy",
+      "estimatedMinutes": 20,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "With willing family members, create a 30-second advertisement for an imaginary useless product using only safe household props.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-085: Family Product Commercial.",
+          "With willing family members, create a 30-second advertisement for an imaginary useless product using only safe household props.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-086",
+      "title": "Recreate Your Own Meme",
+      "prompt": "Choose a meme format you can legally recreate and stage a privacy-safe version using only yourself or willing participants.",
+      "category": "creative",
+      "estimatedMinutes": 25,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "Choose a meme format you can legally recreate and stage a privacy-safe version using only yourself or willing participants.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-086: Recreate Your Own Meme.",
+          "Choose a meme format you can legally recreate and stage a privacy-safe version using only yourself or willing participants.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-087",
+      "title": "Superhero Chair Circuit",
+      "prompt": "Complete two rounds of eight chair sit-to-stands, eight wall push-ups, and 20 marching steps while narrating the rest periods like a superhero trailer.",
+      "category": "fitness",
+      "estimatedMinutes": 15,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "moderate",
+      "description": "Complete two rounds of eight chair sit-to-stands, eight wall push-ups, and 20 marching steps while narrating the rest periods like a superhero trailer.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "health_app_screenshot",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear video showing the movement and safe form. For long, step, distance, or multi-set tasks, include representative clips plus a same-day Apple Health or equivalent activity screenshot when available.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-087: Superhero Chair Circuit.",
+          "Complete two rounds of eight chair sit-to-stands, eight wall push-ups, and 20 marching steps while narrating the rest periods like a superhero trailer.",
+          "The visible movement uses the allowed variation, approximate requested amount or duration, and no obviously unsafe setup."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-088",
+      "title": "Five-Clue Charades Tournament",
+      "prompt": "Host a five-clue charades tournament for willing players using only safe movements and family-friendly clues.",
+      "category": "social",
+      "estimatedMinutes": 20,
+      "timeWindow": "single_session",
+      "mode": "group",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "Host a five-clue charades tournament for willing players using only safe movements and family-friendly clues.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "video",
+          "image",
+          "screenshot"
+        ],
+        "captureInstructions": "With every participant's permission, submit a short video, photo, or redacted screenshot showing the interaction or group result. If another person does not want to appear, keep them off camera and submit a privacy-safe post-task recap; ambiguous evidence should be marked uncertain, not failed.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-088: Five-Clue Charades Tournament.",
+          "Host a five-clue charades tournament for willing players using only safe movements and family-friendly clues.",
+          "The evidence shows the requested message, invitation, interaction, or group result and no visible sign of pressure or repeated contact."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-089",
+      "title": "Book-Cover Pose",
+      "prompt": "At home or in a library area where photography is allowed, recreate the pose from an appropriate book cover using only yourself and keeping patrons out of frame.",
+      "category": "creative",
+      "estimatedMinutes": 20,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": false,
+      "intensity": "none_to_moderate",
+      "description": "At home or in a library area where photography is allowed, recreate the pose from an appropriate book cover using only yourself and keeping patrons out of frame.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "image",
+          "video",
+          "screenshot"
+        ],
+        "captureInstructions": "Submit a clear image, video, or screenshot of the finished work or demonstrated skill. Show enough of the process or final result for a vision model to match it to this challenge.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-089: Book-Cover Pose.",
+          "At home or in a library area where photography is allowed, recreate the pose from an appropriate book cover using only yourself and keeping patrons out of frame.",
+          "The finished creative result is visible and materially matches the requested format."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
+    },
+    {
+      "id": "medium-090",
+      "title": "Ducks-or-Geese Text",
+      "prompt": "Send a trusted friend, 'Important challenge question: ducks or geese?' and accept their answer, joke, or silence without a follow-up demand.",
+      "category": "comedy",
+      "estimatedMinutes": 5,
+      "timeWindow": "single_session",
+      "mode": "solo",
+      "ageGroup": "all",
+      "requiresConsent": true,
+      "intensity": "none_to_moderate",
+      "description": "Send a trusted friend, 'Important challenge question: ducks or geese?' and accept their answer, joke, or silence without a follow-up demand.",
+      "verification": {
+        "gradeableByVision": true,
+        "acceptedEvidence": [
+          "screenshot",
+          "screen_recording",
+          "video"
+        ],
+        "captureInstructions": "Submit a screenshot or screen recording showing the completed outgoing action and current attempt time. Redact names, handles, phone numbers, unrelated messages, and notifications. For a performance message, a captioned self-video may be used instead.",
+        "successCriteria": [
+          "Evidence corresponds to challenge medium-090: Ducks-or-Geese Text.",
+          "Send a trusted friend, 'Important challenge question: ducks or geese?' and accept their answer, joke, or silence without a follow-up demand.",
+          "The submitted evidence visibly shows the intended funny performance, pose, prop, or result rather than only a written claim."
+        ],
+        "privacyNotes": "Do not expose full names, faces without permission, phone numbers, handles, addresses, school or work badges, license plates, private messages, live location, health details, or unrelated bystanders. Consent to do a challenge is separate from consent to record or post it."
+      }
     }
   ]
 }

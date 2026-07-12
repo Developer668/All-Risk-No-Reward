@@ -8,7 +8,7 @@ Project setup and usage instructions will be added as development progresses.
 
 ## Challenge Library
 
-The application-ready dataset is in [`data/challenges`](data/challenges/README.md). It currently contains **477 original same-day challenges** across five levels:
+The application-ready dataset is in [`data/challenges`](data/challenges/README.md). It currently contains **522 original same-day challenges** across five levels:
 
 - Easy
 - Medium
@@ -16,7 +16,7 @@ The application-ready dataset is in [`data/challenges`](data/challenges/README.m
 - Extreme
 - Nightmare
 
-Easy, Medium, and Hard contain 75 challenges each; Extreme contains 125 and Nightmare contains 127. The directory includes a manifest, JSON Schema, stable challenge IDs, research notes, and a required safety policy. Higher levels increase effort, time, planning, travel, comedy, or social courage—not danger or humiliation.
+Easy, Medium, and Hard contain 90 challenges each; Extreme contains 125 and Nightmare contains 127. Every challenge includes a description and structured image/video evidence rules for VLM grading. The directory includes a manifest, JSON Schema, stable challenge IDs, research notes, a VLM grading guide, and a required safety policy.
 
 ## Contributing
 

@@ -60,6 +60,16 @@ Every generated challenge must finish in one session or within the same calendar
 - Offer a private-by-default verification option such as self-check, timer, or written reflection.
 - Strip image metadata when appropriate and prevent accidental display of faces, addresses, school/work badges, license plates, schedules, and live location.
 
+## Evidence and automated grading
+
+- Evidence is opt-in. A user must always be able to choose a privacy pass, manual review, replacement challenge, or no-proof completion without being shamed.
+- Generate a per-attempt random code and capture timestamp. Ask the user to show the code in-frame or attach it through trusted app capture metadata when practical; never use face recognition as identity proof.
+- A VLM may grade only visible or readable criteria. It must not infer an unseen conversation, an off-camera person's consent, exact medical exertion, intent, relationship status, identity, attractiveness, emotion, or protected traits.
+- Return `uncertain` rather than `fail` when frames, OCR, duration, counts, consent, date, or context are ambiguous. Route uncertain and safety-flagged submissions to a privacy-conscious review or let the user retry.
+- Message screenshots must redact recipient identity, handles, phone numbers, unrelated messages, and notification previews. Only the outgoing challenge action and necessary timestamp should remain visible.
+- Health screenshots should show only the relevant same-day metric and date. Crop or redact unrelated health measurements and account information.
+- Recording another person requires separate permission after they agree to participate. Completing a challenge never grants permission to store, upload, analyze, or post their face or voice.
+
 ## Outdoor responsibility
 
 Use legal public routes, prepare for conditions, pack out ordinary waste, leave natural and cultural objects in place, keep distance from wildlife, and respect other visitors and private property.

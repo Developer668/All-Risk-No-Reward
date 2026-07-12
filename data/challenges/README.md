@@ -8,15 +8,16 @@ This directory contains an original, application-ready challenge library for **A
 | --- | --- |
 | `manifest.json` | Dataset version, level files, and expected counts |
 | `challenge-set.schema.json` | JSON Schema for validating every level file |
-| `easy.json` | 75 short, low-pressure challenges |
-| `medium.json` | 75 challenges requiring more time or confidence |
-| `hard.json` | 75 substantial effort, creative, and social-courage challenges |
+| `easy.json` | 90 short, funny, social, creative, and low-pressure challenges |
+| `medium.json` | 90 challenges requiring more time, teamwork, or confidence |
+| `hard.json` | 90 substantial, funny, group, creative, and social-courage challenges |
 | `extreme.json` | 125 difficult, funny, social, fitness, travel, and creative challenges |
 | `nightmare.json` | 127 epic but still same-day challenges |
 | `SAFETY.md` | Required product and moderation rules |
 | `SOURCES.md` | Research sources and content-origin notes |
+| `VLM_GRADING.md` | Evidence capture and vision-model grading contract |
 
-Total: **477 original challenges**. Every challenge ends in one session or by the end of the same day.
+Total: **522 original challenges**. Every challenge ends in one session or by the end of the same day.
 
 ## Challenge object
 
@@ -25,17 +26,30 @@ Total: **477 original challenges**. Every challenge ends in one session or by th
   "id": "easy-001",
   "title": "Wall Push-Up Starter",
   "prompt": "Do 8 controlled wall push-ups. Keep your body straight and stop if anything hurts.",
+  "description": "Do 8 controlled wall push-ups. Keep your body straight and stop if anything hurts.",
   "category": "fitness",
   "estimatedMinutes": 2,
   "timeWindow": "single_session",
   "mode": "solo",
   "ageGroup": "all",
   "requiresConsent": false,
-  "intensity": "light"
+  "intensity": "light",
+  "verification": {
+    "gradeableByVision": true,
+    "acceptedEvidence": ["video", "health_app_screenshot", "screenshot"],
+    "captureInstructions": "Submit a clear video showing the movement and safe form.",
+    "successCriteria": [
+      "Evidence corresponds to challenge easy-001: Wall Push-Up Starter.",
+      "Eight controlled wall push-ups are visibly attempted."
+    ],
+    "privacyNotes": "Keep unrelated people and private information out of frame."
+  }
 }
 ```
 
 IDs are stable and should be stored as completion-history keys. `estimatedMinutes` is estimated active time. `timeWindow` is either `single_session` or `1_day`; multi-day challenges are intentionally excluded.
+
+Each `verification` object tells the application what evidence to accept and what a vision-language model may actually grade. See [`VLM_GRADING.md`](VLM_GRADING.md) before implementing automated approval.
 
 ## Suggested selection flow
 
