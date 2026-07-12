@@ -39,6 +39,9 @@ Every generated challenge must finish in one session or within the same calendar
 - Stop for pain, chest discomfort, unusual shortness of breath, dizziness, faintness, confusion, or feeling unwell. Seek appropriate help when symptoms warrant it.
 - Users with medical concerns should follow their clinician's advice rather than an app challenge.
 - High-repetition fitness prompts must be profile-filtered, scalable, divided into small sets, and capped at 100 repetitions of any repeated movement in a day. Easier variations count equally, and stopping early for form, pain, symptoms, or fatigue counts as the safe outcome. Never generate 200- or 500-repetition exercise demands.
+- One-arm push-ups are advanced-profile only on the floor; wall and countertop variations receive equal completion credit. Never require a user to progress to a lower surface.
+- An unassisted one-arm pull-up is never assigned as a random challenge. Pull-up challenges use two-arm work, rows, bands, counterweights, or coach/spotter assistance at rated equipment.
+- “Upside-down push-ups” are camera-rotation illusions using normal wall or incline push-ups. Never require handstand push-ups, ceiling attachment, hanging, inversion, or head/neck loading.
 
 ## Food challenges
 
@@ -76,6 +79,16 @@ Every generated challenge must finish in one session or within the same calendar
 - Café and restaurant roleplay belongs at home, in a classroom, at a booked activity, or in another explicitly authorized setting using toy food or normal allergy-safe food.
 - Never go behind a real business counter, touch employee equipment, prepare customer orders, impersonate an employee, disrupt service, or pressure workers into participating.
 - At a real café or restaurant, users may order normally, ask one appropriate menu question when staff are available, and film only where venue rules and participant consent allow it.
+
+## Coding, AI models, and operating-system projects
+
+- Never expose API keys, tokens, private repositories, proprietary source, usernames, absolute paths, or customer data in prompts or evidence. Use environment variables and redact screens.
+- Model availability and names change. Resolve the exact model ID at runtime from the official provider and record it with the attempt; an unavailable provider or paid model must always be swappable without penalty.
+- Parameter-limited prompts require an official model card or provider document showing total parameters. Do not guess parameter counts from names.
+- AI-generated code must be reviewed, tested, licensed appropriately, and run with least privilege. Never execute unknown commands blindly or grant an agent unrestricted access to credentials or production systems.
+- Toy kernels, Buildroot images, Linux experiments, and desktop simulators run only in an emulator, container, disposable VM, or other isolated environment. Never repartition, overwrite, dual-boot, replace, or modify the host operating system as a challenge.
+- Windows challenges build an original Windows-style interface or ordinary Windows application; they do not claim to rebuild proprietary Microsoft Windows.
+- Hackathon challenges must follow event rules, normal waking hours, licensing, team consent, venue access, and submission requirements. No sleep deprivation or unauthorized system access.
 
 ## Social and privacy
 

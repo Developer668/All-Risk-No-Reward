@@ -18,6 +18,8 @@ The application-ready dataset is in [`data/challenges`](data/challenges/README.m
 
 Easy contains 90 challenges, Medium 95, Hard 100, Extreme 105, and Nightmare 110. Every challenge includes a description and structured image/video evidence rules for VLM grading. Retired IDs are recorded rather than reused.
 
+The final library includes level-scaled Instagram and friend connections, private ask-outs to people already known, group hangouts, scalable specialist workouts, cooking games, hackathons, video-game builds, VM-only operating-system projects, community tools, and coding challenges using local and cloud AI model families.
+
 ## Contributing
 
 Contributions, ideas, and bug reports are welcome. Open an issue to start a discussion.

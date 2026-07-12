@@ -16,6 +16,7 @@ This directory contains an original, application-ready challenge library for **A
 | `SAFETY.md` | Required product and moderation rules |
 | `SOURCES.md` | Research sources and content-origin notes |
 | `VLM_GRADING.md` | Evidence capture and vision-model grading contract |
+| `SOCIAL_CONNECTIONS.md` | Instagram, messaging, participant-count, and contact-safety contract |
 
 Total: **500 original active challenges**. Every challenge ends in one session or by the end of the same day. Deleted challenge IDs remain listed in `manifest.json` under `retiredChallengeIds` and must not be reused.
 
@@ -31,6 +32,11 @@ Total: **500 original active challenges**. Every challenge ends in one session o
   "estimatedMinutes": 2,
   "timeWindow": "single_session",
   "mode": "solo",
+  "participants": {
+    "minimumTotal": 1,
+    "targetTotal": 1,
+    "maximumTotal": 1
+  },
   "ageGroup": "all",
   "requiresConsent": false,
   "intensity": "light",
@@ -50,6 +56,8 @@ Total: **500 original active challenges**. Every challenge ends in one session o
 IDs are stable and should be stored as completion-history keys. `estimatedMinutes` is estimated active time. `timeWindow` is either `single_session` or `1_day`; multi-day challenges are intentionally excluded.
 
 Each `verification` object tells the application what evidence to accept and what a vision-language model may actually grade. See [`VLM_GRADING.md`](VLM_GRADING.md) before implementing automated approval.
+
+`participants` counts the player plus everyone else involved. Connection challenges scale from one existing contact at Easy to as many as eight existing contacts at Nightmare. See [`SOCIAL_CONNECTIONS.md`](SOCIAL_CONNECTIONS.md); the app should never scrape a personal contact list or automatically send a message.
 
 ## Suggested selection flow
 

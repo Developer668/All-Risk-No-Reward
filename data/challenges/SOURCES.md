@@ -36,3 +36,14 @@ Instagram, Threads, and TikTok pages may restrict automated viewing, so only pub
 - [Cosplay photography and consent](https://www.pcgamer.com/games/cosplay-is-not-consent-and-i-wish-wed-stop-feeling-so-entitled-to-shoving-our-phones-in-peoples-faces-without-asking-them-first/) — public cosplay does not grant permission for targeted photography or recording.
 
 Indexed Reel and short-video idea lists were used only to identify broad formats—freeze edits, character glitches, funny outfits, dramatic speeches, restaurant roleplay, fake commercials, and transformation cuts. The repository prompts are original and reject surprise pranks, unsafe stunts, forced account access, unwanted filming, and interference with workers or the public.
+
+## Final technical references
+
+- [OpenAI Models API](https://platform.openai.com/docs/api-reference/models) — applications can list the model IDs currently available to an account rather than assuming a permanent alias.
+- [Gemini model guide](https://ai.google.dev/gemini-api/docs/models) — documents stable, preview, latest, and experimental naming and recommends specific stable versions for production.
+- [Qwen Code model providers](https://qwenlm.github.io/qwen-code-docs/en/users/configuration/model-providers/) — supports selecting and recording models across configured providers; official examples include Qwen coding models.
+- [GLM Coding Plan documentation](https://docs.bigmodel.cn/cn/coding-plan/faq) — documents current GLM coding options and exact provider model IDs.
+- [Kimi API prompt guidance](https://platform.moonshot.ai/docs/guide/prompt-best-practice) — official Moonshot guidance and current Kimi model-family information.
+- [Buildroot manual](https://buildroot.org/downloads/manual/manual.html) — Buildroot generates toolchains, root filesystems, kernels, and bootloaders and should be used as a normal user in an isolated build environment.
+- [Linux From Scratch](https://www.linuxfromscratch.org/) — official step-by-step source-build project; the challenge library limits full system work to isolated, expert-level environments.
+- [Meta's Instagram API collection](https://www.postman.com/meta/instagram/documentation/6yqw8pt/instagram-api) and [Instagram sharing controls](https://www.facebook.com/help/instagram/1013375002134043) — platform capabilities and sharing depend on account permissions, user action, and the original account's settings.

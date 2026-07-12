@@ -53,6 +53,7 @@
         "estimatedMinutes",
         "timeWindow",
         "mode",
+        "participants",
         "ageGroup",
         "requiresConsent",
         "intensity",
@@ -78,6 +79,8 @@
         "category": {
           "enum": [
             "comedy",
+            "coding",
+            "cooking",
             "creative",
             "fitness",
             "kindness",
@@ -105,6 +108,9 @@
             "solo_with_other_people",
             "group"
           ]
+        },
+        "participants": {
+          "$ref": "#/$defs/participants"
         },
         "ageGroup": {
           "enum": [
@@ -134,8 +140,43 @@
             "minLength": 1
           }
         },
+        "platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
         "verification": {
           "$ref": "#/$defs/verification"
+        }
+      }
+    },
+    "participants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumTotal",
+        "targetTotal",
+        "maximumTotal"
+      ],
+      "properties": {
+        "minimumTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "targetTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "maximumTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
         }
       }
     },
