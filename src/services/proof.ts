@@ -24,6 +24,8 @@ export interface ProofResult extends ProofAssessment {
   model?: string
   mediaKind?: 'image' | 'video' | 'mixed'
   criteriaChecked?: number
+  criteria?: Array<{ criterion: string; met: boolean; observation: string }>
+  countCheck?: { required: string; observed: string; reliable: boolean }
   completion?: unknown
   assignment?: unknown
   profile?: unknown

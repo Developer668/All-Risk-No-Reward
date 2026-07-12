@@ -3,7 +3,13 @@ const VIDEO_FILE_LIMIT = 80 * 1024 * 1024
 const VIDEO_DURATION_LIMIT_SECONDS = 30
 // Three low-resolution frames are enough for coarse action verification while
 // keeping multimodal token usage predictable across multi-video submissions.
-const VIDEO_FRAME_COUNT = 3
+const DEFAULT_VIDEO_FRAME_COUNT = 3
+const MAX_VIDEO_FRAME_COUNT = 6
+
+export interface PrepareProofMediaOptions {
+  /** Counted or motion-heavy challenges get denser temporal coverage. */
+  videoFrameCount?: number
+}
 
 export interface PreparedVideoFrame {
   dataUrl: string
@@ -110,12 +116,12 @@ function frameDataUrl(video: HTMLVideoElement): string {
   throw new Error('A sampled frame is too detailed. Try a lower-resolution video.')
 }
 
-async function prepareVideo(file: File): Promise<PreparedProofMedia> {
+async function prepareVideo(file: File, requestedFrameCount = DEFAULT_VIDEO_FRAME_COUNT): Promise<PreparedProofMedia> {
   if (file.size > VIDEO_FILE_LIMIT) throw new Error('Choose a video smaller than 80 MB.')
   const { video, url, duration } = await videoElement(file)
   try {
     if (duration > VIDEO_DURATION_LIMIT_SECONDS) throw new Error('Choose a video that is 30 seconds or shorter.')
-    const count = VIDEO_FRAME_COUNT
+    const count = Math.max(2, Math.min(MAX_VIDEO_FRAME_COUNT, Math.round(requestedFrameCount)))
     const start = Math.min(0.15, duration / 10)
     const end = Math.max(start, duration - 0.15)
     const timestamps = Array.from({ length: count }, (_, index) =>
@@ -154,7 +160,7 @@ async function prepareImage(file: File): Promise<PreparedProofMedia> {
   throw new Error('This image is still too detailed after privacy-safe compression. Crop it more tightly and try again.')
 }
 
-export async function preparePrivateProofMedia(file: File): Promise<PreparedProofMedia> {
-  if (file.type.startsWith('video/')) return prepareVideo(file)
+export async function preparePrivateProofMedia(file: File, options: PrepareProofMediaOptions = {}): Promise<PreparedProofMedia> {
+  if (file.type.startsWith('video/')) return prepareVideo(file, options.videoFrameCount)
   return prepareImage(file)
 }

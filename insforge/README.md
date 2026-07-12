@@ -208,7 +208,7 @@ await insforge.functions.invoke('verify-proof', {
 `mediaItems` accepts up to four images or sampled videos, including mixed image/video
 submissions and up to three videos. The normal video flow accepts MP4, MOV, or WebM
 files up to 80 MiB and 30 seconds in the browser, then extracts three timestamped JPEG
-frames. Each frame is resized to at
+frames normally or six for counted and motion-heavy challenges. Each frame is resized to at
 most 720 px and capped at 170 KiB before submission. Full videos stay in the browser.
 Image proof accepts PNG, JPEG, or WebP and is likewise resized and re-encoded. The
 edge function independently validates attachment count, frame count, MIME type, and

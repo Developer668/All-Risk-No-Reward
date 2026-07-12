@@ -33,7 +33,7 @@ Local mode includes:
 
 ## Optional InsForge + AI proof-provider mode
 
-Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. Production defaults to the low-cost vision-capable `gpt-5-nano` model with minimal reasoning and short structured output. A proof may contain up to four images or videos, including mixed submissions and multiple videos. The browser extracts three low-resolution timestamped frames from every selected video and sends only those frames through the InsForge edge function; full videos never leave the browser. The edge function retains optional Gemini, OpenRouter, and NVIDIA NIM adapters for development. The browser never receives a provider key or project-admin secret.
+Copy `.env.example` to `.env.local` and supply the public InsForge URL and anon key. Production defaults to the low-cost vision-capable `gpt-5-nano` model with minimal reasoning and structured output. A proof may contain up to four images or videos, including mixed submissions and multiple videos. The browser normally extracts three low-resolution timestamped frames per video and selectively uses six for counted or motion-heavy challenges; full videos never leave the browser. The verifier audits every success criterion, reports the visible basis for each decision, and treats exact counts as complete only when a counter, timer, result screen, measurement, or sufficiently observable sequence supports them. The edge function retains optional Gemini, OpenRouter, and NVIDIA NIM adapters for development. The browser never receives a provider key or project-admin secret.
 
 The production backend in `insforge/` adds:
 

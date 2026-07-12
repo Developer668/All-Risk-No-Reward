@@ -29,6 +29,12 @@ const MAX_ATTACHMENTS = 4
 const MAX_VIDEO_ATTACHMENTS = 3
 const MAX_VISUAL_ITEMS = 18
 
+function needsDenseMotionSampling(challenge: Challenge): boolean {
+  const requirements = [challenge.title, challenge.prompt, challenge.proofHint, ...(challenge.successCriteria ?? [])].join(' ')
+  return /\b(?:reps?|repetitions?|rounds?|laps?|sets?|times?|seconds?|minutes?|hours?|steps?|push[ -]?ups?|pull[ -]?ups?|squats?|sit[ -]?ups?|burpees?|jumps?|hops?|lunges?|planks?|distance|miles?|kilometers?|metres?|meters?)\b/i.test(requirements)
+    || /\b\d{1,5}\b/.test(requirements)
+}
+
 function preferredRecordingMimeType(): string | undefined {
   if (typeof MediaRecorder === 'undefined') return undefined
   return [
@@ -70,6 +76,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
   const recorderRequestIdRef = useRef(0)
   const recordingIntervalRef = useRef<number>()
   const recordingTimeoutRef = useRef<number>()
+  const denseMotionSampling = needsDenseMotionSampling(challenge)
 
   useEffect(() => {
     if (!open) return
@@ -135,7 +142,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
     const nextAttachments: ProofAttachment[] = []
     try {
       for (const file of selected) {
-        const prepared = await preparePrivateProofMedia(file)
+        const prepared = await preparePrivateProofMedia(file, { videoFrameCount: denseMotionSampling ? 6 : 3 })
         nextAttachments.push({ id: `${file.name}:${file.size}:${file.lastModified}:${crypto.randomUUID()}`, file, preview: URL.createObjectURL(file), prepared })
       }
       const visualItems = [...attachments, ...nextAttachments].reduce((total, item) => total + (item.prepared.kind === 'video' ? item.prepared.frames.length : 1), 0)
@@ -351,7 +358,7 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         </div> : <label className="proof-upload" htmlFor="proof-file-input">
           {mediaMode === 'images' ? <Images aria-hidden="true" /> : <Video aria-hidden="true" />}
           <strong>{mediaBusy ? 'Preparing private media…' : mediaMode === 'images' ? 'Choose one or more proof images' : mediaMode === 'videos' ? 'Choose or record one or more videos' : 'Choose images, videos, or both'}</strong>
-          <span>Up to {MAX_ATTACHMENTS} attachments. Videos must be 30 seconds or shorter; only timestamped frames are sent for verification.</span>
+          <span>Up to {MAX_ATTACHMENTS} attachments. Videos must be 30 seconds or shorter; only timestamped frames are sent for verification.{denseMotionSampling ? ' Counted and motion-heavy challenges use extra sequence frames; include a visible counter, timer, or result screen when an exact total matters.' : ''}</span>
         </label>}
         {attachments.length > 0 && <div className="proof-file-ready"><CheckCircle2 aria-hidden="true" /><span><strong>{attachments.length} {attachments.length === 1 ? 'attachment' : 'attachments'} ready for {backendMode === 'insforge' ? 'OpenAI' : 'sample review'}</strong>{attachments.filter(({ prepared }) => prepared.kind === 'image').length} images · {attachments.filter(({ prepared }) => prepared.kind === 'video').length} videos</span></div>}
         <label className="field">Optional context<textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="Anything the verifier should know about what happened? You can leave this blank." rows={4} maxLength={4000} /></label>
@@ -365,6 +372,11 @@ export function ProofDialog({ open, assignment, challenge, backendMode, onClose,
         <p className="section-kicker">{assessment.verdict === 'complete' ? 'CHALLENGE COMPLETE' : assessment.verdict === 'partial' ? 'PROGRESS RECORDED' : 'MORE DETAIL NEEDED'}</p>
         <h2 id="proof-title">{assessment.verdict === 'complete' ? 'You did the brave thing.' : assessment.verdict === 'partial' ? 'You moved forward.' : 'The attempt still matters.'}</h2>
         <p>{assessment.feedback}</p>
+        {assessment.criteria?.length ? <div className="assessment-breakdown">
+          <strong>What the verifier observed</strong>
+          <ul>{assessment.criteria.map((item, index) => <li key={`${item.criterion}-${index}`} className={item.met ? 'met' : 'missing'}>{item.met ? <CheckCircle2 aria-hidden="true" /> : <Circle aria-hidden="true" />}<span><b>{item.criterion}</b><small>{item.observation}</small></span></li>)}</ul>
+          {assessment.countCheck && !/^(?:none|not applicable|n\/a)$/i.test(assessment.countCheck.required) && <div className={`assessment-count ${assessment.countCheck.reliable ? 'reliable' : 'uncertain'}`}><span>COUNT / MEASUREMENT</span><strong>{assessment.countCheck.required}</strong><small>{assessment.countCheck.observed}</small></div>}
+        </div> : null}
         <div className={`verification-receipt ${assessment.provider === 'openai' ? 'verification-receipt--live' : ''}`}><CheckCircle2 aria-hidden="true" /><span><strong>{assessment.provider === 'openai' ? 'Processed by OpenAI' : 'On-device sample result'}</strong>{assessment.provider === 'openai' ? `${assessment.criteriaChecked || challenge.successCriteria?.length || 1} completion criteria checked against the submitted ${assessment.mediaKind === 'video' ? 'video frames' : assessment.mediaKind === 'mixed' ? 'images and video frames' : 'images'}.` : 'Sign in with a synced account for real OpenAI verification.'}</span></div>
         <div className="assessment__xp">+{assessment.pointsAwarded} courage points <Flame size={18} aria-hidden="true" /></div>
         <button className="button button--ink button--full" onClick={onClose}>View today’s log <ArrowRight size={18} aria-hidden="true" /></button>

@@ -487,6 +487,21 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .score-ring--partial { border-color: var(--yellow); box-shadow: 0 0 0 1px #a45d16, inset 0 0 0 5px var(--cream); }
 .score-ring--needs-more { border-color: var(--red); box-shadow: 0 0 0 1px var(--red), inset 0 0 0 5px var(--cream); }
 .assessment > p:not(.section-kicker) { max-width: 400px; margin: 5px 0 20px; color: var(--muted); line-height: 1.5; }
+.assessment-breakdown { width: 100%; margin: 0 0 20px; border: 1px solid var(--border); text-align: left; background: var(--elevated); }
+.assessment-breakdown > strong { min-height: 39px; padding: 0 13px; border-bottom: 1px solid var(--border); display: flex; align-items: center; color: var(--ink); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.assessment-breakdown ul { margin: 0; padding: 0; list-style: none; }
+.assessment-breakdown li { padding: 10px 13px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 18px 1fr; gap: 9px; }
+.assessment-breakdown li > svg { width: 17px; height: 17px; }
+.assessment-breakdown li.met > svg { color: var(--green); }
+.assessment-breakdown li.missing > svg { color: var(--red); }
+.assessment-breakdown li span { display: grid; gap: 2px; }
+.assessment-breakdown li b { font-size: 10px; }
+.assessment-breakdown li small { color: var(--muted); font-size: 9px; line-height: 1.4; }
+.assessment-count { margin: 11px; padding: 11px 12px; border-left: 4px solid var(--green); display: grid; gap: 3px; background: color-mix(in oklch, var(--green) 7%, var(--cream)); }
+.assessment-count.uncertain { border-left-color: var(--red); background: color-mix(in oklch, var(--red) 6%, var(--cream)); }
+.assessment-count span { color: var(--muted); font-size: 8px; font-weight: 820; letter-spacing: .1em; }
+.assessment-count strong { font-size: 11px; }
+.assessment-count small { color: var(--muted); font-size: 9px; line-height: 1.4; }
 .assessment__xp { margin-bottom: 24px; padding: 9px 15px; display: flex; gap: 8px; align-items: center; color: var(--red); background: #f3dfc8; font-size: 12px; font-weight: 780; }
 .verification-progress { margin: 14px 0; padding: 12px 13px; border: 1px solid var(--blue); display: grid; grid-template-columns: 13px 1fr; align-items: center; gap: 12px; color: var(--blue); background: color-mix(in oklch, var(--blue) 6%, var(--cream)); }
 .verification-progress > span { width: 12px; height: 12px; border: 2px solid color-mix(in oklch, var(--blue) 28%, transparent); border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
