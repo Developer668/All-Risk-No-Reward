@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Developer668/All-Risk-No-Reward/blob/main/data/challenges/challenge-set.schema.json",
+  "title": "All Risk No Reward challenge level",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "level",
+    "description",
+    "challengeCount",
+    "challenges"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "level": {
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        "extreme",
+        "nightmare"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "challengeCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "challenges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/challenge"
+      }
+    }
+  },
+  "$defs": {
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "prompt",
+        "category",
+        "estimatedMinutes",
+        "timeWindow",
+        "mode",
+        "ageGroup",
+        "requiresConsent",
+        "intensity"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(easy|medium|hard|extreme|nightmare)-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 10
+        },
+        "category": {
+          "enum": [
+            "comedy",
+            "creative",
+            "fitness",
+            "kindness",
+            "outdoors",
+            "productivity",
+            "skill",
+            "social",
+            "wellness"
+          ]
+        },
+        "estimatedMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "timeWindow": {
+          "enum": [
+            "single_session",
+            "1_day",
+            "3_days",
+            "5_days",
+            "7_days"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "solo",
+            "solo_with_other_people",
+            "group"
+          ]
+        },
+        "ageGroup": {
+          "enum": [
+            "all",
+            "teen_or_adult"
+          ]
+        },
+        "requiresConsent": {
+          "type": "boolean"
+        },
+        "intensity": {
+          "enum": [
+            "none_to_light",
+            "light",
+            "none_to_moderate",
+            "moderate",
+            "moderate_to_vigorous",
+            "vigorous_optional_and_scalable",
+            "high_commitment_but_scalable"
+          ]
+        },
+        "equipment": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}
+
