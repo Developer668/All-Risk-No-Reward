@@ -1,38 +1,38 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "1.0.0",
+  "datasetVersion": "2.0.0",
   "name": "All Risk No Reward Challenge Library",
   "license": "Apache-2.0",
   "contentOrigin": "Original prompts informed by the safety sources documented in SOURCES.md; no third-party challenge database was copied.",
-  "totalChallenges": 250,
+  "totalChallenges": 375,
   "levels": [
     {
       "level": "easy",
       "file": "easy.json",
-      "count": 50
+      "count": 75
     },
     {
       "level": "medium",
       "file": "medium.json",
-      "count": 50
+      "count": 75
     },
     {
       "level": "hard",
       "file": "hard.json",
-      "count": 50
+      "count": 75
     },
     {
       "level": "extreme",
       "file": "extreme.json",
-      "count": 50
+      "count": 75
     },
     {
       "level": "nightmare",
       "file": "nightmare.json",
-      "count": 50
+      "count": 75
     }
   ],
   "safetyPolicy": "SAFETY.md",
-  "schema": "challenge-set.schema.json"
+  "schema": "challenge-set.schema.json",
+  "sameDayOnly": true
 }
-

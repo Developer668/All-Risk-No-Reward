@@ -2,6 +2,8 @@
 
 This policy is part of the dataset contract. The application should enforce it for built-in, user-submitted, and AI-generated content.
 
+Every generated challenge must finish in one session or within the same calendar day. Do not create streaks, multi-day dares, or challenges that require travel beyond a realistic local same-day return.
+
 ## Non-negotiable controls
 
 - Every challenge is optional. Always provide **Skip**, **Swap**, and **Modify** with no punishment, lost streak, shame message, or social notification.
@@ -46,4 +48,3 @@ This policy is part of the dataset contract. The application should enforce it f
 ## Outdoor responsibility
 
 Use legal public routes, prepare for conditions, pack out ordinary waste, leave natural and cultural objects in place, keep distance from wildlife, and respect other visitors and private property.
-

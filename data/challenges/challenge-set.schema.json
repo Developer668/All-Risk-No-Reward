@@ -90,10 +90,7 @@
         "timeWindow": {
           "enum": [
             "single_session",
-            "1_day",
-            "3_days",
-            "5_days",
-            "7_days"
+            "1_day"
           ]
         },
         "mode": {
@@ -135,4 +132,3 @@
     }
   }
 }
-
