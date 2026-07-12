@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "datasetVersion": "6.0.0",
+  "datasetVersion": "6.1.0",
   "name": "All Risk No Reward Challenge Library",
   "license": "Apache-2.0",
   "contentOrigin": "Original prompts informed by the safety sources documented in SOURCES.md; no third-party challenge database was copied.",
@@ -151,5 +151,9 @@
     "nightmare-048"
   ],
   "participantCountsIncluded": true,
-  "socialConnectionGuide": "SOCIAL_CONNECTIONS.md"
+  "socialConnectionGuide": "SOCIAL_CONNECTIONS.md",
+  "acceptedUploadTypes": [
+    "image",
+    "video"
+  ]
 }

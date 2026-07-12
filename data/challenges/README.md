@@ -20,6 +20,8 @@ This directory contains an original, application-ready challenge library for **A
 
 Total: **500 original active challenges**. Every challenge ends in one session or by the end of the same day. Deleted challenge IDs remain listed in `manifest.json` under `retiredChallengeIds` and must not be reused.
 
+The website accepts only `image` and `video` uploads. Screenshots, health summaries, and before/after photos are uploaded as images; screen recordings are uploaded as videos.
+
 ## Challenge object
 
 ```json
@@ -42,8 +44,8 @@ Total: **500 original active challenges**. Every challenge ends in one session o
   "intensity": "light",
   "verification": {
     "gradeableByVision": true,
-    "acceptedEvidence": ["video", "health_app_screenshot", "screenshot"],
-    "captureInstructions": "Submit a clear video showing the movement and safe form.",
+    "acceptedEvidence": ["image", "video"],
+    "captureInstructions": "Upload an image or video clearly showing the movement and safe form.",
     "successCriteria": [
       "Evidence corresponds to challenge easy-001: Wall Push-Up Starter.",
       "Eight controlled wall push-ups are visibly attempted."

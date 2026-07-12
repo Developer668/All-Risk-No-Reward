@@ -201,11 +201,7 @@
           "items": {
             "enum": [
               "image",
-              "video",
-              "screenshot",
-              "screen_recording",
-              "before_after_images",
-              "health_app_screenshot"
+              "video"
             ]
           }
         },

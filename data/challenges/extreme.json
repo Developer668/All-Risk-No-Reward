@@ -19,11 +19,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-003: Dance Routine Two Minutes.",
           "Learn, rehearse, and perform a two-minute beginner-to-intermediate dance routine in a clear, suitable space.",
@@ -52,11 +51,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-012: One-Day Short Film.",
           "Plan, shoot, and edit a three-minute original film in one day using legal locations and only participants who consent to their role, recording, and sharing level.",
@@ -85,11 +83,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-013: Original Song Demo.",
           "Write lyrics and melody for a two-minute original song and record a simple demo using only sounds you created or may legally use.",
@@ -118,11 +115,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-015: Thirty-Photo Story.",
           "Create a coherent original photo essay of 30 images in one day; avoid private property, identifying details, and unconsented people.",
@@ -151,10 +147,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "image"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-016: Three-Course Pretend Restaurant.",
           "With kitchen permission and appropriate supervision, plan, cook, serve, and clean up a simple three-part meal while handling allergies and food safety.",
@@ -183,10 +179,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-017: Wearable Recycled Fashion.",
           "Design a wearable outfit accent from clean reused material, ensuring it cannot restrict breathing, sight, hearing, circulation, or movement.",
@@ -215,11 +211,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-020: Room Transformation.",
           "With household permission, temporarily transform one room around a harmless theme using only removable decorations, then fully restore it.",
@@ -248,11 +243,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-022: Host a Themed Hangout.",
           "Plan and host a two-hour low-cost hangout for willing friends, including a clear start/end time, accessible activities, and an easy way to decline or leave.",
@@ -281,11 +275,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-025: Share a Creative Performance.",
           "Perform an original song, poem, story, or comedy piece for a willing small audience; public posting is optional and requires everyone's permission.",
@@ -314,11 +307,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-027: Ask for Constructive Feedback.",
           "Show a piece of your work to three trusted people and ask one specific feedback question; thank them without arguing.",
@@ -347,11 +339,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-040: Three-Minute Magic Act.",
           "Create and perform a polished three-minute magic act using non-dangerous props for a willing audience.",
@@ -380,11 +371,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-043: One-Day Phone Photo Documentary.",
           "Document one ordinary day with 24 original photos while protecting everyone's privacy and never using the phone while walking, cycling, or driving.",
@@ -413,10 +403,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-046: Closet Responsibility Reset.",
           "Sort only your own clothing into keep, repair, recycle, and donate groups, then complete the cleanup without discarding anything owned by others. Short-form twist: narrate the task as a boss battle without rushing or exposing private information.",
@@ -445,11 +435,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-049: Read-One-Sitting Challenge.",
           "Read a short book or 75 pages across a day with regular posture, movement, food, and eye breaks. Short-form twist: introduce the skill as a fictional game power-up, then show the real result clearly.",
@@ -478,11 +467,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-050: Mystery Event for Friends.",
           "Design a 60-minute mystery or scavenger game for willing friends using only legal locations, harmless clues, accessible tasks, and no deception about real emergencies.",
@@ -512,10 +500,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-051: Public Airport Sign Quest.",
           "Using a safe, affordable plan and a buddy, travel to the publicly accessible area of a local airport, photograph only an airport name sign, and return the same day; no ticket, restricted-area entry, security filming, loitering, or staff interference.",
@@ -544,10 +531,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "image"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-052: Brave but Normal Ask.",
           "Text an age-appropriate person you already know: 'Using my brave message today: would you want to get coffee, food, or take a walk sometime?' Ask once and respect any response or silence. Short-form twist: film only your own reality-show introduction before the interaction and protect everyone else's privacy.",
@@ -576,11 +563,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-053: Meme Vibe Check.",
           "Send someone you like a clean meme tied to a shared interest and ask, 'Does this pass the vibe check?' Do not chase a response.",
@@ -609,11 +595,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-054: Family Awards Speech.",
           "Call a willing family member and perform a one-minute sincere but overdramatic awards speech honoring something ordinary they do well.",
@@ -642,11 +627,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-055: Silly Hat Public Hour.",
           "Wear a comfortable harmless silly hat for one hour in public places where it is allowed; it cannot hide identity, obstruct senses, imitate authority, or disturb anyone.",
@@ -676,10 +660,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-056: Legitimate Karaoke Performance.",
           "Perform one full song at a lawful karaoke venue or private room, following age, volume, recording, and venue rules.",
@@ -709,10 +692,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-057: Five Public Signs.",
           "With a buddy, photograph yourself beside five different legal public landmark signs in one day without blocking paths or including unconsented people.",
@@ -742,10 +724,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-058: Transit End-to-End.",
           "With a buddy and an official schedule, ride one public transit line from a safe boarding point to its public endpoint and back during operating hours; pay fares and keep a backup route home.",
@@ -774,11 +755,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-059: Sixty-Minute Fitness Sampler.",
           "Warm up, complete four different familiar 10-minute activity blocks with breaks, then cool down; use only movements suited to your current ability. Short-form twist: wear one harmless accessory that cannot restrict movement, vision, hearing, or breathing.",
@@ -807,11 +787,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-060: Build and Host a Game.",
           "Design a 45-minute original party game, test it, then host it for willing players with opt-out rules and no forced disclosure.",
@@ -840,11 +819,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-061: Underrated Pick Interview.",
           "At a business you are already using and when staff are not busy, ask one worker for their most underrated appropriate item, thank them, and leave without requiring a purchase. Short-form twist: film only your own reality-show introduction before the interaction and protect everyone else's privacy.",
@@ -873,11 +851,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-062: Librarian's Wild Card.",
           "Ask a librarian for a surprising but age-appropriate recommendation outside your usual genre, borrow it properly if you want, and read 30 pages that day.",
@@ -906,11 +883,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-063: Unbirthday Voice Note.",
           "Send a trusted friend who enjoys jokes a 20-second original 'happy unbirthday' song and clearly say it is today's challenge.",
@@ -939,11 +915,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-064: Overdramatic Selfie.",
           "Send one intentionally overdramatic but privacy-safe selfie to a trusted friend who enjoys this kind of message; do not post it publicly or include anyone else.",
@@ -972,11 +947,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-065: Corny Question Text.",
           "Text a partner or romantic interest who normally welcomes your messages: 'Serious question: would you still hang out with me if I were terrible at mini golf?' Accept no reply without follow-up.",
@@ -1005,11 +979,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-066: Two Public Compliments.",
           "Give two separate brief non-body compliments in appropriate public moments, then disengage unless each person clearly continues the conversation; never film. Short-form twist: record a private five-second victory pose afterward without showing the other person or their response.",
@@ -1038,11 +1011,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-067: Designated Dance Spot.",
           "Perform a one-minute dance only in a private room, booked studio, legal performance space, or willing event area where you will not block or surprise others.",
@@ -1071,11 +1043,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-068: Five-Meme Original Pack.",
           "Create five original clean memes from your own photos or public-domain material and send the best one to a willing friend.",
@@ -1105,10 +1076,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-069: Friend Picks the Challenge Outfit.",
           "Let a trusted friend choose between three comfortable, weather-appropriate outfits you already own, then wear the choice for one appropriate outing.",
@@ -1137,11 +1107,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-070: Ask Three People for Songs.",
           "Ask three people you know for one song recommendation each, then listen to all three at a safe volume.",
@@ -1171,10 +1140,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-071: Public-Place Sketchbook Hour.",
           "Spend an hour sketching in a legal public place without drawing identifiable strangers unless they explicitly agree. Short-form twist: present the result as if it won a completely imaginary award.",
@@ -1203,11 +1171,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-072: Family Lip-Sync Video.",
           "Create a one-minute private lip-sync video with willing family members using audio you may legally use; every participant controls sharing.",
@@ -1237,10 +1204,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-073: Same-Day Mystery Tour.",
           "With a willing buddy, each person chooses one legal public stop without revealing it until arrival; agree on budget, transport, boundaries, and a safe return plan first.",
@@ -1269,11 +1235,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-074: Five-Minute Honest Speech.",
           "Give a willing friend group a five-minute speech about something you genuinely care about and answer two respectful questions.",
@@ -1302,10 +1267,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-075: Boring Errand Speed-Free Marathon.",
           "Complete five overdue ordinary errands in one day using a written route, normal traffic rules, breaks, and no reward for speed. Short-form twist: turn the privacy-safe before-and-after into an absurd cleaning-product commercial.",
@@ -1334,11 +1299,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-076: Hundred Push-Up Point Quest.",
           "If push-ups already fit your ability, earn 100 points across the day in sets of 10 or fewer: wall, countertop, knee, or standard push-ups each count equally. Warm up, keep good form, rest at least several minutes between sets, and stop early for pain or unusual symptoms.",
@@ -1367,11 +1331,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-077: Hundred Sit-to-Stand Quest.",
           "If appropriate for your current ability, complete up to 100 controlled chair sit-to-stands across the day in sets of 10 or fewer using a stable chair and long breaks; stop before form fails.",
@@ -1400,10 +1363,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-078: Wall Push-Up World Tour.",
           "With a buddy, do five controlled wall push-ups at ten different legal, clean, stable walls during one local outing; avoid private property, fragile surfaces, traffic, and crowded walkways. Short-form twist: film one safe set as a superhero training montage with a stationary camera.",
@@ -1432,11 +1395,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-079: Sideways Push-Up Illusion.",
           "Do five normal wall push-ups with safe form while a friend rotates the camera framing to make you appear sideways; film only in a private or permitted place and label the result as an illusion. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -1465,11 +1427,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-080: Ceiling Push-Up Illusion.",
           "Lie flat on a clear floor, place your hands toward a nearby wall without supporting body weight, and film a forced-perspective clip that looks like ceiling push-ups; never invert, climb, or attach yourself to anything.",
@@ -1498,11 +1459,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-081: Superhero Workout Costume.",
           "Complete a 30-minute scalable workout while wearing a comfortable homemade superhero accessory that cannot snag equipment, block senses, overheat you, or restrict movement.",
@@ -1531,10 +1491,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-082: Animal-Walk Relay.",
           "On a clean flat surface, host a relay of short bear-walk, crab-walk, penguin-waddle, and normal-walk sections for willing players; keep sections brief and replace any uncomfortable movement. Short-form twist: announce the safe movement like an overexcited sports commentator.",
@@ -1566,11 +1526,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-083: Balloon Penguin Course.",
           "With willing friends, waddle through a short flat obstacle course while holding a balloon gently between the knees; walk forward only, clear hazards first, and never race for speed. Short-form twist: wear one harmless accessory that cannot restrict movement, vision, hearing, or breathing.",
@@ -1600,10 +1559,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-084: Slow-Motion Championship.",
           "Hold a slow-motion walking race across a short clear route where the last safe finisher wins; no backward walking, contact, blocking, or sudden sprints. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -1632,11 +1590,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-085: Bathroom-Mirror Concert.",
           "At home, alone in a dry private bathroom, perform one full lip-sync or original song to the mirror; keep water off the floor, do not climb fixtures, and share a clip only if you choose.",
@@ -1666,10 +1623,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-086: Cross-Style Anime Errand.",
           "Choose a favorite anime character whose gender presentation differs from your usual style and create a respectful, nonsexual cosplay using comfortable clothes and an optional wig. Wear it for one appropriate public errand with a buddy only if you freely want to; follow costume rules and never frame gender expression as inferior or shameful.",
@@ -1698,11 +1654,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-087: Anime Opening Recreation.",
           "Create a 45-second anime-opening parody in a private or permitted space using original poses and audio you may legally use; everyone filmed must agree to filming and sharing.",
@@ -1731,11 +1686,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-088: One-Minute Anime Recap.",
           "Explain an age-appropriate anime episode to a willing friend in exactly one minute using your most dramatic narrator voice and no major spoilers they did not request.",
@@ -1764,11 +1718,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-089: Friend-Picked Anime Pilot.",
           "Let a friend choose one age-appropriate legally available anime episode, watch only that episode today, then send them a three-sentence review.",
@@ -1798,10 +1751,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-090: Original Anime Hero in Public.",
           "Spend an hour in a legal public place sketching a completely original anime-style hero inspired by the surroundings without drawing identifiable strangers unless they agree.",
@@ -1830,11 +1782,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-091: Favorite-Song Stranger Question.",
           "In a suitable public social setting, politely ask one adult peer who appears available, 'May I ask your favorite song for a challenge?' Thank them for any answer or decline, do not follow them, and do not record.",
@@ -1864,10 +1815,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-092: Permission-First Stranger Photo.",
           "At a safe public event, ask one adult peer, 'Would you be comfortable taking a funny challenge photo together?' Take no photo unless they clearly agree, avoid physical contact unless separately invited, and ask again before posting.",
@@ -1896,10 +1846,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-093: Offer One Clean Joke.",
           "In an appropriate public social setting, ask one adult peer, 'Would you like to hear a clean ten-second joke?' If they say no or hesitate, smile, say no problem, and leave them alone. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -1928,11 +1878,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-094: Choose A or B.",
           "At a social event, ask one available adult peer to choose between two harmless options such as red or blue for your next drawing; thank them and end the interaction unless they continue it. Short-form twist: film only your own reality-show introduction before the interaction and protect everyone else's privacy.",
@@ -1962,10 +1911,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-095: Three Public Compliments.",
           "During one outing, give three brief non-body compliments about choices such as shoes, art, or a bag; never film, touch, follow, flirt after disinterest, or expect conversation.",
@@ -1994,11 +1942,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-096: Five-Minute Private Party.",
           "Start a five-minute dance party with willing friends in a home, booked room, or permitted party area; never use a restroom, workplace, transit vehicle, store aisle, or space where others cannot easily leave.",
@@ -2027,11 +1974,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-097: Airport Board Story.",
           "From a public airport display area or official airport website, choose five destinations and connect them into one ridiculous but clean travel story; obey all airport rules and do not film security operations or travelers.",
@@ -2061,10 +2007,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-098: Business-Traveler Airport Outfit.",
           "With a buddy, wear comfortable business-style clothes you already own to a publicly accessible airport area, take a photo only of yourselves by an allowed sign, and return the same day; do not impersonate staff or enter restricted areas.",
@@ -2094,10 +2039,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-099: Airport by Public Transit.",
           "With a buddy, official schedules, fares, and a backup route, take public transit to a local airport's public passenger area and return before service ends; no ticket purchase, restricted areas, or security interference. Short-form twist: create a three-shot explorer reel using only legal viewpoints and no identifiable bystanders.",
@@ -2126,11 +2070,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-100: Three-Meme Friendship Test.",
           "Create three clean original memes about harmless shared jokes and privately send one to each of three friends who normally welcome memes; no response is required.",
@@ -2159,11 +2102,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-101: Crush Meme Courage.",
           "Send one clean shared-interest meme to an age-appropriate person you like who normally welcomes messages, followed by 'This made me think of you'; do not send another message if they do not respond.",
@@ -2192,11 +2134,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-102: Partner's Corny Poem.",
           "Write a four-line intentionally corny but respectful poem for a partner or romantic interest who welcomes your messages, send it once, and do not demand a reaction.",
@@ -2225,11 +2166,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-103: Friend Press Conference.",
           "Ask a willing friend to call you for a two-minute fake press conference about an ordinary achievement such as making toast; clearly say it is a challenge and avoid deceptive claims. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -2258,11 +2198,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-104: Opera Grocery List.",
           "Sing your own grocery or to-do list in an opera voice and send the 20-second voice note to a trusted friend who enjoys silly messages.",
@@ -2291,10 +2230,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-105: Household-Object Crown Selfie.",
           "Make a safe crown from a clean lightweight household item, take one overdramatic selfie without anyone else, and send it privately to a willing friend.",
@@ -2323,11 +2262,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-106: Inside-Out Fashion Hour.",
           "Wear one comfortable layer inside-out for an hour in an appropriate setting, ensuring seams, labels, and fit do not irritate skin or interfere with movement. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -2356,11 +2294,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-107: NPC Mode Thirty.",
           "Around friends who agreed to play, speak like a friendly video-game character for 30 minutes; immediately use your normal voice for serious questions, emergencies, or anyone outside the game.",
@@ -2389,11 +2326,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-108: Pet Press Conference.",
           "Host a two-minute imaginary press conference for a relaxed pet from a respectful distance; do not costume, restrain, wake, feed, or bother the animal.",
@@ -2422,11 +2358,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-109: Motivate a Potato.",
           "At home, give a one-minute championship speech to a potato or another ordinary object as if it is about to compete in the finals. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -2455,11 +2390,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-110: Permission-First Dance-Off.",
           "At a legitimate party or dance event, ask one peer who is already participating, 'Want to do a friendly 20-second dance-off?' Accept no immediately, keep space, and never record without agreement.",
@@ -2489,10 +2423,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-111: Karaoke Character Voice.",
           "At a legal karaoke venue or private room, perform one suitable song in a harmless fictional-character voice without mocking a real identity or culture.",
@@ -2521,10 +2454,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-112: Original Poem Open Mic.",
           "At a legitimate age-appropriate open mic where you are registered or accepted, perform a clean original poem and follow every venue and recording rule. Short-form twist: film only your own reality-show introduction before the interaction and protect everyone else's privacy.",
@@ -2553,11 +2486,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-113: Tiny Flash-Mob Rehearsal.",
           "With three willing friends and venue permission, perform a rehearsed 30-second dance in a designated event or performance area without blocking, startling, surrounding, or filming bystanders.",
@@ -2586,11 +2518,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-114: Costume Photo Recreation.",
           "Recreate a funny pose from a photo you own using safe costumes and only willing participants; no dangerous positions, restricted locations, or unapproved posting.",
@@ -2622,11 +2553,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-115: Fifty-Two Card Movement Deck.",
           "Assign each card rank a safe familiar movement and each suit a small rep count from one to four, then complete a shuffled deck with breaks; skip duplicates or stop when form changes. Short-form twist: announce the safe movement like an overexcited sports commentator.",
@@ -2655,11 +2585,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-116: Costume Thousand-Step Walk.",
           "If 1,000 steps fits your current ability, take a legal flat walk in a comfortable silly accessory that does not obstruct senses, imitate authority, or attract unsafe attention.",
@@ -2688,11 +2617,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-117: Three-Episode Anime Sampler.",
           "Watch three age-appropriate legally available anime episodes from different series in one day with movement and eye breaks, then rank only the opening minutes without spoilers.",
@@ -2721,11 +2649,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-118: Reverse Commercial.",
           "Create a one-minute advertisement explaining why nobody should buy an imaginary useless product, using only original visuals and sounds.",
@@ -2754,10 +2681,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-119: Five-Strange-Hats Photo Set.",
           "Make five safe hats from paper or clean lightweight objects, photograph yourself in each, and restore every item afterward.",
@@ -2787,10 +2714,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-120: Public Bench Movie Trailer.",
           "While seated in a legal public place, quietly record a 30-second trailer starring only yourself and the scenery; avoid identifiable bystanders and follow venue filming rules.",
@@ -2819,10 +2745,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "before_after_images",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit privacy-safe before-and-after images or a short result video. Keep documents, screens, medication, addresses, valuables, and other people's belongings out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-121: Family Villain Monologue.",
           "Perform a two-minute clean movie-villain monologue about doing household chores for willing family members.",
@@ -2851,10 +2777,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "image"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-122: Random Approved Snack Trio.",
           "Have a household member choose three ordinary compatible ingredients from a pre-approved allergy-safe list, make a tiny normal portion, and taste only if it looks and smells safe; never mix chemicals, unknown items, raw-risk foods, medicines, or excessive spice. Short-form twist: give the finished attempt a funny one-line review without mocking anyone.",
@@ -2883,11 +2809,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-123: Ten-Stop Funny Photo Walk.",
           "With a buddy, take ten staged funny photos of only yourselves at legal public landmarks without blocking paths, climbing, or capturing strangers.",
@@ -2917,10 +2842,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-124: One-Hour Character Errand.",
           "Complete one normal public errand while dressed as an original harmless character, staying able to speak normally to staff and follow every venue rule.",
@@ -2949,11 +2873,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-125: Thirty-Minute No-Laugh Show.",
           "Watch or perform family-friendly comedy with friends for 30 minutes while trying not to laugh; breathing, blinking, breaks, and quitting are always allowed. Short-form twist: keep the final clip under 30 seconds and make the joke visible without targeting anyone else.",
@@ -2991,11 +2914,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screenshot",
-          "screen_recording",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a redacted screenshot or screen recording of the one-time outgoing action and timestamp. Hide names, handles, faces, profile photos, phone numbers, unrelated messages, replies, and notification previews.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-126: Five-Contact Instagram Challenge Hangout.",
           "Privately invite five existing Instagram friends or mutuals you genuinely know to a same-day challenge hangout. Send one individualized invitation each, include full public details, and never chase a response.",
@@ -3027,11 +2949,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
           "image",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit clear evidence of the finished performance, creation, interaction, or helpful result. Obtain separate recording consent for every participant and use a privacy-safe alternative when someone declines evidence capture.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-127: Brave Private Date Invitation.",
           "Privately ask one age-appropriate person you already know through school, work, friends, or a shared group on a specific public date. Ask once, keep the invitation private, and accept no, uncertainty, or silence immediately.",
@@ -3063,11 +2984,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-128: Three-Minute Approved Public Dance.",
           "Create and perform a three-minute routine only at a registered event, booked venue, or specifically approved performance area, with safe spacing and recording permission for every visible participant.",
@@ -3096,11 +3016,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-129: Five Advanced One-Arm Push-Ups.",
           "Advanced-profile users who already train one-arm push-ups may attempt up to five total across both sides after warming up on a clear floor; wall or countertop one-arm repetitions earn equal completion for everyone else.",
@@ -3129,11 +3048,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-130: Hundred Push-Up Costume Quest.",
           "If push-ups match your ability, earn 100 points across the day in sets of ten or fewer while wearing a safe character accessory; wall, counter, knee, and standard variations count equally, and stopping early for form or symptoms is required.",
@@ -3166,11 +3084,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "health_app_screenshot",
-          "screenshot"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Use a stationary camera to show the full safe setup and movement. For long or multi-set tasks, add representative clips and an optional same-day activity screenshot. Exact advanced repetitions pass only when continuously visible with controlled form.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-131: Coach-Assisted One-Arm Pull-Up Session.",
           "At a rated gym station with a qualified coach or trained spotter, practice safe prerequisites such as rows, scapular pulls, assisted archer pull-ups, and heavily assisted one-arm holds. Never attempt an unassisted one-arm pull-up as a random challenge.",
@@ -3203,11 +3120,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-132: Bootable Hello Kernel in a VM.",
           "Following a reputable tutorial, build a tiny bootable hello-world kernel or educational toy OS and run it only in an emulator or disposable VM. Do not repartition, replace, or boot it on the host device.",
@@ -3240,11 +3156,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-133: Minimal Buildroot Linux Image.",
           "Using the current official Buildroot manual in an isolated Linux VM, configure and build a minimal image, boot it in an emulator when supported, and save the configuration and build log. Never overwrite the host OS.",
@@ -3276,11 +3191,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-134: Six-Hour Video Game Build.",
           "Build a complete small video game in six hours with a playable loop, win and lose states, original or licensed assets, README, and a two-minute demo.",
@@ -3314,11 +3228,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-135: Same-Day Hackathon Entry.",
           "Attend a legitimate same-day hackathon or game jam and submit a working demo before its deadline while following team, venue, license, originality, and submission rules.",
@@ -3353,11 +3266,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-136: Three-Model Coding Showdown.",
           "Give the same small coding specification to one currently available OpenAI GPT model, one Google Gemini model, and Qwen3-Coder-Plus or its official successor. Run the outputs, score tests and clarity, and record exact model IDs without exposing keys.",
@@ -3390,11 +3302,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "screen_recording",
-          "screenshot",
+          "image",
           "video"
         ],
-        "captureInstructions": "Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a screen recording showing source, build or test output, and the finished program running. Redact API keys, tokens, private repositories, usernames, absolute paths, and unrelated code. For model tasks, show the exact model ID and provider or model-card evidence.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-137: Under-120B Game Builder.",
           "Use a model whose official model card lists fewer than 120 billion total parameters to help build a tested mini game, then manually review every file and fix at least one issue. Record the model card and exact ID.",
@@ -3423,10 +3334,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "image"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-138: Seven-Ingredient Mystery Meal.",
           "Have a household member select seven compatible ingredients from a pre-approved allergy-safe list, then cook a coherent meal with normal portions and present it like an exaggerated competition finale.",
@@ -3459,10 +3370,9 @@
         "gradeableByVision": true,
         "acceptedEvidence": [
           "image",
-          "video",
-          "screenshot"
+          "video"
         ],
-        "captureInstructions": "Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a stationary photo or short video showing the permitted location, recognizable non-sensitive context, and challenge result. Keep bystanders out of frame unless they separately consented.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-139: Public Cosplay Reel.",
           "Wear a safe rule-compliant cosplay at an appropriate public event or venue and film a 30-second reel using only yourself and consenting participants; ask separately before photographing any cosplayer or bystander.",
@@ -3491,10 +3401,10 @@
       "verification": {
         "gradeableByVision": true,
         "acceptedEvidence": [
-          "video",
-          "image"
+          "image",
+          "video"
         ],
-        "captureInstructions": "Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
+        "captureInstructions": "Website evidence accepts image or video files only. Upload photos, screenshots, health summaries, and before/after captures as images; upload camera recordings and screen recordings as videos. Submit a short video or images showing the approved ingredients, safe preparation or roleplay setup, finished normal portion, and cleanup. Keep allergy or private household information out of frame.",
         "successCriteria": [
           "Evidence corresponds to challenge extreme-140: Home Café Pop-Up.",
           "With willing friends or family, run a two-hour themed home café with a menu, safe drinks or food, rotating jobs, fake currency, customer reviews, and complete cleanup.",

@@ -30,4 +30,4 @@ The exact range for every challenge is stored in `participants.minimumTotal`, `p
 
 ## Evidence
 
-For DMs, invitations, memes, and reactions, accept a cropped screenshot or screen recording showing only the user's one-time outgoing action and attempt time. Require redaction of names, handles, profile photos, message history, notifications, and all replies. The VLM grades the visible outgoing action, not the recipient's response or relationship.
+For DMs, invitations, memes, and reactions, accept a cropped screenshot uploaded as an image or a screen recording uploaded as a video. Show only the user's one-time outgoing action and attempt time. Require redaction of names, handles, profile photos, message history, notifications, and all replies. The VLM grades the visible outgoing action, not the recipient's response or relationship.
