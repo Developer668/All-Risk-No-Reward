@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const clientRoot = resolve(root, 'dist/client')
 const serverEntry = resolve(root, 'dist/server/index.js')
+const serverConfigEntry = resolve(root, 'dist/server/wrangler.json')
 const hostingEntry = resolve(root, 'dist/.openai/hosting.json')
 
 await Promise.all([
@@ -14,8 +15,16 @@ await Promise.all([
   access(resolve(clientRoot, 'og.png')),
   access(resolve(clientRoot, 'sw.js')),
   access(serverEntry),
+  access(serverConfigEntry),
   access(hostingEntry),
 ])
+
+const workerConfig = JSON.parse(await readFile(serverConfigEntry, 'utf8'))
+assert.equal(workerConfig.main, 'index.js')
+assert.equal(workerConfig.assets?.binding, 'ASSETS')
+assert.equal(workerConfig.assets?.directory, '../client')
+assert.equal(workerConfig.assets?.run_worker_first, true)
+assert.equal(workerConfig.assets?.html_handling, 'none')
 
 await assert.rejects(
   access(resolve(root, 'dist/index.html')),
@@ -37,7 +46,7 @@ const mimeTypes = new Map([
 const assets = {
   async fetch(request) {
     const url = new URL(request.url)
-    const pathname = url.pathname === '/' ? '/index.html' : url.pathname
+    const pathname = url.pathname
     const assetPath = resolve(clientRoot, `.${decodeURIComponent(pathname)}`)
 
     if (assetPath !== clientRoot && !assetPath.startsWith(`${clientRoot}${sep}`)) {

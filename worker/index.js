@@ -1,6 +1,8 @@
 const isDocumentNavigation = (request) => {
   if (request.method !== 'GET' && request.method !== 'HEAD') return false
 
+  if (new URL(request.url).pathname === '/') return true
+
   const fetchMode = request.headers.get('sec-fetch-mode')
   if (fetchMode === 'navigate') return true
 

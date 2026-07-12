@@ -5,8 +5,10 @@ import { fileURLToPath } from 'node:url'
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const hostingPath = resolve(root, '.openai/hosting.json')
 const workerPath = resolve(root, 'worker/index.js')
+const workerConfigPath = resolve(root, 'worker/wrangler.json')
 const clientOutputPath = resolve(root, 'dist/client')
 const serverOutputPath = resolve(root, 'dist/server/index.js')
+const serverConfigOutputPath = resolve(root, 'dist/server/wrangler.json')
 const hostingOutputPath = resolve(root, 'dist/.openai/hosting.json')
 
 const hostingSource = await readFile(hostingPath, 'utf8')
@@ -32,4 +34,5 @@ for (const requiredClientFile of ['index.html', 'manifest.webmanifest', 'og.png'
 await mkdir(resolve(root, 'dist/server'), { recursive: true })
 await mkdir(resolve(root, 'dist/.openai'), { recursive: true })
 await writeFile(serverOutputPath, await readFile(workerPath, 'utf8'))
+await writeFile(serverConfigOutputPath, await readFile(workerConfigPath, 'utf8'))
 await writeFile(hostingOutputPath, `${JSON.stringify(hosting, null, 2)}\n`)
