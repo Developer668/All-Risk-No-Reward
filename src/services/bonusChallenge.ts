@@ -22,6 +22,7 @@ export interface BonusState {
   version: 1
   lifelines: number
   records: Record<string, BonusRecord>
+  startedAtByAssignment: Record<string, string>
 }
 
 export interface BonusStorage {
@@ -53,7 +54,7 @@ export const bonusTasks: BonusTask[] = [
 ]
 
 function emptyState(): BonusState {
-  return { version: 1, lifelines: 0, records: {} }
+  return { version: 1, lifelines: 0, records: {}, startedAtByAssignment: {} }
 }
 
 function storageKey(userId: string): string {
@@ -68,10 +69,31 @@ export function loadBonusState(userId: string, storage: BonusStorage): BonusStat
       version: 1,
       lifelines: Math.max(0, Math.floor(Number(parsed.lifelines) || 0)),
       records: parsed.records as Record<string, BonusRecord>,
+      startedAtByAssignment: typeof parsed.startedAtByAssignment === 'object' && parsed.startedAtByAssignment
+        ? parsed.startedAtByAssignment as Record<string, string>
+        : {},
     }
   } catch {
     return emptyState()
   }
+}
+
+export function markChallengeStarted(
+  userId: string,
+  assignmentId: string,
+  storage: BonusStorage,
+  now = new Date(),
+): BonusState {
+  const state = loadBonusState(userId, storage)
+  state.startedAtByAssignment[assignmentId] ??= now.toISOString()
+  return saveBonusState(userId, storage, state)
+}
+
+export function clearBonusState(
+  userId: string,
+  storage: BonusStorage & { removeItem(key: string): void },
+): void {
+  storage.removeItem(storageKey(userId))
 }
 
 function saveBonusState(userId: string, storage: BonusStorage, state: BonusState): BonusState {
@@ -94,7 +116,8 @@ export function rollFastFinishBonus(
   const existing = state.records[assignment.id]
   if (existing) return existing.status === 'not-offered' ? undefined : existing
 
-  const elapsed = new Date(completion.completedAt).getTime() - new Date(assignment.unlockAt).getTime()
+  const startedAt = state.startedAtByAssignment[assignment.id] ?? assignment.unlockAt
+  const elapsed = new Date(completion.completedAt).getTime() - new Date(startedAt).getTime()
   const fastWindow = challenge.minutes * 60_000
   const isFastFinish = Number.isFinite(elapsed) && elapsed >= 0 && elapsed <= fastWindow
   const offered = isFastFinish && random() < OFFER_CHANCE

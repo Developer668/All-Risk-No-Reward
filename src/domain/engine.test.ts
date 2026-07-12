@@ -83,6 +83,28 @@ describe('ChallengeEngine daily assignments', () => {
     expect(result.recovery).toBeUndefined()
   })
 
+  it('keeps a low-evidence proof retryable instead of creating a punishment', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const engine = new ChallengeEngine(createUserState({
+      id: 'user-needs-more',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }))
+    const assignment = engine.sync(now).assignment!
+    const result = engine.submitCompletion({
+      assignmentId: assignment.id,
+      score: 24,
+      note: 'I need to add more detail.',
+    }, new Date(2026, 6, 12, 20, 5))
+
+    expect(result.completion.verdict).toBe('needs-more')
+    expect(result.view.status).toBe('available')
+    expect(result.recovery).toBeUndefined()
+    expect(engine.getState().recoveries).toHaveLength(0)
+    expect(engine.getState().assignments[0].status).toBe('available')
+  })
+
   it('closes an unfinished assignment after its local deadline and creates one recovery', () => {
     const engine = new ChallengeEngine(createUserState({
       id: 'user-missed',
@@ -124,6 +146,35 @@ describe('ChallengeEngine daily assignments', () => {
     const unblocked = engine.completeRecovery(recoveryId, 'Closed the loop.', new Date(2026, 7, 20, 12))
     expect(unblocked.status).not.toBe('blocked')
     expect(unblocked.assignment).toBeDefined()
+  })
+
+  it('supports operator-ranked recovery escalation through level five', () => {
+    const now = new Date(2026, 6, 12, 20)
+    const rankedCatalog: ResetTask[] = [1, 2, 3, 4, 5].map((difficulty) => ({
+      id: `ranked-${difficulty}`,
+      title: `Ranked ${difficulty}`,
+      prompt: `Level ${difficulty} task`,
+      difficulty: difficulty as ResetTask['difficulty'],
+      minutes: 5,
+      privateOnly: true,
+    }))
+    const engine = new ChallengeEngine(createUserState({
+      id: 'user-five-levels',
+      name: 'Alex',
+      email: 'alex@example.com',
+      now,
+    }), undefined, rankedCatalog)
+    const assignment = engine.sync(now).assignment!
+    engine.submitCompletion({
+      assignmentId: assignment.id,
+      score: 70,
+      note: 'I made strong partial progress.',
+    }, new Date(2026, 6, 12, 20, 5))
+
+    expect(engine.sync(new Date(2026, 6, 13, 20)).recovery?.severity).toBe(2)
+    expect(engine.sync(new Date(2026, 6, 14, 20)).recovery?.severity).toBe(3)
+    expect(engine.sync(new Date(2026, 6, 15, 20)).recovery?.severity).toBe(4)
+    expect(engine.sync(new Date(2026, 6, 16, 20)).recovery?.severity).toBe(5)
   })
 
   it('lets a user gamble twice across the entire unseen punishment catalog, then locks the result', () => {

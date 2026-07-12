@@ -10,7 +10,7 @@ import type {
 } from '../types'
 import type { ProofResult } from '../services/proof'
 import {
-  completeBonusChallenge, loadBonusState, rollFastFinishBonus, spendLifeline, taskForBonus,
+  completeBonusChallenge, loadBonusState, markChallengeStarted, rollFastFinishBonus, spendLifeline, taskForBonus,
   type BonusRecord, type BonusState,
 } from '../services/bonusChallenge'
 import { notificationPermission, notificationsSupported, requestNotificationPermission, sendTestNotification } from '../services/notifications'
@@ -372,6 +372,7 @@ export function Dashboard(props: DashboardProps) {
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const autoOpenedBonusRef = useRef('')
   const { daily, onRefresh } = props
+  const bonusEnabled = props.backendMode === 'local'
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000)
@@ -383,6 +384,15 @@ export function Dashboard(props: DashboardProps) {
     autoOpenedBonusRef.current = ''
   }, [props.profile.id])
   useEffect(() => {
+    if (!bonusEnabled || daily.status !== 'available' || !daily.assignment) return
+    setBonusState(markChallengeStarted(props.profile.id, daily.assignment.id, window.localStorage))
+  }, [bonusEnabled, daily.assignment, daily.status, props.profile.id])
+  useEffect(() => {
+    if (!bonusEnabled) {
+      setBonusRecord(undefined)
+      setBonusOpen(false)
+      return
+    }
     if (proofOpen) return
     const record = rollFastFinishBonus(props.profile.id, daily, window.localStorage)
     setBonusState(loadBonusState(props.profile.id, window.localStorage))
@@ -391,7 +401,7 @@ export function Dashboard(props: DashboardProps) {
       autoOpenedBonusRef.current = record.assignmentId
       setBonusOpen(true)
     }
-  }, [daily, proofOpen, props.profile.id])
+  }, [bonusEnabled, daily, proofOpen, props.profile.id])
   useEffect(() => {
     if (!daily.unlockAt || daily.status !== 'locked') return
     const delay = new Date(daily.unlockAt).getTime() - Date.now()
@@ -444,6 +454,7 @@ export function Dashboard(props: DashboardProps) {
     setBonusState(result.state)
   }
   async function useLifeline() {
+    if (!bonusEnabled) throw new Error('Bonus lifelines are available in on-device mode.')
     if (!props.daily.recovery) throw new Error('That recovery task is no longer open.')
     await props.onCompleteRecovery(props.daily.recovery.id, 'Cleared with a bonus challenge lifeline.')
     setBonusState(spendLifeline(props.profile.id, window.localStorage))
@@ -461,7 +472,7 @@ export function Dashboard(props: DashboardProps) {
     <main className="dashboard">
       <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
 
-      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusRecord} lifelines={bonusState.lifelines} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="level-card"><div className="level-card__orbit"><span>{props.profile.level}</span></div><div><span className="section-kicker">CURRENT LEVEL</span><h3>{props.profile.level < 2 ? 'Beginner' : props.profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><p>{props.profile.couragePoints} courage points</p></div><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
+      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="level-card"><div className="level-card__orbit"><span>{props.profile.level}</span></div><div><span className="section-kicker">CURRENT LEVEL</span><h3>{props.profile.level < 2 ? 'Beginner' : props.profile.level < 4 ? 'Explorer' : 'Pathfinder'}</h3><p>{props.profile.couragePoints} courage points</p></div><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
         : <div className="dashboard-content">{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 

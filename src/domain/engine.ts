@@ -29,8 +29,8 @@ import {
 
 const COMPLETE_SCORE = 72
 const BASE_POINTS = 120
-const MAX_RECOVERY_SEVERITY = 3
-const MAX_RECOVERY_ESCALATIONS = 2
+const MAX_RECOVERY_SEVERITY = 5
+const MAX_RECOVERY_ESCALATIONS = 4
 const MAX_RECOVERY_REROLLS = 2
 
 export const DEFAULT_SETTINGS: UserSettings = {
@@ -214,6 +214,12 @@ export class ChallengeEngine {
       completedAt: now.toISOString(),
       verdict,
       pointsAwarded,
+    }
+
+    // A low-confidence proof check is feedback, not a completed attempt. Keep
+    // the same challenge open so the user can add detail or make more progress.
+    if (verdict === 'needs-more') {
+      return { view: this.buildView(now), completion: { ...completion } }
     }
 
     assignment.status = verdict === 'complete' ? 'completed' : 'partial'
@@ -443,14 +449,25 @@ export class ChallengeEngine {
     return 3
   }
 
-  private recoveryTaskFor(severity: number, seed: string, exactOnly = false): ResetTask | undefined {
+  private recoveryTaskFor(severity: number, seed: string): ResetTask | undefined {
     const seen = new Set(this.state.assignedRecoveryTaskIds ?? [])
     const unseen = this.recoveryCatalog.filter((task) => !seen.has(task.id))
     const exact = unseen.filter((task) => task.difficulty === severity)
     const pool = exact.length > 0
       ? exact
-      : exactOnly ? [] : unseen.filter((task) => task.difficulty <= severity)
+      : unseen.filter((task) => task.difficulty <= severity)
     if (pool.length === 0) return undefined
+    return pool[stableHash(seed) % pool.length]
+  }
+
+  private escalationTaskFor(previous: number, target: number, seed: string): ResetTask | undefined {
+    const seen = new Set(this.state.assignedRecoveryTaskIds ?? [])
+    const candidates = this.recoveryCatalog.filter((task) =>
+      !seen.has(task.id) && task.difficulty > previous && task.difficulty <= target,
+    )
+    if (candidates.length === 0) return undefined
+    const nextDifficulty = Math.max(...candidates.map((task) => task.difficulty))
+    const pool = candidates.filter((task) => task.difficulty === nextDifficulty)
     return pool[stableHash(seed) % pool.length]
   }
 
@@ -502,23 +519,24 @@ export class ChallengeEngine {
     const availableEscalations = MAX_RECOVERY_ESCALATIONS - recovery.escalationCount
     const applied = Math.min(elapsedDays, availableEscalations)
     const previousSeverity = recovery.severity
-    recovery.severity = Math.max(
-      previousSeverity,
-      Math.min(MAX_RECOVERY_SEVERITY, recovery.severity + applied),
+    const targetSeverity = Math.min(
+      MAX_RECOVERY_SEVERITY,
+      recovery.severity + applied,
     ) as RecoveryItem['severity']
-    recovery.escalationCount += applied
     recovery.lastEscalatedDateKey = dateKey
-    const task = this.recoveryTaskFor(
-      recovery.severity,
-      `${recovery.id}:${recovery.severity}`,
-      true,
+    const task = this.escalationTaskFor(
+      previousSeverity,
+      targetSeverity,
+      `${recovery.id}:${targetSeverity}`,
     )
-    if (task) {
-      recovery.taskId = task.id
-      this.rememberRecoveryTask(recovery, task.id)
-    }
+    if (!task) return
 
-    if (recovery.severity > previousSeverity && task) {
+    recovery.severity = task.difficulty
+    recovery.escalationCount += applied
+    recovery.taskId = task.id
+    this.rememberRecoveryTask(recovery, task.id)
+
+    if (recovery.severity > previousSeverity) {
       this.addNotification({
         id: `recovery-escalated:${recovery.id}:${dateKey}`,
         kind: 'recovery-escalated',

@@ -27,6 +27,7 @@ import {
   updateRemoteSettings,
 } from './services/remoteStore'
 import { registerAppServiceWorker, scheduleUnlockNotification } from './services/notifications'
+import { clearBonusState, loadBonusState } from './services/bonusChallenge'
 import type { ProofResult } from './services/proof'
 
 type BackendMode = 'local' | 'insforge'
@@ -297,9 +298,12 @@ function AppContent() {
   }
 
   async function exportData() {
-    return backendMode === 'local'
-      ? JSON.stringify(localStore.exportData(), null, 2)
-      : exportRemoteData()
+    if (backendMode !== 'local') return exportRemoteData()
+    const localData = localStore.exportData()
+    return JSON.stringify({
+      ...localData,
+      bonus: loadBonusState(localData.profile.id, window.localStorage),
+    }, null, 2)
   }
 
   async function signOut() {
@@ -313,7 +317,10 @@ function AppContent() {
   }
 
   async function deleteData() {
-    if (backendMode === 'local') localStore.deleteMyData()
+    if (backendMode === 'local') {
+      clearBonusState(localStore.getProfile().id, window.localStorage)
+      localStore.deleteMyData()
+    }
     else {
       await deleteRemoteData()
       await signOutRemote()
