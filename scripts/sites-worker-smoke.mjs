@@ -6,7 +6,6 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const clientRoot = resolve(root, 'dist/client')
 const serverEntry = resolve(root, 'dist/server/index.js')
-const serverConfigEntry = resolve(root, 'dist/server/wrangler.json')
 const hostingEntry = resolve(root, 'dist/.openai/hosting.json')
 
 await Promise.all([
@@ -14,17 +13,16 @@ await Promise.all([
   access(resolve(clientRoot, 'manifest.webmanifest')),
   access(resolve(clientRoot, 'og.png')),
   access(resolve(clientRoot, 'sw.js')),
+  access(resolve(clientRoot, '_headers')),
+  access(resolve(clientRoot, '_redirects')),
   access(serverEntry),
-  access(serverConfigEntry),
   access(hostingEntry),
 ])
 
-const workerConfig = JSON.parse(await readFile(serverConfigEntry, 'utf8'))
-assert.equal(workerConfig.main, 'index.js')
-assert.equal(workerConfig.assets?.binding, 'ASSETS')
-assert.equal(workerConfig.assets?.directory, '../client')
-assert.equal(workerConfig.assets?.run_worker_first, true)
-assert.equal(workerConfig.assets?.html_handling, 'none')
+const deployedIndex = await readFile(resolve(clientRoot, 'index.html'), 'utf8')
+assert.doesNotMatch(deployedIndex, /__SITE_ORIGIN__/)
+assert.match(deployedIndex, /https:\/\/all-risk-no-reward\.decipherer71951502\.chatgpt\.site\/og\.png/)
+assert.equal((await readFile(resolve(clientRoot, '_redirects'), 'utf8')).trim(), '/* /index.html 200')
 
 await assert.rejects(
   access(resolve(root, 'dist/index.html')),
@@ -75,7 +73,7 @@ const navigation = await worker.fetch(new Request('https://all-risk.example/app'
   headers: { Accept: 'text/html', 'Sec-Fetch-Mode': 'navigate' },
 }), { ASSETS: assets })
 assert.equal(navigation.status, 200)
-assert.match(await navigation.text(), /https:\/\/all-risk\.example\/og\.png/)
+assert.match(await navigation.text(), /https:\/\/all-risk-no-reward\.decipherer71951502\.chatgpt\.site\/og\.png/)
 assert.equal(navigation.headers.get('x-content-type-options'), 'nosniff')
 
 const indexHtml = await readFile(resolve(clientRoot, 'index.html'), 'utf8')
