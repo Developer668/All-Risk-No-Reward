@@ -22,7 +22,7 @@ import { ProofDialog } from './ProofDialog'
 import { ReportDialog } from './ReportDialog'
 import { ShareDialog } from './ShareDialog'
 
-export type AppSection = 'today' | 'journey' | 'milestones' | 'settings'
+export type AppSection = 'today' | 'journey' | 'milestones' | 'settings' | 'developer'
 
 interface DashboardProps {
   profile: Profile
@@ -132,33 +132,46 @@ function DeveloperPanel({ daily, tools }: { daily: DailyView; tools: NonNullable
     ...(category === 'any' ? {} : { category }),
   }
 
-  return <section className="developer-panel" aria-label="Developer testing tools">
-    <div className="developer-panel__header"><div><span className="developer-badge"><Bug aria-hidden="true" /> DEV LAB</span><h2>Daily challenge simulator</h2><p>Local demo data only. Generate cards and force states without waiting for the clock or uploading proof.</p></div><span className="developer-environment">DEVELOPMENT</span></div>
-    <div className="developer-generate">
-      <label className="field">Exact difficulty<select value={difficulty} onChange={(event) => setDifficulty(event.target.value as typeof difficulty)} disabled={busy}><option value="any">Any level</option>{([1,2,3,4,5] as Difficulty[]).map((level) => <option value={level} key={level}>Level {level} · {['Easy','Medium','Hard','Extreme','Nightmare'][level - 1]}</option>)}</select></label>
-      <label className="field">Category<select value={category} onChange={(event) => setCategory(event.target.value as typeof category)} disabled={busy}><option value="any">Any category</option>{categoryOptions.map(({ category: id, label }) => <option value={id} key={id}>{label}</option>)}</select></label>
-      <button type="button" className="button button--accent" disabled={busy} onClick={() => void run('New challenge', () => tools.onRegenerate(filters))}><Dices aria-hidden="true" /> Generate new card</button>
+  return <section className="developer-page" aria-label="Developer testing tools">
+    <header className="developer-page__hero">
+      <div><span className="developer-badge"><Bug aria-hidden="true" /> LOCAL QA WORKSPACE</span><h2>Challenge control room.</h2><p>Test the daily loop without waiting, recording video, or touching a synced account.</p></div>
+      <span className="developer-environment">DEV BUILD · LOCAL DATA</span>
+    </header>
+    <div className="developer-workflow" aria-label="Developer workflow"><span><b>01</b> Pick a card</span><span><b>02</b> Force a state</span><span><b>03</b> Inspect JSON</span></div>
+    <div className="developer-panel">
+      <div className="developer-section-heading"><div><span>CHALLENGE GENERATOR</span><h3>Build the exact test case.</h3></div><Dices aria-hidden="true" /></div>
+      <div className="developer-generate">
+        <label className="field">Exact difficulty<select value={difficulty} onChange={(event) => setDifficulty(event.target.value as typeof difficulty)} disabled={busy}><option value="any">Any level</option>{([1,2,3,4,5] as Difficulty[]).map((level) => <option value={level} key={level}>Level {level} · {['Easy','Medium','Hard','Extreme','Nightmare'][level - 1]}</option>)}</select></label>
+        <label className="field">Category<select value={category} onChange={(event) => setCategory(event.target.value as typeof category)} disabled={busy}><option value="any">Any category</option>{categoryOptions.map(({ category: id, label }) => <option value={id} key={id}>{label}</option>)}</select></label>
+        <button type="button" className="button button--accent" disabled={busy} onClick={() => void run('New challenge', () => tools.onRegenerate(filters))}><Dices aria-hidden="true" /> Generate new card</button>
+      </div>
+      <article className="developer-preview">
+        <div><span>LIVE CARD</span><strong>{challenge ? `LEVEL ${challenge.difficulty} · ${(challengeCategoryLabels[challenge.category] ?? challenge.category).toUpperCase()}` : 'NO CARD'}</strong></div>
+        <h3>{challenge?.title ?? 'Generate a challenge to begin.'}</h3>
+        <p>{challenge?.prompt ?? 'Choose a difficulty and category above.'}</p>
+      </article>
+      <div className="developer-current">
+        <span><small>CURRENT STATE</small><strong>{daily.status}</strong></span>
+        <span><small>DIFFICULTY</small><strong>{challenge ? `Level ${challenge.difficulty}` : '—'}</strong></span>
+        <span><small>CATEGORY</small><strong>{challenge ? challengeCategoryLabels[challenge.category] ?? challenge.category : '—'}</strong></span>
+        <span className="developer-current__id"><small>CHALLENGE ID</small><code>{challenge?.id ?? 'none'}</code></span>
+      </div>
+      <div className="developer-section-heading developer-section-heading--states"><div><span>STATE MACHINE</span><h3>Jump to the moment you need.</h3></div><Zap aria-hidden="true" /></div>
+      <div className="developer-actions" aria-label="State simulation">
+        <button type="button" disabled={busy} onClick={() => void run('Unlocked state', () => tools.onScenario('unlock'))}><UnlockKeyhole aria-hidden="true" /> Unlock now</button>
+        <button type="button" disabled={busy} onClick={() => void run('Locked state', () => tools.onScenario('lock'))}><LockKeyhole aria-hidden="true" /> Lock 15 min</button>
+        <button type="button" disabled={busy} onClick={() => void run('Complete proof', () => tools.onScenario('complete'))}><CircleCheckBig aria-hidden="true" /> Pass proof</button>
+        <button type="button" disabled={busy} onClick={() => void run('Partial proof', () => tools.onScenario('partial'))}><RefreshCw aria-hidden="true" /> Partial proof</button>
+        <button type="button" disabled={busy} onClick={() => void run('Missed deadline', () => tools.onScenario('missed'))}><Clock3 aria-hidden="true" /> Miss deadline</button>
+        <button type="button" disabled={busy || !daily.recovery} onClick={() => void run('Recovery completion', () => tools.onScenario('recovery-complete'))}><LifeBuoy aria-hidden="true" /> Complete recovery</button>
+      </div>
+      <div className="developer-footer">
+        <details><summary>Inspect debug snapshot</summary><pre>{JSON.stringify({ daily, challenge: challenge && { id: challenge.id, difficulty: challenge.difficulty, category: challenge.category, mode: challenge.mode, acceptedEvidence: challenge.acceptedEvidence }, assignment }, null, 2)}</pre></details>
+        <button type="button" className="text-button" onClick={() => void copySnapshot()}><Clipboard aria-hidden="true" /> Copy JSON</button>
+        <button type="button" className="text-button developer-reset" disabled={busy} onClick={() => void run('Today reset', tools.onResetToday)}><Trash2 aria-hidden="true" /> Reset today</button>
+      </div>
+      {message && <p className="developer-message" role="status">{message}</p>}
     </div>
-    <div className="developer-current">
-      <span><small>CURRENT STATE</small><strong>{daily.status}</strong></span>
-      <span><small>DIFFICULTY</small><strong>{challenge ? `Level ${challenge.difficulty}` : '—'}</strong></span>
-      <span><small>CATEGORY</small><strong>{challenge ? challengeCategoryLabels[challenge.category] ?? challenge.category : '—'}</strong></span>
-      <span className="developer-current__id"><small>CHALLENGE ID</small><code>{challenge?.id ?? 'none'}</code></span>
-    </div>
-    <div className="developer-actions" aria-label="State simulation">
-      <button type="button" disabled={busy} onClick={() => void run('Unlocked state', () => tools.onScenario('unlock'))}><UnlockKeyhole aria-hidden="true" /> Unlock now</button>
-      <button type="button" disabled={busy} onClick={() => void run('Locked state', () => tools.onScenario('lock'))}><LockKeyhole aria-hidden="true" /> Lock 15 min</button>
-      <button type="button" disabled={busy} onClick={() => void run('Complete proof', () => tools.onScenario('complete'))}><CircleCheckBig aria-hidden="true" /> Pass proof</button>
-      <button type="button" disabled={busy} onClick={() => void run('Partial proof', () => tools.onScenario('partial'))}><RefreshCw aria-hidden="true" /> Partial proof</button>
-      <button type="button" disabled={busy} onClick={() => void run('Missed deadline', () => tools.onScenario('missed'))}><Clock3 aria-hidden="true" /> Miss deadline</button>
-      <button type="button" disabled={busy || !daily.recovery} onClick={() => void run('Recovery completion', () => tools.onScenario('recovery-complete'))}><LifeBuoy aria-hidden="true" /> Complete recovery</button>
-    </div>
-    <div className="developer-footer">
-      <details><summary>Debug snapshot</summary><pre>{JSON.stringify({ daily, challenge: challenge && { id: challenge.id, difficulty: challenge.difficulty, category: challenge.category, mode: challenge.mode, acceptedEvidence: challenge.acceptedEvidence }, assignment }, null, 2)}</pre></details>
-      <button type="button" className="text-button" onClick={() => void copySnapshot()}><Clipboard aria-hidden="true" /> Copy snapshot</button>
-      <button type="button" className="text-button developer-reset" disabled={busy} onClick={() => void run('Today reset', tools.onResetToday)}><Trash2 aria-hidden="true" /> Reset today</button>
-    </div>
-    {message && <p className="developer-message" role="status">{message}</p>}
   </section>
 }
 
@@ -622,23 +635,31 @@ export function Dashboard(props: DashboardProps) {
     setBonusState(spendLifeline(props.profile.id, window.localStorage))
   }
 
+  const navigationItems = [
+    { id: 'today' as const, Icon: Target, label: 'Today' },
+    { id: 'journey' as const, Icon: History, label: 'My journey' },
+    { id: 'milestones' as const, Icon: Trophy, label: 'Milestones' },
+    { id: 'settings' as const, Icon: Settings, label: 'Settings' },
+    ...(props.developerTools ? [{ id: 'developer' as const, Icon: Bug, label: 'Developer lab' }] : []),
+  ]
+
   return <div className="app-shell">
     <aside ref={sidebarRef} className={`sidebar ${menuOpen ? 'sidebar--open' : ''}`} aria-label="Application navigation" aria-hidden={compactNavigation && !menuOpen ? true : undefined}>
       <div className="sidebar__head"><Brand light /><button className="icon-button sidebar__close" onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X aria-hidden="true" /></button></div>
-      <nav>{([['today', Target, 'Today'],['journey', History, 'My journey'],['milestones', Trophy, 'Milestones'],['settings', Settings, 'Settings']] as const).map(([id, Icon, label]) => <button key={id} className={section === id ? 'active' : ''} onClick={() => chooseSection(id)}><Icon aria-hidden="true" /> {label}{id === 'today' && unread > 0 && <span>{unread}</span>}</button>)}</nav>
+      <nav>{navigationItems.map(({ id, Icon, label }) => <button key={id} className={section === id ? 'active' : ''} onClick={() => chooseSection(id)}><Icon aria-hidden="true" /> {label}{id === 'today' && unread > 0 && <span>{unread}</span>}</button>)}</nav>
       <div className="sidebar__principle"><ShieldCheck aria-hidden="true" /><strong>Agency is the rule.</strong><p>Resize or report anything that crosses a boundary.</p></div>
       <button className="sidebar__profile" onClick={() => chooseSection('settings')}><span>{props.profile.name.slice(0,2).toUpperCase()}</span><span><strong>{props.profile.name}</strong><small>Level {props.profile.level} · {props.backendMode === 'local' ? 'On this device' : 'Synced'}</small></span><ChevronRight aria-hidden="true" /></button>
     </aside>
     {compactNavigation && menuOpen && <button className="sidebar-scrim" aria-label="Close navigation" onClick={() => { setMenuOpen(false); menuButtonRef.current?.focus() }} />}
 
     <main className="dashboard">
-      <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
+      <header className="app-header"><button ref={menuButtonRef} className="icon-button mobile-menu" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu aria-hidden="true" /></button><div><p>{formatDate(now)}</p><h1>{section === 'today' ? `Good ${now.getHours() < 12 ? 'morning' : now.getHours() < 18 ? 'afternoon' : 'evening'}, ${props.profile.name.split(' ')[0]}.` : section === 'journey' ? 'Your journey.' : section === 'milestones' ? 'Your milestones.' : section === 'developer' ? 'Developer lab.' : 'Your settings.'}</h1></div><div className="app-header__actions"><button className="icon-button notification" onClick={() => setNotificationsOpen(true)} aria-label={`Open notifications${unread ? `, ${unread} unread` : ''}`}><Bell aria-hidden="true" />{unread > 0 && <span />}</button><div className="streak-pill"><Flame fill="currentColor" aria-hidden="true" /> <strong>{props.profile.streak}</strong> day streak</div></div></header>
 
-      {section === 'today' ? <>{props.developerTools && <DeveloperPanel daily={props.daily} tools={props.developerTools} />}<section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section></>
-        : <div className="dashboard-content">{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
+      {section === 'today' ? <section className="dashboard-grid"><TodayPanel daily={props.daily} bonusRecord={bonusEnabled ? bonusRecord : undefined} lifelines={bonusEnabled ? bonusState.lifelines : 0} onOpenBonus={() => setBonusOpen(true)} onProof={() => setProofOpen(true)} onReport={() => setReportOpen(true)} onShare={() => setShareOpen(true)} onCompleteRecovery={(note) => props.onCompleteRecovery(props.daily.recovery!.id, note)} onRerollRecovery={() => props.onRerollRecovery(props.daily.recovery!.id)} onUseLifeline={useLifeline} diceEnabled onEnableNotifications={() => void enableNotifications()} now={now} /><aside className="right-column">{bonusEnabled && bonusState.lifelines > 0 && <article className="lifeline-balance"><LifeBuoy aria-hidden="true" /><div><span>LIFELINES</span><strong>{bonusState.lifelines} banked</strong></div></article>}<article className="profile-stats-card"><div className="card-heading"><span>YOUR REAL PROGRESS</span><button className="icon-button" onClick={() => chooseSection('milestones')} aria-label="View milestones"><ChevronRight aria-hidden="true" /></button></div><div className="profile-stats-grid"><div><strong>{props.profile.level}</strong><span>Level</span></div><div><strong>{completedCount}</strong><span>Completed</span></div><div><strong>{props.profile.streak}</strong><span>Day streak</span></div><div><strong>{props.profile.couragePoints}</strong><span>Points</span></div></div></article><article className="progress-card"><div className="card-heading"><span>THIS WEEK</span><strong>{weekDone} / 7</strong></div><div className="progress-bar" role="progressbar" aria-label="Weekly attempts" aria-valuemin={0} aria-valuemax={7} aria-valuenow={weekDone}><i style={{ width: `${Math.min(100, weekDone / 7 * 100)}%` }} /></div><p><strong>{Math.max(0, 7-weekDone)} more</strong> attempts to fill the week.</p></article><article className="boundaries-card"><div className="card-heading"><span>YOUR BOUNDARIES</span><ShieldCheck aria-hidden="true" /></div><p>{props.settings.disabledBoundaryTags.length ? `${props.settings.disabledBoundaryTags.length} challenge filters are active.` : 'All safe challenge categories are available.'}</p><div className="tag-list">{props.settings.boundaries.map((boundary) => <span key={boundary}>{boundary}</span>)}</div><button onClick={() => chooseSection('settings')}>Review safety settings <ChevronRight aria-hidden="true" /></button></article><blockquote>“Confidence isn’t knowing they’ll like you. It’s knowing you’ll be okay if they don’t.”<cite>— TODAY’S FIELD NOTE</cite></blockquote></aside></section>
+        : <div className={`dashboard-content ${section === 'developer' ? 'dashboard-content--developer' : ''}`}>{section === 'journey' ? <JourneyPanel history={props.history} /> : section === 'milestones' ? <MilestonesPanel profile={props.profile} history={props.history} /> : section === 'developer' && props.developerTools ? <DeveloperPanel daily={props.daily} tools={props.developerTools} /> : <SettingsPanel settings={props.settings} backendMode={props.backendMode} onSave={props.onUpdateSettings} onExport={props.onExportData} onDelete={props.onDeleteData} onSignOut={props.onSignOut} />}</div>}
     </main>
 
-    <nav className="mobile-bottom-nav" aria-label="Mobile application navigation"><button className={section === 'today' ? 'active' : ''} onClick={() => chooseSection('today')}><Target aria-hidden="true" />Today</button><button className={section === 'journey' ? 'active' : ''} onClick={() => chooseSection('journey')}><CalendarDays aria-hidden="true" />Journey</button><button className={section === 'milestones' ? 'active' : ''} onClick={() => chooseSection('milestones')}><Trophy aria-hidden="true" />Milestones</button><button className={section === 'settings' ? 'active' : ''} onClick={() => chooseSection('settings')}><Settings aria-hidden="true" />Settings</button></nav>
+    <nav className={`mobile-bottom-nav ${props.developerTools ? 'mobile-bottom-nav--developer' : ''}`} aria-label="Mobile application navigation">{navigationItems.map(({ id, Icon, label }) => <button key={id} className={section === id ? 'active' : ''} onClick={() => chooseSection(id)}><Icon aria-hidden="true" />{id === 'journey' ? 'Journey' : id === 'developer' ? 'Dev lab' : label}</button>)}</nav>
     {props.daily.assignment && props.daily.challenge && <ProofDialog open={proofOpen} assignment={props.daily.assignment} challenge={props.daily.challenge} backendMode={props.backendMode} onClose={() => setProofOpen(false)} onRecorded={props.onRecordProof} />}
     {props.daily.challenge && <ReportDialog open={reportOpen} challengeTitle={props.daily.challenge.title} onClose={() => setReportOpen(false)} onSubmit={props.onReport} />}
     {props.daily.completion && <ShareDialog open={shareOpen} onClose={() => setShareOpen(false)} verdict={props.daily.status === 'completed' || props.daily.completion.verdict === 'complete' ? 'complete' : 'partial'} points={props.daily.completion.pointsAwarded ?? 0} streak={props.profile.streak} challengeTitle={props.daily.challenge?.title} />}
